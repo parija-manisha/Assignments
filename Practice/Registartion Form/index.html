@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration Form</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <form id="user-form">
+        <div class="container">
+            <div class="container_details flex">
+                <div id="registration-form">
+                    <h2>Personal Details</h2>
+                    <!-- personal details -->
+                    <div id="personal">
+                        <div class="input_field">
+                            <div data_attribute_display="display" id="div_txt_first_name" class="form_group">
+                                <label id="lbl_txt_first_name" for="txt_first_name" class="form_label">First
+                                    Name</label>
+                                <input type="text" name="first_name" id="txt_first_name" class="form_input imp">
+                            </div>
+                            <p id="txt_first_name_validate" data_attribute_error="error"></p>
+                        </div>
+                        <div class="input_field">
+                            <div data_attribute_display="display" id="div_txt_middle_name" class="form_group">
+                                <label id="lbl_txt_middle_name" for="txt_middle_name" class="form_label">Middle
+                                    Name</label>
+                                <input type="text" name="middle_name" id="txt_middle_name" class="form_input">
+                            </div>
+                            <p id="txt_middle_name_validate" data_attribute_error="error"></p>
+                        </div>
+                        <div class="input_field">
+                            <div data_attribute_display="display" id="div_txt_last_name" class="form_group">
+                                <label id="lbl_txt_last_name" for="txt_last_name" class="form_label">Last Name</label>
+                                <input type="text" name="last_name" id="txt_last_name" class="form_input imp">
+                            </div>
+                            <p id="txt_last_name_validate" data_attribute_error="error"></p>
+                        </div>
+                        <div class="input_field">
+                            <div data_attribute_display="display" id="div_txt_dob" class="form_group">
+                                <label id="lbl_txt_dob" for="txt_dob" class="form_label">Date of Birth</label>
+                                <input type="date" name="dob" id="txt_dob" class="form_input imp">
+                            </div>
+                            <p id="txt_dob_validate" data_attribute_error="error"></p>
+                        </div>
+                        <div class="input_field">
+                            <div data_attribute_display="display" id="div_txt_phone" class="form_group">
+                                <label id="lbl_txt_phone" for="txt_phone" class="form_label">Phone Number</label>
+                                <input type="text" name="phone" id="txt_phone" class="form_input imp">
+                            </div>
+                            <p id="txt_phone_validate" data_attribute_error="error"></p>
+                        </div>
+                        <!-- <div class="input_field">
+                            <div data_attribute_display="display" id="div_txt_alternate_phone" class="form_group">
+                                <label id="lbl_txt_alternate_phone" for="txt_alternate_phone"
+                                    class="form_label">Alternate Phone
+                                    Number</label>
+                                <input type="text" name="phone" id="txt_alternate_phone" class="form_input imp">
+                            </div>
+                            <p id="txt_alternate_phone_validate" data_attribute_error="error"></p>
+                        </div> -->
+                        <div class="input_field">
+                            <div data_attribute_display="display" id="div_txt_email" class="form_group">
+                                <label id="lbl_txt_email" for="txt_email" class="form_label">Email Id</label>
+                                <input type="text" name="email" id="txt_email" class="form_input imp">
+                            </div>
+                            <p id="txt_email_validate" data_attribute_error="error"></p>
+                        </div>
+                        <div class="input_field">
+                            <div data_attribute_display="display" id="div_txt_alternate_email" class="form_group">
+                                <label id="lbl_txt_alternate_email" for="txt_alternate_email"
+                                    class="form_label">Alternate Email
+                                    Id</label>
+                                <input type="text" name="email" id="txt_alternate_email" class="form_input imp"
+                                    data-validation-msg-holder-id="txt_alternate_email_validate"
+                                    data-label-id="lbl_txt_alternate_email">
+                            </div>
+                            <p id="txt_alternate_email_validate" data_attribute_error="error"></p>
+                        </div>
+                        <div class="input_field">
+                            <div data_attribute_display="display" id="div_gender_radio" class="form_group">
+                                <label id="lbl_gender_radio" for="gender_radio" class="form_label">Gender</label>
+                                <div class="options flex justify_space_between" id="gender_radio">
+                                    <div>
+                                        <input type="radio" name="gender" id="male_gender_radio" class="imp">
+                                        <label for="male_gender_radio">Male</label>
+                                    </div>
+                                    <div>
+                                        <input type="radio" name="gender" id="female_gender_radio" class="imp">
+                                        <label for="female_gender_radio">Female</label>
+                                    </div>
+                                    <div>
+                                        <input type="radio" name="gender" id="other_gender_radio" class="imp">
+                                        <label for="other_gender_radio">Other</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <p id="gender_radio_validate" data_attribute_error="error"></p>
+                        </div>
+                        <div class="input_field">
+                            <div data_attribute_display="display" id="div_txt_password" class="form_group">
+                                <label id="lbl_txt_password" for="txt_password" class="form_label">Password</label>
+                                <input type="password" name="password" id="txt_password" class="form_input imp">
+                            </div>
+                            <p id="txt_password_validate" data_attribute_error="error"></p>
+                        </div>
+                        <div class="input_field">
+                            <div data_attribute_display="display" id="div_txt_confirm_password" class="form_group">
+                                <label id="lbl_txt_confirm_password" for="txt_confirm_password"
+                                    class="form_label">Confirm
+                                    Password</label>
+                                <input type="password" name="confirm_password" id="txt_confirm_password"
+                                    class="form_input imp">
+                            </div>
+                            <p id="txt_confirm_password_validate" data_attribute_error="error"></p>
+                        </div>
+                    </div>
+                </div>
+                <!-- <div id="registration-form">
+                    <h2>Educational Details</h2>
+                    <div id="educational">
+                        <div class="input-field">
+                            <div class="table" id="results">
+                                <div class='theader'>
+                                    <div class='table_header'>Qualification</div>
+                                    <div class='table_header'>Board/University</div>
+                                    <div class='table_header'>Course</div>
+                                    <div class='table_header'>Percentage</div>
+                                    <div class='table_header'>Passing Year</div>
+                                </div>
+                                <div id="div_secondary" class='table_row'>
+                                    <div class='table_small'>
+                                        <div class='table_cell'>Qualification</div>
+                                        <div class='table_cell degree_level required'>Secondary</div>
+                                    </div>
+                                    <div class='table_small'>
+                                        <div class='table_cell'>Board/University</div>
+                                        <div class='table_cell'><input type="text" name="secondary_board"
+                                                id="board_secondary"></div>
+                                    </div>
+                                    <div class='table_small'>
+                                        <div class='table_cell'>Course</div>
+                                        <div class='table_cell'><input type="text" name="secondary_course"
+                                                id="course_secondary"></div>
+                                    </div>
+                                    <div class='table_small'>
+                                        <div class='table_cell'>Percentage</div>
+                                        <div class='table_cell'><input type="text" name="secondary_percentage"
+                                                id="percentage_secondary"></div>
+                                    </div>
+                                    <div class='table_small'>
+                                        <div class='table_cell'>Passing Year</div>
+                                        <div class='table_cell'><input type="text" name="secondary_yop"
+                                                id="yop_secondary"></div>
+                                    </div>
+                                    <p id="secondary_validate" data_attribute_error="error"></p>
+                                </div>
+                                <div class='table_row'>
+                                    <div class='table_small'>
+                                        <div class='table_cell'>Qualification</div>
+                                        <div class='table_cell degree_level required'>Senior Secondary</div>
+                                    </div>
+                                    <div class='table_small'>
+                                        <div class='table_cell'>Board/University</div>
+                                        <div class='table_cell'><input type="text" name="senior_secondary_board"
+                                                id="board_senior_secondary"></div>
+                                    </div>
+                                    <div class='table_small'>
+                                        <div class='table_cell'>Course</div>
+                                        <div class='table_cell'><input type="text" name="senior_secondary_course"
+                                                id="course_senior_secondary"></div>
+                                    </div>
+                                    <div class='table_small'>
+                                        <div class='table_cell'>Percentage</div>
+                                        <div class='table_cell'><input type="text" name="percentage_senior_secondary_"
+                                                id="percentage_senior_secondary"></div>
+                                    </div>
+                                    <div class='table_small'>
+                                        <div class='table_cell'>Passing Year</div>
+                                        <div class='table_cell'><input type="text" name="senior_secondary_yop"
+                                                id="yop_senior_secondary"></div>
+                                    </div>
+                                    <p id="senior_secondary_validate" data_attribute_error="error"></p>
+                                </div>
+                                <div class='table_row'>
+                                    <div class='table_small'>
+                                        <div class='table_cell'>Qualification</div>
+                                        <div class='table_cell degree_level required'>Graduation</div>
+                                    </div>
+                                    <div class='table_small'>
+                                        <div class='table_cell'>Board/University</div>
+                                        <div class='table_cell'><input type="text" name="" id=""></div>
+                                    </div>
+                                    <div class='table_small'>
+                                        <div class='table_cell'>Course</div>
+                                        <div class='table_cell'><input type="text" name="" id=""></div>
+                                    </div>
+                                    <div class='table_small'>
+                                        <div class='table_cell'>Percentage</div>
+                                        <div class='table_cell'><input type="text" name="" id=""></div>
+                                    </div>
+                                    <div class='table_small'>
+                                        <div class='table_cell'>Passing Year</div>
+                                        <div class='table_cell'><input type="text" name="" id=""></div>
+                                    </div>
+                                </div>
+                                <div class='table_row'>
+                                    <div class='table_small'>
+                                        <div class='table_cell'>Qualification</div>
+                                        <div class='table_cell degree_level '>Post-Graduation</div>
+                                    </div>
+                                    <div class='table_small'>
+                                        <div class='table_cell'>Board/University</div>
+                                        <div class='table_cell'><input type="text" name="" id=""></div>
+                                    </div>
+                                    <div class='table_small'>
+                                        <div class='table_cell'>Course</div>
+                                        <div class='table_cell'><input type="text" name="" id=""></div>
+                                    </div>
+                                    <div class='table_small'>
+                                        <div class='table_cell'>Percentage</div>
+                                        <div class='table_cell'><input type="text" name="" id=""></div>
+                                    </div>
+                                    <div class='table_small'>
+                                        <div class='table_cell'>Passing Year</div>
+                                        <div class='table_cell'><input type="text" name="" id=""></div>
+                                    </div>
+                                </div>
+                                <div class='table_row'>
+                                    <div class='table_small'>
+                                        <div class='table_cell'>Qualification</div>
+                                        <div class='table_cell degree_level '>Any Other</div>
+                                    </div>
+                                    <div class='table_small'>
+                                        <div class='table_cell'>Board/University</div>
+                                        <div class='table_cell'><input type="text" name="" id=""></div>
+                                    </div>
+                                    <div class='table_small'>
+                                        <div class='table_cell'>Course</div>
+                                        <div class='table_cell'><input type="text" name="" id=""></div>
+                                    </div>
+                                    <div class='table_small'>
+                                        <div class='table_cell'>Percentage</div>
+                                        <div class='table_cell'><input type="text" name="" id=""></div>
+                                    </div>
+                                    <div class='table_small'>
+                                        <div class='table_cell'>Passing Year</div>
+                                        <div class='table_cell'><input type="text" name="" id=""></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <p id="qualification_detaila_validate" class="validate_data"></p>
+                        </div>
+                    </div>
+                </div> -->
+                <!-- <div id="registration-form">
+                    <h2>Extra Details</h2>
+                    <div id="extra">
+                        <div class="input_field">
+                            <div data_attribute_display="display" id="div_txt_hobbies"
+                                class="form_group form_group_other">
+                                <label id="lbl_txt_hobbies" for="txt_hobbies" class="form_label">Hobbies</label>
+                                <div id="txt_hobbies">
+                                    <div class="hobbies">
+                                        <input type="checkbox" name="" id="txt_hobbies_singing">
+                                        <label for="txt_hobbies_singing">Singing</label>
+                                    </div>
+                                    <div class="hobbies">
+                                        <input type="checkbox" name="" id="txt_hobbies_dancing">
+                                        <label for="txt_hobbies_dancing">Dancing</label>
+                                    </div>
+                                    <div class="hobbies">
+                                        <input type="checkbox" name="" id="txt_hobbies_cooking">
+                                        <label for="txt_hobbies_cooking">Cooking</label>
+                                    </div>
+                                    <div class="hobbies">
+                                        <input type="checkbox" name="" id="txt_hobbies_reading">
+                                        <label for="txt_hobbies_reading">Reading</label>
+                                    </div>
+                                    <input type="text" class="other_input">Other
+                                </div>
+                            </div>
+                            <p id="txt_hobbies_validate" data_attribute_error="error"></p>
+                        </div>
+                        <!-- <div class="input_field">
+                            <div data_attribute_display="display" id="div_txt_middle_name" class="form_group">
+                                <label id="lbl_txt_middle_name" for="txt_middle_name" class="form_label">Middle
+                                    Name</label>
+                                <input type="text" name="middle_name" id="txt_middle_name" class="form_input">
+                            </div>
+                            <p id="txt_middle_name_validate" data_attribute_error="error"></p>
+                        </div>
+                        <div class="input_field">
+                            <div data_attribute_display="display" id="div_txt_last_name" class="form_group">
+                                <label id="lbl_txt_last_name" for="txt_last_name" class="form_label">Last Name</label>
+                                <input type="text" name="last_name" id="txt_last_name" class="form_input imp">
+                            </div>
+                            <p id="txt_last_name_validate" data_attribute_error="error"></p>
+                        </div>
+                        <div class="input_field">
+                            <div data_attribute_display="display" id="div_txt_dob" class="form_group">
+                                <label id="lbl_txt_dob" for="txt_dob" class="form_label">Date of Birth</label>
+                                <input type="date" name="dob" id="txt_dob" class="form_input imp">
+                            </div>
+                            <p id="txt_dob_validate" data_attribute_error="error"></p>
+                        </div>
+                        <div class="input_field">
+                            <div data_attribute_display="display" id="div_txt_phone" class="form_group">
+                                <label id="lbl_txt_phone" for="txt_phone" class="form_label">Phone Number</label>
+                                <input type="text" name="phone" id="txt_phone" class="form_input imp">
+                            </div>
+                            <p id="txt_phone_validate" data_attribute_error="error"></p>
+                        </div>
+                        <div class="input_field">
+                            <div data_attribute_display="display" id="div_txt_email" class="form_group">
+                                <label id="lbl_txt_email" for="txt_email" class="form_label">Email Id</label>
+                                <input type="text" name="email" id="txt_email" class="form_input imp">
+                            </div>
+                            <p id="txt_email_validate" data_attribute_error="error"></p>
+                        </div> -->
+                <!-- <div class="input_field">
+                            <div data_attribute_display="display" id="div_gender_radio" class="form_group">
+                                <label id="lbl_gender_radio" for="gender_radio" class="form_label">Gender</label>
+                                <div class="options flex justify_space_between" id="gender_radio">
+                                    <div>
+                                        <input type="radio" name="gender" id="male_gender_radio" class="imp">
+                                        <label for="male_gender_radio">Male</label>
+                                    </div>
+                                    <div>
+                                        <input type="radio" name="gender" id="female_gender_radio" class="imp">
+                                        <label for="female_gender_radio">Female</label>
+                                    </div>
+                                    <div>
+                                        <input type="radio" name="gender" id="other_gender_radio" class="imp">
+                                        <label for="other_gender_radio">Other</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <p id="gender_radio_validate" data_attribute_error="error"></p>
+                        </div>
+                        <div class="input_field">
+                            <div data_attribute_display="display" id="div_txt_password" class="form_group">
+                                <label id="lbl_txt_password" for="txt_password" class="form_label">Password</label>
+                                <input type="password" name="password" id="txt_password" class="form_input imp">
+                            </div>
+                            <p id="txt_password_validate" data_attribute_error="error"></p>
+                        </div>
+                        <div class="input_field">
+                            <div data_attribute_display="display" id="div_txt_confirm_password" class="form_group">
+                                <label id="lbl_txt_confirm_password" for="txt_confirm_password"
+                                    class="form_label">Confirm
+                                    Password</label>
+                                <input type="password" name="confirm_password" id="txt_confirm_password"
+                                    class="form_input imp">
+                            </div>
+                            <p id="txt_confirm_password_validate" data_attribute_error="error"></p>
+                        </div> -->
+                <!-- </div>
+                </div>  -->
+                <!-- </div> -->
+
+                <button type="submit">Register</button>
+                <div id="popup">
+                    <h2>Registration Details</h2>
+                    <p><span id="popup_content"></span></p>
+                    <button onclick="closePopup()">Close</button>
+                </div>
+            </div>
+        </div>
+    </form>
+
+
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script src="index.js"></script>
+</body>
+
+</html>
