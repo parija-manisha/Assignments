@@ -1,0 +1,16 @@
+ALTER AUTHORIZATION ON SCHEMA::dbo TO test;
+SELECT * FROM Test.INFORMATION_SCHEMA.TABLES;
+EXEC sp_columns TEST1;
+EXEC sp_columns Table_1;
+
+SELECT * FROM sys.schemas;
+
+CREATE SCHEMA schema_test;
+
+SELECT * INTO guest.DEMO1 FROM TEST2;
+
+EXEC sp_columns DEMO;
+
+DROP TABLE TEST2;
+
+DROP TABLE dbo.DEMO;
