@@ -1,0 +1,47 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+hr {
+    width: 100%;
+    background-color: whitesmoke;
+    margin: 0;
+}
+
+select {
+    width: 100%;
+    outline: none;
+    border: none;
+}
+
+.form-outline {
+    position: relative;
+    border: 1px solid black;
+    height: 30px;
+}
+
+.form-label {
+    position: absolute;
+    top: -15px;
+    left: 10px;
+    background-color: white;
+}
+
+input,
+select {
+    outline: 0;
+    border: 0;
+}
+
+.required ::after {
+    content: "*";
+    color: red;
+}
+
+.form-text {
+    border: none;
+    outline: none;
+    width: 100%;
+}

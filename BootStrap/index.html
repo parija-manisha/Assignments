@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration Form</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link rel="stylesheet" href="index.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+</head>
+
+<body>
+    <div class="container-fluid">
+        <form id="register" action="">
+            <div class="d-flex justify-content-center align-items-center pt-3">
+                <h1 class="font-weight-bold">REGISTER FORM</h1>
+            </div>
+            <hr>
+            <div class="row bg-light p-3">
+                <div class="col"><button class="btn" onclick="document.location='#personal'">Personal
+                        Details</button></div>
+                <div class="col"><button class="btn" onclick="document.location='#academic'">Educational
+                        Details</button></div>
+                <div class="col"><button class="btn" onclick="document.location='#identify'">Identification
+                        Method</button></div>
+                <div class="col"><button class="btn" onclick="document.location='#emergency'">Emergency
+                        Contact</button></div>
+                <div class="col"><button class="btn" onclick="document.location='#address'">Address
+                        Details</button></div>
+            </div>
+            <div class="h-100 d-flex align-items-center justify-content-center">
+                <div class="w-50 mt-5">
+                    <div id="personal">
+                        <h3>PERSONAL DETAILS</h3>
+                        <div class="p-3 border border-secondary">
+                            <div>
+                                <div id="div_txt_first_name" class="form-outline">
+                                    <label id="lbl_txt_first_name" for="txt_first_name"
+                                        class="form-label  required">First
+                                        Name</label>
+                                    <input type="text" class="form-text ps-2 imp" id="txt_first_name"
+                                        data-label-id="lbl_txt_first_name"
+                                        data-message-validate="txt_first_name_validate" />
+                                </div>
+                                <p data_attribute_error="error" id="txt_first_name_validate"></p>
+                            </div>
+                            <div>
+                                <div id="div_txt_middle_name" class="form-outline">
+                                    <label id="lbl_txt_middle_name" for="txt_middle_name" class="form-label ">Middle
+                                        Name</label>
+                                    <input type="text" class="form-text  ps-2 ps-2" id="txt_middle_name"
+                                        data-label-id="lbl_txt_middle_name"
+                                        data-message-validate="txt_middle_name_validate" />
+                                </div>
+                                <p data_attribute_error="error" id="txt_middle_name_validate"></p>
+                            </div>
+                            <div>
+                                <div id="div_txt_last_name" class="form-outline">
+                                    <label id="lbl_txt_last_name" for="txt_last_name" class="form-label  required">Last
+                                        Name</label>
+                                    <input type="text" class="form-text  ps-2 imp" id="txt_last_name"
+                                        data-label-id="lbl_txt_last_name"
+                                        data-message-validate="txt_last_name_validat" />
+                                </div>
+                                <p data_attribute_error="error" id="txt_last_name_validate"></p>
+                            </div>
+                            <div>
+                                <div id="div_txt_full_name" class="form-outline">
+                                    <label id="lbl_txt_full_name" for="txt_full_name" class="form-label  required">Full
+                                        Name</label>
+                                    <input type="text" class="form-text  ps-2 imp" id="txt_full_name"
+                                        data-label-id="lbl_txt_full_name"
+                                        data-message-validate="txt_full_name_validate" />
+                                </div>
+                                <p data_attribute_error="error" id="txt_full_name_validate"></p>
+                            </div>
+                            <div>
+                                <div id="div_txt_email" class="form-outline">
+                                    <label id="lbl_txt_email" for="txt_email" class="form-label  required">Email
+                                        ID</label>
+                                    <input type="text" class="form-text  ps-2 imp" id="txt_email"
+                                        data-label-id="lbl_txt_email" data-message-validate="txt_email_validate">
+                                </div>
+                                <p data_attribute_error="error" id="txt_email_validate"></p>
+                            </div>
+                            <div>
+                                <div id="div_txt_alternate_email" class="form-outline">
+                                    <label id="lbl_txt_alternate_email" for="txt_alternate_email"
+                                        class="form-label  required">Alternate Email
+                                        ID</label>
+                                    <input type="text" class="form-text  ps-2 imp" id="txt_alternate_email"
+                                        data-label-id="lbl_txt_alternate_email"
+                                        data-message-validate="txt_alternate_email_validate">
+                                </div>
+                                <p data_attribute_error="error" id="txt_alternate_email_validate"></p>
+                            </div>
+                            <div>
+                                <div id="div_txt_phone" class="form-outline">
+                                    <label id="lbl_txt_phone" for="txt_phone" class="form-label  required">Mobile
+                                        Number</label>
+                                    <input type="text" class="form-text  ps-2 imp" id="txt_phone"
+                                        data-label-id="lbl_txt_phone" data-message-validate="txt_phone_validate">
+                                </div>
+                                <p data_attribute_error="error" id="txt_phone_validate"></p>
+                            </div>
+                            <div>
+                                <div id="div_txt_alternate_phone" class="form-outline">
+                                    <label id="lbl_txt_alternate_phone" for="txt_alternate_phone"
+                                        class="form-label  required">Alternate Mobile Number</label>
+                                    <input type="text" class="form-text  ps-2 imp" id="txt_alternate_phone"
+                                        data-label-id="lbl_txt_alternate_phone"
+                                        data-message-validate="txt_alternate_phone_validate">
+                                </div>
+                                <p data_attribute_error="error" id="txt_alternate_phone_validate"></p>
+                            </div>
+                            <div>
+                                <div id="div_txt_dob" class="form-outline">
+                                    <label id="lbl_txt_dob" for="txt_dob" class="form-label  required">Date of
+                                        Birth</label>
+                                    <input type="date" class="form-text  ps-2 imp" id="txt_dob"
+                                        data-label-id="lbl_txt_dob" data-message-validate="txt_dob_validate">
+                                </div>
+                                <p data_attribute_error="error" id="txt_dob_validate"></p>
+                            </div>
+                            <div>
+                                <div id="div_select_gender" class="form-outline">
+                                    <label id="lbl_select_gender" class="form-label required">Gender</label>
+                                    <div class="d-flex justify-content-between p-1">
+                                        <div>
+                                            <input type="radio" name="radio_input" id="radio_male">
+                                            <label for="radio_male" class="lbl_radio_input">Male</label>
+                                        </div>
+                                        <div>
+                                            <input type="radio" name="radio_input" id="radio_female">
+                                            <label for="radio_female" class="lbl_radio_input">Female</label>
+                                        </div>
+                                        <div>
+                                            <input type="radio" name="radio_input" id="radio_other">
+                                            <label for="radio_other" class="lbl_radio_input">Other</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <p data_attribute_error="error" id="select_gender_validate">
+                                </p>
+                            </div>
+                            <div>
+                                <div id="div_txt_password" class="form-outline">
+                                    <label id="lbl_txt_password" for="txt_password"
+                                        class="form-label  required">Password</label>
+                                    <input type="password" class="form-text  ps-2 imp" id="txt_password"
+                                        data-label-id="lbl_txt_password" data-message-validate="txt_password_validate">
+                                </div>
+                                <p data_attribute_error="error" id="txt_password_validate"></p>
+                            </div>
+                            <div>
+                                <div id="div_txt_confirm_password" class="form-outline">
+                                    <label id="lbl_txt_confirm_password" for="txt_confirm_password"
+                                        class="form-label  required">Confirm
+                                        Password</label>
+                                    <input type="password" class="form-text  ps-2 imp" id="txt_confirm_password"
+                                        data-label-id="lbl_txt_confirm_password"
+                                        data-message-validate="txt_confirm_password_validate">
+                                </div>
+                                <p data_attribute_error="error" id="txt_confirm_password_validate"></p>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="address">
+                        <div>
+                            <h3 class="pt-4">PERMANENT ADDRESS</h3>
+                            <div class="p-3 border border-secondary">
+                                <div>
+                                    <div id="div_txt_permanent_address" class="form-outline">
+                                        <label id="lbl_txt_permanent_address" for="txt_permanent_address"
+                                            class="form-label required">Address
+                                            1</label>
+                                        <input type="text" id="txt_permanent_address" cols="50" rows="2"
+                                            class="form-text  ps-2 imp"></input>
+                                    </div>
+                                    <p data_attribute_error="error" id="txt_permanent_address_validate">
+                                    </p>
+                                </div>
+                                <div>
+                                    <div id="div_select_permanent_country" class="form-outline">
+                                        <label id="lbl_select_permanent_country" for="select_permanent_country"
+                                            class="form-label  required">Country</label>
+                                        <select name="" id="select_permanent_country">
+                                            <option value="select"></option>
+                                            <option id="select_afghan" value="afghan">Afghan
+                                            </option>
+                                            <option id="select_american" value="american">
+                                                American
+                                            </option>
+                                            <option id="select_australian" value="australian">
+                                                Australian</option>
+                                            <option id="select_bangladeshi" value="bangladeshi">
+                                                Bangladeshi</option>
+                                            <option id="select_belgian" value="belgian">
+                                                Belgian
+                                            </option>
+                                            <option id="select_british" value="british">
+                                                British
+                                            </option>
+                                            <option id="select_canadian" value="canadian">
+                                                Canadian
+                                            </option>
+                                            <option id="select_african" value="central african">
+                                                Central African
+                                            </option>
+                                            <option id="select_chinese" value="chinese">Chinese
+                                            </option>
+                                            <option id="select_dutch" value="dutch">Dutch</option>
+                                            <option id="select_indian" value="indian">Indian</option>
+                                        </select>
+                                    </div>
+                                    <p data_attribute_error="error" id="select_permanent_country_validate">
+                                    </p>
+                                </div>
+                                <div>
+                                    <div id="div_select_permanent_state" class="form-outline">
+                                        <label id="lbl_select_permanent_state" for="select_permanent_state"
+                                            class="form-label  required">State</label>
+                                        <select name="" id="select_permanent_state">
+                                            <option value=""></option>
+                                            <option value="afghan">Andhra Pradesh</option>
+                                            <option value="american">Arunachal Pradesh</option>
+                                            <option value="australian">Goa</option>
+                                            <option value="bangladeshi">Bangladesh</option>
+                                            <option value="belgian">Odisha</option>
+                                        </select>
+                                    </div>
+                                    <p data_attribute_error="error" id="select_permanent_state_validate"></p>
+                                </div>
+                                <div>
+                                    <div id="div_txt_permanent_city" class="form-outline">
+                                        <label id="lbl_txt_permanent_city" for="txt_permanent_city"
+                                            class="form-label  required">City</label>
+                                        <input id="txt_permanent_city" type="text" class="form-text  ps-2 imp">
+                                    </div>
+                                    <p data_attribute_error="error" id="txt_permanent_city_validate">
+                                    </p>
+                                </div>
+                                <div>
+                                    <div id="div_txt_permanent_pincode" class="form-outline">
+                                        <label id="lbl_txt_permanent_pincode" for="txt_permanent_pincode"
+                                            class="form-label  required">Pincode</label>
+                                        <input id="txt_permanent_pincode" type="text" class="form-text  ps-2 imp">
+                                    </div>
+                                    <p data_attribute_error="error" id="txt_permanent_pincode_validate"></p>
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <h3 class="pt-4">PRESENT ADDRESS</h3>
+                            <input type="checkbox" id="check" checked>
+                            <label for="check" class="pb-2">Same as Permanent Address</label>
+                            <div class="p-3 border border-secondary">
+                                <div>
+                                    <div id="div_txt_present_address" class="form-outline">
+                                        <label id="lbl_txt_present_address" for="txt_present_address"
+                                            class="form-label  required">Address</label>
+                                        <input type="text" id="txt_present_address" cols="50" rows="2"
+                                            class="form-text  ps-2 imp"></input>
+                                    </div>
+                                    <p data_attribute_error="error" id="txt_present_address_validate">
+                                    </p>
+                                </div>
+                                <div>
+                                    <div id="div_select_present_country" class="form-outline">
+                                        <label id="lbl_select_present_country" for="select_present_country"
+                                            class="form-label  required">Country</label>
+                                        <select name="" id="select_present_country">
+                                            <option value="select"></option>
+                                            <option id="select_afghan" value="afghan">Afghan
+                                            </option>
+                                            <option id="select_american" value="american">
+                                                American
+                                            </option>
+                                            <option id="select_australian" value="australian">
+                                                Australian</option>
+                                            <option id="select_bangladeshi" value="bangladeshi">
+                                                Bangladeshi</option>
+                                            <option id="select_belgian" value="belgian">
+                                                Belgian
+                                            </option>
+                                            <option id="select_british" value="british">
+                                                British
+                                            </option>
+                                            <option id="select_canadian" value="canadian">
+                                                Canadian
+                                            </option>
+                                            <option id="select_african" value="central african">
+                                                Central African
+                                            </option>
+                                            <option id="select_chinese" value="chinese">Chinese
+                                            </option>
+                                            <option id="select_dutch" value="dutch">Dutch</option>
+                                            <option id="select_indian" value="indian">Indian</option>
+                                        </select>
+                                    </div>
+                                    <p data_attribute_error="error" id="select_present_country_validate">
+                                    </p>
+                                </div>
+                                <div>
+                                    <div id="div_select_present_state" class="form-outline">
+                                        <label id="lbl_select_present_state" for="select_present_state"
+                                            class="form-label  required">State</label>
+                                        <select name="" id="select_present_state">
+                                            <option value=""></option>
+                                            <option value="afghan">Andhra Pradesh</option>
+                                            <option value="american">Arunachal Pradesh</option>
+                                            <option value="australian">Goa</option>
+                                            <option value="bangladeshi">Bangladesh</option>
+                                            <option value="belgian">Odisha</option>
+                                        </select>
+                                    </div>
+                                    <p data_attribute_error="error" id="select_present_state_validate"></p>
+                                </div>
+                                <div>
+                                    <div id="div_txt_present_city" class="form-outline">
+                                        <label id="lbl_txt_present_city" for="txt_present_city"
+                                            class="form-label  required">City</label>
+                                        <input id="txt_present_city" type="text" class="form-text  ps-2 imp">
+                                    </div>
+                                    <p data_attribute_error="error" id="txt_present_city_validate">
+                                    </p>
+                                </div>
+                                <div>
+                                    <div id="div_txt_present_pincode" class="form-outline">
+                                        <label id="lbl_txt_present_pincode" for="txt_present_pincode"
+                                            class="form-label  required">Pincode</label>
+                                        <input id="txt_present_pincode" type="text" class="form-text  ps-2 imp">
+                                    </div>
+                                    <p data_attribute_error="error" id="txt_present_pincode_validate"></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="academic">
+                        <h3 class="pt-4">EDUCATION DETAILS</h3>
+                        <div class="p-3 border border-secondary">
+                            Please use "Add More" to add all education - PG, UG, 12th, 10th. <br>
+                            <b>Highest Education - Completed or Pursuing</b>
+                            <div class="mt-3 mb-3 pt-3 pb-3 border border-secondary">
+                                <div class="education_details mt-3 mb-3 ms-2 me-2">
+                                    <div id="div_select_education_type_details" class="form-outline">
+                                        <label id="lbl_select_education_type_details"
+                                            for="select_education_type_details" class="form-label required">Education
+                                            Type</label>
+                                        <select name="" id="select_education_type_details">
+                                            <option value="select"></option>
+                                            <option value="undergraduate">Undergraduate</option>
+                                            <option value="postgraduate">Post graduate</option>
+                                        </select>
+                                    </div>
+
+                                    <div class="mt-3 mb-3 ms-2 me-2 d-none">
+                                        <div id="div_select_degree_details" class="form-outline">
+                                            <label id="lbl_select_degree_details" for="select_degree_details"
+                                                class="form-label  required">Degree</label>
+                                            <input type="text" name="" id="select_degree_detail" class="w-100">
+                                        </div>
+                                        <p data_attribute_error="error" id="select_degree_details"></p>
+                                    </div>
+                                    <div class="mt-3 mb-3 ms-2 me-2 d-none">
+                                        <div id="div_select_college_details" class="form-outline">
+                                            <label id="lbl_select_college_details" for="select_college_details"
+                                                class="form-label  required">College</label>
+                                            <input type="text" name="" id="select_college_details" class="w-100">
+                                        </div>
+                                        <p data_attribute_error="error" id="select_college_details"></p>
+                                    </div>
+                                    <div class="mt-3 mb-3 ms-2 me-2 d-none">
+                                        <div id="div_select_branch_details" class="form-outline">
+                                            <label id="lbl_select_branch_details" for="select_branch_details"
+                                                class="form-label  required">Branch</label>
+                                            <input type="text" id="select_branch_details" class="w-100">
+                                        </div>
+                                        <p data_attribute_error="error" id="select_branch_details"></p>
+                                    </div>
+                                    <div class="mt-3 mb-3 ms-2 me-2 d-none">
+                                        <div id="div_select_yop_details" class="form-outline">
+                                            <label id="lbl_select_yop_details" for="select_yop_details"
+                                                class="form-label  required">Year of Passing</label>
+                                            <input type="text" id="select_yop_details" class="w-100">
+                                        </div>
+                                        <p data_attribute_error="error" id="select_yop_details"></p>
+                                    </div>
+                                    <div class="mt-3 mb-3 ms-2 me-2 d-none">
+                                        <div id="div_select_mark_details" class="form-outline">
+                                            <label id="lbl_select_mark_details" for="select_mark_details"
+                                                class="form-label  required">Percentage/CGPA</label>
+                                            <div class="d-flex p-1">
+                                                <div>
+                                                    <input type="radio" name="radio_input_marks" id="radio_percentage">
+                                                    <label for="radio_percentage"
+                                                        class="lbl_radio_input pe-2">Percentage</label>
+                                                </div>
+                                                <div>
+                                                    <input type="radio" name="radio_input_marks" id="radio_cgpa">
+                                                    <label for="radio_cgpa" class="lbl_radio_input pe-2">CGPA</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <p data_attribute_error="error" id="select_mark_details"></p>
+                                    </div>
+                                    <div class="mt-3 mb-3 ms-2 me-2 d-none">
+                                        <div id="div_txt_percentage_mark_details" class="form-outline">
+                                            <label id="lbl_txt_percentage_mark_details"
+                                                for="txt_percentage_mark_details"
+                                                class="form-label  required">Percentage</label>
+                                            <input type="text" id="txt_percentage_mark_details" class="w-100">
+                                        </div>
+                                        <p data_attribute_error="error" id="txt_percentage_mark_details"></p>
+                                    </div>
+                                    <div class="mt-3 mb-3 ms-2 me-2 d-none">
+                                        <div id="div_txt_cgpa_mark_details" class="form-outline">
+                                            <label id="lbl_txt_cgpa_mark_details" for="txt_cgpa_mark_details"
+                                                class="form-label  required">CGPA</label>
+                                            <input type="text" id="txt_cgpa_mark_details" class="w-100">
+                                        </div>
+                                        <p data_attribute_error="error" id="txt_cgpa_mark_details"></p>
+                                    </div>
+                                    <p data_attribute_error="error" id="select_education_type_details"></p>
+                                </div>
+                            </div>
+                            <button class="btn btn-primary p-1 mt-2">Add More</button>
+                        </div>
+                    </div>
+                    <!-- <div id="attachments">
+                        <h3 class="pt-4">ATTACHMENTS</h3>
+                        <div class="p-3 border border-secondary">
+                            Please use "Add More" to add all education - PG, UG, 12th, 10th. <br>
+                            <b>Highest Education - Completed or Pursuing</b>
+                            <div class="mt-3 mb-3 ms-2 me-2" pt-3 pb-3 border border-secondary">
+                                <div class="education_details">
+                                    <div id="div_select_education_type_details" class="form-outline">
+                                        <label id="lbl_select_education_type_details"
+                                            for="select_education_type_details" class="form-label  required">Education
+                                            Type</label>
+                                        <select name="" id="select_education_type_details">
+                                            <option value="select"></option>
+                                            <option value="undergraduate">Undergraduate</option>
+                                            <option value="postgraduate">Post graduate</option>
+                                        </select>
+                                    </div>
+
+                                    <div class="mt-3 mb-3 ms-2 me-2"">
+                                        <div id="div_select_degree_details" class="form-outline">
+                                            <label id="lbl_select_degree_details" for="select_degree_details"
+                                                class="form-label  required">Degree</label>
+                                            <input type="text" name="" id="select_degree_detail" class="w-100">
+                                        </div>
+                                        <p data_attribute_error="error" id="select_degree_details"></p>
+                                    </div>
+                                    <div class="mt-3 mb-3 ms-2 me-2"">
+                                        <div id="div_select_college_details" class="form-outline">
+                                            <label id="lbl_select_college_details" for="select_college_details"
+                                                class="form-label  required">College</label>
+                                            <input type="text" name="" id="select_college_details" class="w-100">
+                                        </div>
+                                        <p data_attribute_error="error" id="select_college_details"></p>
+                                    </div>
+                                    <div class="mt-3 mb-3 ms-2 me-2"">
+                                        <div id="div_select_branch_details" class="form-outline">
+                                            <label id="lbl_select_branch_details" for="select_branch_details"
+                                                class="form-label  required">Branch</label>
+                                            <input type="text" id="select_branch_details" class="w-100">
+                                        </div>
+                                        <p data_attribute_error="error" id="select_branch_details"></p>
+                                    </div>
+                                    <div class="mt-3 mb-3 ms-2 me-2"">
+                                        <div id="div_select_yop_details" class="form-outline">
+                                            <label id="lbl_select_yop_details" for="select_yop_details"
+                                                class="form-label  required">Year of Passing</label>
+                                            <input type="text" id="select_yop_details" class="w-100">
+                                        </div>
+                                        <p data_attribute_error="error" id="select_yop_details"></p>
+                                    </div>
+                                    <div class="mt-3 mb-3 ms-2 me-2"">
+                                        <div id="div_select_mark_details" class="form-outline">
+                                            <label id="lbl_select_mark_details" for="select_mark_details"
+                                                class="form-label  required">Percentage/CGPA</label>
+                                            <div class="d-flex p-1">
+                                                <div>
+                                                    <input type="radio" name="radio_input_marks" id="radio_percentage">
+                                                    <label for="radio_percentage"
+                                                        class="lbl_radio_input pe-2">Percentage</label>
+                                                </div>
+                                                <div>
+                                                    <input type="radio" name="radio_input_marks" id="radio_cgpa">
+                                                    <label for="radio_cgpa" class="lbl_radio_input pe-2">CGPA</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <p data_attribute_error="error" id="select_mark_details"></p>
+                                    </div>
+                                    <div class="mt-3 mb-3 ms-2 me-2"">
+                                        <div id="div_txt_percentage_mark_details" class="form-outline">
+                                            <label id="lbl_txt_percentage_mark_details"
+                                                for="txt_percentage_mark_details"
+                                                class="form-label  required">Percentage</label>
+                                            <input type="text" id="txt_percentage_mark_details" class="w-100">
+                                        </div>
+                                        <p data_attribute_error="error" id="txt_percentage_mark_details"></p>
+                                    </div>
+                                    <div class="mt-3 mb-3 ms-2 me-2"">
+                                        <div id="div_txt_cgpa_mark_details" class="form-outline">
+                                            <label id="lbl_txt_cgpa_mark_details" for="txt_cgpa_mark_details"
+                                                class="form-label  required">CGPA</label>
+                                            <input type="text" id="txt_cgpa_mark_details" class="w-100">
+                                        </div>
+                                        <p data_attribute_error="error" id="txt_cgpa_mark_details"></p>
+                                    </div>
+                                    <p data_attribute_error="error" id="select_education_type_details"></p>
+                                </div>
+                            </div>
+                            <button class="btn btn-primary p-1 mt-2">Add More</button>
+                        </div>
+                    </div> -->
+
+                    <div>
+                        <label for="check1">I agree that above information are true and
+                            valid.</label>
+                        <div>
+                            <input type="checkbox" id="check1">
+                        </div>
+                    </div>
+                    <div>
+                        <label for="check2">Get messages on registered phone number.</label>
+                        <div>
+                            <input type="checkbox" id="check2">
+                        </div>
+                    </div>
+                    <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                        data-bs-target="#myModal">Submit</button>
+                </div>
+            </div>
+            <div class="modal" id="myModal">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title">Registration Details</h4>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                        </div>
+                        <div class="modal-body">
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+        </form>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>
