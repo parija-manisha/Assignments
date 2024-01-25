@@ -1,0 +1,700 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration Form</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <form id="register" action="">
+        <div class="container p-10">
+            <div class="header-part p-10">
+                <center>
+                    <h1>REGISTER NOW</h1>
+                </center>
+            </div>
+
+            <div class="menu flex justify-space-between">
+                <div class="details p-10"><button class="p-10" onclick="document.location='#personal'">Personal
+                        Details</button></div>
+                <div class="details p-10"><button class="p-10" onclick="document.location='#academic'">Educational
+                        Details</button></div>
+                <div class="details p-10"><button class="p-10" onclick="document.location='#identify'">Identification
+                        Method</button></div>
+                <div class="details p-10"><button class="p-10" onclick="document.location='#emergency'">Emergency
+                        Contact</button></div>
+                <div class="details p-10"><button class="p-10" onclick="document.location='#address'">Address
+                        Details</button></div>
+            </div>
+
+            <div class="information flex justify-space-between">
+                <div id="personal" class="stdinfo">
+                    <h3>PERSONAL DETAILS</h3>
+                    <hr>
+                    <div class="input-field">
+                        <div data_attribute_display="display" id="div_txt_first_name" class="form-group">
+                            <label id="lbl_txt_first_name" for="txt_first_name" class="form-control required">First
+                                Name</label>
+                            <input type="text" data-label-id="lbl_txt_first_name"
+                                data-message-validate="txt_first_name_validate" class="form-input imp"
+                                id="txt_first_name" />
+                        </div>
+                        <p class="validate_data" data_attribute_error="error" id="txt_first_name_validate"></p>
+                    </div>
+                    <div class="input-field">
+                        <div data_attribute_display="display" id="div_txt_middle_name" class="form-group">
+                            <label id="lbl_txt_middle_name" for="txt_middle_name" class="form-control">Middle
+                                Name</label>
+                            <input type="text" class="form-input" id="txt_middle_name"
+                                data-label-id="lbl_txt_middle_name" data-message-validate="txt_middle_name_validate" />
+                        </div>
+                        <p class="validate_data" data_attribute_error="error" id="txt_middle_name_validate"></p>
+                    </div>
+                    <div class="input-field">
+                        <div data_attribute_display="display" id="div_txt_last_name" class="form-group">
+                            <label id="lbl_txt_last_name" for="txt_last_name" class="form-control required">Last
+                                Name</label>
+                            <input type="text" class="form-input imp" id="txt_last_name"
+                                data-label-id="lbl_txt_last_name" data-message-validate="txt_last_name_validate">
+                        </div>
+                        <p class="validate_data" data_attribute_error="error" id="txt_last_name_validate"></p>
+                    </div>
+                    <div class="input-field">
+                        <div data_attribute_display="display" id="div_txt_dob" class="form-group">
+                            <label id="lbl_txt_dob" for="txt_dob" class="form-control required">Date of Birth</label>
+                            <input type="date" class="form-input imp" id="txt_dob" data-label-id="lbl_txt_dob"
+                                data-message-validate="txt_dob_validate">
+                        </div>
+                        <p class="validate_data" data_attribute_error="error" id="txt_dob_validate"></p>
+                    </div>
+                    <div class="input-field">
+                        <div data_attribute_display="display" id="div_txt_phone" class="form-group">
+                            <label id="lbl_txt_phone" for="txt_phone" class="form-control required">Phone Number</label>
+                            <input type="text" class="form-input imp" id="txt_phone" data-label-id="lbl_txt_phone"
+                                data-message-validate="txt_phone_validate">
+                        </div>
+                        <p class="validate_data" data_attribute_error="error" id="txt_phone_validate"></p>
+                    </div>
+                    <div class="input-field">
+                        <div data_attribute_display="display" id="div_txt_email" class="form-group">
+                            <label id="lbl_txt_email" for="txt_email" class="form-control required">Email
+                                ID</label>
+                            <input type="text" class="form-input imp" id="txt_email" data-label-id="lbl_txt_email"
+                                data-message-validate="txt_email_validate">
+                        </div>
+                        <p class="validate_data" data_attribute_error="error" id="txt_email_validate"></p>
+                    </div>
+                    <div class="input-field">
+                        <div data_attribute_display="display" id="div_select_gender" class="form-group">
+                            <label id="lbl_select_gender" class="form-control required">Gender</label>
+                            <div class="gender flex justify-space-between">
+                                <div>
+                                    <input type="radio" name="radio_input" id="radio_male">
+                                    <label for="radio_male" class="lbl_radio_input">Male</label>
+                                </div>
+                                <div>
+                                    <input type="radio" name="radio_input" id="radio_female">
+                                    <label for="radio_female" class="lbl_radio_input">Female</label>
+                                </div>
+                                <div>
+                                    <input type="radio" name="radio_input" id="radio_other">
+                                    <label for="radio_other" class="lbl_radio_input">Other</label>
+                                </div>
+                            </div>
+                        </div>
+                        <p class="validate_data" data_attribute_error="error" id="select_gender_validate">
+                        </p>
+                    </div>
+                    <div class="input-field">
+                        <div data_attribute_display="display" id="div_txt_password" class="form-group">
+                            <label id="lbl_txt_password" for="txt_password"
+                                class="form-control required">Password</label>
+                            <input type="password" class="form-input imp" id="txt_password"
+                                data-label-id="lbl_txt_password" data-message-validate="txt_password_validate">
+                        </div>
+                        <p class="validate_data" data_attribute_error="error" id="txt_password_validate"></p>
+                    </div>
+                    <div class="input-field">
+                        <div data_attribute_display="display" id="div_txt_confirm_password" class="form-group">
+                            <label id="lbl_txt_confirm_password" for="txt_confirm_password"
+                                class="form-control required">Confirm
+                                Password</label>
+                            <input type="password" class="form-input imp" id="txt_confirm_password"
+                                data-label-id="lbl_txt_confirm_password"
+                                data-message-validate="txt_confirm_password_validate">
+                        </div>
+                        <p class="validate_data" data_attribute_error="error" id="txt_confirm_password_validate"></p>
+                    </div>
+                    <div class="input-field">
+                        <div data_attribute_display="display" id="div_txt_father_name" class="form-group">
+                            <label id="lbl_txt_father_name" for="txt_father_name" class="form-control required">Father's
+                                Name</label>
+                            <input type="text" class="form-input imp" id="txt_father_name"
+                                data-label-id="lbl_txt_father_name" data-message-validate="txt_father_name_validate">
+                        </div>
+                        <p class="validate_data" data_attribute_error="error" id="txt_father_name_validate"></p>
+                    </div>
+                    <div class="input-field">
+                        <div data_attribute_display="display" id="div_txt_mother_name" class="form-group">
+                            <label id="lbl_txt_mother_name" for="txt_mother_name" class="form-control required">Mother's
+                                Name</label>
+                            <input type="text" class="form-input imp" id="txt_mother_name"
+                                data-label-id="lbl_txt_mother_name" data-message-validate="txt_mother_name_validate">
+                        </div>
+                        <p class="validate_data" data_attribute_error="error" id="txt_mother_name_validate"></p>
+                    </div>
+                    <div class="input-field">
+                        <div data_attribute_display="display" id="div_txt_gaurdian_name" class="form-group">
+                            <label id="lbl_txt_gaurdian_name" for="txt_gaurdian_name"
+                                class="form-control required">Gaurdian's
+                                Name</label>
+                            <input type="text" class="form-input imp" id="txt_gaurdian_name"
+                                data-label-id="lbl_txt_gaurdian_name"
+                                data-message-validate="txt_gaurdian_name_validate">
+                        </div>
+                        <p class="validate_data" data_attribute_error="error" id="txt_gaurdian_name_validate">
+                        </p>
+                    </div>
+                    <div class="input-field">
+                        <div data_attribute_display="display" id="div_txt_gaurdian_phone" class="form-group">
+                            <label id="lbl_txt_gaurdian_phone" for="txt_gaurdian_phone"
+                                class="form-control required">Gaurdian's
+                                Contact Number</label>
+                            <input type="text" class="form-input imp" id="txt_gaurdian_phone"
+                                data-label-id="lbl_txt_gaurdian_phone"
+                                data-message-validate="txt_gaurdian_phone_validate">
+                        </div>
+                        <p class="validate_data" data_attribute_error="error" id="txt_gaurdian_phone_validate">
+                        </p>
+                    </div>
+                </div>
+
+                <div class="edu-verify-emergency">
+                    <div id="academic" class="education">
+                        <h3>QUALIFICATION DETAILS</h3>
+                        <hr>
+                        <div class="input-field">
+                            <div class="table" id="results">
+                                <div class='theader'>
+                                    <div class='table_header'>Qualification</div>
+                                    <div class='table_header'>Board/University</div>
+                                    <div class='table_header'>Course</div>
+                                    <div class='table_header'>Percentage</div>
+                                    <div class='table_header'>Passing Year</div>
+                                </div>
+                                <div class='table_row'>
+                                    <div class='table_small'>
+                                        <div class='table_cell'>Qualification</div>
+                                        <div class='table_cell degree_level required'>Secondary</div>
+                                    </div>
+                                    <div class='table_small'>
+                                        <div class='table_cell'>Board/University</div>
+                                        <div class='table_cell'><input type="text" name="" id=""></div>
+                                    </div>
+                                    <div class='table_small'>
+                                        <div class='table_cell'>Course</div>
+                                        <div class='table_cell'><input type="text" name="" id=""></div>
+                                    </div>
+                                    <div class='table_small'>
+                                        <div class='table_cell'>Percentage</div>
+                                        <div class='table_cell'><input type="text" name="" id=""></div>
+                                    </div>
+                                    <div class='table_small'>
+                                        <div class='table_cell'>Passing Year</div>
+                                        <div class='table_cell'><input type="text" name="" id=""></div>
+                                    </div>
+                                </div>
+                                <div class='table_row'>
+                                    <div class='table_small'>
+                                        <div class='table_cell'>Qualification</div>
+                                        <div class='table_cell degree_level required'>Senior Secondary</div>
+                                    </div>
+                                    <div class='table_small'>
+                                        <div class='table_cell'>Board/University</div>
+                                        <div class='table_cell'><input type="text" name="" id=""></div>
+                                    </div>
+                                    <div class='table_small'>
+                                        <div class='table_cell'>Course</div>
+                                        <div class='table_cell'><input type="text" name="" id=""></div>
+                                    </div>
+                                    <div class='table_small'>
+                                        <div class='table_cell'>Percentage</div>
+                                        <div class='table_cell'><input type="text" name="" id=""></div>
+                                    </div>
+                                    <div class='table_small'>
+                                        <div class='table_cell'>Passing Year</div>
+                                        <div class='table_cell'><input type="text" name="" id=""></div>
+                                    </div>
+                                </div>
+                                <div class='table_row'>
+                                    <div class='table_small'>
+                                        <div class='table_cell'>Qualification</div>
+                                        <div class='table_cell degree_level required'>Graduation</div>
+                                    </div>
+                                    <div class='table_small'>
+                                        <div class='table_cell'>Board/University</div>
+                                        <div class='table_cell'><input type="text" name="" id=""></div>
+                                    </div>
+                                    <div class='table_small'>
+                                        <div class='table_cell'>Course</div>
+                                        <div class='table_cell'><input type="text" name="" id=""></div>
+                                    </div>
+                                    <div class='table_small'>
+                                        <div class='table_cell'>Percentage</div>
+                                        <div class='table_cell'><input type="text" name="" id=""></div>
+                                    </div>
+                                    <div class='table_small'>
+                                        <div class='table_cell'>Passing Year</div>
+                                        <div class='table_cell'><input type="text" name="" id=""></div>
+                                    </div>
+                                </div>
+                                <div class='table_row'>
+                                    <div class='table_small'>
+                                        <div class='table_cell'>Qualification</div>
+                                        <div class='table_cell degree_level '>Post-Graduation</div>
+                                    </div>
+                                    <div class='table_small'>
+                                        <div class='table_cell'>Board/University</div>
+                                        <div class='table_cell'><input type="text" name="" id=""></div>
+                                    </div>
+                                    <div class='table_small'>
+                                        <div class='table_cell'>Course</div>
+                                        <div class='table_cell'><input type="text" name="" id=""></div>
+                                    </div>
+                                    <div class='table_small'>
+                                        <div class='table_cell'>Percentage</div>
+                                        <div class='table_cell'><input type="text" name="" id=""></div>
+                                    </div>
+                                    <div class='table_small'>
+                                        <div class='table_cell'>Passing Year</div>
+                                        <div class='table_cell'><input type="text" name="" id=""></div>
+                                    </div>
+                                </div>
+                                <div class='table_row'>
+                                    <div class='table_small'>
+                                        <div class='table_cell'>Qualification</div>
+                                        <div class='table_cell degree_level '>Any Other</div>
+                                    </div>
+                                    <div class='table_small'>
+                                        <div class='table_cell'>Board/University</div>
+                                        <div class='table_cell'><input type="text" name="" id=""></div>
+                                    </div>
+                                    <div class='table_small'>
+                                        <div class='table_cell'>Course</div>
+                                        <div class='table_cell'><input type="text" name="" id=""></div>
+                                    </div>
+                                    <div class='table_small'>
+                                        <div class='table_cell'>Percentage</div>
+                                        <div class='table_cell'><input type="text" name="" id=""></div>
+                                    </div>
+                                    <div class='table_small'>
+                                        <div class='table_cell'>Passing Year</div>
+                                        <div class='table_cell'><input type="text" name="" id=""></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <p id="qualification_detaila_validate" class="validate_data"></p>
+                        </div>
+                    </div>
+
+                    <div id="identify">
+                        <h3>VERIFICATION DETAILS</h3>
+                        <hr>
+                        <div class="input-field">
+                            <div id="div_verification_documents" class="form-group">
+                                <label id="lbl_verification_documents" class="form-control required">Identification
+                                    Method</label>
+                                <div class="file-upload flex">
+                                    <input type="checkbox" id="aadhar" checked>
+                                    <label for="aadhar">Aadhar Card</label>
+                                    <div class="upload">
+                                        <input type="file" class="imp">
+                                    </div>
+                                </div>
+                                <div class="file-upload flex">
+                                    <input type="checkbox" id="pan">
+                                    <label for="pan">Pan Card</label>
+                                    <div class="upload">
+                                        <input type="file">
+                                    </div>
+                                </div>
+                                <div class="file-upload flex">
+                                    <input type="checkbox" id="dl">
+                                    <label for="dl">Driving License</label>
+                                    <div class="upload">
+                                        <input type="file">
+                                    </div>
+                                </div>
+                                <div class="file-upload flex">
+                                    <input type="checkbox" id="passport">
+                                    <label for="passport">Passport</label>
+                                    <div class="upload">
+                                        <input type="file">
+                                    </div>
+                                </div>
+                                <div class="file-upload flex">
+                                    <input type="checkbox" id="voter">
+                                    <label for="voter">Voter Id</label>
+                                    <div class="upload">
+                                        <input type="file">
+                                    </div>
+                                </div>
+                            </div>
+                            <p id="verification_documents_validation" class="validate_data"></p>
+                        </div>
+                    </div>
+
+                    <div id="emergency">
+                        <h3>EMERGENCY CONTACT</h3>
+                        <hr>
+                        <p>Primary Emercency Details</p>
+                        <div class="response flex">
+                            <div class="input-field">
+                                <div id="div_txt_emergency_name1" class="form-group">
+                                    <label id="lbl_txt_emergency_name1" for="txt_emergency_name1"
+                                        class="form-control required">Name</label>
+                                    <input id="txt_emergency_name1" type="text" class="form-input imp"
+                                        data-label-id="lbl_txt_emergency_name1"
+                                        data-message-validate="txt_emergency_name1_validate" />
+                                </div>
+                                <p class="validate_data" data_attribute_error="error" id="txt_emergency_name1_validate">
+                                </p>
+                            </div>
+                            <div class="input-field">
+                                <div id="div_txt_emergency_relation1" class="form-group">
+                                    <label id="lbl_txt_emergency_relation1" for="txt_emergency_relation1"
+                                        class="form-control">Relationship</label>
+                                    <input type="text" class="form-input" id="txt_emergency_relation1"
+                                        data-label-id="lbl_txt_emergency_relation1"
+                                        data-message-validate="txt_emergency_relation1_validate" />
+                                </div>
+                                <p class="validate_data" data_attribute_error="error"
+                                    id="txt_emergency_relation1_validate"></p>
+                            </div>
+                            <div class="input-field">
+                                <div id="div_txt_emergency_phone1" class="form-group">
+                                    <label id="lbl_txt_emergency_phone1" for="txt_emergency_phone1"
+                                        class="form-control required">Phone Number</label>
+                                    <input type="text" class="form-input imp" id="txt_emergency_phone1"
+                                        data-label-id="lbl_txt_emergency_phone1"
+                                        data-message-validate="txt_emergency_phone1_validate">
+                                </div>
+                                <p class="validate_data" data_attribute_error="error"
+                                    id="txt_emergency_phone1_validate"></p>
+                            </div>
+                            <div class="input-field">
+                                <div id="div_txt_emergency_email1" class="form-group">
+                                    <label id="lbl_txt_emergency_email1" for="txt_emergency_email1"
+                                        class="form-control required">Email ID</label>
+                                    <input type="text" class="form-input imp" id="txt_emergency_email1"
+                                        data-label-id="lbl_txt_emergency_email1"
+                                        data-message-validate="txt_emergency_email1">
+                                </div>
+                                <p class="validate_data" data_attribute_error="error" id="txt_emergency_email1"></p>
+                            </div>
+                        </div>
+                        <p>Seconadary Emercency Details</p>
+                        <div class="response flex">
+                            <div class="input-field">
+                                <div id="div_txt_emergency_name2" class="form-group">
+                                    <label id="lbl_txt_emergency_name2" for="txt_emergency_name2"
+                                        class="form-control">Name</label>
+                                    <input id="txt_emergency_name2" type="text" class="form-input"
+                                        data-label-id="lbl_txt_emergency_name2"
+                                        data-message-validate="txt_emergency_name2_validate" />
+                                </div>
+                                <p class="validate_data" data_attribute_error="error" id="txt_emergency_name2_validate">
+                                </p>
+                            </div>
+                            <div class="input-field">
+                                <div id="div_txt_emergency_relation2" class="form-group">
+                                    <label id="lbl_txt_emergency_relation2" for="txt_emergency_relation2"
+                                        class="form-control">Relationship</label>
+                                    <input type="text" class="form-input" id="txt_emergency_relation2"
+                                        data-label-id="lbl_txt_emergency_relation2"
+                                        data-message-validate="txt_emergency_relation2_validate" />
+                                </div>
+                                <p class="validate_data" data_attribute_error="error"
+                                    id="txt_emergency_relation2_validate"></p>
+                            </div>
+                            <div class="input-field">
+                                <div id="div_txt_emergency_phone2" class="form-group">
+                                    <label id="lbl_txt_emergency_phone2" for="txt_emergency_phone2"
+                                        class="form-control ">Phone Number</label>
+                                    <input type="text" class="form-input" id="txt_emergency_phone2"
+                                        data-label-id="lbl_txt_emergency_phone2"
+                                        data-message-validate="txt_emergency_phone2_validate">
+                                </div>
+                                <p class="validate_data" data_attribute_error="error"
+                                    id="txt_emergency_phone2_validate"></p>
+                            </div>
+                            <div class="input-field">
+                                <div id="div_txt_emergency_email2" class="form-group">
+                                    <label id="lbl_txt_emergency_email2" for="txt_emergency_email2"
+                                        class="form-control ">Email ID</label>
+                                    <input type="text" class="form-input" id="txt_emergency_email2"
+                                        data-label-id="lbl_txt_emergency_email2"
+                                        data-message-validate="txt_emergency_email2">
+                                </div>
+                                <p class="validate_data" data_attribute_error="error" id="txt_emergency_email2"></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="address" class="p-10 flex justify-space-around">
+                <div class="address_permanent p-10">
+                    <h3>PERMANENT ADDRESS</h3>
+                    <div class="input-field">
+                        <div id="div_select_permanent_country" class="form-group">
+                            <label id="lbl_select_permanent_country" for="select_permanent_country"
+                                class="form-control required">Nationality</label>
+                            <select name="" id="select_permanent_country">
+                                <option value="select"></option>
+                                <option id="select_afghan" value="afghan">Afghan
+                                </option>
+                                <option id="select_american" value="american">
+                                    American
+                                </option>
+                                <option id="select_australian" value="australian">
+                                    Australian</option>
+                                <option id="select_bangladeshi" value="bangladeshi">
+                                    Bangladeshi</option>
+                                <option id="select_belgian" value="belgian">
+                                    Belgian
+                                </option>
+                                <option id="select_british" value="british">
+                                    British
+                                </option>
+                                <option id="select_canadian" value="canadian">
+                                    Canadian
+                                </option>
+                                <option id="select_african" value="central african">
+                                    Central African
+                                </option>
+                                <option id="select_chinese" value="chinese">Chinese
+                                </option>
+                                <option id="select_dutch" value="dutch">Dutch</option>
+                                <option id="select_indian" value="indian">Indian</option>
+                            </select>
+                        </div>
+                        <p class="validate_data" data_attribute_error="error" id="select_permanent_country_validate">
+                        </p>
+                    </div>
+                    <div class="input-field">
+                        <div id="div_select_permanent_state" class="form-group">
+                            <label id="lbl_select_permanent_state" for="select_permanent_state"
+                                class="form-control required">State</label>
+                            <select name="" id="select_permanent_state">
+                                <option value=""></option>
+                                <option value="afghan">Andhra Pradesh</option>
+                                <option value="american">Arunachal Pradesh</option>
+                                <option value="australian">Goa</option>
+                                <option value="bangladeshi">Bangladesh</option>
+                                <option value="belgian">Odisha</option>
+                            </select>
+                        </div>
+                        <p class="validate_data" data_attribute_error="error" id="select_permanent_state_validate"></p>
+                    </div>
+                    <div class="input-field">
+                        <div id="div_txt_permanent_city" class="form-group">
+                            <label id="lbl_txt_permanent_city" for="txt_permanent_city"
+                                class="form-control required">City</label>
+                            <input id="txt_permanent_city" type="text" class="form-input imp"
+                                data-label-id="lbl_txt_permanent_city"
+                                data-message-validate="txt_permanent_city_validate">
+                        </div>
+                        <p class="validate_data" data_attribute_error="error" id="txt_permanent_city_validate">
+                        </p>
+                    </div>
+                    <div class="input-field">
+                        <div id="div_txt_permanent_pincode" class="form-group">
+                            <label id="lbl_txt_permanent_pincode" for="txt_permanent_pincode"
+                                class="form-control required">Pincode</label>
+                            <input id="txt_permanent_pincode" type="text" pattern="[1-9][0-9]{5}" maxlength="6"
+                                class="form-input imp" data-label-id="lbl_txt_permanent_pincode"
+                                data-message-validate="txt_permanent_pincode_validate">
+                        </div>
+                        <p class="validate_data" data_attribute_error="error" id="txt_permanent_pincode_validate"></p>
+                    </div>
+                    <div class="input-field">
+                        <div id="div_txt_permanent_address_one" class="form-group">
+                            <label id="lbl_txt_permanent_address_one" for="txt_permanent_address_one"
+                                class="form-control required">Address
+                                1</label>
+                            <textarea id="txt_permanent_address_one" cols="50" rows="2" class="form-input imp"
+                                data-label-id="lbl_txt_permanent_address_one"
+                                data-message-validate="txt_permanent_address_one_validate"></textarea>
+                        </div>
+                        <p class="validate_data" data_attribute_error="error" id="txt_permanent_address_one_validate">
+                        </p>
+                    </div>
+                    <div class="input-field">
+                        <div id="div_txt_permanent_address_two" class="form-group">
+                            <label id="lbl_txt_permanent_address_two" for="txt_permanent_address_two"
+                                class="form-control">Address
+                                2</label>
+                            <textarea id="txt_permanent_address_two" cols="50" rows="2" class="form-input"
+                                data-label-id="lbl_txt_permanent_address_two"
+                                data-message-validate="txt_permanent_address_two_validate"></textarea>
+                        </div>
+                        <p class="validate_data" data_attribute_error="error" id="txt_permanent_address_two_validate">
+                        </p>
+                    </div>
+                    <div class="input-field">
+                        <div id="div_txt_permanent_landmark" class="form-group">
+                            <label id="lbl_txt_permanent_landmark" for="txt_permanent_landmark"
+                                class="form-control">Landamrk</label>
+                            <textarea id="txt_permanent_landmark" cols="50" rows="2" class="form-input"
+                                data-label-id="lbl_txt_permanent_landmark"
+                                data-message-validate="txt_permanent_landmark_validate"></textarea>
+                        </div>
+                        <p class="validate_data" data_attribute_error="error" id="txt_permanent_landmark_validate"></p>
+                    </div>
+                </div>
+                <div class="address_present p-10">
+                    <h3>PRESENT ADDRESS</h3>
+                    <input type="checkbox" id="check">
+                    <label for="check">Same as Permanent Address</label>
+                    <div class="input-field">
+                        <div id="div_select_present_country" class="form-group">
+                            <label id="lbl_select_present_country" for="select_present_counrty"
+                                class="form-control required">Nationality</label>
+                            <select name="" id="select_present_counrty">
+                                <option value="select"></option>
+                                <option id="select_afghan" value="afghan">Afghan
+                                </option>
+                                <option id="select_american" value="american">
+                                    American
+                                </option>
+                                <option id="select_australian" value="australian">
+                                    Australian</option>
+                                <option id="select_bangladeshi" value="bangladeshi">
+                                    Bangladeshi</option>
+                                <option id="select_belgian" value="belgian">
+                                    Belgian
+                                </option>
+                                <option id="select_british" value="british">
+                                    British
+                                </option>
+                                <option id="select_canadian" value="canadian">
+                                    Canadian
+                                </option>
+                                <option id="select_african" value="central african">
+                                    Central African
+                                </option>
+                                <option id="select_chinese" value="chinese">Chinese
+                                </option>
+                                <option id="select_dutch" value="dutch">Dutch</option>
+                                <option id="select_indian" value="indian">Indian</option>
+                            </select>
+                        </div>
+                        <p class="validate_data" data_attribute_error="error" id="select_present_country_validate"></p>
+                    </div>
+                    <div class="input-field">
+                        <div id="div_select_present_state" class="form-group">
+                            <label id="lbl_select_present_state" for="select_present_state"
+                                class="form-control required">State</label>
+                            <select name="" id="select_present_state">
+                                <option value=""></option>
+                                <option value="afghan">Andhra Pradesh</option>
+                                <option value="american">Arunachal Pradesh</option>
+                                <option value="australian">Goa</option>
+                                <option value="bangladeshi">Bangladesh</option>
+                                <option value="belgian">Odisha</option>
+                            </select>
+                        </div>
+                        <p class="validate_data" data_attribute_error="error" id="select_present_state_validate"></p>
+                    </div>
+                    <div class="input-field">
+                        <div id="div_txt_present_city" class="form-group">
+                            <label id="lbl_txt_present_city" for="txt_present_city"
+                                class="form-control required">City</label>
+                            <input id="txt_present_city" type="text" class="form-input imp"
+                                data-label-id="lbl_txt_present_city" data-message-validate="txt_present_city_validate">
+                        </div>
+                        <p class="validate_data" data_attribute_error="error" id="txt_present_city_validate">
+                        </p>
+                    </div>
+                    <div class="input-field">
+                        <div id="div_txt_present_pincode" class="form-group">
+                            <label id="lbl_txt_present_pincode" for="txt_present_pincode"
+                                class="form-control required">Pincode</label>
+                            <input id="txt_present_pincode" type="text" pattern="[1-9][0-9]{5}" maxlength="6"
+                                class="form-input imp" data-label-id="lbl_txt_present_pincode"
+                                data-message-validate="txt_present_pincode_validate">
+                        </div>
+                        <p class="validate_data" data_attribute_error="error" id="txt_present_pincode_validate">
+                        </p>
+                    </div>
+                    <div class="input-field">
+                        <div id="div_txt_present_address_one" class="form-group">
+                            <label id="lbl_txt_present_address_one" for="txt_present_address_one"
+                                class="form-control required">Address
+                                1</label>
+                            <textarea id="txt_present_address_one" cols="50" rows="2" class="form-input imp"
+                                data-label-id="lbl_txt_present_address_one"
+                                data-message-validate="txt_present_address_one_validate"></textarea>
+                        </div>
+                        <p class="validate_data" data_attribute_error="error" id="txt_present_address_one_validate"></p>
+                    </div>
+                    <div class="input-field">
+                        <div id="div_txt_present_address_two" class="form-group">
+                            <label id="lbl_txt_present_address_two" for="txt_present_address_two"
+                                class="form-control">Address
+                                2</label>
+                            <textarea id="txt_present_address_two" cols="50" rows="2" class="form-input"
+                                data-label-id="lbl_txt_present_address_two"
+                                data-message-validate="txt_present_address_two_validate"></textarea>
+                        </div>
+                        <p class="validate_data" data_attribute_error="error" id="txt_present_address_two_validate"></p>
+                    </div>
+                    <div class="input-field">
+                        <div id="div_txt_present_landmark" class="form-group">
+                            <label id="lbl_txt_present_landmark" for="txt_present_landmark"
+                                class="form-control">Landamrk</label>
+                            <textarea id="txt_present_landmark" cols="50" rows="2" class="form-input"
+                                data-label-id="lbl_txt_present_landmark"
+                                data-message-validate="txt_present_landmark_validate"></textarea>
+                        </div>
+                        <p class="validate_data" data_attribute_error="error" id="txt_present_landmark_validate"></p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="p-10 m-10 flex justify-space-between">
+                <div class="agreement">
+                    <div class="agree flex">
+                        <label class="check1 required" for="check1">I agree that above information are true and
+                            valid.</label>
+                        <div class="check">
+                            <input type="checkbox" id="check1">
+                        </div>
+                    </div>
+                    <br>
+                    <div class="agree flex">
+                        <label for="check2">Get messages on registered phone number.</label>
+                        <div class="check">
+                            <input type="checkbox" id="check2">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <button type="submit" class="btn">Submit</button>
+            <div id="popup">
+                <h2>Registration Details</h2>
+                <p><span id="popup_content"></span></p>
+                <button onclick="closePopup()">Close</button>
+            </div>
+        </div>
+    </form>
+
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script src="validate.js"></script>
+</body>
+
+</html>
