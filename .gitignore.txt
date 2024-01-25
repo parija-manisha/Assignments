@@ -1,5 +1,6 @@
 
 # Ignore bin and obj folders
-/bin/Debug/
-/obj/
-/.vs/
+bin/
+obj/
+Properties/
+.vs/
