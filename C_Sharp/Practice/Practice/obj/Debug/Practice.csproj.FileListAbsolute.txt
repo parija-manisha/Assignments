@@ -1,0 +1,14 @@
+C:\Users\manishap\source\repos\Practice\Practice\bin\Debug\Practice.exe.config
+C:\Users\manishap\source\repos\Practice\Practice\bin\Debug\Practice.exe
+C:\Users\manishap\source\repos\Practice\Practice\bin\Debug\Practice.pdb
+C:\Users\manishap\source\repos\Practice\Practice\obj\Debug\Practice.csproj.AssemblyReference.cache
+C:\Users\manishap\source\repos\Practice\Practice\obj\Debug\Practice.csproj.CoreCompileInputs.cache
+C:\Users\manishap\source\repos\Practice\Practice\obj\Debug\Practice.exe
+C:\Users\manishap\source\repos\Practice\Practice\obj\Debug\Practice.pdb
+C:\Users\manishap\Desktop\Assignment\C#\Practice\Practice\bin\Debug\Practice.exe.config
+C:\Users\manishap\Desktop\Assignment\C#\Practice\Practice\bin\Debug\Practice.exe
+C:\Users\manishap\Desktop\Assignment\C#\Practice\Practice\bin\Debug\Practice.pdb
+C:\Users\manishap\Desktop\Assignment\C#\Practice\Practice\obj\Debug\Practice.csproj.AssemblyReference.cache
+C:\Users\manishap\Desktop\Assignment\C#\Practice\Practice\obj\Debug\Practice.csproj.CoreCompileInputs.cache
+C:\Users\manishap\Desktop\Assignment\C#\Practice\Practice\obj\Debug\Practice.exe
+C:\Users\manishap\Desktop\Assignment\C#\Practice\Practice\obj\Debug\Practice.pdb

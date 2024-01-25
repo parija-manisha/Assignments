@@ -1,0 +1,7 @@
+C:\Users\manishap\Desktop\Assignment\C#\Practice\Practice_dbConnection\bin\Debug\Practice_dbConnection.exe.config
+C:\Users\manishap\Desktop\Assignment\C#\Practice\Practice_dbConnection\bin\Debug\Practice_dbConnection.exe
+C:\Users\manishap\Desktop\Assignment\C#\Practice\Practice_dbConnection\bin\Debug\Practice_dbConnection.pdb
+C:\Users\manishap\Desktop\Assignment\C#\Practice\Practice_dbConnection\obj\Debug\Practice_dbConnection.csproj.AssemblyReference.cache
+C:\Users\manishap\Desktop\Assignment\C#\Practice\Practice_dbConnection\obj\Debug\Practice_dbConnection.csproj.CoreCompileInputs.cache
+C:\Users\manishap\Desktop\Assignment\C#\Practice\Practice_dbConnection\obj\Debug\Practice_dbConnection.exe
+C:\Users\manishap\Desktop\Assignment\C#\Practice\Practice_dbConnection\obj\Debug\Practice_dbConnection.pdb

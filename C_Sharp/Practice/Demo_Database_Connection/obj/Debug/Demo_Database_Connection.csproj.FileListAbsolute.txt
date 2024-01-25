@@ -1,0 +1,7 @@
+C:\Users\manishap\Desktop\Assignment\C#\Practice\Demo_Database_Connection\bin\Debug\Demo_Database_Connection.exe.config
+C:\Users\manishap\Desktop\Assignment\C#\Practice\Demo_Database_Connection\bin\Debug\Demo_Database_Connection.exe
+C:\Users\manishap\Desktop\Assignment\C#\Practice\Demo_Database_Connection\bin\Debug\Demo_Database_Connection.pdb
+C:\Users\manishap\Desktop\Assignment\C#\Practice\Demo_Database_Connection\obj\Debug\Demo_Database_Connection.csproj.AssemblyReference.cache
+C:\Users\manishap\Desktop\Assignment\C#\Practice\Demo_Database_Connection\obj\Debug\Demo_Database_Connection.csproj.CoreCompileInputs.cache
+C:\Users\manishap\Desktop\Assignment\C#\Practice\Demo_Database_Connection\obj\Debug\Demo_Database_Connection.exe
+C:\Users\manishap\Desktop\Assignment\C#\Practice\Demo_Database_Connection\obj\Debug\Demo_Database_Connection.pdb
