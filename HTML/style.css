@@ -1,0 +1,52 @@
+.border {
+    border: none;
+    width: 100%;
+}
+
+fieldset,
+input,
+select,
+textarea {
+    background-color: rgb(240, 240, 240);
+}
+
+input,
+select,
+textarea {
+    height: 100%;
+    outline: none;
+}
+
+.bold {
+    font-size: large;
+    font-weight: bold;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    display: none;
+}
+
+.imp::after {
+    content: "*";
+    color: red;
+}
+
+.show {
+    width: 29.5%;
+    display: inline-block;
+}
+
+.show-display {
+    width: 46%;
+    display: inline-block;
+}
+
+.show-display-half {
+    width: 43%;
+    display: inline-block;
+}
+
+.address {
+    display: flex;
+}
