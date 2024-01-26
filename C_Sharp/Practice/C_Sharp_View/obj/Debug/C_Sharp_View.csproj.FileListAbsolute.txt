@@ -1,0 +1,7 @@
+C:\Users\manishap\Desktop\ASSIGNMENTS\C_Sharp\Practice\C_Sharp_View\bin\Debug\C_Sharp_View.exe.config
+C:\Users\manishap\Desktop\ASSIGNMENTS\C_Sharp\Practice\C_Sharp_View\bin\Debug\C_Sharp_View.exe
+C:\Users\manishap\Desktop\ASSIGNMENTS\C_Sharp\Practice\C_Sharp_View\bin\Debug\C_Sharp_View.pdb
+C:\Users\manishap\Desktop\ASSIGNMENTS\C_Sharp\Practice\C_Sharp_View\obj\Debug\C_Sharp_View.csproj.AssemblyReference.cache
+C:\Users\manishap\Desktop\ASSIGNMENTS\C_Sharp\Practice\C_Sharp_View\obj\Debug\C_Sharp_View.csproj.CoreCompileInputs.cache
+C:\Users\manishap\Desktop\ASSIGNMENTS\C_Sharp\Practice\C_Sharp_View\obj\Debug\C_Sharp_View.exe
+C:\Users\manishap\Desktop\ASSIGNMENTS\C_Sharp\Practice\C_Sharp_View\obj\Debug\C_Sharp_View.pdb

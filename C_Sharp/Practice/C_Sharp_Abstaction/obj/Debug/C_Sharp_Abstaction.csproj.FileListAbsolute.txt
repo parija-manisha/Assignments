@@ -1,0 +1,7 @@
+C:\Users\manishap\Desktop\ASSIGNMENTS\C_Sharp\Practice\C_Sharp_Abstaction\bin\Debug\C_Sharp_Abstaction.exe.config
+C:\Users\manishap\Desktop\ASSIGNMENTS\C_Sharp\Practice\C_Sharp_Abstaction\bin\Debug\C_Sharp_Abstaction.exe
+C:\Users\manishap\Desktop\ASSIGNMENTS\C_Sharp\Practice\C_Sharp_Abstaction\bin\Debug\C_Sharp_Abstaction.pdb
+C:\Users\manishap\Desktop\ASSIGNMENTS\C_Sharp\Practice\C_Sharp_Abstaction\obj\Debug\C_Sharp_Abstaction.csproj.AssemblyReference.cache
+C:\Users\manishap\Desktop\ASSIGNMENTS\C_Sharp\Practice\C_Sharp_Abstaction\obj\Debug\C_Sharp_Abstaction.csproj.CoreCompileInputs.cache
+C:\Users\manishap\Desktop\ASSIGNMENTS\C_Sharp\Practice\C_Sharp_Abstaction\obj\Debug\C_Sharp_Abstaction.exe
+C:\Users\manishap\Desktop\ASSIGNMENTS\C_Sharp\Practice\C_Sharp_Abstaction\obj\Debug\C_Sharp_Abstaction.pdb

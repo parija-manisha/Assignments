@@ -1,0 +1,7 @@
+C:\Users\manishap\Desktop\ASSIGNMENTS\C_Sharp\Practice\C_Sharp_LINQ\bin\Debug\C_Sharp_LINQ.exe.config
+C:\Users\manishap\Desktop\ASSIGNMENTS\C_Sharp\Practice\C_Sharp_LINQ\bin\Debug\C_Sharp_LINQ.exe
+C:\Users\manishap\Desktop\ASSIGNMENTS\C_Sharp\Practice\C_Sharp_LINQ\bin\Debug\C_Sharp_LINQ.pdb
+C:\Users\manishap\Desktop\ASSIGNMENTS\C_Sharp\Practice\C_Sharp_LINQ\obj\Debug\C_Sharp_LINQ.csproj.AssemblyReference.cache
+C:\Users\manishap\Desktop\ASSIGNMENTS\C_Sharp\Practice\C_Sharp_LINQ\obj\Debug\C_Sharp_LINQ.csproj.CoreCompileInputs.cache
+C:\Users\manishap\Desktop\ASSIGNMENTS\C_Sharp\Practice\C_Sharp_LINQ\obj\Debug\C_Sharp_LINQ.exe
+C:\Users\manishap\Desktop\ASSIGNMENTS\C_Sharp\Practice\C_Sharp_LINQ\obj\Debug\C_Sharp_LINQ.pdb

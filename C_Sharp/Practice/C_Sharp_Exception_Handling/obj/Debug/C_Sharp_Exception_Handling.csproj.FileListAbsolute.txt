@@ -1,0 +1,7 @@
+C:\Users\manishap\Desktop\ASSIGNMENTS\C_Sharp\Practice\C_Sharp_Exception_Handling\bin\Debug\C_Sharp_Exception_Handling.exe.config
+C:\Users\manishap\Desktop\ASSIGNMENTS\C_Sharp\Practice\C_Sharp_Exception_Handling\bin\Debug\C_Sharp_Exception_Handling.exe
+C:\Users\manishap\Desktop\ASSIGNMENTS\C_Sharp\Practice\C_Sharp_Exception_Handling\bin\Debug\C_Sharp_Exception_Handling.pdb
+C:\Users\manishap\Desktop\ASSIGNMENTS\C_Sharp\Practice\C_Sharp_Exception_Handling\obj\Debug\C_Sharp_Exception_Handling.csproj.AssemblyReference.cache
+C:\Users\manishap\Desktop\ASSIGNMENTS\C_Sharp\Practice\C_Sharp_Exception_Handling\obj\Debug\C_Sharp_Exception_Handling.csproj.CoreCompileInputs.cache
+C:\Users\manishap\Desktop\ASSIGNMENTS\C_Sharp\Practice\C_Sharp_Exception_Handling\obj\Debug\C_Sharp_Exception_Handling.exe
+C:\Users\manishap\Desktop\ASSIGNMENTS\C_Sharp\Practice\C_Sharp_Exception_Handling\obj\Debug\C_Sharp_Exception_Handling.pdb

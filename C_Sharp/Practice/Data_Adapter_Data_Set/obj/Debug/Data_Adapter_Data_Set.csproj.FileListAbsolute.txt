@@ -1,0 +1,7 @@
+C:\Users\manishap\Desktop\ASSIGNMENTS\C_Sharp\Practice\Data_Adapter_Data_Set\bin\Debug\Data_Adapter_Data_Set.exe.config
+C:\Users\manishap\Desktop\ASSIGNMENTS\C_Sharp\Practice\Data_Adapter_Data_Set\bin\Debug\Data_Adapter_Data_Set.exe
+C:\Users\manishap\Desktop\ASSIGNMENTS\C_Sharp\Practice\Data_Adapter_Data_Set\bin\Debug\Data_Adapter_Data_Set.pdb
+C:\Users\manishap\Desktop\ASSIGNMENTS\C_Sharp\Practice\Data_Adapter_Data_Set\obj\Debug\Data_Adapter_Data_Set.csproj.AssemblyReference.cache
+C:\Users\manishap\Desktop\ASSIGNMENTS\C_Sharp\Practice\Data_Adapter_Data_Set\obj\Debug\Data_Adapter_Data_Set.csproj.CoreCompileInputs.cache
+C:\Users\manishap\Desktop\ASSIGNMENTS\C_Sharp\Practice\Data_Adapter_Data_Set\obj\Debug\Data_Adapter_Data_Set.exe
+C:\Users\manishap\Desktop\ASSIGNMENTS\C_Sharp\Practice\Data_Adapter_Data_Set\obj\Debug\Data_Adapter_Data_Set.pdb

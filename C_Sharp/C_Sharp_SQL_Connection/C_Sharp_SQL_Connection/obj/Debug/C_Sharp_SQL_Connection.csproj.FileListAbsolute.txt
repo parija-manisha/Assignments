@@ -1,0 +1,7 @@
+C:\Users\manishap\Desktop\Assignment\C#\C_Sharp_SQL_Connection\C_Sharp_SQL_Connection\bin\Debug\C_Sharp_SQL_Connection.exe.config
+C:\Users\manishap\Desktop\Assignment\C#\C_Sharp_SQL_Connection\C_Sharp_SQL_Connection\bin\Debug\C_Sharp_SQL_Connection.exe
+C:\Users\manishap\Desktop\Assignment\C#\C_Sharp_SQL_Connection\C_Sharp_SQL_Connection\bin\Debug\C_Sharp_SQL_Connection.pdb
+C:\Users\manishap\Desktop\Assignment\C#\C_Sharp_SQL_Connection\C_Sharp_SQL_Connection\obj\Debug\C_Sharp_SQL_Connection.csproj.AssemblyReference.cache
+C:\Users\manishap\Desktop\Assignment\C#\C_Sharp_SQL_Connection\C_Sharp_SQL_Connection\obj\Debug\C_Sharp_SQL_Connection.csproj.CoreCompileInputs.cache
+C:\Users\manishap\Desktop\Assignment\C#\C_Sharp_SQL_Connection\C_Sharp_SQL_Connection\obj\Debug\C_Sharp_SQL_Connection.exe
+C:\Users\manishap\Desktop\Assignment\C#\C_Sharp_SQL_Connection\C_Sharp_SQL_Connection\obj\Debug\C_Sharp_SQL_Connection.pdb

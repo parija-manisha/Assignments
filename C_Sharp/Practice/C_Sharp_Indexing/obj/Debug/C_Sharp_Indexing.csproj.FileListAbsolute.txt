@@ -1,0 +1,7 @@
+C:\Users\manishap\Desktop\ASSIGNMENTS\C_Sharp\Practice\C_Sharp_Indexing\bin\Debug\C_Sharp_Indexing.exe.config
+C:\Users\manishap\Desktop\ASSIGNMENTS\C_Sharp\Practice\C_Sharp_Indexing\bin\Debug\C_Sharp_Indexing.exe
+C:\Users\manishap\Desktop\ASSIGNMENTS\C_Sharp\Practice\C_Sharp_Indexing\bin\Debug\C_Sharp_Indexing.pdb
+C:\Users\manishap\Desktop\ASSIGNMENTS\C_Sharp\Practice\C_Sharp_Indexing\obj\Debug\C_Sharp_Indexing.csproj.AssemblyReference.cache
+C:\Users\manishap\Desktop\ASSIGNMENTS\C_Sharp\Practice\C_Sharp_Indexing\obj\Debug\C_Sharp_Indexing.csproj.CoreCompileInputs.cache
+C:\Users\manishap\Desktop\ASSIGNMENTS\C_Sharp\Practice\C_Sharp_Indexing\obj\Debug\C_Sharp_Indexing.exe
+C:\Users\manishap\Desktop\ASSIGNMENTS\C_Sharp\Practice\C_Sharp_Indexing\obj\Debug\C_Sharp_Indexing.pdb

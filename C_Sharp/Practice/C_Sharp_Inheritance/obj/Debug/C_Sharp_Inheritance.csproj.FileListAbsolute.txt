@@ -1,0 +1,7 @@
+C:\Users\manishap\Desktop\ASSIGNMENTS\C_Sharp\Practice\C_Sharp_Inheritance\bin\Debug\C_Sharp_Inheritance.exe.config
+C:\Users\manishap\Desktop\ASSIGNMENTS\C_Sharp\Practice\C_Sharp_Inheritance\bin\Debug\C_Sharp_Inheritance.exe
+C:\Users\manishap\Desktop\ASSIGNMENTS\C_Sharp\Practice\C_Sharp_Inheritance\bin\Debug\C_Sharp_Inheritance.pdb
+C:\Users\manishap\Desktop\ASSIGNMENTS\C_Sharp\Practice\C_Sharp_Inheritance\obj\Debug\C_Sharp_Inheritance.csproj.AssemblyReference.cache
+C:\Users\manishap\Desktop\ASSIGNMENTS\C_Sharp\Practice\C_Sharp_Inheritance\obj\Debug\C_Sharp_Inheritance.csproj.CoreCompileInputs.cache
+C:\Users\manishap\Desktop\ASSIGNMENTS\C_Sharp\Practice\C_Sharp_Inheritance\obj\Debug\C_Sharp_Inheritance.exe
+C:\Users\manishap\Desktop\ASSIGNMENTS\C_Sharp\Practice\C_Sharp_Inheritance\obj\Debug\C_Sharp_Inheritance.pdb
