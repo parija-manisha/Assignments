@@ -36,10 +36,55 @@ public static class DataTableExtensions
 
         return result;
     }
-}
 
-class Program
-{
+    public static DataTable ToDataTable<T>(this List<T> list)
+    {
+        DataTable dataTable = new DataTable();
+
+        // If the list is empty, return an empty DataTable
+        if (list.Count == 0)
+            return dataTable;
+
+        // Get the type of the objects in the list
+        Type objectType = typeof(T);
+
+        // Get the properties of the object type
+        var properties = objectType.GetProperties();
+
+        // Add columns to the DataTable based on the object properties
+        foreach (var property in properties)
+        {
+            dataTable.Columns.Add(property.Name, property.PropertyType);
+        }
+
+        // Add rows to the DataTable based on the object values
+        foreach (var item in list)
+        {
+            DataRow row = dataTable.NewRow();
+
+            foreach (var property in properties)
+            {
+                row[property.Name] = property.GetValue(item);
+            }
+
+            dataTable.Rows.Add(row);
+        }
+
+        return dataTable;
+    }
+
+    public class Person
+    {
+        public string Name { get; set; }
+        public int Age { get; set; }
+
+        public DataTable ToDataTable()
+        {
+            List<Person> list = new List<Person> { this };
+            return list.ToDataTable();
+        }
+    }
+
     static void Main()
     {
         string connectionString = "Data Source=MANISHAP-WIN10;Initial Catalog=TEST;Integrated Security=True";
@@ -70,10 +115,5 @@ class Program
         }
 
         Console.ReadLine();
-    }
-    public class Person
-    { 
-        public string Name { get; set; }
-        public int Age { get; set; }
     }
 }
