@@ -1,0 +1,845 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration Form</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">
+
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+</head>
+
+<body>
+    <div class="container-fluid">
+        <div class="shadow-lg p-3 mb-5 bg-white rounded">
+            <h1>Registration Form</h1>
+        </div>
+        <form id="register" action="">
+            <div class="all-info d-flex">
+                <div class="shadow p-3 mb-5 me-2 bg-white rounded">
+                    <div class="personal-details">
+                        <div class="input-field">
+                            <div id="div_inputFirstName" data-attribute-display="display" class="form-group pb-2">
+                                <label id="label_inputFirstName" for="inputFirstName" class="required">First
+                                    Name</label>
+                                <input type="text" class="form-control imp" id="inputFirstName"
+                                    data-label-id="label_inputFirstName" data-message-validate="inputFirstNameValidate">
+                            </div>
+                            <p class="validate-data" data-message-error="error" id="inputFirstNameValidate"></p>
+                        </div>
+                        <div class="input-field">
+                            <div id="div_inputMiddleName" data-attribute-display="display" class="form-group pb-2">
+                                <label id="label_inputMiddleName" for="inputMiddleName">Middle Name</label>
+                                <input type="text" class="form-control" id="inputMiddleName"
+                                    data-label-id="label_inputMiddleName"
+                                    data-message-validate="inputMiddleNameValidate">
+                            </div>
+                            <p class="validate-data" data-message-error="error" id="inputMiddleNameValidate"></p>
+                        </div>
+                        <div class="input-field">
+                            <div id="div_inputLastName" data-attribute-display="display" class="form-group pb-2">
+                                <label id="label_inputLastName" for="inputLastName" class="required">Last Name</label>
+                                <input type="text" class="form-control imp" id="inputLastName"
+                                    data-label-id="label_inputLastName" data-message-validate="inputLastNameValidate">
+                            </div>
+                            <p class="validate-data" data-message-error="error" id="inputLastNameValidate"></p>
+                        </div>
+                        <div class="input-field">
+                            <div id="div_inputFullName" data-attribute-display="display" class="form-group pb-2">
+                                <label id="label_inputFullName" for="inputFullName" class="required">Full Name</label>
+                                <input type="text" class="form-control imp" id="inputFullName"
+                                    data-label-id="label_inputFullName" data-message-validate="inputFullNameValidate">
+                            </div>
+                            <p class="validate-data" data-message-error="error" id="inputFullNameValidate"></p>
+                        </div>
+                        <div class="input-field">
+                            <div id="div_inputEmail" data-attribute-display="display" class="form-group pb-2">
+                                <label id="label_inputEmail" for="inputEmail" class="required">Email address</label>
+                                <input type="email" class="form-control imp" id="inputEmail"
+                                    aria-describedby="emailHelp" data-label-id="label_inputEmail"
+                                    data-message-validate="inputEmailValidate">
+                                <small id="emailHelp" class="form-text text-muted">We'll never share your email with
+                                    anyone
+                                    else.</small>
+                            </div>
+                            <p class="validate-data" data-message-error="error" id="inputEmailValidate"></p>
+                        </div>
+                        <div class="input-field">
+                            <div data-attribute-display="display" id="div_inputEmailAlternate" class="form-group pb-2">
+                                <label id="label_inputEmailAlternate" for="inputEmailAlternate">Alternate Email
+                                    address</label>
+                                <input type="email" class="form-control" id="inputEmailAlternate"
+                                    data-label-id="label_inputEmailAlternate"
+                                    data-message-validate="inputEmailAlternateValidate">
+                            </div>
+                            <p class="validate-data" data-message-error="error" id="inputEmailAlternateValidate"></p>
+                        </div>
+                        <div class="input-field">
+                            <div id="div_inputPhone" data-attribute-display="display" class="form-group pb-2">
+                                <label id="label_inputPhone" for="inputPhone" class="required">Mobile Number</label>
+                                <input type="tel" class="form-control imp" id="inputPhone"
+                                    data-label-id="label_inputPhone" data-message-validate="inputPhoneValidate">
+                            </div>
+                            <p class="validate-data" data-message-error="error" id="inputPhoneValidate"></p>
+                        </div>
+                        <div class="input-field">
+                            <div id="div_inputPhoneAlternate" data-attribute-display="display" class="form-group pb-2">
+                                <label id="label_inputPhoneAlternate" for="inputPhoneAlternate">Alternate Phone
+                                    Number</label>
+                                <input type="tel" class="form-control" id="inputPhoneAlternate"
+                                    data-label-id="label_inputPhoneAlternate"
+                                    data-message-validate="inputPhoneAlternateValidate">
+                            </div>
+                            <p class="validate-data" data-message-error="error" id="inputPhoneAlternateValidate"></p>
+                        </div>
+                        <div class="input-field">
+                            <div id="div_inputDOB" data-attribute-display="display" class="form-group pb-2">
+                                <label id="label_inputDOB" for="inputDOB" class="required">Date of Birth</label>
+                                <input type="date" class="form-control imp" id="inputDOB" data-label-id="label_inputDOB"
+                                    data-message-validate="inputDOBValidate">
+                            </div>
+                            <p class="validate-data" data-message-error="error" id="inputDOBValidate"></p>
+                        </div>
+                        <div class="input-field">
+                            <div id="div_inputRadioGender" data-attribute-display="display" class="form-group pb-2">
+                                <label id="label_inputRadioGender" for="inputRadioGender"
+                                    class="required">Gender</label>
+                                <div class="options d-flex">
+                                    <div class="form-check pe-3">
+                                        <input class="form-check-input" type="radio" name="flexRadio"
+                                            id="inputRadioGenderMale">
+                                        <label class="form-check-label" for="inputRadioGenderMale">
+                                            Male
+                                        </label>
+                                    </div>
+                                    <div class="form-check pe-3">
+                                        <input class="form-check-input" type="radio" name="flexRadio"
+                                            id="inputRadioGenderFemale">
+                                        <label class="form-check-label" for="inputRadioGenderFemale">
+                                            Female
+                                        </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="flexRadio"
+                                            id="inputRadioGenderOther">
+                                        <label class="form-check-label" for="inputRadioGenderOther">
+                                            Other
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <p class="validate-data" data-message-error="error" id="inputRadioGenderValidate"></p>
+                        </div>
+                        <div class="input-field">
+                            <div id="div_inputPassword" data-attribute-display="display" class="form-group pb-2">
+                                <label id="label_inputPassword" for="inputPassword" class="required">Password</label>
+                                <input type="password" class="form-control imp" id="inputPassword"
+                                    data-label-id="label_inputPassword" data-message-validate="inputPasswordValidate">
+                            </div>
+                            <p class="validate-data" data-message-error="error" id="inputPasswordValidate"></p>
+                        </div>
+                        <div class="input-field">
+                            <div id="div_inputConfirmPassword" data-attribute-display="display" class="form-group pb-2">
+                                <label id="label_inputConfirmPassword" for="inputConfirmPassword"
+                                    class="required">Confirm Password</label>
+                                <input type="password" class="form-control imp" id="inputConfirmPassword"
+                                    data-label-id="label_inputConfirmPassword"
+                                    data-message-validate="inputConfirmPasswordValidate">
+                            </div>
+                            <p class="validate-data" data-message-error="error" id="inputConfirmPasswordValidate"></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="info-section w-100">
+                    <div class="shadow p-3 mb-4 bg-white rounded">
+                        <div class="d-flex border-bottom">
+                            <div class="present-address w-50 pe-3">
+                                <p class="font-weight-bold">Present Address Details</p>
+                                <div class="input-field">
+                                    <div id="div_selectCountryPresent" data-attribute-display="display"
+                                        class="form-group">
+                                        <label id="label_selectCountryPresent" for="selectCountryPresent"
+                                            class="required">Country</label>
+                                        <select class="form-control imp" id="selectCountryPresent">
+                                            <option>Select the country</option>
+                                            <option>India</option>
+                                            <option>United Kingdom</option>
+                                            <option>United States</option>
+                                            <option>Germmany</option>
+                                            <option>France</option>
+                                        </select>
+                                    </div>
+                                    <p class="validate-data" data-message-error="error"
+                                        id="selectCountryPresentValidate"></p>
+                                </div>
+                                <div class="input-field">
+                                    <div id="div_selectStatePresent" data-attribute-display="display"
+                                        class="form-group">
+                                        <label id="label_selectStatePresent" for="selectStatePresent"
+                                            class="required">State</label>
+                                        <select class="form-control imp" id="selectStatePresent">
+                                            <option>Select the state</option>
+                                            <option>India</option>
+                                            <option>United Kingdom</option>
+                                            <option>United States</option>
+                                            <option>Germmany</option>
+                                            <option>France</option>
+                                        </select>
+                                    </div>
+                                    <p class="validate-data" data-message-error="error" id="selectStatePresentValidate">
+                                    </p>
+                                </div>
+                                <div class="input-field">
+                                    <div id="div_selectCityPresent" data-attribute-display="display" class="form-group">
+                                        <label id="label_selectCityPresent" for="selectCityPresent"
+                                            class="required">City</label>
+                                        <select class="form-control imp" id="selectCityPresent">
+                                            <option>Select the city</option>
+                                            <option>India</option>
+                                            <option>United Kingdom</option>
+                                            <option>United States</option>
+                                            <option>Germmany</option>
+                                            <option>France</option>
+                                        </select>
+                                    </div>
+                                    <p class="validate-data" data-message-error="error" id="selectCityPresentValidate">
+                                    </p>
+                                </div>
+                                <div class="input-field">
+                                    <div id="div_inputAddressPresent" data-attribute-display="display"
+                                        class="form-group">
+                                        <label id="label_inputAddressPresent" for="inputAddressPresent"
+                                            class="required">Address</label>
+                                        <input type="text" class="form-control imp" id="inputAddressPresent"
+                                            data-label-id="label_inputAddressPresent"
+                                            data-message-validate="inputAddressPresentValidate">
+                                    </div>
+                                    <p class="validate-data" data-message-error="error"
+                                        id="inputAddressPresentValidate">
+                                    </p>
+                                </div>
+                                <div class="input-field">
+                                    <div id="div_inputPincodePresent" data-attribute-display="display"
+                                        class="form-group">
+                                        <label id="label_inputPincodePresent" for="inputPincodePresent"
+                                            class="required">Pincode</label>
+                                        <input type="phone" class="form-control imp" id="inputPincodePresent"
+                                            aria-describedby="pincodeHelpPresent"
+                                            data-label-id="label_inputPincodePresent"
+                                            data-message-validate="inputPincodePresentValidate">
+                                        <small id="pincodeHelpPresent" class="form-text text-muted">If you reside
+                                            outside
+                                            India,
+                                            please
+                                            update pincode as 111111.</small>
+                                    </div>
+                                    <p class="validate-data" data-message-error="error"
+                                        id="inputPincodePresentValidate">
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="permanent-address w-50">
+                                <p class="font-weight-bold">Permanent Address Details</p>
+                                <div class="form-check">
+                                    <input type="checkbox" class="form-check-input" id="check1">
+                                    <label class="form-check-label" for="check1">Same as Present Address</label>
+                                </div>
+                                <div class="input-field">
+                                    <div id="div_selectCountryPermanent" data-attribute-display="display"
+                                        class="form-group">
+                                        <label id="label_selectCountryPermanent" for="selectCountryPermanent"
+                                            class="required">Country</label>
+                                        <select class="form-control imp" id="selectCountryPermanent">
+                                            <option>Select the country</option>
+                                            <option>India</option>
+                                            <option>United Kingdom</option>
+                                            <option>United States</option>
+                                            <option>Germmany</option>
+                                            <option>France</option>
+                                        </select>
+                                    </div>
+                                    <p class="validate-data" data-message-error="error"
+                                        id="selectCountryPermanentValidate">
+                                    </p>
+                                </div>
+                                <div class="input-field">
+                                    <div id="div_selectStatePermanent" data-attribute-display="display"
+                                        class="form-group">
+                                        <label id="label_selectStatePermanent" for="selectStatePermanent"
+                                            class="required">State</label>
+                                        <select class="form-control imp" id="selectStatePermanent">
+                                            <option>Select the state</option>
+                                            <option>India</option>
+                                            <option>United Kingdom</option>
+                                            <option>United States</option>
+                                            <option>Germmany</option>
+                                            <option>France</option>
+                                        </select>
+                                    </div>
+                                    <p class="validate-data" data-message-error="error"
+                                        id="selectStatePermanentValidate">
+                                    </p>
+                                </div>
+                                <div class="input-field">
+                                    <div id="div_selectCityPermanent" data-attribute-display="display"
+                                        class="form-group">
+                                        <label id="label_selectCityPermanent" for="selectCityPermanent"
+                                            class="required">City</label>
+                                        <select class="form-control imp" id="selectCityPermanent">
+                                            <option>Select the city</option>
+                                            <option>India</option>
+                                            <option>United Kingdom</option>
+                                            <option>United States</option>
+                                            <option>Germmany</option>
+                                            <option>France</option>
+                                        </select>
+                                    </div>
+                                    <p class="validate-data" data-message-error="error"
+                                        id="selectCityPermanentValidate">
+                                    </p>
+                                </div>
+                                <div class="input-field">
+                                    <div id="div_inputAddressPermanent" data-attribute-display="display"
+                                        class="form-group">
+                                        <label id="label_inputAddressPermanent" for="inputAddressPermanent"
+                                            class="required">Address</label>
+                                        <input type="text" class="form-control imp" id="inputAddressPermanent"
+                                            data-label-id="label_inputAddressPermanent"
+                                            data-message-validate="inputAddressPermanentValidate">
+                                    </div>
+                                    <p class="validate-data" data-message-error="error"
+                                        id="inputAddressPermanentValidate">
+                                    </p>
+                                </div>
+                                <div class="input-field">
+                                    <div id="div_inputPincodePermanent" data-attribute-display="display"
+                                        class="form-group">
+                                        <label id="label_inputPincodePermanent" for="inputPincodePermanent"
+                                            class="required">Pincode</label>
+                                        <input type="phone" class="form-control imp" id="inputPincodePermanent"
+                                            aria-describedby="pincodeHelpPermanent"
+                                            data-label-id="label_inputPincodePermanent"
+                                            data-message-validate="inputPincodePermanentValidate">
+                                        <small id="pincodeHelpPermanent" class="form-text text-muted">If you reside
+                                            outside
+                                            India,
+                                            please
+                                            update pincode as 111111.</small>
+                                    </div>
+                                    <p class="validate-data" data-message-error="error"
+                                        id="inputPincodePermanentValidate">
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="shadow p-3 mb-5 bg-white rounded">
+                        <div class="education-details">
+                            <p class="font-weight-bold">Education Details</p>
+                            <small id="educationalHelp" class="form-text text-muted">Please use "Add More" to add all
+                                education - PG, UG, 12th, 10th</small>
+                            <div>
+                                <p>Highest Education - Completed or Pursing</p>
+                                <div class="border border-light rounded">
+                                    <div class="input-field">
+                                        <div id="div_selectEducationPG" data-attribute-display="display"
+                                            class="form-group w-100 pe-2">
+                                            <label id="label_selectEducationPG" for="selectEducationPG">Education
+                                                Type</label>
+                                            <select class="form-control" id="selectEducationPG">
+                                                <option>--</option>
+                                                <option>Post Graduate</option>
+                                                <option>Under Graduate</option>
+                                            </select>
+                                        </div>
+                                        <p class="validate-data" data-message-error="error"
+                                            id="selectEducationPGValidate">
+                                        </p>
+                                    </div>
+                                    <div class="highestEducationUG d-none">
+                                        <div class="d-flex pb-2">
+                                            <div class="input-field">
+                                                <div id="div_selectDegreeUG" data-attribute-display="display"
+                                                    class="form-group w-100 pe-2">
+                                                    <label id="label_selectDegreeUG" for="selectDegreeUG">Degree</label>
+                                                    <select class="form-control" id="selectDegreeUG">
+                                                        <option>--</option>
+                                                        <option>Post Graduate</option>
+                                                        <option>Under Graduate</option>
+                                                    </select>
+                                                </div>
+                                                <p class="validate-data" data-message-error="error"
+                                                    id="selectDegreeUGValidate">
+                                                </p>
+                                            </div>
+                                            <div class="input-field">
+                                                <div id="div_selectCollegeUG" class="form-group w-100">
+                                                    <label id="label_selectCollegeUG"
+                                                        for="selectCollegeUG">College</label>
+                                                    <select class="form-control" id="selectCollegeUG">
+                                                        <option>--</option>
+                                                        <option>Post Graduate</option>
+                                                        <option>Under Graduate</option>
+                                                    </select>
+                                                </div>
+                                                <p class="validate-data" data-message-error="error"
+                                                    id="selectCollegeUGValidate">
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <div class="d-flex pb-2">
+                                            <div class="input-field">
+                                                <div id="div_selectBranchUG" data-attribute-display="display"
+                                                    class="form-group w-100 pe-2">
+                                                    <label id="label_selectBranchUG" for="selectBranchUG">Branch</label>
+                                                    <select class="form-control" id="selectBranchUG">
+                                                        <option>--</option>
+                                                        <option>Post Graduate</option>
+                                                        <option>Under Graduate</option>
+                                                    </select>
+                                                </div>
+                                                <p class="validate-data" data-message-error="error"
+                                                    id="selectBranchUGValidate">
+                                                </p>
+                                            </div>
+                                            <div class="input-field">
+                                                <div id="div_selectYearOfPassingUG" data-attribute-display="display"
+                                                    class="form-group w-100">
+                                                    <label id="label_selectYearOfPassingUG"
+                                                        for="selectYearOfPassingUG">Year of Passing</label>
+                                                    <select class="form-control" id="selectYearOfPassingUG">
+                                                        <option>--</option>
+                                                        <option>Post Graduate</option>
+                                                        <option>Under Graduate</option>
+                                                    </select>
+                                                </div>
+                                                <p class="validate-data" data-message-error="error"
+                                                    id="selectYearOfPassingUGValidate">
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <div class="d-flex">
+                                            <div class="input-field">
+                                                <div id="div_inputMarks" data-attribute-display="display"
+                                                    class="form-group pe-2 w-100">
+                                                    <label id="label_inputMarks"
+                                                        for="inputMarks">Percentage/CGPA</label>
+                                                    <div class="options d-flex">
+                                                        <div class="form-check pe-5">
+                                                            <input class="form-check-input" type="radio"
+                                                                name="marksRadio" id="inputRadioPercentUG">
+                                                            <label class="form-check-label" for="inputRadioPercentUG">
+                                                                Percentage
+                                                            </label>
+                                                        </div>
+                                                        <div class="form-check pe-3">
+                                                            <input class="form-check-input" type="radio"
+                                                                name="marksRadio" id="inputRadioCGPAUG">
+                                                            <label class="form-check-label" for="inputRadioCGPAUG">
+                                                                CGPA
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <p class="validate-data" data-message-error="error"
+                                                    id="inputMarksValidate">
+                                                </p>
+                                            </div>
+                                            <div class="input-field">
+                                                <div id="div_selectPercentUG" class="form-group w-100 d-none">
+                                                    <label id="label_selectPercentUG"
+                                                        for="selectPercentUG">Percentage</label>
+                                                    <input type="number" class="form-control" id="selectPercentUG"
+                                                        data-label-id="label_selectPercentUG"
+                                                        data-message-validate="selectPercentUGValidate">
+                                                </div>
+                                                <p class="validate-data" data-message-error="error"
+                                                    id="selectPercentUGValidate">
+                                                </p>
+                                            </div>
+                                            <div class="input-field">
+                                                <div id="div_selectCGPAUG" data-attribute-display="display"
+                                                    class="form-group w-100 pe-2">
+                                                    <label id="label_selectCGPAUG" for="selectCGPAUG">CGPA</label>
+                                                    <input type="number" class="form-control" id="selectCGPAUG"
+                                                        data-label-id="label_selectCGPAUG"
+                                                        data-message-validate="selectCGPAUGValidate">
+                                                </div>
+                                                <p class="validate-data" data-message-error="error"
+                                                    id="selectCGPAUGValidate">
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="highestEducationPG d-none">
+                                        <div class="d-flex pb-2">
+                                            <div class="input-field">
+                                                <div id="label_selectDegreePG" data-attribute-display="display"
+                                                    class="form-group w-100 pe-2">
+                                                    <label id="div_selectDegreePG" for="selectDegreePG">Degree</label>
+                                                    <select class="form-control" id="selectDegreePG">
+                                                        <option>--</option>
+                                                        <option>Post Graduate</option>
+                                                        <option>Under Graduate</option>
+                                                    </select>
+                                                </div>
+                                                <p class="validate-data" data-message-error="error"
+                                                    id="selectDegreePGValidate">
+                                                </p>
+                                            </div>
+                                            <div class="input-field">
+                                                <div id="div_selectCollegePG" data-attribute-display="display"
+                                                    class="form-group w-100">
+                                                    <label id="label_selectCollegePG"
+                                                        for="selectCollegePG">College</label>
+                                                    <select class="form-control" id="selectCollegePG">
+                                                        <option>--</option>
+                                                        <option>Post Graduate</option>
+                                                        <option>Under Graduate</option>
+                                                    </select>
+                                                </div>
+                                                <p class="validate-data" data-message-error="error"
+                                                    id="selectCollegePGValidate">
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <div class="d-flex pb-2">
+                                            <div class="input-field">
+                                                <div id="div_selectBranchPG" data-attribute-display="display"
+                                                    class="form-group w-100 pe-2">
+                                                    <label id="label_selectBranchPG" for="selectBranchPG">Branch</label>
+                                                    <select class="form-control" id="selectBranchPG">
+                                                        <option>--</option>
+                                                        <option>Post Graduate</option>
+                                                        <option>Under Graduate</option>
+                                                    </select>
+                                                </div>
+                                                <p class="validate-data" data-message-error="error"
+                                                    id="selectBranchPGValidate">
+                                                </p>
+                                            </div>
+                                            <div class="input-field">
+                                                <div id="div_selectYearOfPassingPG" data-attribute-display="display"
+                                                    class="form-group w-100">
+                                                    <label id="label_selectYearOfPassingPG"
+                                                        for="selectYearOfPassingPG">Year of Passing</label>
+                                                    <select class="form-control" id="selectYearOfPassingPG">
+                                                        <option>--</option>
+                                                        <option>Post Graduate</option>
+                                                        <option>Under Graduate</option>
+                                                    </select>
+                                                </div>
+                                                <p class="validate-data" data-message-error="error"
+                                                    id="selectYearOfPassingPGValidate">
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <div class="d-flex">
+                                            <div class="input-field">
+                                                <div data-attribute-display="display" class="form-group pe-2 w-100">
+                                                    <label id="label_inputRadioPercentPG"
+                                                        for="inputMarks">Percentage/CGPA</label>
+                                                    <div class="options d-flex">
+                                                        <div class="form-check pe-5">
+                                                            <input class="form-check-input" type="radio"
+                                                                name="marksRadio" id="inputRadioPercentPG">
+                                                            <label class="form-check-label" for="inputRadioPercentPG">
+                                                                Percentage
+                                                            </label>
+                                                        </div>
+                                                        <div class="form-check pe-3">
+                                                            <input class="form-check-input" type="radio"
+                                                                name="marksRadio" id="inputRadioCGPAPG">
+                                                            <label class="form-check-label" for="inputRadioCGPAPG">
+                                                                CGPA
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <p class="validate-data" data-message-error="error"
+                                                    id="inputRadioPercentPGValidate">
+                                                </p>
+                                            </div>
+                                            <div class="input-field">
+                                                <div id="div_selectPercentPG" class="form-group w-100 d-none">
+                                                    <label id="label_selectPercentPG"
+                                                        for="selectPercentPG">Percentage</label>
+                                                    <input type="number" class="form-control" id="selectPercentPG"
+                                                        data-label-id="label_selectPercentPG"
+                                                        data-message-validate="selectPercentPGValidate">
+                                                </div>
+                                                <p class="validate-data" data-message-error="error"
+                                                    id="selectPercentPGValidate">
+                                                </p>
+                                            </div>
+                                            <div class="input-field">
+                                                <div id="div_selectCGPAPG" data-attribute-display="display"
+                                                    class="form-group w-100 pe-2">
+                                                    <label id="label_selectCGPAPG" for="selectCGPAPG">CGPA</label>
+                                                    <input type="number" class="form-control" id="selectCGPAPG"
+                                                        data-label-id="label_selectCGPAPG"
+                                                        data-message-validate="selectCGPAPGValidate">
+                                                </div>
+                                                <p class="validate-data" data-message-error="error"
+                                                    id="selectCGPAPGValidate">
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="highestEducation12 d-none">
+                                        <div class="d-flex pb-2">
+                                            <div data-attribute-display="display" class="form-group w-100 pe-2">
+                                                <label for="selectDegree12">Degree</label>
+                                                <select class="form-control" id="selectDegree12">
+                                                    <option>--</option>
+                                                    <option>Post Graduate</option>
+                                                    <option>Under Graduate</option>
+                                                </select>
+                                            </div>
+                                            <div data-attribute-display="display" class="form-group w-100">
+                                                <label for="selectCollege12">College</label>
+                                                <select class="form-control" id="selectCollege12">
+                                                    <option>--</option>
+                                                    <option>Post Graduate</option>
+                                                    <option>Under Graduate</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="d-flex pb-2">
+                                            <div data-attribute-display="display" class="form-group w-100 pe-2">
+                                                <label for="selectBranch12">Branch</label>
+                                                <select class="form-control" id="selectBranch12">
+                                                    <option>--</option>
+                                                    <option>Post Graduate</option>
+                                                    <option>Under Graduate</option>
+                                                </select>
+                                            </div>
+                                            <div data-attribute-display="display" class="form-group w-100">
+                                                <label for="selectYearOfPassing12">Year of Passing</label>
+                                                <select class="form-control" id="selectYearOfPassing12">
+                                                    <option>--</option>
+                                                    <option>Post Graduate</option>
+                                                    <option>Under Graduate</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="d-flex">
+                                            <div data-attribute-display="display" class="form-group pe-2 w-100">
+                                                <label for="inputMarks">Percentage/CGPA</label>
+                                                <div class="options d-flex">
+                                                    <div class="form-check pe-5">
+                                                        <input class="form-check-input" type="radio" name="marksRadio"
+                                                            id="inputRadioPercent12">
+                                                        <label class="form-check-label" for="inputRadioPercent12">
+                                                            Percentage
+                                                        </label>
+                                                    </div>
+                                                    <div class="form-check pe-3">
+                                                        <input class="form-check-input" type="radio" name="marksRadio"
+                                                            id="inputRadioCGPA12">
+                                                        <label class="form-check-label" for="inputRadioCGPA12">
+                                                            CGPA
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group w-100 d-none">
+                                                <label for="selectPercent12">Percentage</label>
+                                                <input type="number" class="form-control" id="selectPercent12">
+                                            </div>
+                                            <div data-attribute-display="display" class="form-group w-100 pe-2">
+                                                <label for="selectCGPA12">CGPA</label>
+                                                <input type="number" class="form-control" id="selectCGPA12">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="highestEducation10 d-none">
+                                        <div class="d-flex pb-2">
+                                            <div data-attribute-display="display" class="form-group w-100 pe-2">
+                                                <label for="selectDegree10">Degree</label>
+                                                <select class="form-control" id="selectDegree10">
+                                                    <option>--</option>
+                                                    <option>Post Graduate</option>
+                                                    <option>Under Graduate</option>
+                                                </select>
+                                            </div>
+                                            <div data-attribute-display="display" class="form-group w-100">
+                                                <label for="selectCollege10">College</label>
+                                                <select class="form-control" id="selectCollege10">
+                                                    <option>--</option>
+                                                    <option>Post Graduate</option>
+                                                    <option>Under Graduate</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="d-flex pb-2">
+                                            <div data-attribute-display="display" class="form-group w-100 pe-2">
+                                                <label for="selectBranch10">Branch</label>
+                                                <select class="form-control" id="selectBranch10">
+                                                    <option>--</option>
+                                                    <option>Post Graduate</option>
+                                                    <option>Under Graduate</option>
+                                                </select>
+                                            </div>
+                                            <div data-attribute-display="display" class="form-group w-100">
+                                                <label for="selectYearOfPassing10">Year of Passing</label>
+                                                <select class="form-control" id="selectYearOfPassing10">
+                                                    <option>--</option>
+                                                    <option>Post Graduate</option>
+                                                    <option>Under Graduate</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="d-flex">
+                                            <div data-attribute-display="display" class="form-group pe-2 w-100">
+                                                <label for="inputMarks">Percentage/CGPA</label>
+                                                <div class="options d-flex">
+                                                    <div class="form-check pe-5">
+                                                        <input class="form-check-input" type="radio" name="marksRadio"
+                                                            id="inputRadioPercent10">
+                                                        <label class="form-check-label" for="inputRadioPercent10">
+                                                            Percentage
+                                                        </label>
+                                                    </div>
+                                                    <div class="form-check pe-3">
+                                                        <input class="form-check-input" type="radio" name="marksRadio"
+                                                            id="inputRadioCGPA10">
+                                                        <label class="form-check-label" for="inputRadioCGPA10">
+                                                            CGPA
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group w-100 d-none">
+                                                <label for="selectPercent10">Percentage</label>
+                                                <input type="number" class="form-control" id="selectPercent10">
+                                            </div>
+                                            <div data-attribute-display="display" class="form-group w-100 pe-2">
+                                                <label for="selectCGPA10">CGPA</label>
+                                                <input type="number" class="form-control" id="selectCGPA10">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="highestEducationDiploma d-none">
+                                        <div class="d-flex pb-2">
+                                            <div data-attribute-display="display" class="form-group w-100 pe-2">
+                                                <label for="selectDegreeDiploma">Degree</label>
+                                                <select class="form-control" id="selectDegreeDiploma">
+                                                    <option>--</option>
+                                                    <option>Post Graduate</option>
+                                                    <option>Under Graduate</option>
+                                                </select>
+                                            </div>
+                                            <div data-attribute-display="display" class="form-group w-100">
+                                                <label for="selectCollegeDiploma">College</label>
+                                                <select class="form-control" id="selectCollegeDiploma">
+                                                    <option>--</option>
+                                                    <option>Post Graduate</option>
+                                                    <option>Under Graduate</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="d-flex pb-2">
+                                            <div data-attribute-display="display" class="form-group w-100 pe-2">
+                                                <label for="selectBranchDiploma">Branch</label>
+                                                <select class="form-control" id="selectBranchDiploma">
+                                                    <option>--</option>
+                                                    <option>Post Graduate</option>
+                                                    <option>Under Graduate</option>
+                                                </select>
+                                            </div>
+                                            <div data-attribute-display="display" class="form-group w-100">
+                                                <label for="selectYearOfPassingDiploma">Year of Passing</label>
+                                                <select class="form-control" id="selectYearOfPassingDiploma">
+                                                    <option>--</option>
+                                                    <option>Post Graduate</option>
+                                                    <option>Under Graduate</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="d-flex">
+                                            <div data-attribute-display="display" class="form-group pe-2 w-100">
+                                                <label for="inputMarks">Percentage/CGPA</label>
+                                                <div class="options d-flex">
+                                                    <div class="form-check pe-5">
+                                                        <input class="form-check-input" type="radio" name="marksRadio"
+                                                            id="inputRadioPercentDiploma">
+                                                        <label class="form-check-label" for="inputRadioPercentDiploma">
+                                                            Percentage
+                                                        </label>
+                                                    </div>
+                                                    <div class="form-check pe-3">
+                                                        <input class="form-check-input" type="radio" name="marksRadio"
+                                                            id="inputRadioCGPADiploma">
+                                                        <label class="form-check-label" for="inputRadioCGPADiploma">
+                                                            CGPA
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group w-100 d-none">
+                                                <label for="selectPercentDiploma">Percentage</label>
+                                                <input type="number" class="form-control" id="selectPercentDiploma">
+                                            </div>
+                                            <div data-attribute-display="display" class="form-group w-100 pe-2">
+                                                <label for="selectCGPA10">CGPA</label>
+                                                <input type="number" class="form-control" id="selectCGPADiploma">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="shadow p-3 mb-5 bg-white rounded">
+                        <div class="attachment w-50 pe-3">
+                            <p class="font-weight-bold">Attachments</p>
+                            <div data-attribute-display="display" class="form-group pb-2">
+                                <label for="inputResume">Upload your Resume</label>
+                                <input type="file" class="form-control" id="inputResume">
+                            </div>
+                            <div class="photo d-flex">
+                                <div class="form-group pb-2 w-100">
+                                    <label for="inputPhoto">Upload your Photo</label>
+                                    <input type="file" class="form-control" id="inputPhoto">
+                                </div>
+                                <div class="photo-input border"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="submit float-right">
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
+        </form>
+        <div class="modal" tabindex="-1">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Registration Details</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <p id="popup_content"></p>
+                    </div>
+                    <div class="modal-footer">
+                        <button onclick="closePopup()" type="button" class="btn btn-secondary"
+                            data-bs-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary">Save changes</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+        crossorigin="anonymous"></script>
+    <script src="index.js"></script>
+</body>
+
+</html>

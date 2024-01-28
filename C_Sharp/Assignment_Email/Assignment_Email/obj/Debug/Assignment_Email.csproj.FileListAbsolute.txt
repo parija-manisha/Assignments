@@ -1,0 +1,7 @@
+C:\Users\manishap\Desktop\ASSIGNMENTS\C_Sharp\Assignment_Email\Assignment_Email\bin\Debug\Assignment_Email.exe.config
+C:\Users\manishap\Desktop\ASSIGNMENTS\C_Sharp\Assignment_Email\Assignment_Email\bin\Debug\Assignment_Email.exe
+C:\Users\manishap\Desktop\ASSIGNMENTS\C_Sharp\Assignment_Email\Assignment_Email\bin\Debug\Assignment_Email.pdb
+C:\Users\manishap\Desktop\ASSIGNMENTS\C_Sharp\Assignment_Email\Assignment_Email\obj\Debug\Assignment_Email.csproj.AssemblyReference.cache
+C:\Users\manishap\Desktop\ASSIGNMENTS\C_Sharp\Assignment_Email\Assignment_Email\obj\Debug\Assignment_Email.csproj.CoreCompileInputs.cache
+C:\Users\manishap\Desktop\ASSIGNMENTS\C_Sharp\Assignment_Email\Assignment_Email\obj\Debug\Assignment_Email.exe
+C:\Users\manishap\Desktop\ASSIGNMENTS\C_Sharp\Assignment_Email\Assignment_Email\obj\Debug\Assignment_Email.pdb
