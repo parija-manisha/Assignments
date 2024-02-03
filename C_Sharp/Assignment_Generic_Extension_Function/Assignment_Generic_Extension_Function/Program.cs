@@ -41,23 +41,18 @@ public static class DataTableExtensions
     {
         DataTable dataTable = new DataTable();
 
-        // If the list is empty, return an empty DataTable
         if (list.Count == 0)
             return dataTable;
 
-        // Get the type of the objects in the list
         Type objectType = typeof(T);
 
-        // Get the properties of the object type
         var properties = objectType.GetProperties();
 
-        // Add columns to the DataTable based on the object properties
         foreach (var property in properties)
         {
             dataTable.Columns.Add(property.Name, property.PropertyType);
         }
 
-        // Add rows to the DataTable based on the object values
         foreach (var item in list)
         {
             DataRow row = dataTable.NewRow();
@@ -106,10 +101,22 @@ public static class DataTableExtensions
                 dataAdapter.Fill(dataTable);
 
                 List<Person> people = dataTable.ToList<Person>();
-
                 foreach (var person in people)
                 {
+                    Console.WriteLine("List:");
                     Console.WriteLine($"Name: {person.Name}, Age: {person.Age}");
+                }
+
+                Console.WriteLine();
+
+                DataTable convertedTable = people.ToDataTable();
+
+
+
+                foreach (DataRow row in convertedTable.Rows)
+                {
+                    Console.WriteLine("Data Table:");
+                    Console.WriteLine($"Name: {row["Name"]}, Age: {row["Age"]}");
                 }
             }
         }

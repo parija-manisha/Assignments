@@ -8,12 +8,12 @@ class Program
     {
         string smtpServer = "sandbox.smtp.mailtrap.io";
         int smtpPort = 2525;
-        string smtpUsername = "manishaparija26@gmail.com"; 
-        string smtpPassword = "12Manisha"; 
+        string smtpUsername = "e8b75725d629c3"; 
+        string smtpPassword = "57a90b00ca2126"; 
 
         string fromEmail = "manishaparija26@gmail.com";
 
-        Console.WriteLine("Enter recipient names (comma-separated):");
+        Console.WriteLine("Enter recipient names (seperated by comma):");
         string recipientNamesInput = Console.ReadLine();
 
         string[] recipientNames = recipientNamesInput.Split(',');
@@ -28,7 +28,7 @@ class Program
         }
 
         mailMessage.Subject = "Test Email";
-        mailMessage.Body = "This is a test email sent from C# to multiple recipients.";
+        mailMessage.Body = "Hello Everyone.";
 
         SmtpClient smtpClient = new SmtpClient(smtpServer, smtpPort);
         smtpClient.Credentials = new NetworkCredential(smtpUsername, smtpPassword);

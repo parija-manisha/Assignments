@@ -15,7 +15,7 @@ class Program
 
         DeleteOperation(connectionString);
 
-        Console.ReadLine(); // Keep the console window open until a key is pressed
+        Console.ReadLine(); 
     }
 
     static void SelectOperation(string connectionString)
