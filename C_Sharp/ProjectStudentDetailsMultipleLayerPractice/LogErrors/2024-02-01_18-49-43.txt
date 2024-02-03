@@ -1,0 +1,2 @@
+01-02-2024 18:49:43: Insertion Failed
+Exception details: 

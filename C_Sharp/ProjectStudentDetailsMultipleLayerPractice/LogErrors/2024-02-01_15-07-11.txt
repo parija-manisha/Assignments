@@ -1,0 +1,9 @@
+01-02-2024 15:07:11: Insertion Failed
+Exception details: System.Reflection.TargetException: Object does not match target type.
+   at System.Reflection.RuntimeMethodInfo.CheckConsistency(Object target)
+   at System.Reflection.RuntimeMethodInfo.InvokeArgumentsCheck(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+   at System.Reflection.RuntimeMethodInfo.Invoke(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+   at System.Reflection.RuntimePropertyInfo.SetValue(Object obj, Object value, BindingFlags invokeAttr, Binder binder, Object[] index, CultureInfo culture)
+   at System.Reflection.RuntimePropertyInfo.SetValue(Object obj, Object value, Object[] index)
+   at System.Reflection.PropertyInfo.SetValue(Object obj, Object value)
+   at ProjectStudentDetailsMultipleLayer.DataAccess.StudentOperation.StudentUpdate(Int32 studentID, String col, String data) in C:\Users\manishap\Desktop\ASSIGNMENTS\C_Sharp\ProjectStudentDetailsMultipleLayer\ProjectStudentDetailsMultipleLayer.DataAccess\DataAccess.cs:line 46

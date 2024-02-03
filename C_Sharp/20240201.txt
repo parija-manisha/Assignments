@@ -1,0 +1,9 @@
+01-02-2024 14:34:33: Insertion Failed. Error:
+Exception details: System.FormatException: String was not recognized as a valid DateTime.
+   at System.DateTimeParse.Parse(String s, DateTimeFormatInfo dtfi, DateTimeStyles styles)
+   at System.Convert.ToDateTime(String value, IFormatProvider provider)
+   at System.String.System.IConvertible.ToDateTime(IFormatProvider provider)
+   at System.Convert.ChangeType(Object value, Type conversionType, IFormatProvider provider)
+   at System.Convert.ChangeType(Object value, Type conversionType)
+   at ProjectStudentDetailsMultipleLayer.Util.Utility.SetValue(Object student, String input, PropertyInfo property) in C:\Users\manishap\Desktop\ASSIGNMENTS\C_Sharp\ProjectStudentDetailsMultipleLayer\ProjectStudentDetailsMultipleLayer.Util\Utility.cs:line 34
+   at ProjectStudentDetailsMultipleLayer.Program.StudentInsertData(Type entityType) in C:\Users\manishap\Desktop\ASSIGNMENTS\C_Sharp\ProjectStudentDetailsMultipleLayer\ProjectStudentDetailsMultipleLayer\Program.cs:line 131

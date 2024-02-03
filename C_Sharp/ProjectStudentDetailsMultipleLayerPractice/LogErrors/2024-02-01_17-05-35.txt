@@ -1,0 +1,12 @@
+01-02-2024 17:05:35: Insertion Failed
+Exception details: System.InvalidOperationException: No connection string named 'ENTITY_FRAMEWORK_ASSIGNMENTEntities' could be found in the application config file.
+   at System.Data.Entity.Internal.LazyInternalConnection.get_ConnectionHasModel()
+   at System.Data.Entity.Internal.LazyInternalContext.InitializeContext()
+   at System.Data.Entity.Internal.InternalContext.Initialize()
+   at System.Data.Entity.Internal.InternalContext.GetEntitySetAndBaseTypeForType(Type entityType)
+   at System.Data.Entity.Internal.Linq.InternalSet`1.Initialize()
+   at System.Data.Entity.Internal.Linq.InternalSet`1.get_InternalContext()
+   at System.Data.Entity.Internal.Linq.InternalSet`1.ActOnSet(Action action, EntityState newState, Object entity, String methodName)
+   at System.Data.Entity.Internal.Linq.InternalSet`1.Add(Object entity)
+   at System.Data.Entity.DbSet.Add(Object entity)
+   at ProjectStudentDetailsMultipleLayer.DataAccess.StudentOperation.StudentInsert(Student student, Type entityType) in C:\Users\manishap\Desktop\ASSIGNMENTS\C_Sharp\ProjectStudentDetailsMultipleLayer\ProjectStudentDetailsMultipleLayer.DataAccess\DataAccess.cs:line 15

@@ -1,0 +1,3 @@
+Exception Details
+The specified parameter type 'System.Data.Entity.DynamicProxies.ClassDetail_6AED2C045A51ABAEB25F09140D5515F0B872DAF21B5EB5D8EDD76AC221BC6559' is not valid. Only scalar types, such as System.Int32, System.Decimal, System.DateTime, and System.Guid, are supported.
+Parameter name: item

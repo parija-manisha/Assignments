@@ -1,0 +1,8 @@
+02-02-2024 10:53:46: Insertion Failed. Error:
+Exception details: System.OverflowException: Value was either too large or too small for an Int32.
+   at System.Number.ParseInt32(String s, NumberStyles style, NumberFormatInfo info)
+   at System.String.System.IConvertible.ToInt32(IFormatProvider provider)
+   at System.Convert.ChangeType(Object value, Type conversionType, IFormatProvider provider)
+   at System.Convert.ChangeType(Object value, Type conversionType)
+   at StudentDetailsLayers.Util.Utility.SetValue(Object entity, String input, PropertyInfo property) in C:\Users\manishap\Desktop\ASSIGNMENTS\C_Sharp\StudentDetailsLayers\StudentDetailsLayers.Util\Utility.cs:line 44
+   at StudentDetailsLayers.Program.StudentInsertData(Type entityType) in C:\Users\manishap\Desktop\ASSIGNMENTS\C_Sharp\StudentDetailsLayers\StudentDetailsLayers\Program.cs:line 137

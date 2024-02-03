@@ -1,0 +1,2 @@
+Exception Details
+No connection string named 'StudentDetailsEntities' could be found in the application config file.

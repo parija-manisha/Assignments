@@ -1,0 +1,8 @@
+02-02-2024 10:26:55: Insertion Failed. Error:
+Exception details: System.InvalidCastException: Invalid cast from 'System.String' to 'System.Nullable`1[[System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]'.
+   at System.Convert.DefaultToType(IConvertible value, Type targetType, IFormatProvider provider)
+   at System.String.System.IConvertible.ToType(Type type, IFormatProvider provider)
+   at System.Convert.ChangeType(Object value, Type conversionType, IFormatProvider provider)
+   at System.Convert.ChangeType(Object value, Type conversionType)
+   at StudentDetailsLayers.Util.Utility.SetValue(Object entity, String input, PropertyInfo property) in C:\Users\manishap\Desktop\ASSIGNMENTS\C_Sharp\StudentDetailsLayers\StudentDetailsLayers.Util\Utility.cs:line 33
+   at StudentDetailsLayers.Program.StudentInsertData(Type entityType) in C:\Users\manishap\Desktop\ASSIGNMENTS\C_Sharp\StudentDetailsLayers\StudentDetailsLayers\Program.cs:line 137

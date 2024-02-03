@@ -1,0 +1,3 @@
+Exception Details
+Schema specified is not valid. Errors: 
+Model1.msl(25,12) : error 2019: Member Mapping specified is not valid. The type 'Edm.Int32[Nullable=True,DefaultValue=]' of member 'CourseName' in type 'StudentDetailsModel.CourseDetail' is not compatible with 'SqlServer.nvarchar[Nullable=True,DefaultValue=,MaxLength=50,Unicode=True,FixedLength=False]' of member 'CourseName' in type 'StudentDetailsModel.Store.CourseDetail'.

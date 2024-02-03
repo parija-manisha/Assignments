@@ -1,0 +1,352 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="Entity_Framework_Practice_Online_Merch_StoreModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2012" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="Entity_Framework_Practice_Online_Merch_StoreModelStoreContainer">
+    <EntitySet Name="Categories" EntityType="Entity_Framework_Practice_Online_Merch_StoreModel.Store.Categories" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Orders" EntityType="Entity_Framework_Practice_Online_Merch_StoreModel.Store.Orders" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="OrderItems" EntityType="Entity_Framework_Practice_Online_Merch_StoreModel.Store.OrderItems" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Products" EntityType="Entity_Framework_Practice_Online_Merch_StoreModel.Store.Products" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Users" EntityType="Entity_Framework_Practice_Online_Merch_StoreModel.Store.Users" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="UserOrder" Association="Entity_Framework_Practice_Online_Merch_StoreModel.Store.UserOrder">
+      <End Role="User" EntitySet="Users" />
+      <End Role="Order" EntitySet="Orders" />
+    </AssociationSet>
+    <AssociationSet Name="OrderOrderItem" Association="Entity_Framework_Practice_Online_Merch_StoreModel.Store.OrderOrderItem">
+      <End Role="Order" EntitySet="Orders" />
+      <End Role="OrderItem" EntitySet="OrderItems" />
+    </AssociationSet>
+    <AssociationSet Name="ProductOrderItem" Association="Entity_Framework_Practice_Online_Merch_StoreModel.Store.ProductOrderItem">
+      <End Role="Product" EntitySet="Products" />
+      <End Role="OrderItem" EntitySet="OrderItems" />
+    </AssociationSet>
+    <AssociationSet Name="ProductCategory" Association="Entity_Framework_Practice_Online_Merch_StoreModel.Store.ProductCategory">
+      <End Role="Product" EntitySet="Products" />
+      <End Role="Category" EntitySet="Categories" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Categories">
+    <Key>
+      <PropertyRef Name="CategoryID" />
+    </Key>
+    <Property Name="CategoryID" Type="int" Nullable="false" />
+    <Property Name="CategoryName" Type="nvarchar" Nullable="true" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Orders">
+    <Key>
+      <PropertyRef Name="OrderID" />
+    </Key>
+    <Property Name="OrderID" Type="int" Nullable="false" />
+    <Property Name="UserID" Type="int" Nullable="true" />
+    <Property Name="OrderDate" Type="datetime" Nullable="true" />
+    <Property Name="TotalAmount" Type="nchar" Nullable="true" MaxLength="10" />
+    <Property Name="UserUserID" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="OrderItems">
+    <Key>
+      <PropertyRef Name="OrderItemID" />
+    </Key>
+    <Property Name="OrderItemID" Type="int" Nullable="false" />
+    <Property Name="OrderID" Type="int" Nullable="true" />
+    <Property Name="ProductID" Type="int" Nullable="true" />
+    <Property Name="Qunatity" Type="int" Nullable="true" />
+    <Property Name="SubTotal" Type="nchar" Nullable="true" MaxLength="10" />
+    <Property Name="OrderOrderID" Type="int" Nullable="false" />
+    <Property Name="ProductProductID" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Products">
+    <Key>
+      <PropertyRef Name="ProductID" />
+    </Key>
+    <Property Name="ProductID" Type="int" Nullable="false" />
+    <Property Name="ProductName" Type="nvarchar" Nullable="false" MaxLength="50" />
+    <Property Name="Description" Type="nvarchar" Nullable="false" MaxLength="50" />
+    <Property Name="Price" Type="nchar" Nullable="false" MaxLength="10" />
+    <Property Name="StockQuantity" Type="nchar" Nullable="false" MaxLength="10" />
+    <Property Name="CategoryID" Type="int" Nullable="false" />
+    <Property Name="Category_CategoryID" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Users">
+    <Key>
+      <PropertyRef Name="UserID" />
+    </Key>
+    <Property Name="UserID" Type="int" Nullable="false" />
+    <Property Name="Username" Type="nvarchar" Nullable="true" MaxLength="50" />
+    <Property Name="Email" Type="nvarchar" Nullable="true" MaxLength="50" />
+    <Property Name="Password" Type="nchar" Nullable="true" MaxLength="10" />
+    <Property Name="FullName" Type="nvarchar" Nullable="true" MaxLength="50" />
+    <Property Name="Address" Type="nvarchar" Nullable="true" MaxLength="50" />
+    <Property Name="PhoneNumber" Type="nvarchar" Nullable="true" MaxLength="50" />
+  </EntityType>
+  <Association Name="UserOrder">
+    <End Role="User" Type="Entity_Framework_Practice_Online_Merch_StoreModel.Store.Users" Multiplicity="1" />
+    <End Role="Order" Type="Entity_Framework_Practice_Online_Merch_StoreModel.Store.Orders" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="UserID" />
+      </Principal>
+      <Dependent Role="Order">
+        <PropertyRef Name="UserUserID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="OrderOrderItem">
+    <End Role="Order" Type="Entity_Framework_Practice_Online_Merch_StoreModel.Store.Orders" Multiplicity="1" />
+    <End Role="OrderItem" Type="Entity_Framework_Practice_Online_Merch_StoreModel.Store.OrderItems" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Order">
+        <PropertyRef Name="OrderID" />
+      </Principal>
+      <Dependent Role="OrderItem">
+        <PropertyRef Name="OrderOrderID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="ProductOrderItem">
+    <End Role="Product" Type="Entity_Framework_Practice_Online_Merch_StoreModel.Store.Products" Multiplicity="1" />
+    <End Role="OrderItem" Type="Entity_Framework_Practice_Online_Merch_StoreModel.Store.OrderItems" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Product">
+        <PropertyRef Name="ProductID" />
+      </Principal>
+      <Dependent Role="OrderItem">
+        <PropertyRef Name="ProductProductID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="ProductCategory">
+    <End Role="Product" Type="Entity_Framework_Practice_Online_Merch_StoreModel.Store.Products" Multiplicity="*" />
+    <End Role="Category" Type="Entity_Framework_Practice_Online_Merch_StoreModel.Store.Categories" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Category">
+        <PropertyRef Name="CategoryID" />
+      </Principal>
+      <Dependent Role="Product">
+        <PropertyRef Name="Category_CategoryID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="Entity_Framework_Practice_Online_Merch_StoreModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Category">
+          <Key>
+            <PropertyRef Name="CategoryID" />
+          </Key>
+          <Property Name="CategoryID" Type="Int32" Nullable="false" />
+          <Property Name="CategoryName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Products" Relationship="Entity_Framework_Practice_Online_Merch_StoreModel.ProductCategory" FromRole="Category" ToRole="Product" />
+        </EntityType>
+        <EntityType Name="Order">
+          <Key>
+            <PropertyRef Name="OrderID" />
+          </Key>
+          <Property Name="OrderID" Type="Int32" Nullable="false" />
+          <Property Name="UserID" Type="Int32" />
+          <Property Name="OrderDate" Type="DateTime" Precision="0" />
+          <Property Name="TotalAmount" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="User1" Relationship="Entity_Framework_Practice_Online_Merch_StoreModel.UserOrder" FromRole="Order" ToRole="User" />
+          <Property Name="UserUserID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="OrderItems" Relationship="Entity_Framework_Practice_Online_Merch_StoreModel.OrderOrderItem" FromRole="Order" ToRole="OrderItem" />
+        </EntityType>
+        <EntityType Name="OrderItem">
+          <Key>
+            <PropertyRef Name="OrderItemID" />
+          </Key>
+          <Property Name="OrderItemID" Type="Int32" Nullable="false" />
+          <Property Name="OrderID" Type="Int32" />
+          <Property Name="ProductID" Type="Int32" />
+          <Property Name="Qunatity" Type="Int32" />
+          <Property Name="SubTotal" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="Order" Relationship="Entity_Framework_Practice_Online_Merch_StoreModel.OrderOrderItem" FromRole="OrderItem" ToRole="Order" />
+          <Property Name="OrderOrderID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Product" Relationship="Entity_Framework_Practice_Online_Merch_StoreModel.ProductOrderItem" FromRole="OrderItem" ToRole="Product" />
+          <Property Name="ProductProductID" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Product">
+          <Key>
+            <PropertyRef Name="ProductID" />
+          </Key>
+          <Property Name="ProductID" Type="Int32" Nullable="false" />
+          <Property Name="ProductName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Price" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="StockQuantity" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="CategoryID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="OrderItems" Relationship="Entity_Framework_Practice_Online_Merch_StoreModel.ProductOrderItem" FromRole="Product" ToRole="OrderItem" />
+          <NavigationProperty Name="Category" Relationship="Entity_Framework_Practice_Online_Merch_StoreModel.ProductCategory" FromRole="Product" ToRole="Category" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="UserID" />
+          </Key>
+          <Property Name="UserID" Type="Int32" Nullable="false" />
+          <Property Name="Username" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Password" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="FullName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Address" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="PhoneNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Orders1" Relationship="Entity_Framework_Practice_Online_Merch_StoreModel.UserOrder" FromRole="User" ToRole="Order" />
+        </EntityType>
+        <EntityContainer Name="Entity_Framework_Practice_Online_Merch_StoreEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Categories" EntityType="Self.Category" />
+          <EntitySet Name="Orders" EntityType="Self.Order" />
+          <EntitySet Name="OrderItems" EntityType="Self.OrderItem" />
+          <EntitySet Name="Products" EntityType="Self.Product" />
+          <EntitySet Name="Users" EntityType="Self.User" />
+          <AssociationSet Name="UserOrder" Association="Entity_Framework_Practice_Online_Merch_StoreModel.UserOrder">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Order" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="OrderOrderItem" Association="Entity_Framework_Practice_Online_Merch_StoreModel.OrderOrderItem">
+            <End Role="Order" EntitySet="Orders" />
+            <End Role="OrderItem" EntitySet="OrderItems" />
+          </AssociationSet>
+          <AssociationSet Name="ProductOrderItem" Association="Entity_Framework_Practice_Online_Merch_StoreModel.ProductOrderItem">
+            <End Role="Product" EntitySet="Products" />
+            <End Role="OrderItem" EntitySet="OrderItems" />
+          </AssociationSet>
+          <AssociationSet Name="ProductCategory" Association="Entity_Framework_Practice_Online_Merch_StoreModel.ProductCategory">
+            <End Role="Product" EntitySet="Products" />
+            <End Role="Category" EntitySet="Categories" />
+          </AssociationSet>
+        </EntityContainer>
+        <Association Name="UserOrder">
+          <End Type="Entity_Framework_Practice_Online_Merch_StoreModel.User" Role="User" Multiplicity="1" />
+          <End Type="Entity_Framework_Practice_Online_Merch_StoreModel.Order" Role="Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="Order">
+              <PropertyRef Name="UserUserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="OrderOrderItem">
+          <End Type="Entity_Framework_Practice_Online_Merch_StoreModel.Order" Role="Order" Multiplicity="1" />
+          <End Type="Entity_Framework_Practice_Online_Merch_StoreModel.OrderItem" Role="OrderItem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Order">
+              <PropertyRef Name="OrderID" />
+            </Principal>
+            <Dependent Role="OrderItem">
+              <PropertyRef Name="OrderOrderID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ProductOrderItem">
+          <End Type="Entity_Framework_Practice_Online_Merch_StoreModel.Product" Role="Product" Multiplicity="1" />
+          <End Type="Entity_Framework_Practice_Online_Merch_StoreModel.OrderItem" Role="OrderItem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="ProductID" />
+            </Principal>
+            <Dependent Role="OrderItem">
+              <PropertyRef Name="ProductProductID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ProductCategory">
+          <End Type="Entity_Framework_Practice_Online_Merch_StoreModel.Product" Role="Product" Multiplicity="*" />
+          <End Type="Entity_Framework_Practice_Online_Merch_StoreModel.Category" Role="Category" Multiplicity="1" />
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+    <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="Entity_Framework_Practice_Online_Merch_StoreModelStoreContainer" CdmEntityContainer="Entity_Framework_Practice_Online_Merch_StoreEntities">
+    <EntitySetMapping Name="Categories">
+      <EntityTypeMapping TypeName="IsTypeOf(Entity_Framework_Practice_Online_Merch_StoreModel.Category)">
+        <MappingFragment StoreEntitySet="Categories">
+          <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
+          <ScalarProperty Name="CategoryName" ColumnName="CategoryName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Orders">
+      <EntityTypeMapping TypeName="IsTypeOf(Entity_Framework_Practice_Online_Merch_StoreModel.Order)">
+        <MappingFragment StoreEntitySet="Orders">
+          <ScalarProperty Name="OrderID" ColumnName="OrderID" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="OrderDate" ColumnName="OrderDate" />
+          <ScalarProperty Name="TotalAmount" ColumnName="TotalAmount" />
+          <ScalarProperty Name="UserUserID" ColumnName="UserUserID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="OrderItems">
+      <EntityTypeMapping TypeName="IsTypeOf(Entity_Framework_Practice_Online_Merch_StoreModel.OrderItem)">
+        <MappingFragment StoreEntitySet="OrderItems">
+          <ScalarProperty Name="OrderItemID" ColumnName="OrderItemID" />
+          <ScalarProperty Name="OrderID" ColumnName="OrderID" />
+          <ScalarProperty Name="ProductID" ColumnName="ProductID" />
+          <ScalarProperty Name="Qunatity" ColumnName="Qunatity" />
+          <ScalarProperty Name="SubTotal" ColumnName="SubTotal" />
+          <ScalarProperty Name="OrderOrderID" ColumnName="OrderOrderID" />
+          <ScalarProperty Name="ProductProductID" ColumnName="ProductProductID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Products">
+      <EntityTypeMapping TypeName="IsTypeOf(Entity_Framework_Practice_Online_Merch_StoreModel.Product)">
+        <MappingFragment StoreEntitySet="Products">
+          <ScalarProperty Name="ProductID" ColumnName="ProductID" />
+          <ScalarProperty Name="ProductName" ColumnName="ProductName" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="Price" ColumnName="Price" />
+          <ScalarProperty Name="StockQuantity" ColumnName="StockQuantity" />
+          <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Users">
+      <EntityTypeMapping TypeName="IsTypeOf(Entity_Framework_Practice_Online_Merch_StoreModel.User)">
+        <MappingFragment StoreEntitySet="Users">
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="Username" ColumnName="Username" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="FullName" ColumnName="FullName" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
+          <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="ProductCategory" TypeName="Entity_Framework_Practice_Online_Merch_StoreModel.ProductCategory" StoreEntitySet="Products">
+      <EndProperty Name="Category">
+        <ScalarProperty Name="CategoryID" ColumnName="Category_CategoryID" />
+      </EndProperty>
+      <EndProperty Name="Product">
+        <ScalarProperty Name="ProductID" ColumnName="ProductID" />
+      </EndProperty>
+    </AssociationSetMapping>
+  </EntityContainerMapping>
+</Mapping></edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="False" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

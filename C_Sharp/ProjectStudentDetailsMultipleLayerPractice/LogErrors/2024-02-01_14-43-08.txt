@@ -1,0 +1,6 @@
+01-02-2024 14:43:08: Insertion Failed
+Exception details: System.Data.Entity.Validation.DbEntityValidationException: Validation failed for one or more entities. See 'EntityValidationErrors' property for more details.
+   at System.Data.Entity.Internal.InternalContext.SaveChanges()
+   at System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   at System.Data.Entity.DbContext.SaveChanges()
+   at ProjectStudentDetailsMultipleLayer.DataAccess.StudentOperation.StudentInsert(Student student, Type entityType) in C:\Users\manishap\Desktop\ASSIGNMENTS\C_Sharp\ProjectStudentDetailsMultipleLayer\ProjectStudentDetailsMultipleLayer.DataAccess\DataAccess.cs:line 18

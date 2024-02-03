@@ -1,0 +1,3 @@
+Exception Details
+The specified parameter type 'System.Data.Entity.DynamicProxies.Student_E1B1486DAF132C630BDEC777BDF9E667671CD9A98A19BCC2E271B26EC5333234' is not valid. Only scalar types, such as System.Int32, System.Decimal, System.DateTime, and System.Guid, are supported.
+Parameter name: item

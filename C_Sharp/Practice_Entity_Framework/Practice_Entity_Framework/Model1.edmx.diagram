@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="bbb9c3e54abd4a0382f12efe933878a9" Name="Diagram1">
+        <EntityTypeShape EntityType="Entity_Framework_Practice_Online_Merch_StoreModel.Category" Width="1.5" PointX="0.75" PointY="1.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="Entity_Framework_Practice_Online_Merch_StoreModel.Order" Width="1.5" PointX="3" PointY="5.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Entity_Framework_Practice_Online_Merch_StoreModel.OrderItem" Width="1.5" PointX="5.25" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Entity_Framework_Practice_Online_Merch_StoreModel.Product" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="Entity_Framework_Practice_Online_Merch_StoreModel.User" Width="1.5" PointX="0.75" PointY="5" IsExpanded="true" />
+        <AssociationConnector Association="Entity_Framework_Practice_Online_Merch_StoreModel.UserOrder" />
+        <AssociationConnector Association="Entity_Framework_Practice_Online_Merch_StoreModel.OrderOrderItem" />
+        <AssociationConnector Association="Entity_Framework_Practice_Online_Merch_StoreModel.ProductOrderItem" />
+        <AssociationConnector Association="Entity_Framework_Practice_Online_Merch_StoreModel.ProductCategory" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
