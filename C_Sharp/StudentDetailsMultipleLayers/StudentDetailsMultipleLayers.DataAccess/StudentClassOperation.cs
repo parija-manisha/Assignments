@@ -11,27 +11,15 @@ namespace StudentDetailsMultipleLayers.DataAccess
 {
     public class StudentClassOperation
     {
-        public static bool AssignStudentToClass(int studentID, int classID)
+        public static bool AssignStudentToClass(StudentClass studentClass, Type entityType)
         {
             try
             {
                 using (var context = new StudentDetailsEntities())
                 {
-                    Student student = context.Students.Find(studentID);
-                    ClassDetail newClass = context.ClassDetails.Find(classID);
-
-                    if (student != null && newClass != null)
-                    {
-                        StudentClass studentClass = new StudentClass
-                        {
-                            StudentID = studentID,
-                            ClassID = classID,
-                        };
-
-                        context.StudentClasses.Add(studentClass);
-                        int affectedRows = context.SaveChanges();
-                        return affectedRows > 0;
-                    }
+                    context.Set(entityType).Add(studentClass);
+                    int affectedRows = context.SaveChanges();
+                    return affectedRows > 0;
                 }
             }
             catch (Exception ex)
@@ -42,19 +30,17 @@ namespace StudentDetailsMultipleLayers.DataAccess
             return false;
         }
 
-        // Inside your StudentDataAccess class
-
         public static List<StudentClassInfo> StudentClassDisplay()
         {
             List<StudentClassInfo> students = new List<StudentClassInfo>();
 
-            using (var connection = Connection.Connect())
+            using (var connection = Connection.ConnectADO())
             {
                 connection.Open();
 
-                string query = "SELECT Students.StudentID, Students.StudentName, Class.ClassName " +
-                               "FROM Students " +
-                               "JOIN Class ON Students.ClassID = Class.ClassID";
+                string query = "SELECT StudentClass.StudentID, StudentClass.ClassID, ClassDetail.ClassName " +
+                               "FROM StudentClass " +
+                               "JOIN ClassDetail ON StudentClass.ClassID = ClassDetail.ClassID";
 
                 using (SqlCommand command = new SqlCommand(query, connection))
                 {
@@ -65,7 +51,7 @@ namespace StudentDetailsMultipleLayers.DataAccess
                             StudentClassInfo student = new StudentClassInfo
                             {
                                 StudentID = Convert.ToInt32(reader["StudentID"]),
-                                StudentName = reader["StudentName"].ToString(),
+                                ClassID= Convert.ToInt32(reader["ClassID"]),
                                 ClassName = reader["ClassName"].ToString(),
                             };
 

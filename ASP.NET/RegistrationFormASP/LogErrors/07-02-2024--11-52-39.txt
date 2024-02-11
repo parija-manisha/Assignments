@@ -1,0 +1,6 @@
+Exception Details
+Message: Please fill in all the required fields.
+Source: RegistrationFormASP
+Stack Trace:    at RegistrationFormASP.NewStudent.StudentButton_Click(Object sender, EventArgs e) in D:\Projects\ASSIGNMENTS\ASP.NET\RegistrationFormASP\RegistrationFormASP\NewStudent.aspx.cs:line 34
+
+

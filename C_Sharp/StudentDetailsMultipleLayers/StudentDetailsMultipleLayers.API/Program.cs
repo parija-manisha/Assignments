@@ -155,7 +155,7 @@ namespace StudentDetailsMultipleLayers.API
             {
                 case EnumValues.MenuChoiceOperation.Insert
                     :
-                    AssignStudentToClass();
+                    AssignStudentToClass(typeof(StudentClassDTO));
                     break;
                 case EnumValues.MenuChoiceOperation.Update
                     :
@@ -209,40 +209,57 @@ namespace StudentDetailsMultipleLayers.API
             {
                 var entity = Activator.CreateInstance(entityType);
                 var properties = entityType.GetProperties();
+                bool allColumnsNotEmpty = true;
 
                 foreach (var property in properties)
                 {
                     Console.WriteLine($"Enter {property.Name}");
                     string input = Console.ReadLine();
 
-                    if (input != null)
+                    if (String.IsNullOrWhiteSpace(input))
                     {
-                        if (property.PropertyType == typeof(int))
-                        {
-                            if (!Utility.TryParseInt(input, out int intValue))
-                            {
-                                Console.WriteLine($"Invalid {property.Name} format. Please enter a valid integer.");
-                                continue;
-                            }
-                            property.SetValue(entity, intValue, null);
-                        }
-                        else if (property.PropertyType == typeof(string))
-                        {
-                            property.SetValue(entity, input, null);
-                        }
+                        Console.WriteLine($"\n{property.Name} cannot be null\n");
+                        allColumnsNotEmpty = false;
+                        break;
                     }
-                    else
+
+                    if (property.PropertyType == typeof(int))
                     {
-                        Console.WriteLine($"{property.Name} cannot be null");
-                        continue;
+                        if (!Utility.TryParseInt(input, out int intValue))
+                        {
+                            Console.WriteLine($"Invalid {property.Name} format. Please enter a valid integer.");
+                            allColumnsNotEmpty = false;
+                            break;
+                        }
+                        property.SetValue(entity, intValue, null);
+                    }
+                    else if (property.PropertyType == typeof(string))
+                    {
+                        property.SetValue(entity, input, null);
+                    }
+                    else if (property.PropertyType == typeof(DateTime))
+                    {
+                        if (!Utility.TryParseDate(input, out DateTime dateValue))
+                        {
+                            Console.WriteLine($"Invalid {property.Name} format. Please enter a valid date.");
+                            allColumnsNotEmpty = false;
+                            break;
+                        }
+                        property.SetValue(entity, dateValue.ToString());
                     }
                 }
 
-                bool success = StudentLogic.AddStudent((StudentDTO)entity);
-
-                if (success)
+                if (allColumnsNotEmpty)
                 {
-                    Console.WriteLine("\nStudent added Successfully\n");
+                    bool success = StudentLogic.AddStudent((StudentDTO)entity);
+
+                    if (success)
+                    {
+                        Console.WriteLine("\nStudent added Successfully\n");
+                    }
+                    else {
+                        Console.WriteLine("\nFailed to add Student\n");
+                    }
                 }
             }
             catch (Exception ex)
@@ -319,6 +336,55 @@ namespace StudentDetailsMultipleLayers.API
                     Console.WriteLine($"Enter {property.Name}");
                     string input = Console.ReadLine();
 
+                    if (!String.IsNullOrWhiteSpace(input))
+                    {
+                        if (property.PropertyType == typeof(int))
+                        {
+                            if (!Utility.TryParseInt(input, out int intValue))
+                            {
+                                Console.WriteLine($"Invalid {property.Name} format. Please enter a valid integer.");
+                            }
+                            property.SetValue(entity, intValue, null);
+                        }
+                        else if (property.PropertyType == typeof(string))
+                        {
+                            property.SetValue(entity, input, null);
+                        }
+                    }
+                    else
+                    {
+                        Console.WriteLine($"{property.Name} cannot be null");
+                    }
+                }
+
+                bool success = ClassLogic.AddClass((ClassDetailDTO)entity);
+
+                if (success)
+                {
+                    Console.WriteLine("\nClass added Successfully\n");
+                }
+            }
+            catch (Exception ex)
+            {
+                Logger.AddError("\nFailed to add Class\n", ex);
+            }
+        }
+
+        /// <summary>
+        /// Function to Assign student to class Table
+        /// </summary>
+        static void AssignStudentToClass(Type entityType)
+        {
+            try
+            {
+                var entity = Activator.CreateInstance(entityType);
+                var properties = entityType.GetProperties();
+
+                foreach (var property in properties)
+                {
+                    Console.WriteLine($"Enter {property.Name}");
+                    string input = Console.ReadLine();
+
                     if (input != null)
                     {
                         if (property.PropertyType == typeof(int))
@@ -342,36 +408,16 @@ namespace StudentDetailsMultipleLayers.API
                     }
                 }
 
-                bool success = ClassLogic.AddClass((ClassDetailDTO)entity);
+                bool success = StudentClassLogic.AssignStudentToClass((StudentClassDTO)entity);
 
                 if (success)
                 {
-                    Console.WriteLine("\nClass added Successfully\n");
+                    Console.WriteLine("\nStudent assigned to class added Successfully\n");
                 }
             }
             catch (Exception ex)
             {
-                Logger.AddError("\nFailed to add Class\n", ex.InnerException);
-            }
-        }
-
-        /// <summary>
-        /// Function to Assign student to class Table
-        /// </summary>
-        static void AssignStudentToClass()
-        {
-            Console.WriteLine("Enter Student ID:");
-            int studentId = int.Parse(Console.ReadLine());
-
-            Console.WriteLine("Enter Class ID:");
-            int classId = int.Parse(Console.ReadLine());
-            if (StudentClassLogic.AssignStudentToClass(studentId, classId))
-            {
-                Console.WriteLine("Student assigned to class successfully.");
-            }
-            else
-            {
-                Console.WriteLine("Assigning Student to Class failed");
+                Logger.AddError("\nFailed to assign Student to Class\n", ex.InnerException);
             }
         }
 
@@ -561,7 +607,7 @@ namespace StudentDetailsMultipleLayers.API
         static void DisplayStudent()
         {
             List<StudentDTO> allStudents = StudentLogic.DisplayStudent();
-            Console.WriteLine("\nStudents:\n");
+            Console.WriteLine("\nStudents:\n", Console.Title);
             foreach (var student in allStudents)
             {
                 Console.WriteLine($"ID: {student.StudentID}, Name: {student.StudentName}, Gender: {student.Gender}, PhoneNumber: {student.PhoneNumber}, DateOfBirth: {student.DateOfBirth}, Email: {student.Email}\n");
@@ -604,7 +650,7 @@ namespace StudentDetailsMultipleLayers.API
 
             foreach (var student in students)
             {
-                Console.WriteLine($"ID: {student.StudentID}, Name: {student.StudentName}, Class: {student.ClassName}");
+                Console.WriteLine($"ID: {student.StudentID}, Name: {student.ClassID}, Class: {student.ClassName}");
             }
 
         }

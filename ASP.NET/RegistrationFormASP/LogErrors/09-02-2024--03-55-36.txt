@@ -1,0 +1,6 @@
+Exception Details
+Message: Enrollment already exists.
+Source: RegistrationFormASP
+Stack Trace:    at RegistrationFormASP.NewEnrollment.EnrollmentButton_Click(Object sender, EventArgs e) in D:\Projects\ASSIGNMENTS\ASP.NET\RegistrationFormASP\RegistrationFormASP\NewEnrollment.aspx.cs:line 86
+
+

@@ -1,0 +1,3 @@
+Exception Details
+System.Exception: Please fill in all the required fields.
+   at StudentDetailsWebForms.NewStudent.StudentButton_Click(Object sender, EventArgs e) in C:\Users\manishap\Desktop\ASSIGNMENTS\ASP.NET\StudentDetailsWebForms\StudentDetailsWebForms\NewStudent.aspx.cs:line 34

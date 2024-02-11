@@ -1,0 +1,10 @@
+Exception Details
+Message: Thread was being aborted.
+Source: mscorlib
+Stack Trace:    at System.Threading.Thread.AbortInternal()
+   at System.Threading.Thread.Abort(Object stateInfo)
+   at System.Web.HttpResponse.AbortCurrentThread()
+   at System.Web.HttpServerUtility.Transfer(String path)
+   at RegistrationFormASP.NewStudent.StudentButton_Click(Object sender, EventArgs e) in D:\Projects\ASSIGNMENTS\ASP.NET\RegistrationFormASP\RegistrationFormASP\NewStudent.aspx.cs:line 71
+
+

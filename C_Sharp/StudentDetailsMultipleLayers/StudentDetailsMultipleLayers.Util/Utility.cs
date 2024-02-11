@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -28,7 +29,9 @@ namespace StudentDetailsMultipleLayers.Util
 
         public static bool TryParseDate(string input, out DateTime result)
         {
-            return DateTime.TryParse(input, out result);
+            string[] formats = { "yyyy-MM-dd", "yyyy/MM/dd", "MM/dd/yyyy", "M/d/yyyy", "yyyy-MM-ddTHH:mm:ss" };
+
+            return DateTime.TryParseExact(input, formats, CultureInfo.InvariantCulture, DateTimeStyles.None, out result);
         }
 
         public static bool IsNullOrEmpty(string value)

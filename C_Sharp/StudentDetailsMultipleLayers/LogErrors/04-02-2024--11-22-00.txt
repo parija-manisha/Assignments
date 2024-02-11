@@ -1,0 +1,2 @@
+Exception Details
+Keyword not supported: 'server'.

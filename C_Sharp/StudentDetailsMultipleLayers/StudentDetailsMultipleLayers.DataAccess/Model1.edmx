@@ -33,7 +33,7 @@
           </Key>
           <Property Name="StudentID" Type="int" Nullable="false" />
           <Property Name="StudentName" Type="nvarchar" MaxLength="50" />
-          <Property Name="Gender" Type="nchar" MaxLength="10" />
+          <Property Name="Gender" Type="nchar" MaxLength="1" />
           <Property Name="PhoneNumber" Type="int" />
           <Property Name="DateOfBirth" Type="date" />
           <Property Name="Email" Type="nvarchar" MaxLength="50" />
@@ -145,7 +145,7 @@
             <PropertyRef Name="CourseID" />
           </Key>
           <Property Name="CourseID" Type="Int32" Nullable="false" />
-          <Property Name="CourseName" Type="String" />
+          <Property Name="CourseName" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
           <NavigationProperty Name="CourseClasses" Relationship="Self.FK_CourseClass_CourseDetail" FromRole="CourseDetail" ToRole="CourseClass" />
         </EntityType>
         <EntityType Name="Student">
@@ -154,7 +154,7 @@
           </Key>
           <Property Name="StudentID" Type="Int32" Nullable="false" />
           <Property Name="StudentName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Gender" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="Gender" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
           <Property Name="PhoneNumber" Type="Int32" />
           <Property Name="DateOfBirth" Type="DateTime" Precision="0" />
           <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />

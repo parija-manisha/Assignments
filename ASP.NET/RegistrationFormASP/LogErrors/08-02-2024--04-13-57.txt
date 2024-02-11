@@ -1,0 +1,8 @@
+Exception Details
+Message: A recipient must be specified.
+Source: System
+Stack Trace:    at System.Net.Mail.SmtpClient.Send(MailMessage message)
+   at RegistrationFormASP.Business.Email.SendEmail(String email) in D:\Projects\ASSIGNMENTS\ASP.NET\RegistrationFormASP\RegistrationFormASP.Business\Email.cs:line 32
+   at RegistrationFormASP.NewStudent.StudentButton_Click(Object sender, EventArgs e) in D:\Projects\ASSIGNMENTS\ASP.NET\RegistrationFormASP\RegistrationFormASP\NewStudent.aspx.cs:line 69
+
+
