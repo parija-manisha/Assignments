@@ -1,0 +1,33 @@
+Exception Details
+Message: No connection string named 'UserManagementTableEntities1' could be found in the application config file.
+Source: EntityFramework
+Stack Trace:    at System.Data.Entity.Internal.LazyInternalConnection.get_ConnectionHasModel()
+   at System.Data.Entity.Internal.LazyInternalContext.InitializeContext()
+   at System.Data.Entity.Internal.InternalContext.Initialize()
+   at System.Data.Entity.Internal.InternalContext.GetEntitySetAndBaseTypeForType(Type entityType)
+   at System.Data.Entity.Internal.Linq.InternalSet`1.Initialize()
+   at System.Data.Entity.Internal.Linq.InternalSet`1.get_InternalContext()
+   at System.Data.Entity.Internal.Linq.InternalSet`1.ActOnSet(Action action, EntityState newState, Object entity, String methodName)
+   at System.Data.Entity.Internal.Linq.InternalSet`1.Add(Object entity)
+   at System.Data.Entity.DbSet`1.Add(TEntity entity)
+   at DemoUserManagement.DataAccess.UserDataAccess.SaveUser(UserDetailDTO userDetailDTO) in D:\Projects\DemoUserManagement\DemoUserManagement.DataAccess\UserDataAccess.cs:line 31
+   at DemoUserManagement.Business.UserLogic.SaveUser(UserDetailDTO userDetailDTO) in D:\Projects\DemoUserManagement\DemoUserManagement.Business\UserLogic.cs:line 18
+
+
+Exception Details
+Message: No connection string named 'UserManagementTableEntities1' could be found in the application config file.
+Source: EntityFramework
+Stack Trace:    at System.Data.Entity.Internal.LazyInternalConnection.get_ConnectionHasModel()
+   at System.Data.Entity.Internal.LazyInternalContext.InitializeContext()
+   at System.Data.Entity.Internal.InternalContext.Initialize()
+   at System.Data.Entity.Internal.InternalContext.GetEntitySetAndBaseTypeForType(Type entityType)
+   at System.Data.Entity.Internal.Linq.InternalSet`1.Initialize()
+   at System.Data.Entity.Internal.Linq.InternalSet`1.get_InternalContext()
+   at System.Data.Entity.Internal.Linq.InternalSet`1.ActOnSet(Action action, EntityState newState, Object entity, String methodName)
+   at System.Data.Entity.Internal.Linq.InternalSet`1.Add(Object entity)
+   at System.Data.Entity.DbSet`1.Add(TEntity entity)
+   at DemoUserManagement.DataAccess.UserDataAccess.SaveUser(UserDetailDTO userDetailDTO) in D:\Projects\DemoUserManagement\DemoUserManagement.DataAccess\UserDataAccess.cs:line 31
+   at DemoUserManagement.Business.UserLogic.SaveUser(UserDetailDTO userDetailDTO) in D:\Projects\DemoUserManagement\DemoUserManagement.Business\UserLogic.cs:line 23
+   at DemoUserManagement._Default.SaveUserButton_Click(Object sender, EventArgs e) in D:\Projects\DemoUserManagement\DemoUserManagement\UserDetails.aspx.cs:line 109
+
+

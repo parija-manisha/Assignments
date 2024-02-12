@@ -1,0 +1,14 @@
+Exception Details
+Message: No connection string named 'UserManagementTableEntities1' could be found in the application config file.
+Source: EntityFramework
+Stack Trace:    at System.Data.Entity.Internal.LazyInternalConnection.get_ConnectionHasModel()
+   at System.Data.Entity.Internal.LazyInternalContext.InitializeContext()
+   at System.Data.Entity.Internal.InternalContext.Initialize()
+   at System.Data.Entity.Internal.InternalContext.GetEntitySetAndBaseTypeForType(Type entityType)
+   at System.Data.Entity.Internal.Linq.InternalSet`1.Initialize()
+   at System.Data.Entity.Internal.Linq.InternalSet`1.GetEnumerator()
+   at System.Collections.Generic.List`1..ctor(IEnumerable`1 collection)
+   at System.Linq.Enumerable.ToList[TSource](IEnumerable`1 source)
+   at DemoUserManagement.DataAccess.CountryDataAccess.GetCountry() in D:\Projects\DemoUserManagement\DemoUserManagement.DataAccess\CountryDataAccess.cs:line 19
+
+

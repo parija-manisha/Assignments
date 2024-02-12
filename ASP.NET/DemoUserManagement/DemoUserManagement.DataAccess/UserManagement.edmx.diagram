@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="425bb3dc5b6145b6aa119f6198679b0a" Name="Diagram1">
+        <EntityTypeShape EntityType="UserManagementTableModel.AddressDetail" Width="1.5" PointX="3" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="UserManagementTableModel.Country" Width="1.5" PointX="1.5" PointY="8.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="UserManagementTableModel.Note" Width="1.5" PointX="5.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="UserManagementTableModel.State" Width="1.5" PointX="0.75" PointY="5.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="UserManagementTableModel.UserDetail" Width="1.5" PointX="0.75" PointY="1" IsExpanded="true" />
+        <AssociationConnector Association="UserManagementTableModel.FK_AddressDetails_Country" ManuallyRouted="false" />
+        <AssociationConnector Association="UserManagementTableModel.FK_AddressDetails_State" ManuallyRouted="false" />
+        <AssociationConnector Association="UserManagementTableModel.FK_AddressDetails_UserDetails" ManuallyRouted="false" />
+        <AssociationConnector Association="UserManagementTableModel.FK_State_Country" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

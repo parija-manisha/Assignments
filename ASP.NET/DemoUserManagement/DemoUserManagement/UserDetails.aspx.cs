@@ -1,13 +1,18 @@
 ﻿using DemoUserManagement.Business;
+using DemoUserManagement.Models;
 using DemoUserManagement.Util;
 using System;
 using System.Collections.Generic;
-using System.Data.SqlClient;
+using System.Linq;
+using System.Security.Policy;
+using System.Web;
+using System.Web.UI;
 using System.Web.UI.WebControls;
+using System.Web.WebSockets;
 
 namespace DemoUserManagement
 {
-    public partial class UserDetails : System.Web.UI.Page
+    public partial class _Default : Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -17,269 +22,146 @@ namespace DemoUserManagement
                 {
                     ErrorMessage.Text = "This User already exists";
                 }
+
+                PopulateCountries();
+                ShowButton(false);
+
                 ErrorMessage.Text = "";
-                if (Session["UserId"] != null)
-                {
-                    AddNote.Visible = true;
-                }
-                else
-                {
-                    AddNote.Visible = false;
-                }
-            }
-
-            if (!IsPostBack)
-            {
-                PopulateCountryDropdown(PermanentCountry);
-                PopulateStateDropdown(PermanentState, PermanentCountry.SelectedItem.Text);
-
-                PopulateCountryDropdown(PresentCountry);
-                PopulateStateDropdown(PresentState, PresentCountry.SelectedItem.Text);
             }
         }
 
-        private void PopulateCountryDropdown(DropDownList ddl)
+        private void ShowButton(bool button)
         {
-            List<string> countries = GetCountriesFromDatabase();
-
-            ddl.Items.Clear();
-            ddl.Items.Add(new ListItem("", ""));
-            foreach (string country in countries)
+            if ((button))
             {
-                ddl.Items.Add(new ListItem(country, country));
+                SaveUserButton.Visible = false;
+                UpdateUserButton.Visible = true;
+                DeleteUserButton.Visible = true;
+            }
+
+            else
+            {
+                SaveUserButton.Visible = true;
+                UpdateUserButton.Visible = false;
+                DeleteUserButton.Visible = false;
             }
         }
 
-
-        private void PopulateStateDropdown(DropDownList ddl, string selectedCountry)
+        private void BindDropDownList<T>(DropDownList ddl, List<T> list, string textField, string valueField)
         {
-            List<string> states = GetStatesFromDatabase(selectedCountry);
-            ddl.Items.Clear();
-            ddl.Items.Add(new ListItem("", ""));
-
-            foreach (string state in states)
-            {
-                ddl.Items.Add(new ListItem(state, state));
-            }
+            ddl.DataSource = list;
+            ddl.DataTextField = textField;
+            ddl.DataValueField = valueField;
+            ddl.DataBind();
+            ddl.Items.Insert(0, new ListItem("Select", ""));
         }
 
-        private List<string> GetCountriesFromDatabase()
+        private void PopulateCountries()
         {
-            List<string> countries = new List<string>();
+            List<CountryDTO> countryList = CountryLogic.GetCountryList();
 
-            string query = "SELECT CountryName FROM Country";
-
-            using (var connection = Connection.Connect())
-            {
-                using (SqlCommand command = new SqlCommand(query, connection))
-                {
-                    connection.Open();
-
-                    using (SqlDataReader reader = command.ExecuteReader())
-                    {
-                        while (reader.Read())
-                        {
-                            string countryName = reader.GetString(0);
-                            countries.Add(countryName);
-                        }
-                    }
-                }
-            }
-
-            return countries;
+            BindDropDownList(DdlPresentCountry, countryList, "CountryName", "CountryId");
+            BindDropDownList(DdlPermanentCountry, countryList, "CountryName", "CountryId");
         }
 
-        private List<string> GetStatesFromDatabase(string selectedCountry)
+        private void PopulateStates(DropDownList ddl, int countryId)
         {
-            List<string> states = new List<string>();
+            List<StateDTO> stateList = StateLogic.GetStateList(countryId);
+            BindDropDownList(ddl, stateList, "StateName", "StateId");
+        }
 
-            string query = "SELECT StateName FROM State WHERE CountryName = @SelectedCountry";
+        protected void PresentCountryState(object sender, EventArgs e)
+        {
+            int selectedCountryId = Convert.ToInt32(DdlPresentCountry.SelectedValue);
+            PopulateStates(DdlPresentState, selectedCountryId);
+        }
 
-            using (var connection =Connection.Connect())
+        protected void PermanentCountryState(object sender, EventArgs e)
+        {
+            int selectedCountryId = Convert.ToInt32(DdlPermanentCountry.SelectedValue);
+            PopulateStates(DdlPermanentState, selectedCountryId);
+        }
+
+        protected void SameAsPermanent_CheckedChanged(object sender, EventArgs e)
+        {
+            if (SameAsPermanent.Checked)
             {
-                using (SqlCommand command = new SqlCommand(query, connection))
-                {
-                    command.Parameters.AddWithValue("@SelectedCountry", selectedCountry);
-
-                    connection.Open();
-
-                    using (SqlDataReader reader = command.ExecuteReader())
-                    {
-                        while (reader.Read())
-                        {
-                            string stateName = reader.GetString(0);
-                            states.Add(stateName);
-                        }
-                    }
-                }
+                DdlPresentCountry.SelectedValue = DdlPermanentCountry.SelectedValue;
+                DdlPresentState.SelectedValue = DdlPermanentState.SelectedValue;
+                DdlPresentCity.Text = DdlPermanentCity.Text;
+                DdlPresentPincode.Text = DdlPermanentPincode.Text;
+                DdlPresentAddressLine.Text = DdlPermanentPincode.Text;
             }
-
-            return states;
+            else
+            {
+                DdlPresentCountry.SelectedIndex = 0;
+                DdlPresentState.SelectedIndex = 0;
+                DdlPresentCity.Text = "";
+                DdlPresentPincode.Text = "";
+                DdlPresentAddressLine.Text = "";
+            }
         }
 
         protected void SaveUserButton_Click(object sender, EventArgs e)
         {
             try
             {
-                bool flag = false;
-                string firstName = TxtFirstName.Text;
-                string middleName = TxtMiddleName.Text;
-                string lastName = TxtLastName.Text;
-                string gender = TxtGender.Text;
-                string email = TxtEmailID.Text;
-                string phone = TxtPhoneNumber.Text;
-                string dateOfBirth = TxtDateOfBirth.Text;
-                string fatherName = TxtFatherName.Text;
-                string motherName = TxtMotherName.Text;
-
-                string permanentCountry = PermanentCountry.SelectedItem.Text;
-                string permanentState = PermanentState.SelectedItem.Text;
-                string permanentCity = PermanentCity.Text;
-                string permanentPincode = PermanentPincode.Text;
-                string permanentAddressLine = PermanentAddressLine.Text;
-
-                string presentCountry = PresentCountry.SelectedItem.Text;
-                string presentState = PresentState.SelectedItem.Text;
-                string presentCity = PresentCity.Text;
-                string presentPincode = PresentPincode.Text;
-                string presentAddressLine = PresentAddressLine.Text;
-
-                if (string.IsNullOrEmpty(firstName) || string.IsNullOrEmpty(lastName) || string.IsNullOrEmpty(gender)
-                    || string.IsNullOrEmpty(email) || string.IsNullOrEmpty(phone) || string.IsNullOrEmpty(dateOfBirth)
-                    || string.IsNullOrEmpty(fatherName) || string.IsNullOrEmpty(motherName)
-                    || string.IsNullOrEmpty(permanentCountry) || string.IsNullOrEmpty(permanentState) || string.IsNullOrEmpty(permanentCity) || string.IsNullOrEmpty(permanentPincode) || string.IsNullOrEmpty(permanentAddressLine)
-                    || string.IsNullOrEmpty(presentCountry) || string.IsNullOrEmpty(presentState) || string.IsNullOrEmpty(presentCity) || string.IsNullOrEmpty(presentPincode) || string.IsNullOrEmpty(presentAddressLine))
+                UserDetailDTO user = CreateUserFromForm();
+                if (ArePropertiesNullOrEmpty(user))
                 {
-                    throw new Exception("Please fill in all the required fields.");
+                    ErrorMessage.Text = "Please fill in all the required fields.";
+                    return; 
                 }
+                UserLogic.SaveUser(user);
+                Session["Phone"] = TxtPhoneNumber.Text;
 
-                if (Session["Phone"] != null && Session["Phone"].ToString() == phone)
-                {
-                    ErrorMessage.Text = "This User already exists";
-                    return;
-                }
+                ResetFormFields();
 
-                int userId = InsertUserDetails(firstName, middleName, lastName, gender, email, phone, dateOfBirth, fatherName, motherName);
-
-                InsertAddress(userId, 1, permanentCountry, permanentState, permanentCity, permanentPincode, permanentAddressLine);
-
-                InsertAddress(userId, 2, presentCountry, presentState, presentCity, presentPincode, presentAddressLine);
-
-                Session["Phone"] = phone;
-                flag = true;
-
-                if (flag)
-                {
-                    ClearFormFields();
-
-                    Email.SendEmail(email);
-
-                    Response.Redirect("Users.aspx");
-                }
+                Response.Redirect("Users.aspx");
             }
             catch (Exception ex)
             {
-                Logger.AddError("Insertion Failed", ex);
+                Logger.AddError("Registration Failed", ex);
+                ErrorMessage.Text = "An error occurred during registration";
             }
         }
 
-        private int InsertUserDetails(string firstName, string middleName, string lastName, string gender, string email, string phone, string dateOfBirth, string fatherName, string motherName)
+        private UserDetailDTO CreateUserFromForm()
         {
-            int userId;
-            using (var con = Connection.Connect())
+            UserDetailDTO user = new UserDetailDTO
             {
-                con.Open();
+                FirstName = TxtFirstName.Text,
+                MiddleName = TxtMiddleName.Text,
+                LastName = TxtLastName.Text,
+                Gender = TxtGender.Text,
+                Email = TxtEmailID.Text,
+                PhoneNumber = int.TryParse(TxtPhoneNumber.Text, out int phone) ? (int?)phone : null,
+                DateOfBirth = DateTime.TryParse(TxtDateOfBirth.Text, out DateTime dateOfBirth) ? (DateTime?)dateOfBirth : null,
+                FatherName = TxtFatherName.Text,
+                MotherName = TxtMotherName.Text
+            };
+            ArePropertiesNullOrEmpty(user);
+            return user;
+        }
 
-                string queryUser = "INSERT INTO UserDetails VALUES (@firstName, @middleName, @lastName, @gender, @email, @phone, @dateOfBirth, @fatherName, @motherName); ";
+        public bool ArePropertiesNullOrEmpty(object obj)
+        {
+            var properties = obj.GetType().GetProperties();
 
-                using (SqlCommand cmd = new SqlCommand(queryUser, con))
+            foreach (var property in properties)
+            {
+                var value = property.GetValue(obj);
+
+                if (value == null || string.IsNullOrEmpty(value.ToString()))
                 {
-                    cmd.Parameters.AddWithValue("@firstName", firstName);
-                    cmd.Parameters.AddWithValue("@middleName", middleName);
-                    cmd.Parameters.AddWithValue("@lastName", lastName);
-                    cmd.Parameters.AddWithValue("@gender", gender);
-                    cmd.Parameters.AddWithValue("@email", email);
-                    cmd.Parameters.AddWithValue("@phone", phone);
-                    cmd.Parameters.AddWithValue("@dateOfBirth", dateOfBirth);
-                    cmd.Parameters.AddWithValue("@fatherName", fatherName);
-                    cmd.Parameters.AddWithValue("@motherName", motherName);
-
-                    userId = Convert.ToInt32(cmd.ExecuteScalar());
+                    return true; 
                 }
             }
 
-            return userId;
+            return false;
         }
 
-        private void InsertAddress(int userId, int addressType, string street, string city, string pincode, String country, String state)
-        {
-            using (var con = Connection.Connect())
-            {
-                con.Open();
-
-                int countryId = GetCountryIdByName(country);
-                int stateId = GetStateIdByNameAndCountry(state, countryId);
-
-                string queryAddress = "INSERT INTO AddressDetails VALUES (@userId, @addressType, @street, @city, @pincode, @countryId, @stateId);";
-
-                using (SqlCommand cmd = new SqlCommand(queryAddress, con))
-                {
-                    cmd.Parameters.AddWithValue("@userId", userId);
-                    cmd.Parameters.AddWithValue("@addressType", addressType);
-                    cmd.Parameters.AddWithValue("@street", street);
-                    cmd.Parameters.AddWithValue("@city", city);
-                    cmd.Parameters.AddWithValue("@pincode", pincode);
-                    cmd.Parameters.AddWithValue("@countryId", countryId);
-                    cmd.Parameters.AddWithValue("@stateId", stateId);
-
-                    cmd.ExecuteNonQuery();
-                }
-            }
-        }
-
-
-
-
-        private int GetStateIdByNameAndCountry(string stateName, int countryId)
-        {
-            using (var con = Connection.Connect())
-            {
-                con.Open();
-
-                string query = "SELECT StateID FROM State WHERE StateName = @stateName AND CountryID = @countryId;";
-                using (SqlCommand cmd = new SqlCommand(query, con))
-                {
-                    cmd.Parameters.AddWithValue("@stateName", stateName);
-                    cmd.Parameters.AddWithValue("@countryId", countryId);
-
-                    object result = cmd.ExecuteScalar();
-
-                    return result != null ? Convert.ToInt32(result) : -1;
-                }
-            }
-        }
-
-        private int GetCountryIdByName(string countryName)
-        {
-            using (var con = Connection.Connect())
-            {
-                con.Open();
-
-                string query = "SELECT CountryID FROM Country WHERE CountryName = @countryName;";
-                using (SqlCommand cmd = new SqlCommand(query, con))
-                {
-                    cmd.Parameters.AddWithValue("@countryName", countryName);
-
-                    object result = cmd.ExecuteScalar();
-
-                    return result != null ? Convert.ToInt32(result) : -1;
-                }
-            }
-        }
-
-
-
-        private void ClearFormFields()
+        private void ResetFormFields()
         {
             TxtFirstName.Text = "";
             TxtMiddleName.Text = "";
@@ -290,18 +172,33 @@ namespace DemoUserManagement
             TxtDateOfBirth.Text = "";
             TxtFatherName.Text = "";
             TxtMotherName.Text = "";
-            PermanentCountry.SelectedIndex = -1;
-            PermanentState.SelectedIndex = -1;
-            PermanentCity.Text = "";
-            PermanentPincode.Text = "";
-            PermanentAddressLine.Text = "";
-            PresentCountry.SelectedIndex = -1;
-            PresentState.SelectedIndex = -1;
-            PresentCity.Text = "";
-            PresentPincode.Text = "";
-            PresentAddressLine.Text = "";
+        }
 
-            ErrorMessage.Text = "";
+        protected void Update_Click(object sender, EventArgs e)
+        {
+            int userId = int.Parse(Request.QueryString["UserId"]);
+            UserDetailDTO user = new UserDetailDTO
+            {
+                FirstName = TxtFirstName.Text,
+                MiddleName = TxtMiddleName.Text,
+                LastName = TxtLastName.Text,
+                Gender = TxtGender.Text,
+                Email = TxtEmailID.Text,
+                PhoneNumber = int.TryParse(TxtPhoneNumber.Text, out int phone) ? (int?)phone : null,
+                DateOfBirth = DateTime.TryParse(TxtDateOfBirth.Text, out DateTime dateOfBirth) ? (DateTime?)dateOfBirth : null,
+                FatherName = TxtFatherName.Text,
+                MotherName = TxtMotherName.Text,
+
+            };
+            UserLogic.UpdateUser(userId, user);
+        }
+
+        protected void Delete_Click(object sender, EventArgs e)
+        {
+            int userId = int.Parse(Request.QueryString["ID"]);
+            UserLogic.DeleteUser(userId);
+            ScriptManager.RegisterStartupScript(this, GetType(), "showalert", "alert('Deleted User Successfully');", true);
+            Response.Redirect("UserList.aspx");
         }
     }
 }

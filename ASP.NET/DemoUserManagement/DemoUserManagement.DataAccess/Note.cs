@@ -15,7 +15,7 @@ namespace DemoUserManagement.DataAccess
     public partial class Note
     {
         public int NoteID { get; set; }
-        public Nullable<int> ObjectID { get; set; }
+        public Nullable<int> UserID { get; set; }
         public Nullable<int> ObjectType { get; set; }
         public string NoteText { get; set; }
         public Nullable<System.DateTime> TimeStamp { get; set; }

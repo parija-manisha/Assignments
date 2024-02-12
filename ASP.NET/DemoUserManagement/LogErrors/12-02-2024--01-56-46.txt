@@ -1,0 +1,10 @@
+Exception Details
+Message: Thread was being aborted.
+Source: mscorlib
+Stack Trace:    at System.Threading.Thread.AbortInternal()
+   at System.Threading.Thread.Abort(Object stateInfo)
+   at System.Web.HttpResponse.AbortCurrentThread()
+   at System.Web.HttpResponse.Redirect(String url, Boolean endResponse, Boolean permanent)
+   at DemoUserManagement._Default.SaveUserButton_Click(Object sender, EventArgs e) in D:\Projects\DemoUserManagement\DemoUserManagement\UserDetails.aspx.cs:line 113
+
+

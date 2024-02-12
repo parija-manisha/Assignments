@@ -1,44 +1,71 @@
-﻿using System;
+﻿using DemoUserManagement.Models;
+using DemoUserManagement.Util;
+using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
-using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace DemoUserManagement.DataAccess
 {
-    internal class UserDataAccess
+    public class UserDataAccess
     {
-        namespace DemoUserManagement.DataAccess
-    {
-        public class UserRepository
+        public static void SaveUser(UserDetailDTO userDetailDTO)
         {
-            public List<User> GetUsers()
+            using (var context = new UserManagementTableEntities2())
             {
-                // Implementation to get users from the database
-                throw new NotImplementedException();
+                UserDetail user = new UserDetail
+                {
+                    FirstName = userDetailDTO.FirstName,
+                    MiddleName = userDetailDTO.MiddleName,
+                    LastName = userDetailDTO.LastName,
+                    Gender = userDetailDTO.Gender,
+                    Email = userDetailDTO.Email,
+                    PhoneNumber = userDetailDTO.PhoneNumber,
+                    DateOfBirth = userDetailDTO.DateOfBirth,
+                    FatherName = userDetailDTO.FatherName,
+                    MotherName = userDetailDTO.MotherName,
+                    
+                };
+                context.UserDetails.Add(user);
+                context.SaveChanges();
             }
-
-            public int InsertUser(User user)
-            {
-                // Implementation to insert user into the database
-                throw new NotImplementedException();
-            }
-
-            // Add other methods for interacting with the database
         }
 
-        public class AddressRepository
+        public static void UpdateUser(int userId, UserDetailDTO userDetailDTO)
         {
-            public void InsertAddress(Address address)
+            using (UserManagementTableEntities2 context = new UserManagementTableEntities2())
             {
-                // Implementation to insert address into the database
-                throw new NotImplementedException();
-            }
+                UserDetail user = context.UserDetails.FirstOrDefault(x => x.UserID == userId);
+                if (user != null)
+                {
+                    user.FirstName = userDetailDTO.FirstName;
+                    user.MiddleName = userDetailDTO.MiddleName;
+                    user.LastName = userDetailDTO.LastName;
+                    user.Gender = userDetailDTO.Gender;
+                    user.Email = userDetailDTO.Email;
+                    user.PhoneNumber = userDetailDTO.PhoneNumber;
+                    user.DateOfBirth = userDetailDTO.DateOfBirth;
+                    user.FatherName = userDetailDTO.FatherName;
+                    user.MotherName = userDetailDTO.MotherName;
 
-            // Add other methods for interacting with the database
+                    context.SaveChanges();
+                }
+            }
+        }
+
+        public static void DeleteUser(int userId)
+        {
+            using (UserManagementTableEntities2 context = new UserManagementTableEntities2())
+            {
+                UserDetail user = context.UserDetails.FirstOrDefault(x => x.UserID == userId);
+                if (user != null)
+                {
+                    context.UserDetails.Remove(user);
+                    context.SaveChanges();
+                }
+            }
         }
     }
-
-}
 }

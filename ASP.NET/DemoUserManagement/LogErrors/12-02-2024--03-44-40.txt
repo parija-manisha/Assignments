@@ -1,0 +1,10 @@
+Exception Details
+Message: Thread was being aborted.
+Source: mscorlib
+Stack Trace:    at System.Threading.Thread.AbortInternal()
+   at System.Threading.Thread.Abort(Object stateInfo)
+   at System.Web.HttpResponse.AbortCurrentThread()
+   at System.Web.HttpResponse.Redirect(String url, Boolean endResponse, Boolean permanent)
+   at DemoUserManagement.Users.GridViewUsers_RowEditing(Object sender, GridViewEditEventArgs e) in D:\Projects\DemoUserManagement\DemoUserManagement\Users.aspx.cs:line 70
+
+

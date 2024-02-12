@@ -11,7 +11,7 @@ namespace DemoUserManagement
 {
 
 
-    public partial class UserDetails
+    public partial class _Default
     {
 
         /// <summary>
@@ -195,15 +195,6 @@ namespace DemoUserManagement
         protected global::System.Web.UI.WebControls.Button SaveUserButton;
 
         /// <summary>
-        /// AddUserButton control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button AddUserButton;
-
-        /// <summary>
         /// UpdateUserButton control.
         /// </summary>
         /// <remarks>
@@ -211,6 +202,15 @@ namespace DemoUserManagement
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button UpdateUserButton;
+
+        /// <summary>
+        /// DeleteUserButton control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button DeleteUserButton;
 
         /// <summary>
         /// ErrorMessage control.
@@ -231,22 +231,22 @@ namespace DemoUserManagement
         protected global::System.Web.UI.WebControls.Panel pnlAddress;
 
         /// <summary>
-        /// lblPermanentCountry control.
+        /// LblPermanentCountry control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblPermanentCountry;
+        protected global::System.Web.UI.WebControls.Label LblPermanentCountry;
 
         /// <summary>
-        /// PermanentCountry control.
+        /// DdlPermanentCountry control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList PermanentCountry;
+        protected global::System.Web.UI.WebControls.DropDownList DdlPermanentCountry;
 
         /// <summary>
         /// LblPermanentState control.
@@ -258,13 +258,13 @@ namespace DemoUserManagement
         protected global::System.Web.UI.WebControls.Label LblPermanentState;
 
         /// <summary>
-        /// PermanentState control.
+        /// DdlPermanentState control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList PermanentState;
+        protected global::System.Web.UI.WebControls.DropDownList DdlPermanentState;
 
         /// <summary>
         /// LblPermanentCity control.
@@ -276,13 +276,13 @@ namespace DemoUserManagement
         protected global::System.Web.UI.WebControls.Label LblPermanentCity;
 
         /// <summary>
-        /// PermanentCity control.
+        /// DdlPermanentCity control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox PermanentCity;
+        protected global::System.Web.UI.WebControls.TextBox DdlPermanentCity;
 
         /// <summary>
         /// LblPermanentPincode control.
@@ -294,13 +294,13 @@ namespace DemoUserManagement
         protected global::System.Web.UI.WebControls.Label LblPermanentPincode;
 
         /// <summary>
-        /// PermanentPincode control.
+        /// DdlPermanentPincode control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox PermanentPincode;
+        protected global::System.Web.UI.WebControls.TextBox DdlPermanentPincode;
 
         /// <summary>
         /// LblPermanentAddressLine control.
@@ -312,13 +312,22 @@ namespace DemoUserManagement
         protected global::System.Web.UI.WebControls.Label LblPermanentAddressLine;
 
         /// <summary>
-        /// PermanentAddressLine control.
+        /// DdlPermanentAddressLine control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox PermanentAddressLine;
+        protected global::System.Web.UI.WebControls.TextBox DdlPermanentAddressLine;
+
+        /// <summary>
+        /// SameAsPermanent control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CheckBox SameAsPermanent;
 
         /// <summary>
         /// lblPresentCountry control.
@@ -330,13 +339,13 @@ namespace DemoUserManagement
         protected global::System.Web.UI.WebControls.Label lblPresentCountry;
 
         /// <summary>
-        /// PresentCountry control.
+        /// DdlPresentCountry control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList PresentCountry;
+        protected global::System.Web.UI.WebControls.DropDownList DdlPresentCountry;
 
         /// <summary>
         /// LblPresentState control.
@@ -348,13 +357,13 @@ namespace DemoUserManagement
         protected global::System.Web.UI.WebControls.Label LblPresentState;
 
         /// <summary>
-        /// PresentState control.
+        /// DdlPresentState control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList PresentState;
+        protected global::System.Web.UI.WebControls.DropDownList DdlPresentState;
 
         /// <summary>
         /// LblPresentCity control.
@@ -366,13 +375,13 @@ namespace DemoUserManagement
         protected global::System.Web.UI.WebControls.Label LblPresentCity;
 
         /// <summary>
-        /// PresentCity control.
+        /// DdlPresentCity control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox PresentCity;
+        protected global::System.Web.UI.WebControls.TextBox DdlPresentCity;
 
         /// <summary>
         /// LblPresentPincode control.
@@ -384,39 +393,39 @@ namespace DemoUserManagement
         protected global::System.Web.UI.WebControls.Label LblPresentPincode;
 
         /// <summary>
-        /// PresentPincode control.
+        /// DdlPresentPincode control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox PresentPincode;
+        protected global::System.Web.UI.WebControls.TextBox DdlPresentPincode;
 
         /// <summary>
-        /// Label1 control.
+        /// LblPresentAddressLine control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label1;
+        protected global::System.Web.UI.WebControls.Label LblPresentAddressLine;
 
         /// <summary>
-        /// PresentAddressLine control.
+        /// DdlPresentAddressLine control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox PresentAddressLine;
+        protected global::System.Web.UI.WebControls.TextBox DdlPresentAddressLine;
 
         /// <summary>
-        /// AddNote control.
+        /// AddNotePlaceholder control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::DemoUserManagement.AddNote AddNote;
+        protected global::System.Web.UI.WebControls.PlaceHolder AddNotePlaceholder;
     }
 }

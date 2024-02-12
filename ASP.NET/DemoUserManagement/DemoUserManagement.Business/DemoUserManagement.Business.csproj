@@ -4,7 +4,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{9E0890BE-8C76-457C-9D6B-6B1181D45C0C}</ProjectGuid>
+    <ProjectGuid>{7EB0D5B6-0994-49FD-9F02-9F78E77A2145}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>DemoUserManagement.Business</RootNamespace>
@@ -34,6 +34,7 @@
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Web" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -42,9 +43,25 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CountryLogic.cs" />
     <Compile Include="Email.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="User.cs" />
+    <Compile Include="StateLogic.cs" />
+    <Compile Include="UserLogic.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\DemoUserManagement.DataAccess\DemoUserManagement.DataAccess.csproj">
+      <Project>{3afdaf7f-270f-4cfa-9439-cf32797cde31}</Project>
+      <Name>DemoUserManagement.DataAccess</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DemoUserManagement.Models\DemoUserManagement.Models.csproj">
+      <Project>{7b9cc5b7-80c9-457c-84a1-bb2e119a0cd4}</Project>
+      <Name>DemoUserManagement.Models</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DemoUserManagement.Util\DemoUserManagement.Util.csproj">
+      <Project>{b8712cb2-4c12-4414-ac5a-dc6e8e3d577d}</Project>
+      <Name>DemoUserManagement.Util</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

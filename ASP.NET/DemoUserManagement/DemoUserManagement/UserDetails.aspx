@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="UserDetails.aspx.cs" MasterPageFile="~/Site.Master" Inherits="DemoUserManagement.UserDetails" %>
+﻿<%@ Page Title="Home Page" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="UserDetails.aspx.cs" Inherits="DemoUserManagement._Default" %>
 
 <%@ Register Src="~/AddNote.ascx" TagPrefix="uc1" TagName="AddNote" %>
 
@@ -74,8 +74,8 @@
 
                 <div class="pt-5">
                     <asp:Button runat="server" ClientIDMode="static" ID="SaveUserButton" Text="Save User" CssClass="w-25" OnClick="SaveUserButton_Click" />
-                    <asp:Button runat="server" ClientIDMode="static" ID="AddUserButton" Text="Add User" CssClass="w-25" />
                     <asp:Button runat="server" ClientIDMode="static" ID="UpdateUserButton" Text="Update User" CssClass="w-25" />
+                    <asp:Button runat="server" ClientIDMode="static" ID="DeleteUserButton" Text="Add User" CssClass="w-25" />
                 </div>
 
                 <asp:Label ClientIDMode="static" ID="ErrorMessage" runat="server"></asp:Label>
@@ -88,46 +88,40 @@
 
                     <div>
                         <div id="divPermanentCountry" class="pb-3">
-                            <asp:Label CssClass="pe-2 w-25" ClientIDMode="static" ID="lblPermanentCountry" runat="server" AssociatedControlID="PermanentCountry">Nationality</asp:Label>
-                            <asp:DropDownList ClientIDMode="static" ID="PermanentCountry" runat="server" CssClass="w-100">
-                                <asp:ListItem Value=""></asp:ListItem>
-                                <asp:ListItem Value="India">India</asp:ListItem>
-                                <asp:ListItem Value="USA">USA</asp:ListItem>
+                            <asp:Label CssClass="pe-2 w-25" ClientIDMode="static" ID="LblPermanentCountry" runat="server" AssociatedControlID="DdlPermanentCountry">Nationality</asp:Label>
+                            <asp:DropDownList ClientIDMode="static" ID="DdlPermanentCountry" runat="server" CssClass="w-100">
+                                <asp:ListItem Text="Select" Value="" />
                             </asp:DropDownList>
                         </div>
                     </div>
 
                     <div>
                         <div id="DivPermanentState" class="pb-3">
-                            <asp:Label CssClass="pe-2 w-25" ClientIDMode="static" ID="LblPermanentState" runat="server" AssociatedControlID="PermanentState">State</asp:Label>
-                            <asp:DropDownList ClientIDMode="static" ID="PermanentState" runat="server" CssClass="w-100">
-                                <asp:ListItem Value=""></asp:ListItem>
-                                <asp:ListItem Value="Mumbai">Mumbai</asp:ListItem>
-                                <asp:ListItem Value="Odisha">Odisha</asp:ListItem>
-                                <asp:ListItem Value="Florida">Florida</asp:ListItem>
-                                <asp:ListItem Value="NewYork">NewYork</asp:ListItem>
+                            <asp:Label CssClass="pe-2 w-25" ClientIDMode="static" ID="LblPermanentState" runat="server" AssociatedControlID="DdlPermanentState">State</asp:Label>
+                            <asp:DropDownList ClientIDMode="static" ID="DdlPermanentState" runat="server" CssClass="w-100">
+                                <asp:ListItem Text="Select" Value=""></asp:ListItem>
                             </asp:DropDownList>
                         </div>
                     </div>
 
                     <div>
                         <div id="DivPermanentCity" class="pb-3">
-                            <asp:Label CssClass="pe-2 w-25" ClientIDMode="static" ID="LblPermanentCity" runat="server" AssociatedControlID="PermanentCity">City</asp:Label>
-                            <asp:TextBox ClientIDMode="static" ID="PermanentCity" runat="server" CssClass="w-100"></asp:TextBox>
+                            <asp:Label CssClass="pe-2 w-25" ClientIDMode="static" ID="LblPermanentCity" runat="server" AssociatedControlID="DdlPermanentCity">City</asp:Label>
+                            <asp:TextBox ClientIDMode="static" ID="DdlPermanentCity" runat="server" CssClass="w-100"></asp:TextBox>
                         </div>
-                    </div>
+                    </div> 
 
                     <div>
                         <div id="DivPermanentPincode" class="pb-3">
-                            <asp:Label CssClass="pe-2 w-25" ClientIDMode="static" ID="LblPermanentPincode" runat="server" AssociatedControlID="PermanentPincode">Pincode</asp:Label>
-                            <asp:TextBox ClientIDMode="static" ID="PermanentPincode" runat="server" CssClass="w-100"></asp:TextBox>
+                            <asp:Label CssClass="pe-2 w-25" ClientIDMode="static" ID="LblPermanentPincode" runat="server" AssociatedControlID="DdlPermanentPincode">Pincode</asp:Label>
+                            <asp:TextBox ClientIDMode="static" ID="DdlPermanentPincode" runat="server" CssClass="w-100"></asp:TextBox>
                         </div>
                     </div>
 
                     <div>
                         <div id="DivPermanentAddressLine" class="pb-3">
-                            <asp:Label CssClass="pe-2 w-25" ClientIDMode="static" ID="LblPermanentAddressLine" runat="server" AssociatedControlID="PermanentAddressLine">Address</asp:Label>
-                            <asp:TextBox ClientIDMode="static" ID="PermanentAddressLine" runat="server" CssClass="w-100"></asp:TextBox>
+                            <asp:Label CssClass="pe-2 w-25" ClientIDMode="static" ID="LblPermanentAddressLine" runat="server" AssociatedControlID="DdlPermanentAddressLine">Address</asp:Label>
+                            <asp:TextBox ClientIDMode="static" ID="DdlPermanentAddressLine" runat="server" CssClass="w-100"></asp:TextBox>
                         </div>
                     </div>
                 </div>
@@ -135,49 +129,46 @@
                 <div>
                     <h3>PRESENT ADDRESS</h3>
                     <hr />
+                      <asp:CheckBox ID="SameAsPermanent" runat="server" Text="Same As Permanent Address" OnCheckedChanged="SameAsPermanent_CheckedChanged" />
                     <div>
                         <div id="divPresentCountry" class="pb-3">
-                            <asp:Label CssClass="pe-2 w-25" ClientIDMode="static" ID="lblPresentCountry" runat="server" AssociatedControlID="PresentCountry">Nationality</asp:Label>
-                            <asp:DropDownList ClientIDMode="static" ID="PresentCountry" runat="server" CssClass="w-100">
+                            <asp:Label CssClass="pe-2 w-25" ClientIDMode="static" ID="lblPresentCountry" runat="server" AssociatedControlID="DdlPresentCountry">Nationality</asp:Label>
+                            <asp:DropDownList ClientIDMode="static" ID="DdlPresentCountry" runat="server" CssClass="w-100">
                                 <asp:ListItem Value=""></asp:ListItem>
                                 <asp:ListItem Value="India">India</asp:ListItem>
-                                <asp:ListItem Value="USA">USA</asp:ListItem>
+                                <asp:ListItem Value="america">America</asp:ListItem>
                             </asp:DropDownList>
                         </div>
                     </div>
                     <div>
                         <div id="DivPresentState" class="pb-3">
-                            <asp:Label CssClass="pe-2 w-25" ClientIDMode="static" ID="LblPresentState" runat="server" AssociatedControlID="PresentState">State</asp:Label>
-                            <asp:DropDownList ClientIDMode="static" ID="PresentState" runat="server" CssClass="w-100">
-                                <asp:ListItem Value=""></asp:ListItem>
-                                <asp:ListItem Value="Mumbai">Mumbai</asp:ListItem>
-                                <asp:ListItem Value="Odisha">Odisha</asp:ListItem>
-                                <asp:ListItem Value="Florida">Florida</asp:ListItem>
-                                <asp:ListItem Value="NewYork">NewYork</asp:ListItem>
+                            <asp:Label CssClass="pe-2 w-25" ClientIDMode="static" ID="LblPresentState" runat="server" AssociatedControlID="DdlPresentState">State</asp:Label>
+                            <asp:DropDownList ClientIDMode="static" ID="DdlPresentState" runat="server">
+                                <asp:ListItem Text="Select" Value="" />
                             </asp:DropDownList>
                         </div>
                     </div>
                     <div>
                         <div id="DivPresentCity" class="pb-3">
-                            <asp:Label CssClass="pe-2 w-25" ClientIDMode="static" ID="LblPresentCity" runat="server" AssociatedControlID="PresentCity">City</asp:Label>
-                            <asp:TextBox ClientIDMode="static" ID="PresentCity" runat="server" CssClass="w-100"></asp:TextBox>
+                            <asp:Label CssClass="pe-2 w-25" ClientIDMode="static" ID="LblPresentCity" runat="server" AssociatedControlID="DdlPresentCity">City</asp:Label>
+                            <asp:TextBox ClientIDMode="static" ID="DdlPresentCity" runat="server" CssClass="w-100"></asp:TextBox>
                         </div>
                     </div>
                     <div>
                         <div id="DivPresentPincode" class="pb-3">
-                            <asp:Label CssClass="pe-2 w-25" ClientIDMode="static" ID="LblPresentPincode" runat="server" AssociatedControlID="PresentPincode">Pincode</asp:Label>
-                            <asp:TextBox ClientIDMode="static" ID="PresentPincode" runat="server" CssClass="w-100"></asp:TextBox>
+                            <asp:Label CssClass="pe-2 w-25" ClientIDMode="static" ID="LblPresentPincode" runat="server" AssociatedControlID="DdlPresentPincode">Pincode</asp:Label>
+                            <asp:TextBox ClientIDMode="static" ID="DdlPresentPincode" runat="server" CssClass="w-100"></asp:TextBox>
                         </div>
                     </div>
                     <div>
                         <div id="DivPresentAddressLine" class="pb-3">
-                            <asp:Label CssClass="pe-2 w-25" ClientIDMode="static" ID="Label1" runat="server" AssociatedControlID="PresentAddressLine">Address</asp:Label>
-                            <asp:TextBox ClientIDMode="static" ID="PresentAddressLine" runat="server" CssClass="w-100"></asp:TextBox>
+                            <asp:Label CssClass="pe-2 w-25" ClientIDMode="static" ID="LblPresentAddressLine" runat="server" AssociatedControlID="DdlPresentAddressLine">Address</asp:Label>
+                            <asp:TextBox ClientIDMode="static" ID="DdlPresentAddressLine" runat="server" CssClass="w-100"></asp:TextBox>
                         </div>
                     </div>
                 </div>
             </asp:Panel>
-            <uc1:AddNote runat="server" ID="AddNote" Visible="false" />
+            <asp:PlaceHolder ClientIDMode="static" ID="AddNotePlaceholder" runat="server"></asp:PlaceHolder>
         </div>
     </main>
 </asp:Content>

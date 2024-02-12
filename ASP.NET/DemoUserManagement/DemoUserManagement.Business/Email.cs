@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Net.Mail;
 using System.Net;
 using System.Text;
 using System.Threading.Tasks;
-using System.Configuration;
 
 namespace DemoUserManagement.Business
 {
@@ -44,7 +44,6 @@ namespace DemoUserManagement.Business
             catch (Exception ex)
             {
                 Console.WriteLine($"Error sending email: {ex.Message}");
-                // Log or handle the exception as needed
             }
         }
     }
