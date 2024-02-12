@@ -35,6 +35,9 @@ namespace StudentDetailsMultipleLayers.Business
         {
             ClassDetail student = new ClassDetail();
 
+            student.ClassID = classDetailDTO.ClassID; 
+
+
             var propertiesDTO = typeof(ClassDetailDTO).GetProperties();
             var properties = typeof(ClassDetail).GetProperties();
 

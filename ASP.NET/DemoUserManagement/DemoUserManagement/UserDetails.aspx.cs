@@ -84,30 +84,6 @@ namespace DemoUserManagement
             }
         }
 
-        protected void SaveUserButton_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                UserDetailDTO user = CreateUserFromForm();
-                if (ArePropertiesNullOrEmpty(user))
-                {
-                    ErrorMessage.Text = "Please fill in all the required fields.";
-                    return; 
-                }
-                UserLogic.SaveUser(user);
-                Session["Phone"] = TxtPhoneNumber.Text;
-
-                ResetFormFields();
-
-                Response.Redirect("Users.aspx");
-            }
-            catch (Exception ex)
-            {
-                Logger.AddError("Registration Failed", ex);
-                ErrorMessage.Text = "An error occurred during registration";
-            }
-        }
-
         private UserDetailDTO CreateUserFromForm()
         {
             UserDetailDTO user = new UserDetailDTO
@@ -126,21 +102,102 @@ namespace DemoUserManagement
             return user;
         }
 
+        private List<AddressDetailDTO> CreateAddressesFromForm()
+        {
+            List<AddressDetailDTO> addresses = new List<AddressDetailDTO>();
+
+            AddressDetailDTO presentAddress = new AddressDetailDTO
+            {
+                AddressType = 1,
+                Street = DdlPresentAddressLine.Text,
+                City = DdlPresentCity.Text,
+                Pincode = int.TryParse(DdlPresentPincode.Text, out int presentPincode) ? (int?)presentPincode : null,
+                CountryID = GetCountryIdByName(DdlPresentCountry.SelectedValue),
+                StateID = GetStateIdByName(DdlPresentState.SelectedValue, GetCountryIdByName(DdlPresentCountry.SelectedValue))
+            };
+            addresses.Add(presentAddress);
+
+            AddressDetailDTO permanentAddress = new AddressDetailDTO
+            {
+                AddressType = 2,
+                Street = DdlPermanentAddressLine.Text,
+                City = DdlPermanentCity.Text,
+                Pincode = int.TryParse(DdlPermanentPincode.Text, out int permanentPincode) ? (int?)permanentPincode : null,
+                CountryID = GetCountryIdByName(DdlPermanentCountry.SelectedValue),
+                StateID = GetStateIdByName(DdlPermanentState.SelectedValue, GetCountryIdByName(DdlPermanentCountry.SelectedValue))
+            };
+            addresses.Add(permanentAddress);
+
+            return addresses;
+        }
+
+        private int GetCountryIdByName(string countryName)
+        {
+            List<CountryDTO> countryList = CountryLogic.GetCountryList();
+
+            CountryDTO country = countryList.Find(c => c.CountryName == countryName);
+
+            return country?.CountryID ?? 0;
+        }
+
+        private int GetStateIdByName(string stateName, int countryID)
+        {
+            List<StateDTO> stateList = StateLogic.GetStateList(countryID);
+
+            StateDTO state = stateList.Find(c => c.StateName == stateName);
+
+            return state?.StateID ?? 0;
+        }
+
         public bool ArePropertiesNullOrEmpty(object obj)
         {
+            if (obj == null)
+            {
+                return true;
+            }
+
             var properties = obj.GetType().GetProperties();
 
             foreach (var property in properties)
             {
                 var value = property.GetValue(obj);
 
-                if (value == null || string.IsNullOrEmpty(value.ToString()))
+                if (value == null || (value is string && string.IsNullOrEmpty((string)value)))
                 {
-                    return true; 
+                    return true;
                 }
             }
 
             return false;
+        }
+
+        protected void SaveUserButton_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                UserDetailDTO user = CreateUserFromForm();
+                List<AddressDetailDTO> addresses = CreateAddressesFromForm();
+                if (ArePropertiesNullOrEmpty(user) || ArePropertiesNullOrEmpty(addresses))
+                {
+                    ErrorMessage.Text = "Please fill in all the required fields.";
+                    return;
+                }
+                UserLogic.SaveUser(user);
+                foreach (var address in addresses)
+                {
+                    UserLogic.SaveAddress(address);
+                }
+                Session["Phone"] = TxtPhoneNumber.Text;
+
+                ResetFormFields();
+
+                Response.Redirect("Users.aspx");
+            }
+            catch (Exception ex)
+            {
+                Logger.AddError("Registration Failed", ex);
+                ErrorMessage.Text = "An error occurred during registration";
+            }
         }
 
         private void ResetFormFields()

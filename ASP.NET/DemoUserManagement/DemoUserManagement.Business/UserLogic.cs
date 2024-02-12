@@ -20,7 +20,7 @@ namespace DemoUserManagement.Business
             catch (Exception ex)
             {
                 Logger.AddError("SaveUser Failed", ex);
-                throw; 
+                throw;
             }
         }
 
@@ -33,7 +33,7 @@ namespace DemoUserManagement.Business
             catch (Exception ex)
             {
                 Logger.AddError("UpdateUser Failed", ex);
-                throw; 
+                throw;
             }
         }
 
@@ -46,7 +46,20 @@ namespace DemoUserManagement.Business
             catch (Exception ex)
             {
                 Logger.AddError("DeleteUser Failed", ex);
-                throw; 
+                throw;
+            }
+        }
+
+        public static void SaveAddress(AddressDetailDTO addressDetailDTO)
+        {
+            try
+            {
+                AddressDataAccess.SaveAddress(addressDetailDTO);
+            }
+            catch (Exception ex)
+            {
+                Logger.AddError("SaveUser Failed", ex);
+                throw;
             }
         }
 
