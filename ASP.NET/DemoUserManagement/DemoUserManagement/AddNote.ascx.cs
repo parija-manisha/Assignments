@@ -33,7 +33,7 @@ namespace DemoUserManagement
 
         protected void LoadExistingNotes()
         {
-            string objectID = Request.QueryString["ObjectID"];
+            string objectID = Request.QueryString["UserID"];
 
             if (!string.IsNullOrEmpty(objectID))
             {
@@ -51,7 +51,7 @@ namespace DemoUserManagement
             {
                 connection.Open();
 
-                string query = "SELECT UserID, ObjectType, Text, TimeStamp FROM Note WHERE UserID = @objectID AND ObjectType = @Page";
+                string query = "SELECT ObjectID, ObjectType, Text, TimeStamp FROM Note WHERE ObjectID = @objectID AND ObjectType = @Page";
                 using (SqlCommand command = new SqlCommand(query, connection))
                 {
                     command.Parameters.AddWithValue("@ObjectID", objectID);

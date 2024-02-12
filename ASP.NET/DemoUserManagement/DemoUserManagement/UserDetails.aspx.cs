@@ -24,28 +24,10 @@ namespace DemoUserManagement
                 }
 
                 PopulateCountries();
-                ShowButton(false);
-
                 ErrorMessage.Text = "";
             }
         }
 
-        private void ShowButton(bool button)
-        {
-            if ((button))
-            {
-                SaveUserButton.Visible = false;
-                UpdateUserButton.Visible = true;
-                DeleteUserButton.Visible = true;
-            }
-
-            else
-            {
-                SaveUserButton.Visible = true;
-                UpdateUserButton.Visible = false;
-                DeleteUserButton.Visible = false;
-            }
-        }
 
         private void BindDropDownList<T>(DropDownList ddl, List<T> list, string textField, string valueField)
         {

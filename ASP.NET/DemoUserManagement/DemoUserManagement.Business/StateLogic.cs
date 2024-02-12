@@ -13,15 +13,20 @@ namespace DemoUserManagement.Business
         public static List<StateDTO> GetStateList(int countryId)
         {
             List<State> states = GetStateNameByCountry.StateCountry(countryId);
-            List<StateDTO> stateList = states.Select(state => new StateDTO
-            {
-                StateID = state.StateID,
-                StateName = state.StateName,
-                CountryID = (int)state.CountryID
-            }).ToList();
 
-            return stateList;
+            if (states != null)
+            {
+                List<StateDTO> stateList = states.Select(state => new StateDTO
+                {
+                    StateName = state.StateName,
+                }).ToList();
+
+                return stateList;
+            }
+
+            return new List<StateDTO>(); 
         }
+
 
     }
 }

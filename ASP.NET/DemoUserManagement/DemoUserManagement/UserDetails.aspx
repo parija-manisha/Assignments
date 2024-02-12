@@ -74,8 +74,7 @@
 
                 <div class="pt-5">
                     <asp:Button runat="server" ClientIDMode="static" ID="SaveUserButton" Text="Save User" CssClass="w-25" OnClick="SaveUserButton_Click" />
-                    <asp:Button runat="server" ClientIDMode="static" ID="UpdateUserButton" Text="Update User" CssClass="w-25" />
-                    <asp:Button runat="server" ClientIDMode="static" ID="DeleteUserButton" Text="Add User" CssClass="w-25" />
+                    <asp:Button runat="server" ClientIDMode="static" ID="DeleteUserButton" Text="Delete User" CssClass="w-25" />
                 </div>
 
                 <asp:Label ClientIDMode="static" ID="ErrorMessage" runat="server"></asp:Label>
@@ -143,7 +142,7 @@
                     <div>
                         <div id="DivPresentState" class="pb-3">
                             <asp:Label CssClass="pe-2 w-25" ClientIDMode="static" ID="LblPresentState" runat="server" AssociatedControlID="DdlPresentState">State</asp:Label>
-                            <asp:DropDownList ClientIDMode="static" ID="DdlPresentState" runat="server">
+                            <asp:DropDownList ClientIDMode="static" ID="DdlPresentState" runat="server" CssClass="w-100">
                                 <asp:ListItem Text="Select" Value="" />
                             </asp:DropDownList>
                         </div>
