@@ -11,7 +11,10 @@ namespace DemoUserManagement
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            if (!IsPostBack)
+            {
+                SiteName.Text = Page.Title;
+            }
         }
     }
 }

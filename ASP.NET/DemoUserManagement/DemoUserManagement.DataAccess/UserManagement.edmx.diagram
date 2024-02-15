@@ -4,16 +4,18 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="425bb3dc5b6145b6aa119f6198679b0a" Name="Diagram1">
-        <EntityTypeShape EntityType="UserManagementTableModel.AddressDetail" Width="1.5" PointX="3" PointY="1.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="UserManagementTableModel.Country" Width="1.5" PointX="9.75" PointY="1.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="UserManagementTableModel.Note" Width="1.5" PointX="5.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="UserManagementTableModel.State" Width="1.5" PointX="7.25" PointY="2.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="UserManagementTableModel.UserDetail" Width="1.5" PointX="0.75" PointY="1" IsExpanded="true" />
+      <Diagram DiagramId="7970d62183c2449b9fb91797e3771832" Name="Diagram1">
+        <EntityTypeShape EntityType="UserManagementTableModel.AddressDetail" Width="1.5" PointX="5.25" PointY="4.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="UserManagementTableModel.Country" Width="1.5" PointX="0.75" PointY="3.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="UserManagementTableModel.FileUpload" Width="1.5" PointX="5.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="UserManagementTableModel.Note" Width="1.5" PointX="7.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="UserManagementTableModel.State" Width="1.5" PointX="3" PointY="7" IsExpanded="true" />
+        <EntityTypeShape EntityType="UserManagementTableModel.UserDetail" Width="1.5" PointX="3" PointY="2.125" IsExpanded="true" />
         <AssociationConnector Association="UserManagementTableModel.FK_AddressDetails_Country" ManuallyRouted="false" />
         <AssociationConnector Association="UserManagementTableModel.FK_AddressDetails_State" ManuallyRouted="false" />
         <AssociationConnector Association="UserManagementTableModel.FK_AddressDetails_UserDetails" ManuallyRouted="false" />
         <AssociationConnector Association="UserManagementTableModel.FK_State_Country" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="UserManagementTableModel.DocumentList" Width="1.5" PointX="7.375" PointY="3.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

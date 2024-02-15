@@ -18,7 +18,6 @@ namespace DemoUserManagement.DataAccess
         public UserDetail()
         {
             this.AddressDetails = new HashSet<AddressDetail>();
-            this.AddressDetails1 = new HashSet<AddressDetail>();
         }
     
         public int UserID { get; set; }
@@ -27,14 +26,15 @@ namespace DemoUserManagement.DataAccess
         public string LastName { get; set; }
         public string Gender { get; set; }
         public string Email { get; set; }
-        public Nullable<int> PhoneNumber { get; set; }
-        public Nullable<System.DateTime> DateOfBirth { get; set; }
+        public int PhoneNumber { get; set; }
+        public System.DateTime DateOfBirth { get; set; }
+        public string Hobbies { get; set; }
         public string FatherName { get; set; }
         public string MotherName { get; set; }
+        public System.Guid FileNameGuid { get; set; }
+        public string FileName { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<AddressDetail> AddressDetails { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<AddressDetail> AddressDetails1 { get; set; }
     }
 }

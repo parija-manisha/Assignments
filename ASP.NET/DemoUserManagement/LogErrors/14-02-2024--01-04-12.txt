@@ -1,0 +1,8 @@
+Exception Details
+Message: Value was either too large or too small for an Int32.
+Source: mscorlib
+Stack Trace:    at System.Number.ParseInt32(String s, NumberStyles style, NumberFormatInfo info)
+   at DemoUserManagement._Default.CreateUserFromForm() in D:\Projects\ASSIGNMENTS\ASP.NET\DemoUserManagement\DemoUserManagement\UserDetails.aspx.cs:line 231
+   at DemoUserManagement._Default.SaveUserButton_Click(Object sender, EventArgs e) in D:\Projects\ASSIGNMENTS\ASP.NET\DemoUserManagement\DemoUserManagement\UserDetails.aspx.cs:line 188
+
+

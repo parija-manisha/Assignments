@@ -43,10 +43,13 @@ namespace DemoUserManagement.DataAccess
                 LastName = reader["LastName"].ToString(),
                 Gender = reader["Gender"].ToString(),
                 Email = reader["Email"].ToString(),
-                PhoneNumber = reader["PhoneNumber"] == DBNull.Value ? (int?)null : (int?)reader["PhoneNumber"],
-                DateOfBirth = reader["DateOfBirth"] == DBNull.Value ? (DateTime?)null : (DateTime?)reader["DateOfBirth"],
+                PhoneNumber = (int)reader["PhoneNumber"],
+                DateOfBirth = (DateTime)reader["DateOfBirth"],
                 FatherName = reader["FatherName"].ToString(),
-                MotherName = reader["MotherName"].ToString()
+                MotherName = reader["MotherName"].ToString(),
+                FileNameGuid = (Guid)reader["FileNameGuid"],
+                FileName = reader["FileName"].ToString()
+
             };
 
             return user;

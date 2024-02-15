@@ -411,12 +411,21 @@ namespace DemoUserManagement
         protected global::System.Web.UI.WebControls.TextBox DdlPresentAddressLine;
 
         /// <summary>
-        /// AddNotePlaceholder control.
+        /// ucDocumentUserControl control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.PlaceHolder AddNotePlaceholder;
+        protected global::DemoUserManagement.ucDocumentUserControl ucDocumentUserControl;
+
+        /// <summary>
+        /// ucNoteControl control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::DemoUserManagement.ucNoteControl ucNoteControl;
     }
 }

@@ -102,7 +102,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="AddNote.ascx" />
+    <Content Include="Login.aspx" />
+    <Content Include="Scripts\JavaScript.js" />
+    <Content Include="ucDocumentUserControl.ascx" />
+    <Content Include="ucDocumentControlDisplay.ascx" />
+    <Content Include="ucNoteControl.ascx" />
     <Content Include="Content\bootstrap-grid.css" />
     <Content Include="Content\bootstrap-grid.min.css" />
     <Content Include="Content\bootstrap-grid.rtl.css" />
@@ -152,6 +156,7 @@
     <Content Include="Content\bootstrap-grid.rtl.css.map" />
     <Content Include="Content\bootstrap-grid.min.css.map" />
     <Content Include="Content\bootstrap-grid.css.map" />
+    <Content Include="FileUploadDownload.ashx" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -187,12 +192,36 @@
     <Content Include="Site.Mobile.Master" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AddNote.ascx.cs">
-      <DependentUpon>AddNote.ascx</DependentUpon>
+    <Compile Include="FileUploadDownload.ashx.cs">
+      <DependentUpon>FileUploadDownload.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="Login.aspx.cs">
+      <DependentUpon>Login.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="AddNote.ascx.designer.cs">
-      <DependentUpon>AddNote.ascx</DependentUpon>
+    <Compile Include="Login.aspx.designer.cs">
+      <DependentUpon>Login.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ucDocumentUserControl.ascx.cs">
+      <DependentUpon>ucDocumentUserControl.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ucDocumentUserControl.ascx.designer.cs">
+      <DependentUpon>ucDocumentUserControl.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="ucDocumentControlDisplay.ascx.cs">
+      <DependentUpon>ucDocumentControlDisplay.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ucDocumentControlDisplay.ascx.designer.cs">
+      <DependentUpon>ucDocumentControlDisplay.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="ucNoteControl.ascx.cs">
+      <DependentUpon>ucNoteControl.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ucNoteControl.ascx.designer.cs">
+      <DependentUpon>ucNoteControl.ascx</DependentUpon>
     </Compile>
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
@@ -238,6 +267,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="upload\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -256,7 +286,7 @@
       <Name>DemoUserManagement.Business</Name>
     </ProjectReference>
     <ProjectReference Include="..\DemoUserManagement.Models\DemoUserManagement.Models.csproj">
-      <Project>{7B9CC5B7-80C9-457C-84A1-BB2E119A0CD4}</Project>
+      <Project>{7b9cc5b7-80c9-457c-84a1-bb2e119a0cd4}</Project>
       <Name>DemoUserManagement.Models</Name>
     </ProjectReference>
     <ProjectReference Include="..\DemoUserManagement.Util\DemoUserManagement.Util.csproj">

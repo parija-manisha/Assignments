@@ -21,7 +21,7 @@
     </style>
 </head>
 <body>
-    <form id="form1" runat="server">
+    <form action="Handler1.ashx" id="form1" runat="server">
         <div>
             <h2>Heading</h2>
             <table class="auto-style1">
@@ -110,7 +110,7 @@
         <div>
             <asp:FileUpload ID="FileUpload2" runat="server" />
             <asp:Button ID="Button4" runat="server" Text="Upload File" OnClick="Button4_Click" />
-
+            
             <asp:Label runat="server" ID="FileUploadStatus"></asp:Label>
         </div>
         <br />
@@ -159,6 +159,11 @@
             </asp:GridView>
         </div>
     </form>
+    <script type="text/javascript">
+    function openFileInNewWindow(fileUrl) {
+        window.open(fileUrl, '_blank');
+    }
+    </script>
 </body>
 </html>
 

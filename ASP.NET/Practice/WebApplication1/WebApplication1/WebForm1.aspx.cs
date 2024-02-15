@@ -62,7 +62,7 @@ namespace WebApplication1
 
         protected void Button4_Click(object sender, EventArgs e)
         {
-            if ((FileUpload2.PostedFile != null) && (FileUpload2.PostedFile.ContentLength > 0))
+            if ((Request.Files.Count > 0) && (Request.Files[0].ContentLength > 0))
             {
                 string fn = System.IO.Path.GetFileName(FileUpload2.PostedFile.FileName);
                 string SaveLocation = Server.MapPath("upload") + "\\" + fn;
@@ -70,6 +70,10 @@ namespace WebApplication1
                 {
                     FileUpload2.PostedFile.SaveAs(SaveLocation);
                     FileUploadStatus.Text = "The file has been uploaded.";
+
+                    // RegisterStartupScript to call openFileInNewWindow after upload
+                    string script = $"<script type='text/javascript'>openFileInNewWindow('FileUploadHandler.ashx');</script>";
+                    Page.ClientScript.RegisterStartupScript(this.GetType(), "openFileScript", script);
                 }
                 catch (Exception ex)
                 {
@@ -81,6 +85,7 @@ namespace WebApplication1
                 FileUploadStatus.Text = "Please select a file to upload.";
             }
         }
+
 
         protected void Button5_Click(object sender, EventArgs e)
         {

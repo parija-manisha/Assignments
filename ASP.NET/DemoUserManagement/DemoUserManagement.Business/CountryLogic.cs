@@ -21,5 +21,10 @@ namespace DemoUserManagement.Business
 
             return countryList;
         }
+
+        public static int GetCountryIDByName(string countryName)
+        {
+            return CountryDataAccess.GetCountryIDByName(countryName);
+        }
     }
 }

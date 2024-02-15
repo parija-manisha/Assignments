@@ -1,6 +1,8 @@
-﻿<%@ Page Title="Home Page" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="UserDetails.aspx.cs" Inherits="DemoUserManagement._Default" %>
+﻿<%@ Page Title="User Details" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="UserDetails.aspx.cs" Inherits="DemoUserManagement._Default" %>
 
-<%@ Register Src="~/AddNote.ascx" TagPrefix="uc1" TagName="AddNote" %>
+<%@ Register Src="~/ucNoteControl.ascx" TagPrefix="uc1" TagName="ucNoteControl" %>
+<%@ Register Src="~/ucDocumentUserControl.ascx" TagPrefix="uc1" TagName="ucDocumentUserControl" %>
+
 
 
 <asp:Content ClientIDMode="static" ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
@@ -88,7 +90,7 @@
                     <div>
                         <div id="divPermanentCountry" class="pb-3">
                             <asp:Label CssClass="pe-2 w-25" ClientIDMode="static" ID="LblPermanentCountry" runat="server" AssociatedControlID="DdlPermanentCountry">Nationality</asp:Label>
-                            <asp:DropDownList ClientIDMode="static" ID="DdlPermanentCountry" runat="server" CssClass="w-100">
+                            <asp:DropDownList ClientIDMode="static" ID="DdlPermanentCountry" runat="server" CssClass="w-100" AutoPostBack="true" OnSelectedIndexChanged="PermanentCountryState">
                                 <asp:ListItem Text="Select" Value="" />
                             </asp:DropDownList>
                         </div>
@@ -97,7 +99,7 @@
                     <div>
                         <div id="DivPermanentState" class="pb-3">
                             <asp:Label CssClass="pe-2 w-25" ClientIDMode="static" ID="LblPermanentState" runat="server" AssociatedControlID="DdlPermanentState">State</asp:Label>
-                            <asp:DropDownList ClientIDMode="static" ID="DdlPermanentState" runat="server" CssClass="w-100">
+                            <asp:DropDownList ClientIDMode="static" ID="DdlPermanentState" runat="server" CssClass="w-100" DataTextField="StateName" DataValueField="StateId">
                                 <asp:ListItem Text="Select" Value=""></asp:ListItem>
                             </asp:DropDownList>
                         </div>
@@ -108,7 +110,7 @@
                             <asp:Label CssClass="pe-2 w-25" ClientIDMode="static" ID="LblPermanentCity" runat="server" AssociatedControlID="DdlPermanentCity">City</asp:Label>
                             <asp:TextBox ClientIDMode="static" ID="DdlPermanentCity" runat="server" CssClass="w-100"></asp:TextBox>
                         </div>
-                    </div> 
+                    </div>
 
                     <div>
                         <div id="DivPermanentPincode" class="pb-3">
@@ -128,41 +130,41 @@
                 <div>
                     <h3>PRESENT ADDRESS</h3>
                     <hr />
-                      <asp:CheckBox ID="SameAsPermanent" runat="server" Text="Same As Permanent Address" OnCheckedChanged="SameAsPermanent_CheckedChanged" />
+                    <asp:CheckBox ID="SameAsPermanent" runat="server" Text="Same As Permanent Address" OnCheckedChanged="SameAsPermanent_CheckedChanged" />
                     <div>
                         <div id="divPresentCountry" class="pb-3">
                             <asp:Label CssClass="pe-2 w-25" ClientIDMode="static" ID="lblPresentCountry" runat="server" AssociatedControlID="DdlPresentCountry">Nationality</asp:Label>
-                            <asp:DropDownList ClientIDMode="static" ID="DdlPresentCountry" runat="server" CssClass="w-100">
+                            <asp:DropDownList ID="DdlPresentCountry" runat="server" AutoPostBack="true" OnSelectedIndexChanged="PresentCountryState" ClientIDMode="Static" CssClass="w-100">
                                 <asp:ListItem Value=""></asp:ListItem>
                                 <asp:ListItem Value="India">India</asp:ListItem>
                                 <asp:ListItem Value="america">America</asp:ListItem>
                             </asp:DropDownList>
                         </div>
                     </div>
-                    
+
                     <div>
                         <div id="DivPresentState" class="pb-3">
                             <asp:Label CssClass="pe-2 w-25" ClientIDMode="static" ID="LblPresentState" runat="server" AssociatedControlID="DdlPresentState">State</asp:Label>
-                            <asp:DropDownList ClientIDMode="static" ID="DdlPresentState" runat="server" CssClass="w-100">
+                            <asp:DropDownList ClientIDMode="static" ID="DdlPresentState" runat="server" CssClass="w-100" DataTextField="StateName" DataValueField="StateId">
                                 <asp:ListItem Text="Select" Value="" />
                             </asp:DropDownList>
                         </div>
                     </div>
-                    
+
                     <div>
                         <div id="DivPresentCity" class="pb-3">
                             <asp:Label CssClass="pe-2 w-25" ClientIDMode="static" ID="LblPresentCity" runat="server" AssociatedControlID="DdlPresentCity">City</asp:Label>
                             <asp:TextBox ClientIDMode="static" ID="DdlPresentCity" runat="server" CssClass="w-100"></asp:TextBox>
                         </div>
                     </div>
-                    
+
                     <div>
                         <div id="DivPresentPincode" class="pb-3">
                             <asp:Label CssClass="pe-2 w-25" ClientIDMode="static" ID="LblPresentPincode" runat="server" AssociatedControlID="DdlPresentPincode">Pincode</asp:Label>
                             <asp:TextBox ClientIDMode="static" ID="DdlPresentPincode" runat="server" CssClass="w-100"></asp:TextBox>
                         </div>
                     </div>
-                    
+
                     <div>
                         <div id="DivPresentAddressLine" class="pb-3">
                             <asp:Label CssClass="pe-2 w-25" ClientIDMode="static" ID="LblPresentAddressLine" runat="server" AssociatedControlID="DdlPresentAddressLine">Address</asp:Label>
@@ -170,8 +172,9 @@
                         </div>
                     </div>
                 </div>
+                <uc1:ucDocumentUserControl runat="server" ID="ucDocumentUserControl" />
             </asp:Panel>
-            <asp:PlaceHolder ClientIDMode="static" ID="AddNotePlaceholder" runat="server"></asp:PlaceHolder>
         </div>
+        <uc1:ucNoteControl runat="server" ID="ucNoteControl" />
     </main>
 </asp:Content>

@@ -13,10 +13,10 @@ namespace DemoUserManagement.DataAccess
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class UserManagementTableEntities2 : DbContext
+    public partial class UserManagementTableEntities : DbContext
     {
-        public UserManagementTableEntities2()
-            : base("name=UserManagementTableEntities2")
+        public UserManagementTableEntities()
+            : base("name=UserManagementTableEntities")
         {
         }
     
@@ -27,8 +27,10 @@ namespace DemoUserManagement.DataAccess
     
         public virtual DbSet<AddressDetail> AddressDetails { get; set; }
         public virtual DbSet<Country> Countries { get; set; }
+        public virtual DbSet<FileUpload> FileUploads { get; set; }
         public virtual DbSet<Note> Notes { get; set; }
         public virtual DbSet<State> States { get; set; }
         public virtual DbSet<UserDetail> UserDetails { get; set; }
+        public virtual DbSet<DocumentList> DocumentLists { get; set; }
     }
 }

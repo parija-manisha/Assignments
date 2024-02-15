@@ -3,6 +3,7 @@ using DemoUserManagement.Models;
 using DemoUserManagement.Util;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Security.Policy;
 using System.Web;
@@ -16,18 +17,80 @@ namespace DemoUserManagement
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            ucNoteControl.ObjectType = Constants.ObjectType.UserDetail;
+            ucNoteControl.ObjectIDName = Constants.ObjectIDName.UserID;
+            ucDocumentUserControl.ObjectType = Constants.ObjectType.UserDetail;
+            ucDocumentUserControl.ObjectIDName = Constants.ObjectIDName.UserID;
+
             if (!IsPostBack)
             {
+
                 if (Session["Phone"] != null)
                 {
                     ErrorMessage.Text = "This User already exists";
                 }
 
                 PopulateCountries();
-                ErrorMessage.Text = "";
+                DdlPresentCountry.SelectedIndexChanged += PresentCountryState;
+                DdlPermanentCountry.SelectedIndexChanged += PermanentCountryState;
+
+
+                if (!string.IsNullOrEmpty(Request.QueryString[ucNoteControl.ObjectIDName]))
+                {
+                    int userId = Convert.ToInt32(Request.QueryString[ucNoteControl.ObjectIDName]);
+                    LoadUserDetails(userId);
+                }
+
+
+                if (!string.IsNullOrEmpty(Request.QueryString[ucNoteControl.ObjectIDName]))
+                {
+                    ucNoteControl.Visible = true;
+                }
+                else
+                {
+                    ucNoteControl.Visible = false;
+                }
             }
         }
 
+        private void LoadUserDetails(int userId)
+        {
+            UserDetailDTO user = UserLogic.GetUserById(userId);
+
+            if (user !=
+                null)
+            {
+                TxtFirstName.Text = user.FirstName;
+                TxtMiddleName.Text = user.MiddleName;
+                TxtLastName.Text = user.LastName;
+                TxtGender.Text = user.Gender;
+                TxtEmailID.Text = user.Email;
+                TxtPhoneNumber.Text = user.PhoneNumber.ToString();
+                TxtDateOfBirth.Text = user.DateOfBirth.ToString();
+                TxtFatherName.Text = user.FatherName;
+                TxtMotherName.Text = user.MotherName;
+
+                if (user.PresentAddress != null)
+                {
+                    DdlPresentAddressLine.Text = user.PresentAddress.Street;
+                    DdlPresentCity.Text = user.PresentAddress.City;
+                    DdlPresentPincode.Text = user.PresentAddress.Pincode.ToString();
+                    DdlPresentCountry.SelectedValue = user.PresentAddress.CountryID.ToString();
+                    PopulateStates(DdlPresentState, user.PresentAddress.CountryID);
+                    DdlPresentState.SelectedValue = user.PresentAddress.StateID.ToString();
+                }
+
+                if (user.PermanentAddress != null)
+                {
+                    DdlPermanentAddressLine.Text = user.PermanentAddress.Street;
+                    DdlPermanentCity.Text = user.PermanentAddress.City;
+                    DdlPermanentPincode.Text = user.PermanentAddress.Pincode.ToString();
+                    DdlPermanentCountry.SelectedValue = user.PermanentAddress.CountryID.ToString();
+                    PopulateStates(DdlPermanentState, user.PermanentAddress.CountryID);
+                    DdlPermanentState.SelectedValue = user.PermanentAddress.StateID.ToString();
+                }
+            }
+        }
 
         private void BindDropDownList<T>(DropDownList ddl, List<T> list, string textField, string valueField)
         {
@@ -48,8 +111,11 @@ namespace DemoUserManagement
 
         private void PopulateStates(DropDownList ddl, int countryId)
         {
-            List<StateDTO> stateList = StateLogic.GetStateList(countryId);
-            BindDropDownList(ddl, stateList, "StateName", "StateId");
+            if (countryId > 0)
+            {
+                List<StateDTO> stateList = StateLogic.GetStateList(countryId);
+                BindDropDownList(ddl, stateList, "StateName", "StateId");
+            }
         }
 
         protected void PresentCountryState(object sender, EventArgs e)
@@ -72,7 +138,7 @@ namespace DemoUserManagement
                 DdlPresentState.SelectedValue = DdlPermanentState.SelectedValue;
                 DdlPresentCity.Text = DdlPermanentCity.Text;
                 DdlPresentPincode.Text = DdlPermanentPincode.Text;
-                DdlPresentAddressLine.Text = DdlPermanentPincode.Text;
+                DdlPresentAddressLine.Text = DdlPermanentAddressLine.Text;
             }
             else
             {
@@ -84,70 +150,6 @@ namespace DemoUserManagement
             }
         }
 
-        private UserDetailDTO CreateUserFromForm()
-        {
-            UserDetailDTO user = new UserDetailDTO
-            {
-                FirstName = TxtFirstName.Text,
-                MiddleName = TxtMiddleName.Text,
-                LastName = TxtLastName.Text,
-                Gender = TxtGender.Text,
-                Email = TxtEmailID.Text,
-                PhoneNumber = int.TryParse(TxtPhoneNumber.Text, out int phone) ? (int?)phone : null,
-                DateOfBirth = DateTime.TryParse(TxtDateOfBirth.Text, out DateTime dateOfBirth) ? (DateTime?)dateOfBirth : null,
-                FatherName = TxtFatherName.Text,
-                MotherName = TxtMotherName.Text
-            };
-            ArePropertiesNullOrEmpty(user);
-            return user;
-        }
-
-        private List<AddressDetailDTO> CreateAddressesFromForm()
-        {
-            List<AddressDetailDTO> addresses = new List<AddressDetailDTO>();
-
-            AddressDetailDTO presentAddress = new AddressDetailDTO
-            {
-                AddressType = 1,
-                Street = DdlPresentAddressLine.Text,
-                City = DdlPresentCity.Text,
-                Pincode = int.TryParse(DdlPresentPincode.Text, out int presentPincode) ? (int?)presentPincode : null,
-                CountryID = GetCountryIdByName(DdlPresentCountry.SelectedValue),
-                StateID = GetStateIdByName(DdlPresentState.SelectedValue, GetCountryIdByName(DdlPresentCountry.SelectedValue))
-            };
-            addresses.Add(presentAddress);
-
-            AddressDetailDTO permanentAddress = new AddressDetailDTO
-            {
-                AddressType = 2,
-                Street = DdlPermanentAddressLine.Text,
-                City = DdlPermanentCity.Text,
-                Pincode = int.TryParse(DdlPermanentPincode.Text, out int permanentPincode) ? (int?)permanentPincode : null,
-                CountryID = GetCountryIdByName(DdlPermanentCountry.SelectedValue),
-                StateID = GetStateIdByName(DdlPermanentState.SelectedValue, GetCountryIdByName(DdlPermanentCountry.SelectedValue))
-            };
-            addresses.Add(permanentAddress);
-
-            return addresses;
-        }
-
-        private int GetCountryIdByName(string countryName)
-        {
-            List<CountryDTO> countryList = CountryLogic.GetCountryList();
-
-            CountryDTO country = countryList.Find(c => c.CountryName == countryName);
-
-            return country?.CountryID ?? 0;
-        }
-
-        private int GetStateIdByName(string stateName, int countryID)
-        {
-            List<StateDTO> stateList = StateLogic.GetStateList(countryID);
-
-            StateDTO state = stateList.Find(c => c.StateName == stateName);
-
-            return state?.StateID ?? 0;
-        }
 
         public bool ArePropertiesNullOrEmpty(object obj)
         {
@@ -172,32 +174,100 @@ namespace DemoUserManagement
         }
 
         protected void SaveUserButton_Click(object sender, EventArgs e)
+
         {
             try
             {
+                ucDocumentUserControl.LoadDocumentDetails();
                 UserDetailDTO user = CreateUserFromForm();
                 List<AddressDetailDTO> addresses = CreateAddressesFromForm();
-                if (ArePropertiesNullOrEmpty(user) || ArePropertiesNullOrEmpty(addresses))
-                {
-                    ErrorMessage.Text = "Please fill in all the required fields.";
-                    return;
-                }
-                UserLogic.SaveUser(user);
+
+                int userId = UserLogic.SaveUser(user);
+
                 foreach (var address in addresses)
                 {
+                    address.UserID = userId;
                     UserLogic.SaveAddress(address);
                 }
                 Session["Phone"] = TxtPhoneNumber.Text;
 
-                ResetFormFields();
-
-                Response.Redirect("Users.aspx");
+                if (userId != -1)
+                {
+                    ucDocumentUserControl.UploadFile(userId);
+                    ResetFormFields();
+                    Response.Redirect("Users.aspx", false);
+                }
             }
             catch (Exception ex)
             {
                 Logger.AddError("Registration Failed", ex);
                 ErrorMessage.Text = "An error occurred during registration";
             }
+        }
+
+        private UserDetailDTO CreateUserFromForm()
+        {
+            UserDetailDTO user = new UserDetailDTO
+            {
+                FirstName = TxtFirstName.Text,
+                MiddleName = TxtMiddleName.Text,
+                LastName = TxtLastName.Text,
+                Gender = TxtGender.Text,
+                Email = TxtEmailID.Text,
+                PhoneNumber = int.Parse(TxtPhoneNumber.Text),
+                DateOfBirth = DateTime.Parse(TxtDateOfBirth.Text),
+                FatherName = TxtFatherName.Text,
+                MotherName = TxtMotherName.Text,
+                FileNameGuid = ucDocumentUserControl.FileNameGuid,
+                FileName = ucDocumentUserControl.FileName,
+
+                UserID = (!string.IsNullOrEmpty(Request.QueryString[Constants.ObjectIDName.UserID])) ? int.Parse(Request.QueryString[Constants.ObjectIDName.UserID]) : 0
+
+            };
+
+            ArePropertiesNullOrEmpty(user);
+            return user;
+        }
+
+        private List<AddressDetailDTO> CreateAddressesFromForm()
+        {
+            List<AddressDetailDTO> addresses = new List<AddressDetailDTO>();
+
+            AddressDetailDTO presentAddress = new AddressDetailDTO
+            {
+                AddressType = 2,
+                Street = DdlPresentAddressLine.Text,
+                City = DdlPresentCity.Text,
+                Pincode = int.Parse(DdlPresentPincode.Text),
+                CountryID = int.Parse(DdlPresentCountry.SelectedValue),
+                StateID = int.Parse(DdlPresentState.SelectedValue),
+
+                UserID = (!string.IsNullOrEmpty(Request.QueryString[Constants.ObjectIDName.UserID])) ? int.Parse(Request.QueryString[Constants.ObjectIDName.UserID]) : 0
+            };
+            addresses.Add(presentAddress);
+
+            AddressDetailDTO permanentAddress = new AddressDetailDTO
+            {
+                AddressType = 1,
+                Street = DdlPermanentAddressLine.Text,
+                City = DdlPermanentCity.Text,
+                Pincode = int.Parse(DdlPermanentPincode.Text),
+                CountryID = int.Parse(DdlPermanentCountry.SelectedValue),
+                StateID = int.Parse(DdlPermanentState.SelectedValue),
+
+                UserID = (!string.IsNullOrEmpty(Request.QueryString[Constants.ObjectIDName.UserID])) ? int.Parse(Request.QueryString[Constants.ObjectIDName.UserID]) : 0
+            };
+            addresses.Add(permanentAddress);
+
+            return addresses;
+        }
+
+        protected void Delete_Click(object sender, EventArgs e)
+        {
+            int userId = int.Parse(Request.QueryString["ID"]);
+            UserLogic.DeleteUser(userId);
+            ScriptManager.RegisterStartupScript(this, GetType(), "showalert", "alert('Deleted User Successfully');", true);
+            Response.Redirect("UserList.aspx");
         }
 
         private void ResetFormFields()
@@ -211,33 +281,6 @@ namespace DemoUserManagement
             TxtDateOfBirth.Text = "";
             TxtFatherName.Text = "";
             TxtMotherName.Text = "";
-        }
-
-        protected void Update_Click(object sender, EventArgs e)
-        {
-            int userId = int.Parse(Request.QueryString["UserId"]);
-            UserDetailDTO user = new UserDetailDTO
-            {
-                FirstName = TxtFirstName.Text,
-                MiddleName = TxtMiddleName.Text,
-                LastName = TxtLastName.Text,
-                Gender = TxtGender.Text,
-                Email = TxtEmailID.Text,
-                PhoneNumber = int.TryParse(TxtPhoneNumber.Text, out int phone) ? (int?)phone : null,
-                DateOfBirth = DateTime.TryParse(TxtDateOfBirth.Text, out DateTime dateOfBirth) ? (DateTime?)dateOfBirth : null,
-                FatherName = TxtFatherName.Text,
-                MotherName = TxtMotherName.Text,
-
-            };
-            UserLogic.UpdateUser(userId, user);
-        }
-
-        protected void Delete_Click(object sender, EventArgs e)
-        {
-            int userId = int.Parse(Request.QueryString["ID"]);
-            UserLogic.DeleteUser(userId);
-            ScriptManager.RegisterStartupScript(this, GetType(), "showalert", "alert('Deleted User Successfully');", true);
-            Response.Redirect("UserList.aspx");
         }
     }
 }

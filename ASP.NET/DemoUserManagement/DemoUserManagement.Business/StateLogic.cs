@@ -1,5 +1,6 @@
 ﻿using DemoUserManagement.DataAccess;
 using DemoUserManagement.Models;
+using DemoUserManagement.Util;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,21 +13,26 @@ namespace DemoUserManagement.Business
     {
         public static List<StateDTO> GetStateList(int countryId)
         {
-            List<State> states = GetStateNameByCountry.StateCountry(countryId);
+            List<State> states = StateCountry.GetStateByCountry(countryId);
+            List<StateDTO> stateList = new List<StateDTO>();  // Declare outside the try block
 
             if (states != null)
             {
-                List<StateDTO> stateList = states.Select(state => new StateDTO
-                {
-                    StateName = state.StateName,
-                }).ToList();
-
-                return stateList;
+                    stateList = states.Select(state => new StateDTO
+                    {
+                        StateID = state.StateID,
+                        CountryID = state.CountryID,
+                        StateName = state.StateName
+                    }).ToList();
             }
 
-            return new List<StateDTO>(); 
+            return stateList;
         }
 
+        public static int GetStateIDByName(string stateName)
+        {
+            return StateDataAccess.GetStateIDByName(stateName);
+        }
 
     }
 }

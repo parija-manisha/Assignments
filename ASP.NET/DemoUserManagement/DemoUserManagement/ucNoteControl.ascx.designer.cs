@@ -11,7 +11,7 @@ namespace DemoUserManagement
 {
 
 
-    public partial class AddNote
+    public partial class ucNoteControl
     {
 
         /// <summary>

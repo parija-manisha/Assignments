@@ -15,16 +15,16 @@ namespace DemoUserManagement.DataAccess
     public partial class AddressDetail
     {
         public int AddressID { get; set; }
-        public Nullable<int> UserID { get; set; }
-        public Nullable<int> AddressType { get; set; }
+        public int UserID { get; set; }
+        public int AddressType { get; set; }
         public string Street { get; set; }
         public string City { get; set; }
-        public Nullable<int> Pincode { get; set; }
+        public int Pincode { get; set; }
         public int CountryID { get; set; }
-        public Nullable<int> StateID { get; set; }
+        public int StateID { get; set; }
     
-        public virtual UserDetail UserDetail { get; set; }
+        public virtual Country Country { get; set; }
         public virtual State State { get; set; }
-        public virtual UserDetail UserDetail1 { get; set; }
+        public virtual UserDetail UserDetail { get; set; }
     }
 }

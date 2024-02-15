@@ -43,6 +43,9 @@
   <ItemGroup>
     <Compile Include="AddressDetailDTO.cs" />
     <Compile Include="CountryDTO.cs" />
+    <Compile Include="DocumentListDTO.cs" />
+    <Compile Include="DocumentTypeDTO.cs" />
+    <Compile Include="FileUploadDTO.cs" />
     <Compile Include="NoteDTO.cs" />
     <Compile Include="StateDTO.cs" />
     <Compile Include="UserDetailDTO.cs" />

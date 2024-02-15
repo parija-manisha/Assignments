@@ -1,4 +1,5 @@
-﻿using DemoUserManagement.DataAccess;
+﻿
+using DemoUserManagement.DataAccess;
 using DemoUserManagement.Models;
 using DemoUserManagement.Util;
 using System;
@@ -11,15 +12,29 @@ namespace DemoUserManagement.Business
 {
     public class UserLogic
     {
-        public static void SaveUser(UserDetailDTO userDetailDTO)
+        public static int SaveUser(UserDetailDTO userDetailDTO)
         {
             try
             {
-                UserDataAccess.SaveUser(userDetailDTO);
+                int userId = UserDataAccess.SaveUser(userDetailDTO);
+                return userId;
             }
             catch (Exception ex)
             {
                 Logger.AddError("SaveUser Failed", ex);
+                throw;
+            }
+        }
+
+        public static UserDetailDTO GetUserById(int userId)
+        {
+            try
+            {
+                return UserDataAccess.GetUserById(userId);
+            }
+            catch (Exception ex)
+            {
+                Logger.AddError("GetUserById Failed", ex);
                 throw;
             }
         }
@@ -63,10 +78,52 @@ namespace DemoUserManagement.Business
             }
         }
 
-        public List<UserDetailDTO> GetAllUsers()
+        public static List<UserDetailDTO> GetAllUsers()
         {
-            GetUser user = new GetUser();
-            return user.Users();
+            try
+            {
+                GetUser user = new GetUser();
+                return user.Users();
+            }
+            catch (Exception ex)
+            {
+                Logger.AddError("GetAllUsers Failed", ex);
+                throw;
+            }
         }
+
+        public static string GetFileNameFromFileGuid(string fileNameGuid)
+        {
+            try
+            {
+                string fileName = UserDataAccess.GetFileNameByFileGuid(fileNameGuid);
+                if (fileName != null)
+                {
+                    return fileName;
+                }
+                else
+                {
+                    return null;
+                }
+            }
+            catch (Exception ex)
+            {
+                Logger.AddError("Failed", ex);
+                return null;
+            }
+        }
+
+        //public static List<UserDetailDTO> GetUsers(int pageSize, int pageIndex, string sortBy, string sortDirection)
+        //{
+        //    try
+        //    {
+        //        return UserDataAccess.GetUsers(pageSize, pageIndex, sortBy, sortDirection);
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        Logger.AddError("Error in business logic while fetching users", ex);
+        //        throw;
+        //    }
+        //}
     }
 }

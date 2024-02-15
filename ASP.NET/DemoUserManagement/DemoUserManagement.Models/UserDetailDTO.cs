@@ -1,4 +1,5 @@
-﻿using System;
+﻿
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -15,9 +16,17 @@ namespace DemoUserManagement.Models
         public string LastName { get; set; }
         public string Gender { get; set; }
         public string Email { get; set; }
-        public Nullable<int> PhoneNumber { get; set; }
-        public Nullable<System.DateTime> DateOfBirth { get; set; }
+        public int PhoneNumber { get; set; }
+        public System.DateTime DateOfBirth { get; set; }
+        public string Hobbies { get; set; }
         public string FatherName { get; set; }
         public string MotherName { get; set; }
+        public System.Guid FileNameGuid { get; set; }
+        public string FileName { get; set; }
+
+        public AddressDetailDTO PresentAddress { get; set; }
+        public AddressDetailDTO PermanentAddress { get; set; }
+
+        public DocumentTypeDTO DocumentType { get; set; }
     }
 }

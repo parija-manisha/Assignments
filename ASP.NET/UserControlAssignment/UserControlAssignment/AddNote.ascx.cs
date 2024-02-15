@@ -21,6 +21,10 @@ namespace UserControlAssignment
             }
         }
 
+        public string ObjectIDType
+        {
+            get; set;
+        }
         public string PageName
         {
             get; set;
@@ -34,7 +38,7 @@ namespace UserControlAssignment
 
         protected void LoadExistingNotes()
         {
-            string objectID = Request.QueryString["ObjectID"];
+            string objectID = Request.QueryString[ObjectIDType];
 
             if (!string.IsNullOrEmpty(objectID))
             {
@@ -71,7 +75,7 @@ namespace UserControlAssignment
 
         protected void SaveNoteButton_Click(object sender, EventArgs e)
         {
-            string objectID = Request.QueryString["ObjectID"];
+            string objectID = Request.QueryString[ObjectIDType];
             string noteText = AddNoteText.Text;
             if (string.IsNullOrEmpty(objectID))
             {

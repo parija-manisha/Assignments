@@ -1,0 +1,12 @@
+Exception Details
+Message: Illegal characters in path.
+Source: mscorlib
+Stack Trace:    at System.Security.Permissions.FileIOPermission.CheckIllegalCharacters(String[] str, Boolean onlyCheckExtras)
+   at System.Security.Permissions.FileIOPermission.AddPathList(FileIOPermissionAccess access, AccessControlActions control, String[] pathListOrig, Boolean checkForDuplicates, Boolean needFullPath, Boolean copyPathList)
+   at System.Security.Permissions.FileIOPermission..ctor(FileIOPermissionAccess access, String path)
+   at System.Web.InternalSecurityPermissions.PathDiscovery(String path)
+   at System.Web.HttpRequest.MapPath(VirtualPath virtualPath, VirtualPath baseVirtualDir, Boolean allowCrossAppMapping)
+   at System.Web.HttpServerUtility.MapPath(String path)
+   at DemoUserManagement.ucDocumentUserControl.UploadFile(Int32 userID) in D:\Projects\ASSIGNMENTS\ASP.NET\DemoUserManagement\DemoUserManagement\ucDocumentUserControl.ascx.cs:line 81
+
+

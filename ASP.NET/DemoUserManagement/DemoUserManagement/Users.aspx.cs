@@ -5,6 +5,8 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
+using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Web.UI;
 using System.Web.UI.WebControls;
@@ -13,6 +15,7 @@ namespace DemoUserManagement
 {
     public partial class Users : System.Web.UI.Page
     {
+
         private string SortExpression
         {
             get { return ViewState["SortExpression"] as string ?? string.Empty; }
@@ -30,56 +33,21 @@ namespace DemoUserManagement
             if (!IsPostBack)
             {
                 BindGridView();
-
-                if (Session["SelectedUserID"] != null)
-                {
-                    int selectedUserID;
-                    if (int.TryParse(Session["SelectedUserID"].ToString(), out selectedUserID))
-                    {
-                        AddNote addNoteControl = LoadControl("~/AddNote.ascx") as AddNote;
-
-                        //AddNotePlaceholder.Controls.Add(addNoteControl);
-
-                        Session.Remove("SelectedUserID");
-                    }
-                }
             }
         }
 
         private void BindGridView()
         {
-            UserLogic userLogic = new UserLogic();
-            var userList = userLogic.GetAllUsers();
-
-
+            var userList = UserLogic.GetAllUsers();
             GridViewUsers.DataSource = userList;
             GridViewUsers.DataBind();
+
         }
 
         protected void GridViewUsers_PageIndexChanging(object sender, GridViewPageEventArgs e)
         {
             GridViewUsers.PageIndex = e.NewPageIndex;
             BindGridView();
-        }
-
-        protected void GridViewUsers_RowEditing(object sender, GridViewEditEventArgs e)
-        {
-            try
-            {
-                if (e.NewEditIndex >= 0 && e.NewEditIndex < GridViewUsers.Rows.Count)
-                {
-                    string userId = GridViewUsers.DataKeys[e.NewEditIndex]["UserID"].ToString();
-                    int.TryParse(userId, out int id);
-                    UserDetailDTO userDetailDTO = new UserDetailDTO();
-                    UserLogic.UpdateUser(id, userDetailDTO);
-                    Session["SelectedUserID"] = id;
-                    Response.Redirect($"UserDetails.aspx?UserId={userId}");
-                }
-            }
-            catch (Exception ex)
-            {
-                Logger.AddError("Could not retrieve ID", ex);
-            }
         }
 
         protected void GridViewUsers_RowDataBound(object sender, GridViewRowEventArgs e)
@@ -112,6 +80,51 @@ namespace DemoUserManagement
             }
 
             return "ASC";
+        }
+
+        protected void LinkButtonDownload_Command(object sender, CommandEventArgs e)
+        {
+            string userIdString = e.CommandArgument.ToString();
+
+            if (int.TryParse(userIdString, out int userId))
+            {
+                UserDetailDTO user = UserLogic.GetUserById(userId);
+
+                if (user != null && user.FileNameGuid != Guid.Empty)
+                {
+                    string fileNameGuidString = user.FileNameGuid.ToString();
+                    string fileName = user.FileName;
+
+                    if (!string.IsNullOrEmpty(fileName))
+                    {
+                        string filePath = Server.MapPath("~/upload/" + fileNameGuidString + Path.GetExtension(fileName));
+                        if (File.Exists(filePath))
+                        {
+                            Response.Clear();
+                            Response.ContentType = "application/octet-stream";
+                            Response.AppendHeader("Content-Disposition", "attachment; filename=" + fileName);
+                            Response.TransmitFile(filePath);
+                            Response.End();
+                        }
+                        else
+                        {
+                            SuccessMessage.Text = "File Not Found";
+                        }
+                    }
+                    else
+                    {
+                        SuccessMessage.Text = "File Not Found in Database";
+                    }
+                }
+                else
+                {
+                    SuccessMessage.Text = "User or File Not Found";
+                }
+            }
+            else
+            {
+                SuccessMessage.Text = "Invalid User Identifier";
+            }
         }
     }
 }

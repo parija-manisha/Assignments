@@ -9,12 +9,15 @@ namespace DemoUserManagement.Models
     public class AddressDetailDTO
     {
         public int AddressID { get; set; }
-        public Nullable<int> UserID { get; set; }
-        public Nullable<int> AddressType { get; set; }
+        public int UserID { get; set; }
+        public int AddressType { get; set; }
         public string Street { get; set; }
         public string City { get; set; }
-        public Nullable<int> Pincode { get; set; }
+        public int Pincode { get; set; }
         public int CountryID { get; set; }
-        public Nullable<int> StateID { get; set; }
+        public int StateID { get; set; }
+        
+        public CountryDTO Country { get; set; }
+        public StateDTO State { get; set; }
     }
 }

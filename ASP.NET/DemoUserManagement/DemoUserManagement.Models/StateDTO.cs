@@ -9,7 +9,7 @@ namespace DemoUserManagement.Models
     public class StateDTO
     {
         public int StateID { get; set; }
-        public Nullable<int> CountryID { get; set; }
+        public int CountryID { get; set; }
         public string StateName { get; set; }
 
     }

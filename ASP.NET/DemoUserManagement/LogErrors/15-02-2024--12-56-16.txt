@@ -1,0 +1,16 @@
+Exception Details
+Message: The parameterized query '(@objectID nvarchar(4000),@objectType int,@documentType nvarchar' expects the parameter '@objectID', which was not supplied.
+Source: .Net SqlClient Data Provider
+Stack Trace:    at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString, Boolean isInternal, Boolean forDescribeParameterEncryption, Boolean shouldCacheForAlwaysEncrypted)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, Boolean inRetry, SqlDataReader ds, Boolean describeParameterEncryptionRequest)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry)
+   at System.Data.SqlClient.SqlCommand.InternalExecuteNonQuery(TaskCompletionSource`1 completion, String methodName, Boolean sendToPipe, Int32 timeout, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry)
+   at System.Data.SqlClient.SqlCommand.ExecuteNonQuery()
+   at DemoUserManagement.DataAccess.DocumentDataAccess.InsertDocument(String objectID, Int32 objectType, String documentName, String fileName, Guid fileNameGuid, String fileExtension) in D:\Projects\ASSIGNMENTS\ASP.NET\DemoUserManagement\DemoUserManagement.DataAccess\DocumentDataAccess.cs:line 31
+   at DemoUserManagement.Business.DocumentLogic.InsertDocument(String objectID, Int32 objectType, String documentName, String fileName, Guid fileNameGuid, String fileExtension) in D:\Projects\ASSIGNMENTS\ASP.NET\DemoUserManagement\DemoUserManagement.Business\DocumentLogic.cs:line 18
+   at DemoUserManagement.ucDocumentUserControl.UploadFileButton_Click(Object sender, EventArgs e) in D:\Projects\ASSIGNMENTS\ASP.NET\DemoUserManagement\DemoUserManagement\ucDocumentUserControl.ascx.cs:line 80
+
+

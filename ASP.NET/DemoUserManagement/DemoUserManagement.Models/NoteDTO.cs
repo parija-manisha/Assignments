@@ -9,9 +9,9 @@ namespace DemoUserManagement.Models
     public class NoteDTO
     {
         public int NoteID { get; set; }
-        public Nullable<int> UserID { get; set; }
-        public Nullable<int> ObjectType { get; set; }
+        public int UserID { get; set; }
+        public int ObjectType { get; set; }
         public string NoteText { get; set; }
-        public Nullable<System.DateTime> TimeStamp { get; set; }
+        public System.DateTime TimeStamp { get; set; }
     }
 }
