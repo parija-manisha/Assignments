@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DemoUserManagement.Util;
+using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.IO;
@@ -15,33 +16,54 @@ namespace DemoUserManagement
 
         public void ProcessRequest(HttpContext context)
         {
-            string file = ConfigurationManager.AppSettings["UploadDocumentPath"] + context.Request.QueryString["file"];
-            file = HttpUtility.UrlDecode(file);
-
             context.Response.ContentType = "application/octet-stream";
-            context.Response.AddHeader("Content-Disposition", "attachment; filename=\"" + Path.GetFileName(file) + "\"");
-            context.Response.WriteFile(file);
-            context.ApplicationInstance.CompleteRequest();
-        }
 
-        public void ProcessRequestOld(HttpContext context)
-        {
-            string file = ConfigurationManager.AppSettings["MyBasePath"] + context.Request.QueryString["file"];
-            file = HttpUtility.UrlDecode(file);
-
-            if (!string.IsNullOrEmpty(file) && File.Exists(file))
+            if (context.Request.Files.Count > 0)
             {
-                string extension = Path.GetExtension(file).ToLower();
+                HttpPostedFile uploadedFile = context.Request.Files[0];
 
-                context.Response.ContentType = "application/octet-stream";
-                context.Response.AddHeader("content-disposition", "attachment;filename=" + Path.GetFileName(file));
-                context.Response.WriteFile(file);
+                string fileExtension = Path.GetExtension(uploadedFile.FileName);
+                string uploadedFileName = UploadFileToServer(uploadedFile) + fileExtension;
 
-                context.Response.End();
-
+                if (!string.IsNullOrEmpty(uploadedFileName))
+                {
+                    context.Response.Write("File uploaded successfully. FileName: " + uploadedFileName);
+                }
+                else
+                {
+                    context.Response.Write("Error uploading file.");
+                }
+            }
+            else
+            {
+                context.Response.Write("No file uploaded.");
             }
         }
 
+        public Guid UploadFileToServer(HttpPostedFile uploadedFile)
+        {
+            if (uploadedFile != null && uploadedFile.ContentLength > 0)
+            {
+                try
+                {
+                    string uploadFolderPath = ConfigurationManager.AppSettings["UploadDocumentPath"];
+
+                    string FileName = Path.GetFileName(uploadedFile.FileName);
+                    Guid FileNameGuid = Guid.NewGuid();
+                    string FileExtension = Path.GetExtension(uploadedFile.FileName);
+                    string UniqueFileName = FileNameGuid + FileExtension;
+                    string FilePath = Path.Combine(uploadFolderPath, UniqueFileName);
+                    uploadedFile.SaveAs(FilePath);
+                    return FileNameGuid;
+                }
+                catch (Exception ex)
+                {
+                    Logger.AddError("Error in uploading the file", ex);
+                    return Guid.Empty;
+                }
+            }
+            return Guid.Empty;
+        }
         public bool IsReusable
         {
             get

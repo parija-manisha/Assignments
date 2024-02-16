@@ -1,0 +1,8 @@
+Exception Details
+Message: Value cannot be null.
+Parameter name: path1
+Source: mscorlib
+Stack Trace:    at System.IO.Path.Combine(String path1, String path2)
+   at DemoUserManagement.FileUploadDownload.UploadFileToServer(HttpPostedFile uploadedFile) in D:\Projects\ASSIGNMENTS\ASP.NET\DemoUserManagement\DemoUserManagement\FileUploadDownload.ashx.cs:line 55
+
+

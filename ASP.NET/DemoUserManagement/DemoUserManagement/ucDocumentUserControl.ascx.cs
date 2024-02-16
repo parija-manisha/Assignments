@@ -74,17 +74,13 @@ namespace DemoUserManagement
             {
                 try
                 {
-                    string fileExtension = Path.GetExtension(Request.Files[0].FileName);
-                    string saveLocation = Server.MapPath("upload") + "\\" + FileNameGuid + fileExtension;
-
-                    DdlFileUpload.PostedFile.SaveAs(saveLocation);
-
                     DocumentTypeDTO selectedDocument = new DocumentTypeDTO
                     {
                         DocumentID = Convert.ToInt32(DocumentDropDown.SelectedValue),
                         DocumentName = DocumentDropDown.SelectedValue,
                     };
 
+                    string fileExtension = Path.GetExtension(DdlFileUpload.PostedFile.FileName);
 
                     Documents.Add(selectedDocument);
 
@@ -107,10 +103,11 @@ namespace DemoUserManagement
 
         public void LoadDocumentDetails()
         {
+            FileUploadDownload fileUploadDownload = new FileUploadDownload();
             if (Request.Files.Count > 0 && Request.Files[0].ContentLength > 0)
             {
-                FileNameGuid = Guid.NewGuid();
-                FileName = Path.GetFileName(Request.Files[0].FileName);
+                FileNameGuid = fileUploadDownload.UploadFileToServer(DdlFileUpload.PostedFile);
+                FileName = Path.GetFileName(DdlFileUpload.PostedFile.FileName);
             }
             else
             {
