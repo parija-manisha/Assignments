@@ -18,11 +18,6 @@ namespace DemoUserManagement.Business
             DocumentDataAccess.InsertDocument(objectID, objectType, documentName, fileName, fileNameGuid, fileExtension);
         }
 
-        public static string GetFilePathByFileNameGuid(Guid fileNameGuid)
-        {
-            return DocumentDataAccess.GetFilePathByFileNameGuid(fileNameGuid);
-        }
-
         public static string GetDocumentDetailsByUserId(int userId)
         {
             return DocumentDataAccess.GetDocumentDetailsByUserId(userId);

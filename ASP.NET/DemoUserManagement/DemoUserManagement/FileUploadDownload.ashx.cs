@@ -51,7 +51,7 @@ namespace DemoUserManagement
 
                     int objectID = userId;
                     int objectType = ObjectType.UserDetail;
-                    Guid documentName = new Guid();
+                    int documentName = 1;
 
                     HttpPostedFile uploadedFile = context.Request.Files[0];
 
@@ -141,13 +141,6 @@ namespace DemoUserManagement
                 }
             }
             return Guid.Empty;
-        }
-
-        private string GetFilePathFromGuid(int userId)
-        {
-            string filePath = DocumentLogic.GetFilePathByFileNameGuid(userId);
-
-            return filePath;
         }
 
         public bool IsReusable

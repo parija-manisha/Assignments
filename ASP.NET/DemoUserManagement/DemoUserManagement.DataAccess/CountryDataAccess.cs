@@ -22,7 +22,7 @@ namespace DemoUserManagement.DataAccess
             }
             catch (Exception ex)
             {
-                Logger.AddError("Couldnot retrive Country Details", ex);
+                Logger.AddError("Could not retrieve Country Details", ex);
             }
             return countryList;
         }
