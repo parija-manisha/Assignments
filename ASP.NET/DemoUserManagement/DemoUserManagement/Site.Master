@@ -8,6 +8,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title><%: Page.Title %> User Management</title>
 
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script type="text/javascript" src="Scripts/UserManagement.js"></script>
+
     <asp:PlaceHolder runat="server">
         <%: Scripts.Render("~/bundles/modernizr") %>
     </asp:PlaceHolder>
@@ -15,30 +18,11 @@
     <webopt:BundleReference runat="server" Path="~/Content/css" />
     <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" />
-    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-    <script>
-        $(document).ready(function () {
-            var currentPage = getQueryStringValue('page');
-
-            $('#navBarLinks a.nav-link').each(function () {
-                if ($(this).attr('href').toLowerCase().endsWith(currentPage.toLowerCase())) {
-                    $(this).addClass('active fw-bold');
-                    return false;
-                }
-            });
-        });
-
-        function getQueryStringValue(key) {
-            var urlParams = new URLSearchParams(window.location.search);
-            return urlParams.get(key);
-        }
-    </script>
-
 
 </head>
 <body>
     <form runat="server">
-        <asp:ScriptManager runat="server">
+        <asp:ScriptManager runat="server" EnablePageMethods="true">
             <Scripts>
                 <%--To learn more about bundling scripts in ScriptManager see https://go.microsoft.com/fwlink/?LinkID=301884 --%>
                 <%--Framework Scripts--%>
@@ -65,9 +49,9 @@
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1" id="navBarLinks">
-                        <li class="nav-item"><a class="nav-link" runat="server" href="~/UserDetails.aspx?page=UserDetails">Add User</a></li>
-                        <li class="nav-item"><a class="nav-link" runat="server" href="~/Users.aspx?page=UpdateUserx">Update User</a></li>
+                    <ul runat="server" class="navbar-nav flex-grow-1" id="navBarLinks">
+                        <li runat="server" class="nav-item" id="UserDetailsLink"><a class="nav-link" runat="server" href="~/UserDetails_v2.aspx">Add User</a></li>
+                        <li runat="server" class="nav-item" id="UpdateUserLink"><a class="nav-link" runat="server" href="~/Users.aspx">Update User</a></li>
                     </ul>
                     <asp:Label ID="SiteName" runat="server" ForeColor="White"></asp:Label>
                 </div>

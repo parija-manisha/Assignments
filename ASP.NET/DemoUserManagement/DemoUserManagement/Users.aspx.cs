@@ -88,38 +88,8 @@ namespace DemoUserManagement
 
             if (int.TryParse(userIdString, out int userId))
             {
-                UserDetailDTO user = UserLogic.GetUserById(userId);
-
-                if (user != null && user.FileNameGuid != Guid.Empty)
-                {
-                    string fileNameGuidString = user.FileNameGuid.ToString();
-                    string fileName = user.FileName;
-
-                    if (!string.IsNullOrEmpty(fileName))
-                    {
-                        string filePath = Server.MapPath("~/upload/" + fileNameGuidString + Path.GetExtension(fileName));
-                        if (File.Exists(filePath))
-                        {
-                            Response.Clear();
-                            Response.ContentType = "application/octet-stream";
-                            Response.AppendHeader("Content-Disposition", "attachment; filename=" + fileName);
-                            Response.TransmitFile(filePath);
-                            Response.End();
-                        }
-                        else
-                        {
-                            SuccessMessage.Text = "File Not Found";
-                        }
-                    }
-                    else
-                    {
-                        SuccessMessage.Text = "File Not Found in Database";
-                    }
-                }
-                else
-                {
-                    SuccessMessage.Text = "User or File Not Found";
-                }
+                string fileHandlerUrl = "FileUploadDownload.ashx?Action=download&UserID=" + userId;
+                Response.Redirect(fileHandlerUrl);
             }
             else
             {

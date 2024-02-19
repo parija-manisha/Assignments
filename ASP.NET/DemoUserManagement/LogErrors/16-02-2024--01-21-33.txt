@@ -1,0 +1,12 @@
+Exception Details
+Message: There is already an open DataReader associated with this Command which must be closed first.
+Source: System.Data
+Stack Trace:    at System.Data.SqlClient.SqlInternalConnectionTds.ValidateConnectionForExecute(SqlCommand command)
+   at System.Data.SqlClient.SqlCommand.ValidateCommand(String method, Boolean async)
+   at System.Data.SqlClient.SqlCommand.InternalExecuteNonQuery(TaskCompletionSource`1 completion, String methodName, Boolean sendToPipe, Int32 timeout, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry)
+   at System.Data.SqlClient.SqlCommand.ExecuteNonQuery()
+   at DemoUserManagement.DataAccess.UserDataAccess.SaveRole(Int32 userId) in D:\Projects\ASSIGNMENTS\ASP.NET\DemoUserManagement\DemoUserManagement.DataAccess\UserDataAccess.cs:line 208
+   at DemoUserManagement.Business.UserLogic.SaveRole(Int32 userID) in D:\Projects\ASSIGNMENTS\ASP.NET\DemoUserManagement\DemoUserManagement.Business\UserLogic.cs:line 123
+   at DemoUserManagement._Default.SaveUserButton_Click(Object sender, EventArgs e) in D:\Projects\ASSIGNMENTS\ASP.NET\DemoUserManagement\DemoUserManagement\UserDetails.aspx.cs:line 192
+
+

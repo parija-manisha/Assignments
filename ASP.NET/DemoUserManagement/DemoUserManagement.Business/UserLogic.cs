@@ -92,38 +92,36 @@ namespace DemoUserManagement.Business
             }
         }
 
-        public static string GetFileNameFromFileGuid(string fileNameGuid)
+        public static int GetUserID(string userName, string password)
         {
-            try
-            {
-                string fileName = UserDataAccess.GetFileNameByFileGuid(fileNameGuid);
-                if (fileName != null)
-                {
-                    return fileName;
-                }
-                else
-                {
-                    return null;
-                }
-            }
-            catch (Exception ex)
-            {
-                Logger.AddError("Failed", ex);
-                return null;
-            }
+            return UserDataAccess.GetUserID(userName, password);
         }
 
-        //public static List<UserDetailDTO> GetUsers(int pageSize, int pageIndex, string sortBy, string sortDirection)
-        //{
-        //    try
-        //    {
-        //        return UserDataAccess.GetUsers(pageSize, pageIndex, sortBy, sortDirection);
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        Logger.AddError("Error in business logic while fetching users", ex);
-        //        throw;
-        //    }
-        //}
+        public static void SaveRole(int userID)
+        {
+            UserDataAccess.SaveRole(userID);
+        }
+        
+        public static bool IsAdmin(int userId)
+        {
+            return UserDataAccess.IsAdmin(userId);
+        }
+
+        public static bool IsEmailExists(string email) {
+            return UserDataAccess.IsEmailExists(email);
+        }
+
+        public static List<RoleDTO> GetRoleList()
+        {
+            List<Role> roles = UserDataAccess.GetRole();
+            List<RoleDTO> roleList = roles.Select(role => new RoleDTO
+            {
+                RoleID = role.RoleID,
+                RoleName = role.RoleName
+            }).ToList();
+
+            return roleList;
+        }
+
     }
 }

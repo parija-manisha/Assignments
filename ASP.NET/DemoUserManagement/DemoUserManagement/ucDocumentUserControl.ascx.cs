@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Net;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
@@ -66,55 +67,60 @@ namespace DemoUserManagement
             DocumentDropDown.DataBind();
         }
 
-        public void UploadFile(int userID)
+        //public void UploadFile(int userID)
+        //{
+        //    if (DdlFileUpload.HasFile)
+        //    {
+        //        try
+        //        {
+        //            using (Stream fileStream = DdlFileUpload.PostedFile.InputStream)
+        //            {
+        //                byte[] fileData = new byte[DdlFileUpload.PostedFile.ContentLength];
+        //                fileStream.Read(fileData, 0, DdlFileUpload.PostedFile.ContentLength);
+
+        //                UploadFileToHandler(fileData);
+        //            }
+
+        //            ErrorMessage.Text = "";
+        //        }
+        //        catch (Exception ex)
+        //        {
+        //            Logger.AddError("Error: ", ex);
+        //            ErrorMessage.Text = "An error occurred while uploading the file.";
+        //        }
+        //    }
+        //    else
+        //    {
+        //        ErrorMessage.Text = "Please select a file to upload";
+        //    }
+        //}
+
+        private void UploadFileToHandler(byte[] fileData, int objectType, string objectIDName)
         {
-            int objectID = userID;
-
-            if (Request.Files.Count > 0 && Request.Files[0].ContentLength > 0)
+            using (WebClient client = new WebClient())
             {
-                try
-                {
-                    DocumentTypeDTO selectedDocument = new DocumentTypeDTO
-                    {
-                        DocumentID = Convert.ToInt32(DocumentDropDown.SelectedValue),
-                        DocumentName = DocumentDropDown.SelectedValue,
-                    };
+                string fileHandlerUrl = $"~/FileUploadDownload.ashx?Action=upload&ObjectType={objectType}&ObjectIDName={objectIDName}";
+                string targetUrl = HttpContext.Current.Server.MapPath(fileHandlerUrl);
 
-                    string fileExtension = Path.GetExtension(DdlFileUpload.PostedFile.FileName);
-
-                    Documents.Add(selectedDocument);
-
-                    string documentName = selectedDocument.DocumentName;
-                    DocumentLogic.InsertDocument(objectID, ObjectType, documentName, FileName, FileNameGuid, fileExtension);
-
-                    ErrorMessage.Text = "";
-                }
-                catch (Exception ex)
-                {
-                    Logger.AddError("Error: ", ex);
-                    ErrorMessage.Text = "An error occurred while uploading the file.";
-                }
-            }
-            else
-            {
-                ErrorMessage.Text = "Please select a file to upload";
+                client.Headers[HttpRequestHeader.ContentType] = "application/octet-stream";
+                client.UploadData(targetUrl, "POST", fileData);
             }
         }
 
-        public void LoadDocumentDetails()
-        {
-            FileUploadDownload fileUploadDownload = new FileUploadDownload();
-            if (Request.Files.Count > 0 && Request.Files[0].ContentLength > 0)
-            {
-                FileNameGuid = fileUploadDownload.UploadFileToServer(DdlFileUpload.PostedFile);
-                FileName = Path.GetFileName(DdlFileUpload.PostedFile.FileName);
-            }
-            else
-            {
-                FileNameGuid = Guid.Empty;
-                FileName = string.Empty;
-            }
-        }
+        //public void LoadDocumentDetails()
+        //{
+        //    FileUploadDownload fileUploadDownload = new FileUploadDownload();
+        //    if (Request.Files.Count > 0 && Request.Files[0].ContentLength > 0)
+        //    {
+        //        FileNameGuid = fileUploadDownload.UploadFileToServer(DdlFileUpload.PostedFile);
+        //        FileName = Path.GetFileName(DdlFileUpload.PostedFile.FileName);
+        //    }
+        //    else
+        //    //{
+        //        FileNameGuid = Guid.Empty;
+        //        FileName = string.Empty;
+        //    }
+        //}
 
         protected void DocumentDropDown_SelectedIndexChanged(object sender, EventArgs e)
         {

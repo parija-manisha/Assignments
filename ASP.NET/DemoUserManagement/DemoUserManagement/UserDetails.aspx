@@ -42,7 +42,22 @@
                 <div>
                     <div id="DivEmailID" class="pb-3">
                         <asp:Label CssClass="pe-2 w-25" ClientIDMode="static" ID="LblEmailID" runat="server" AssociatedControlID="TxtEmailID">Email ID</asp:Label>
-                        <asp:TextBox ClientIDMode="static" ID="TxtEmailID" runat="server" CssClass="w-100"></asp:TextBox>
+                        <asp:TextBox ClientIDMode="static" ID="TxtEmailID" runat="server" CssClass="w-100" onkeyup="chech"></asp:TextBox><br />
+                        <asp:Label ID="LblEmailExists" ClientIDMode="Static" runat="server" ForeColor="Red"></asp:Label>
+                    </div>
+                </div>
+
+                <div>
+                    <div id="DivPassword" class="pb-3">
+                        <asp:Label CssClass="pe-2 w-25" ClientIDMode="static" ID="LblPassword" runat="server" AssociatedControlID="TxtPassword">Password</asp:Label>
+                        <asp:TextBox ClientIDMode="static" ID="TxtPassword" runat="server" CssClass="w-100"></asp:TextBox>
+                    </div>
+                </div>
+
+                <div>
+                    <div id="DivConfirmPassword" class="pb-3">
+                        <asp:Label CssClass="pe-2 w-25" ClientIDMode="static" ID="LblConfirmPassword" runat="server" AssociatedControlID="TxtConfirmPassword">Confirm Password</asp:Label>
+                        <asp:TextBox ClientIDMode="static" ID="TxtConfirmPassword" runat="server" CssClass="w-100"></asp:TextBox>
                     </div>
                 </div>
 
@@ -72,6 +87,13 @@
                         <asp:Label CssClass="pe-2 w-25" ClientIDMode="static" ID="LblTxtMotherName" runat="server" AssociatedControlID="TxtMotherName">Mother Name</asp:Label>
                         <asp:TextBox ClientIDMode="static" ID="TxtMotherName" runat="server" CssClass="w-100"></asp:TextBox>
                     </div>
+                </div>
+
+                <div id="AddRoleToUser" runat="server" class="pt-5">
+                    <asp:Label CssClass="pe-2 w-25" ClientIDMode="static" ID="LblAddRole" runat="server" AssociatedControlID="DdlAddRole">Add Roles</asp:Label>
+                    <asp:DropDownList ClientIDMode="static" ID="DdlAddRole" runat="server" CssClass="w-100" AutoPostBack="true" OnSelectedIndexChanged="AddRole">
+                        <asp:ListItem Text="Select" Value="" />
+                    </asp:DropDownList>
                 </div>
 
                 <div class="pt-5">

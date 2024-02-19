@@ -7,6 +7,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Security.Policy;
 using System.Web;
+using System.Web.Services;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Web.WebSockets;
@@ -24,13 +25,8 @@ namespace DemoUserManagement
 
             if (!IsPostBack)
             {
-
-                if (Session["Phone"] != null)
-                {
-                    ErrorMessage.Text = "This User already exists";
-                }
-
                 PopulateCountries();
+                PopulateRoles();
                 DdlPresentCountry.SelectedIndexChanged += PresentCountryState;
                 DdlPermanentCountry.SelectedIndexChanged += PermanentCountryState;
 
@@ -45,12 +41,22 @@ namespace DemoUserManagement
                 if (!string.IsNullOrEmpty(Request.QueryString[ucNoteControl.ObjectIDName]))
                 {
                     ucNoteControl.Visible = true;
+                    DeleteUserButton.Visible = true;
+                    AddRoleToUser.Visible = true;
                 }
                 else
                 {
                     ucNoteControl.Visible = false;
+                    DeleteUserButton.Visible = false;
+                    AddRoleToUser.Visible = false;
                 }
             }
+        }
+
+        [WebMethod]
+        public static bool IsEmailExists(string email)
+        {
+            return UserLogic.IsEmailExists(email);
         }
 
         private void LoadUserDetails(int userId)
@@ -150,7 +156,6 @@ namespace DemoUserManagement
             }
         }
 
-
         public bool ArePropertiesNullOrEmpty(object obj)
         {
             if (obj == null)
@@ -178,24 +183,32 @@ namespace DemoUserManagement
         {
             try
             {
-                ucDocumentUserControl.LoadDocumentDetails();
+                //ucDocumentUserControl.LoadDocumentDetails();
                 UserDetailDTO user = CreateUserFromForm();
                 List<AddressDetailDTO> addresses = CreateAddressesFromForm();
 
                 int userId = UserLogic.SaveUser(user);
+                Session["UserID"] = userId;
 
                 foreach (var address in addresses)
                 {
                     address.UserID = userId;
                     UserLogic.SaveAddress(address);
                 }
-                Session["Phone"] = TxtPhoneNumber.Text;
 
                 if (userId != -1)
                 {
-                    ucDocumentUserControl.UploadFile(userId);
+                    //ucDocumentUserControl.UploadFile(userId);
+                    UserLogic.SaveRole(userId);
+                    if (UserLogic.IsAdmin(userId))
+                    {
+                        Response.Redirect("Users.aspx", false);
+                    }
+                    else
+                    {
+                        ErrorMessage.Text = "User Added successfully";
+                    }
                     ResetFormFields();
-                    Response.Redirect("Users.aspx", false);
                 }
             }
             catch (Exception ex)
@@ -218,8 +231,8 @@ namespace DemoUserManagement
                 DateOfBirth = DateTime.Parse(TxtDateOfBirth.Text),
                 FatherName = TxtFatherName.Text,
                 MotherName = TxtMotherName.Text,
-                FileNameGuid = ucDocumentUserControl.FileNameGuid,
-                FileName = ucDocumentUserControl.FileName,
+                Password = TxtPassword.Text,
+                ConfirmPassword = TxtConfirmPassword.Text,
 
                 UserID = (!string.IsNullOrEmpty(Request.QueryString[Constants.ObjectIDName.UserID])) ? int.Parse(Request.QueryString[Constants.ObjectIDName.UserID]) : 0
 
@@ -272,15 +285,45 @@ namespace DemoUserManagement
 
         private void ResetFormFields()
         {
-            TxtFirstName.Text = "";
-            TxtMiddleName.Text = "";
-            TxtLastName.Text = "";
-            TxtGender.Text = "";
-            TxtEmailID.Text = "";
-            TxtPhoneNumber.Text = "";
-            TxtDateOfBirth.Text = "";
-            TxtFatherName.Text = "";
-            TxtMotherName.Text = "";
+            foreach (Control control in Page.Controls)
+            {
+                if (control is TextBox)
+                {
+                    ((TextBox)control).Text = string.Empty;
+                }
+                else if (control is DropDownList)
+                {
+                    ((DropDownList)control).ClearSelection();
+                }
+            }
+        }
+
+        protected void TxtEmailID_TextChanged(object sender, EventArgs e)
+        {
+            string email = TxtEmailID.Text;
+            bool emailExists = UserLogic.IsEmailExists(email);
+
+            if (emailExists)
+            {
+                LblEmailExists.Text = "Email already exists!";
+                SaveUserButton.Enabled = false;
+            }
+            else
+            {
+                LblEmailExists.Text = "";
+                SaveUserButton.Enabled = true;
+            }
+        }
+
+        private void PopulateRoles()
+        {
+            List<RoleDTO> roleList = UserLogic.GetRoleList();
+            BindDropDownList(DdlAddRole, roleList, "RoleName", "RoleID");
+        }
+
+        protected void AddRole(object sender, EventArgs e)
+        {
+            PopulateRoles();
         }
     }
 }

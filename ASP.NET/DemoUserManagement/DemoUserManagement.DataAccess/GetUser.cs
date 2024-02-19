@@ -47,9 +47,6 @@ namespace DemoUserManagement.DataAccess
                 DateOfBirth = (DateTime)reader["DateOfBirth"],
                 FatherName = reader["FatherName"].ToString(),
                 MotherName = reader["MotherName"].ToString(),
-                FileNameGuid = (Guid)reader["FileNameGuid"],
-                FileName = reader["FileName"].ToString()
-
             };
 
             return user;

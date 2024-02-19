@@ -39,6 +39,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
@@ -69,6 +70,9 @@
     <Compile Include="Note.cs">
       <DependentUpon>UserManagement.tt</DependentUpon>
     </Compile>
+    <Compile Include="Role.cs">
+      <DependentUpon>UserManagement.tt</DependentUpon>
+    </Compile>
     <Compile Include="State.cs">
       <DependentUpon>UserManagement.tt</DependentUpon>
     </Compile>
@@ -95,6 +99,9 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>UserManagement.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="UserRole.cs">
+      <DependentUpon>UserManagement.tt</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>

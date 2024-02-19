@@ -18,6 +18,7 @@ namespace DemoUserManagement.DataAccess
         public UserDetail()
         {
             this.AddressDetails = new HashSet<AddressDetail>();
+            this.UserRoles = new HashSet<UserRole>();
         }
     
         public int UserID { get; set; }
@@ -31,10 +32,12 @@ namespace DemoUserManagement.DataAccess
         public string Hobbies { get; set; }
         public string FatherName { get; set; }
         public string MotherName { get; set; }
-        public System.Guid FileNameGuid { get; set; }
-        public string FileName { get; set; }
+        public string Password { get; set; }
+        public string ConfirmPassword { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<AddressDetail> AddressDetails { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<UserRole> UserRoles { get; set; }
     }
 }

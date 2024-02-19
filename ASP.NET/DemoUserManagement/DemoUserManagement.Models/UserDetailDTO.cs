@@ -21,9 +21,9 @@ namespace DemoUserManagement.Models
         public string Hobbies { get; set; }
         public string FatherName { get; set; }
         public string MotherName { get; set; }
-        public System.Guid FileNameGuid { get; set; }
-        public string FileName { get; set; }
-
+        public string Password { get; set; }
+        public string ConfirmPassword { get; set; }
+      
         public AddressDetailDTO PresentAddress { get; set; }
         public AddressDetailDTO PermanentAddress { get; set; }
 

@@ -17,7 +17,7 @@ namespace DemoUserManagement.DataAccess
         {
             using (var context = new UserManagementTableEntities())
             {
-                if(userDetailDTO.UserID > 0)
+                if (userDetailDTO.UserID > 0)
                 {
                     UpdateUser(userDetailDTO.UserID, userDetailDTO);
                     return userDetailDTO.UserID;
@@ -33,8 +33,8 @@ namespace DemoUserManagement.DataAccess
                     DateOfBirth = userDetailDTO.DateOfBirth,
                     FatherName = userDetailDTO.FatherName,
                     MotherName = userDetailDTO.MotherName,
-                    FileNameGuid = userDetailDTO.FileNameGuid,
-                    FileName = userDetailDTO.FileName,
+                    Password = userDetailDTO.Password,
+                    ConfirmPassword = userDetailDTO.ConfirmPassword,
 
                 };
                 context.UserDetails.Add(user);
@@ -45,6 +45,14 @@ namespace DemoUserManagement.DataAccess
             }
         }
 
+        public static bool IsEmailExists(string email)
+        {
+            using (var context = new UserManagementTableEntities())
+            {
+                return context.UserDetails.Any(u => u.Email == email);
+            }
+        }
+        
         public static void UpdateUser(int userId, UserDetailDTO userDetailDTO)
         {
             using (UserManagementTableEntities context = new UserManagementTableEntities())
@@ -108,8 +116,6 @@ namespace DemoUserManagement.DataAccess
                             DateOfBirth = userEntity.DateOfBirth,
                             FatherName = userEntity.FatherName,
                             MotherName = userEntity.MotherName,
-                            FileName = userEntity.FileName,
-                            FileNameGuid = userEntity.FileNameGuid,
                         };
                         var presentAddress = userEntity.AddressDetails.FirstOrDefault(a => a.AddressType == 2);
                         if (presentAddress != null)
@@ -151,21 +157,79 @@ namespace DemoUserManagement.DataAccess
             }
         }
 
-        public static string GetFileNameByFileGuid(string fileNameGuid)
+        public static int GetUserID(string userName, string password)
         {
-            if (Guid.TryParse(fileNameGuid, out Guid parsedGuid))
+            using (var context = new UserManagementTableEntities())
+            {
+                var user = context.UserDetails
+                    .Where(u => u.Email == userName && u.Password == password)
+                    .FirstOrDefault();
+
+                return user != null ? user.UserID : 0;
+            }
+        }
+
+        public static void SaveRole(int userId)
+        {
+            using (var connection = Connection.Connect())
+            {
+                connection.Open();
+
+                string selectDefaultRolesQuery = "SELECT RoleID FROM Role WHERE isDefaultRole = 'true'";
+
+                using (SqlCommand selectDefaultRolesCommand = new SqlCommand(selectDefaultRolesQuery, connection))
+                {
+                    using (var reader = selectDefaultRolesCommand.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            int roleId = Convert.ToInt32(reader["RoleID"]);
+
+                            using (var insertConnection = Connection.Connect())
+                            {
+                                insertConnection.Open();
+
+                                string insertUserRoleQuery = "INSERT INTO UserRoles (UserID, RoleID) VALUES (@UserID, @RoleID)";
+
+                                using (SqlCommand insertUserRoleCommand = new SqlCommand(insertUserRoleQuery, insertConnection))
+                                {
+                                    insertUserRoleCommand.Parameters.AddWithValue("@UserID", userId);
+                                    insertUserRoleCommand.Parameters.AddWithValue("@RoleID", roleId);
+
+                                    insertUserRoleCommand.ExecuteNonQuery();
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        public static bool IsAdmin(int userId)
+        {
+            using (var context = new UserManagementTableEntities())
+            {
+                var isAdmin = context.UserRoles.Any(ur => ur.UserID == userId && ur.Role.isAdmin == "true");
+
+                return isAdmin;
+            }
+        }
+
+        public static List<Role> GetRole()
+        {
+            List<Role> roleList = new List<Role>();
+            try
             {
                 using (UserManagementTableEntities context = new UserManagementTableEntities())
                 {
-                    UserDetail fileName = context.UserDetails.FirstOrDefault(u => u.FileNameGuid == parsedGuid);
-
-                    return fileName?.FileName;
+                    roleList = context.Roles.ToList();
                 }
             }
-            else
+            catch (Exception ex)
             {
-                return null;
+                Logger.AddError("Couldn't retrieve Country Details", ex);
             }
+            return roleList;
         }
 
     }
