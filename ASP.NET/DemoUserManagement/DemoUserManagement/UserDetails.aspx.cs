@@ -177,7 +177,6 @@ namespace DemoUserManagement
         {
             try
             {
-                //ucDocumentUserControl.LoadDocumentDetails();
                 UserDetailDTO user = CreateUserFromForm();
                 List<AddressDetailDTO> addresses = CreateAddressesFromForm();
 

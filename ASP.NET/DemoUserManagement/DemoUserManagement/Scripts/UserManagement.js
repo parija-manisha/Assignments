@@ -1,26 +1,11 @@
-﻿$(document).ready(function () {
+﻿
+$(document).ready(function () {
     initializePage();
-
-    var userId = getQueryStringParameter('<%= ucNoteControl.ObjectIDName %>');
-
-    if (userId) {
-        LoadUserDetails(userId);
-
-        showControls(true);
-    } else {
-        showControls(false);
-    }
 });
 
 function getQueryStringParameter(parameterName) {
     var urlParams = new URLSearchParams(window.location.search);
     return urlParams.get(parameterName);
-}
-
-function showControls(show) {
-    $("#ucNoteControl").toggle(show);
-    $("#DeleteUserButton").toggle(show);
-    $("#AddRoleToUser").toggle(show);
 }
 
 function initializePage() {
@@ -47,7 +32,6 @@ function initializePage() {
     });
 }
 
-
 function loginUser() {
     var username = $("#txtUsername").val();
     var password = $("#txtPassword").val();
@@ -59,10 +43,14 @@ function loginUser() {
         contentType: "application/json; charset=utf-8",
         dataType: "json",
         success: function (result) {
-            if (result != -1)
-                window.location.href = 'UserDetails_v2.aspx?UserID=' + result.d;
-            else
+            if (result && result.d && result.d !== -1) {
+                var userId = result.d;
+                window.location.href = 'UserDetails_v2.aspx?UserID=' + userId;
+                console.log(userId);
+                loadUserDetails(userId);
+            } else {
                 $("#lblMessage").text("Invalid Username or password");
+            }
         },
         error: function () {
             console.error("Error");
@@ -76,35 +64,35 @@ function newUser() {
 
 function saveUser() {
     var userDetails = {
-        "firstName": $("#TxtFirstName").val(),
-        "middleName": $("#TxtMiddleName").val(),
-        "lastName": $("#TxtLastName").val(),
-        "gender": $("#TxtGender").val(),
-        "email": $("#TxtEmailId").val(),
-        "password": $("#TxtPassword").val(),
-        "confirmPassword": $("#TxtConfirmPassword").val(),
-        "phone": $("#TxtPhone").val(),
-        "dateOfBirth": $('#TxtDateOfBirth').val(),
-        "fatherName": $("#TxtFatherName").val(),
-        "motherName": $("#TxtMotherName").val()
+        firstName: $("#TxtFirstName").val(),
+        middleName: $("#TxtMiddleName").val(),
+        lastName: $("#TxtLastName").val(),
+        gender: $("#TxtGender").val(),
+        email: $("#TxtEmailId").val(),
+        password: $("#TxtPassword").val(),
+        confirmPassword: $("#TxtConfirmPassword").val(),
+        phone: $("#TxtPhone").val(),
+        dateOfBirth: $('#TxtDateOfBirth').val(),
+        fatherName: $("#TxtFatherName").val(),
+        motherName: $("#TxtMotherName").val()
     };
 
     var presentAddressDetails = {
-        "addressType": "Present",
-        "country": $("#DdlPresentCountry").val(),
-        "state": $("#DdlPresentState").val(),
-        "city": $("#TxtPresentCity").val(),
-        "pincode": $("#TxtPresentPincode").val(),
-        "street": $("#TxtPresentAddressLine").val(),
+        addressType: 2,
+        country: $("#DdlPresentCountry").val(),
+        state: $("#DdlPresentState").val(),
+        city: $("#TxtPresentCity").val(),
+        pincode: $("#TxtPresentPincode").val(),
+        street: $("#TxtPresentAddressLine").val(),
     };
 
     var permanentAddressDetails = {
-        "addressType": "Permanent",
-        "country": $("#DdlPermanentCountry").val(),
-        "state": $("#DdlPermanentState").val(),
-        "city": $("#TxtPermanentCity").val(),
-        "pincode": $("#TxtPermanentPincode").val(),
-        "street": $("#TxtPermanentAddressLine").val(),
+        addressType: 1,
+        country: $("#DdlPermanentCountry").val(),
+        state: $("#DdlPermanentState").val(),
+        city: $("#TxtPermanentCity").val(),
+        pincode: $("#TxtPermanentPincode").val(),
+        street: $("#TxtPermanentAddressLine").val(),
     };
 
     var addressDetails = [presentAddressDetails, permanentAddressDetails];
@@ -160,19 +148,23 @@ function populateState(selectCountryId, targetDropdownId) {
         contentType: "application/json; charset=utf-8",
         dataType: "json",
         success: function (result) {
-            var stateNames = result.d.map(function (state) {
-                return state.StateName;
-            });
-            console.log(stateNames)
-
-            populateDropdown("#" + targetDropdownId, stateNames);
+            if (result.success) {
+                var stateNames = result.data.map(function (state) {
+                    return state.StateName;
+                });
+                console.log(stateNames);
+                populateDropdown("#" + targetDropdownId, stateNames);
+            } else {
+                console.error("Error fetching state data: " + result.message);
+                onError(result.message);
+            }
         },
+
         error: function (result) {
             onError(result.d);
         }
     });
 }
-
 
 function onSuccess(data, targetDropdownId) {
     populateDropdown("#" + targetDropdownId, data);
@@ -193,7 +185,6 @@ function populateDropdown(selector, data) {
         dropdown.append(option);
     });
 }
-
 
 function copyPermanentAddress() {
     var sameAsPermanent = $("#SameAsPermanent").prop("checked");
@@ -225,18 +216,47 @@ function copyPermanentAddress() {
     });
 }
 
-function updatePresentAddress(sameAsPermanent) {
-    if (sameAsPermanent) {
-        $("#DdlPresentCountry").val($("#DdlPermanentCountry").val());
-        $("#DdlPresentState").val($("#DdlPermanentState").val());
-        $("#TxtPresentCity").val($("#TxtPermanentCity").val());
-        $("#TxtPresentPincode").val($("#TxtPermanentPincode").val());
-        $("#TxtPresentAddressLine").val($("#TxtPermanentAddressLine").val());
-    } else {
-        $("#DdlPresentCountry").val("");
-        $("#DdlPresentState").val("");
-        $("#TxtPresentCity").val("");
-        $("#TxtPresentPincode").val("");
-        $("#TxtPresentAddressLine").val("");
-    }
+function loadUserDetails(userId) {
+    $.ajax({
+        type: "POST",
+        url: "UserDetails_v2.aspx/GetUserDetails",
+        data: JSON.stringify({ userId: userId }),
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        success: function (response) {
+            var user = response.d;
+            console.log(user);
+            if (user != null) {
+                $("#TxtFirstName").val(user.FirstName);
+                $("#TxtMiddleName").val(user.MiddleName);
+                $("#TxtLastName").val(user.LastName);
+                $("#TxtGender").val(user.Gender);
+                $("#TxtEmail").val(user.Email);
+                $("#TxtPhoneNumber").val(user.PhoneNumber);
+                $("#TxtDateOfBirth").val(user.DateOfBirth);
+                $("#TxtHobbies").val(user.Hobbies);
+                $("#TxtFatherName").val(user.FatherName);
+                $("#TxtMotherName").val(user.MotherName);
+
+                if (user.PresentAddress != null) {
+                    $("#TxtPresentStreet").val(user.PresentAddress.Street);
+                    $("#TxtPresentCity").val(user.PresentAddress.City);
+                    $("#TxtPresentPincode").val(user.PresentAddress.Pincode);
+                    $("#DdlPresentCountry").val(user.PresentAddress.CountryID);
+                    $("#DdlPresentState").val(user.PresentAddress.StateID);
+                }
+
+                if (user.PermanentAddress != null) {
+                    $("#TxtPermanentStreet").val(user.PermanentAddress.Street);
+                    $("#TxtPermanentCity").val(user.PermanentAddress.City);
+                    $("#TxtPermanentPincode").val(user.PermanentAddress.Pincode);
+                    $("#DdlPermanentCountry").val(user.PermanentAddress.CountryID);
+                    $("#DdlPermanentState").val(user.PermanentAddress.StateID);
+                }
+            }
+        },
+        error: function (xhr, status, error) {
+            console.error("Error fetching user details: " + error);
+        }
+    });
 }

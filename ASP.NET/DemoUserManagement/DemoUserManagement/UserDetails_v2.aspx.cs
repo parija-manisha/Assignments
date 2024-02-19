@@ -3,6 +3,8 @@ using DemoUserManagement.Models;
 using DemoUserManagement.Util;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
+using System.IO;
 using System.Web;
 using System.Web.Services;
 using System.Web.UI;
@@ -17,18 +19,13 @@ namespace DemoUserManagement
         }
 
         [WebMethod]
-        public static int SaveUser(Dictionary<string, string> userDetails, List<Dictionary<string, string>> addressDetails)
+        public static int SaveUser(UserDetailDTO userDetails, List<AddressDetailDTO> addressDetails)
         {
             try
             {
-                UserDetailDTO user = CreateUserFromDictionary(userDetails);
+                UserDetailDTO user = CreateUser(userDetails);
 
-                List<AddressDetailDTO> addresses = new List<AddressDetailDTO>();
-                foreach (var addressDetail in addressDetails)
-                {
-                    AddressDetailDTO address = CreateAddressFromDictionary(addressDetail, user.UserID, addressDetail["AddressType"]);
-                    addresses.Add(address);
-                }
+                List<AddressDetailDTO> addresses = CreateAddress(addressDetails);
 
                 int userId = UserLogic.SaveUser(user);
 
@@ -64,66 +61,75 @@ namespace DemoUserManagement
             }
         }
 
-        private static UserDetailDTO CreateUserFromDictionary(Dictionary<string, string> userDetails)
+        private static UserDetailDTO CreateUser(UserDetailDTO userDetails)
         {
             UserDetailDTO user = new UserDetailDTO
             {
-                UserID = Convert.ToInt32(userDetails["UserID"]),
-                FirstName = userDetails["FirstName"],
-                MiddleName = userDetails["MiddleName"],
-                LastName = userDetails["LastName"],
-                Gender = userDetails["Gender"],
-                Email = userDetails["Email"],
-                PhoneNumber = Convert.ToInt32(userDetails["PhoneNumber"]),
-                DateOfBirth = Convert.ToDateTime(userDetails["DateOfBirth"]),
-                Hobbies = userDetails["Hobbies"],
-                FatherName = userDetails["FatherName"],
-                MotherName = userDetails["MotherName"],
-                Password = userDetails["Password"],
-                ConfirmPassword = userDetails["ConfirmPassword"],
+                UserID = Convert.ToInt32(userDetails.UserID),
+                FirstName = userDetails.FirstName,
+                MiddleName = userDetails.MiddleName,
+                LastName = userDetails.LastName,
+                Gender = userDetails.Gender,
+                Email = userDetails.Email,
+                PhoneNumber = Convert.ToInt32(userDetails.PhoneNumber),
+                DateOfBirth = Convert.ToDateTime(userDetails.DateOfBirth),
+                Hobbies = userDetails.Hobbies,
+                FatherName = userDetails.FatherName,
+                MotherName = userDetails.MotherName,
+                Password = userDetails.Password,
+                ConfirmPassword = userDetails.ConfirmPassword
             };
 
             return user;
         }
 
-        private static AddressDetailDTO CreateAddressFromDictionary(Dictionary<string, string> userDetails, int userId, string addressType)
+        private static List<AddressDetailDTO> CreateAddress(List<AddressDetailDTO> addressDetails)
         {
-            AddressDetailDTO address = new AddressDetailDTO();
+            List<AddressDetailDTO> addresses = new List<AddressDetailDTO>();
 
-            if (addressType.Equals("Present", StringComparison.OrdinalIgnoreCase))
+            foreach (var detail in addressDetails)
             {
-                address.AddressType = 2;
-            }
-            else if (addressType.Equals("Permanent", StringComparison.OrdinalIgnoreCase))
-            {
-                address.AddressType = 1;
+                AddressDetailDTO presentAddress = new AddressDetailDTO
+                {
+                    AddressType = 2,
+                    Street = detail.Street,
+                    City = detail.City,
+                    Pincode = Convert.ToInt32(detail.Pincode),
+                    CountryID = Convert.ToInt32(detail.CountryID),
+                    StateID = Convert.ToInt32(detail.StateID),
+                };
+                addresses.Add(presentAddress);
+
+                AddressDetailDTO permanentAddress = new AddressDetailDTO
+                {
+                    AddressType = 1,
+                    Street = detail.Street,
+                    City = detail.City,
+                    Pincode = Convert.ToInt32(detail.Pincode),
+                    CountryID = Convert.ToInt32(detail.CountryID),
+                    StateID = Convert.ToInt32(detail.StateID),
+                };
+                addresses.Add(permanentAddress);
             }
 
-            address.Street = userDetails[$"{addressType}Street"];
-            address.City = userDetails[$"{addressType}City"];
-            address.Pincode = Convert.ToInt32(userDetails[$"{addressType}Pincode"]);
-            address.CountryID = Convert.ToInt32(userDetails[$"{addressType}Country"]);
-            address.StateID = Convert.ToInt32(userDetails[$"{addressType}State"]);
-            address.UserID = userId;
-
-            return address;
+            return addresses;
         }
 
+
         [WebMethod]
-        public static List<StateDTO> PopulateState(int countryId)
+        public static object PopulateState(int countryId)
         {
             try
             {
                 List<StateDTO> stateList = StateLogic.GetStateList(countryId);
-                return stateList;
+                return new { success = true, data = stateList };
             }
             catch (Exception ex)
             {
                 Logger.AddError("Error in PopulateState method", ex);
-                throw;
+                return new { success = false, message = "An error occurred while populating states." };
             }
         }
-
 
         [WebMethod]
         public static List<CountryDTO> GetCountries()
@@ -154,6 +160,21 @@ namespace DemoUserManagement
                 HttpContext.Current.Session["PresentAddressLine"] = null;
             }
         }
+
+        [WebMethod]
+        public static UserDetailDTO GetUserDetails(int userId)
+        {
+            try
+            {
+                return UserLogic.GetUserById(userId);
+            }
+            catch (Exception ex)
+            {
+                Logger.AddError("Error in GetUserDetails method", ex);
+                return null; 
+            }
+        }
+
 
     }
 }

@@ -53,58 +53,58 @@
   <ItemGroup>
     <Compile Include="AddressDataAccess.cs" />
     <Compile Include="AddressDetail.cs">
-      <DependentUpon>UsrManagement.tt</DependentUpon>
+      <DependentUpon>UserManagement.tt</DependentUpon>
     </Compile>
     <Compile Include="Country.cs">
-      <DependentUpon>UsrManagement.tt</DependentUpon>
+      <DependentUpon>UserManagement.tt</DependentUpon>
     </Compile>
     <Compile Include="CountryDataAccess.cs" />
     <Compile Include="DocumentDataAccess.cs" />
     <Compile Include="DocumentList.cs">
-      <DependentUpon>UsrManagement.tt</DependentUpon>
+      <DependentUpon>UserManagement.tt</DependentUpon>
     </Compile>
     <Compile Include="FileUpload.cs">
-      <DependentUpon>UsrManagement.tt</DependentUpon>
+      <DependentUpon>UserManagement.tt</DependentUpon>
     </Compile>
     <Compile Include="FileUploadDataAccess.cs" />
     <Compile Include="Note.cs">
-      <DependentUpon>UsrManagement.tt</DependentUpon>
+      <DependentUpon>UserManagement.tt</DependentUpon>
     </Compile>
     <Compile Include="Role.cs">
-      <DependentUpon>UsrManagement.tt</DependentUpon>
+      <DependentUpon>UserManagement.tt</DependentUpon>
     </Compile>
     <Compile Include="State.cs">
-      <DependentUpon>UsrManagement.tt</DependentUpon>
+      <DependentUpon>UserManagement.tt</DependentUpon>
     </Compile>
     <Compile Include="StateCountry.cs" />
     <Compile Include="GetUser.cs" />
     <Compile Include="NotesDataAccess.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="sysdiagram.cs">
-      <DependentUpon>UsrManagement.tt</DependentUpon>
+      <DependentUpon>UserManagement.tt</DependentUpon>
     </Compile>
     <Compile Include="UserDataAccess.cs" />
     <Compile Include="StateDataAccess.cs" />
     <Compile Include="UserDetail.cs">
-      <DependentUpon>UsrManagement.tt</DependentUpon>
+      <DependentUpon>UserManagement.tt</DependentUpon>
     </Compile>
-    <Compile Include="UserRole.cs">
-      <DependentUpon>UsrManagement.tt</DependentUpon>
-    </Compile>
-    <Compile Include="UsrManagement.Context.cs">
+    <Compile Include="UserManagement.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>UsrManagement.Context.tt</DependentUpon>
+      <DependentUpon>UserManagement.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="UsrManagement.cs">
+    <Compile Include="UserManagement.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>UsrManagement.tt</DependentUpon>
+      <DependentUpon>UserManagement.tt</DependentUpon>
     </Compile>
     <Compile Include="UserManagement.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>UserManagement.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="UserRole.cs">
+      <DependentUpon>UserManagement.tt</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -132,15 +132,15 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="UsrManagement.Context.tt">
+    <Content Include="UserManagement.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>UserManagement.edmx</DependentUpon>
-      <LastGenOutput>UsrManagement.Context.cs</LastGenOutput>
+      <LastGenOutput>UserManagement.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="UsrManagement.tt">
+    <Content Include="UserManagement.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>UserManagement.edmx</DependentUpon>
-      <LastGenOutput>UsrManagement.cs</LastGenOutput>
+      <LastGenOutput>UserManagement.cs</LastGenOutput>
     </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

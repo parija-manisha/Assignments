@@ -18,12 +18,12 @@ namespace DemoUserManagement
         }
 
         [WebMethod]
-        public static int LoginUser(string username, string password)
+        public int LoginUser(string username, string password)
         {
             int authenticatedUserId = UserLogic.GetUserID(username, password);
             if (authenticatedUserId > 0)
             {
-                HttpContext.Current.Session["UserID"] = authenticatedUserId;
+                Session["UserID"] = authenticatedUserId;
                 return authenticatedUserId;
             }
             else

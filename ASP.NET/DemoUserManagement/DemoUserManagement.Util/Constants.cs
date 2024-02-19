@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web;
 
 namespace DemoUserManagement.Util
 {
@@ -30,5 +31,15 @@ namespace DemoUserManagement.Util
             new DocumentTypeDTO { DocumentID=2, DocumentName="PanCard"},
             new DocumentTypeDTO { DocumentID=3, DocumentName="ProfilePicture"}
             };
+
+        public static SessionModel GetSessionDetail()
+        {
+            return HttpContext.Current.Session["UserID"] as SessionModel;
+        }
+
+        public static void SetSessionDetail(SessionModel sessionModel)
+        {
+            HttpContext.Current.Session["UserID"] = sessionModel;
+        }
     }
 }

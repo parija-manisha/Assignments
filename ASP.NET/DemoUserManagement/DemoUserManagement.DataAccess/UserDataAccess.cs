@@ -1,13 +1,11 @@
-﻿using DemoUserManagement.Models;
+﻿
+
+using DemoUserManagement.Models;
 using DemoUserManagement.Util;
 using System;
-using System.Collections.Generic;
-using System.Data.Entity;
+using System.Data.Entity.ModelConfiguration.Conventions;
 using System.Data.SqlClient;
 using System.Linq;
-using System.Runtime.Remoting.Contexts;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DemoUserManagement.DataAccess
 {
@@ -52,7 +50,7 @@ namespace DemoUserManagement.DataAccess
                 return context.UserDetails.Any(u => u.Email == email);
             }
         }
-        
+
         public static void UpdateUser(int userId, UserDetailDTO userDetailDTO)
         {
             using (UserManagementTableEntities context = new UserManagementTableEntities())
@@ -117,6 +115,7 @@ namespace DemoUserManagement.DataAccess
                             FatherName = userEntity.FatherName,
                             MotherName = userEntity.MotherName,
                         };
+
                         var presentAddress = userEntity.AddressDetails.FirstOrDefault(a => a.AddressType == 2);
                         if (presentAddress != null)
                         {
@@ -143,7 +142,6 @@ namespace DemoUserManagement.DataAccess
                             };
                         }
 
-
                         return userDto;
                     }
 
@@ -159,15 +157,38 @@ namespace DemoUserManagement.DataAccess
 
         public static int GetUserID(string userName, string password)
         {
-            using (var context = new UserManagementTableEntities())
-            {
-                var user = context.UserDetails
-                    .Where(u => u.Email == userName && u.Password == password)
-                    .FirstOrDefault();
+            int userId = -1;
 
-                return user != null ? user.UserID : 0;
+            using (var connection = Connection.Connect())
+            {
+                string query = "SELECT UserID FROM UserDetails WHERE Email = @userName AND Password = @password";
+
+                using (SqlCommand command = new SqlCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@userName", userName);
+                    command.Parameters.AddWithValue("@password", password);
+
+                    try
+                    {
+                        connection.Open();
+
+                        object result = command.ExecuteScalar();
+
+                        if (result != null && result != DBNull.Value)
+                        {
+                            userId = Convert.ToInt32(result);
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        Logger.AddError("Error in GetUserID method", ex);
+                    }
+                }
             }
+
+            return userId;
         }
+
 
         public static void SaveRole(int userId)
         {
@@ -215,22 +236,22 @@ namespace DemoUserManagement.DataAccess
             }
         }
 
-        public static List<Role> GetRole()
-        {
-            List<Role> roleList = new List<Role>();
-            try
-            {
-                using (UserManagementTableEntities context = new UserManagementTableEntities())
-                {
-                    roleList = context.Roles.ToList();
-                }
-            }
-            catch (Exception ex)
-            {
-                Logger.AddError("Couldn't retrieve Country Details", ex);
-            }
-            return roleList;
-        }
+        //public static List<Role> GetRole()
+        //{
+        //    List<Role> roleList = new List<Role>();
+        //    try
+        //    {
+        //        using (UserManagementTableEntities context = new UserManagementTableEntities())
+        //        {
+        //            roleList = context.Roles.ToList();
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        Logger.AddError("Couldn't retrieve Country Details", ex);
+        //    }
+        //    return roleList;
+        //}
 
     }
 }
