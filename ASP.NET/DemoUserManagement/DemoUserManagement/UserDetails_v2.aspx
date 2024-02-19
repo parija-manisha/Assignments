@@ -101,7 +101,7 @@
                     <div>
                         <div id="DivPermanentCountry" class="pb-3">
                             <label for="DdlPermanentCountry" class="pe-2 w-25">Country</label>
-                            <select id="DdlPermanentCountry" class="w-100" onchange="onPermanentCountryChange()">
+                            <select id="DdlPermanentCountry" class="w-100">
                                 <option value="">Select</option>
                             </select>
                         </div>

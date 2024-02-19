@@ -15,7 +15,7 @@ namespace DemoUserManagement
             //if (!IsPostBack)
             //{
                 SiteName.Text = Page.Title;
-                bool isLoginPage = Request.Url.AbsolutePath.ToLower().EndsWith("login.aspx");
+                bool isLoginPage = Request.Url.AbsolutePath.ToLower().EndsWith("Login_v2.aspx");
 
                 bool isLoggedIn = Session["UserID"] != null;
                 bool isAdmin = isLoggedIn && UserLogic.IsAdmin(Convert.ToInt32(Session["UserID"]));

@@ -25,7 +25,7 @@ function showControls(show) {
 
 function initializePage() {
     populateCountries();
-    populateRoles();
+    //populateRoles();
 
     $("#DdlPermanentCountry").on("change", function () {
         var selectCountryId = $("#" + this.id).val();
@@ -38,15 +38,15 @@ function initializePage() {
         var targetDropdownId = $("#" + this.id.replace("Country", "State")).attr("id");
         populateState(selectCountryId, targetDropdownId);
     });
+    $("#btnSaveUser").on("click", function () {
+        saveUser();
+    });
+
+    $("#SameAsPermanent").change(function () {
+        copyPermanentAddress();
+    });
 }
 
-$("#btnSaveUser").on("click", function () {
-    saveUser();
-});
-
-$("#SameAsPermanent").change(function () {
-    copyPermanentAddress();
-});
 
 function loginUser() {
     var username = $("#txtUsername").val();
@@ -59,23 +59,15 @@ function loginUser() {
         contentType: "application/json; charset=utf-8",
         dataType: "json",
         success: function (result) {
-            onSuccess(result.d);
+            if (result != -1)
+                window.location.href = 'UserDetails_v2.aspx?UserID=' + result.d;
+            else
+                $("#lblMessage").text("Invalid Username or password");
         },
-        error: function (result) {
-            onError(result.d);
+        error: function () {
+            console.error("Error");
         }
     });
-}
-
-function onSuccess(result) {
-    if (result != -1)
-        window.location.href = 'UserDetails_v2.aspx?UserID=' + result;
-    else
-        $("#lblMessage").text("Invalid Username or password");
-}
-
-function onError(result) {
-    console.error("Error!!");
 }
 
 function newUser() {
@@ -145,8 +137,12 @@ function populateCountries() {
         contentType: "application/json; charset=utf-8",
         dataType: "json",
         success: function (result) {
-            populateDropdown("#DdlPermanentCountry", result.d);
-            populateDropdown("#DdlPresentCountry", result.d);
+            var countryNames = result.d.map(function (country) {
+                return country.CountryName;
+            });
+            console.log(countryNames)
+            populateDropdown("#DdlPermanentCountry", countryNames);
+            populateDropdown("#DdlPresentCountry", countryNames);
         },
         error: function (xhr, status, error) {
             console.error("Error fetching countries: " + error);
@@ -155,14 +151,21 @@ function populateCountries() {
 }
 
 function populateState(selectCountryId, targetDropdownId) {
+    var data = { countryId: selectCountryId };
+
     $.ajax({
         type: "POST",
         url: "UserDetails_v2.aspx/PopulateState",
-        data: JSON.stringify({ countryId: $("#" + selectCountryId).val() }),
+        data: JSON.stringify(data),
         contentType: "application/json; charset=utf-8",
         dataType: "json",
         success: function (result) {
-            onSuccess(result.d, targetDropdownId);
+            var stateNames = result.d.map(function (state) {
+                return state.StateName;
+            });
+            console.log(stateNames)
+
+            populateDropdown("#" + targetDropdownId, stateNames);
         },
         error: function (result) {
             onError(result.d);
@@ -170,19 +173,27 @@ function populateState(selectCountryId, targetDropdownId) {
     });
 }
 
+
 function onSuccess(data, targetDropdownId) {
     populateDropdown("#" + targetDropdownId, data);
 }
 
+function onError(data) {
+    console.error("Error fetching state data: " + data);
+}
+
 function populateDropdown(selector, data) {
-    var ddl = $(selector);
-    ddl.empty();
+    var dropdown = $(selector);
+    dropdown.empty();
+
+    dropdown.append($("<option></option>").val("").text("Select"));
+
     $.each(data, function (index, item) {
-        ddl.append($("<option></option>")
-            .attr("value", item.Value)
-            .text(item.Text));
+        var option = $("<option></option>").text(item);
+        dropdown.append(option);
     });
 }
+
 
 function copyPermanentAddress() {
     var sameAsPermanent = $("#SameAsPermanent").prop("checked");

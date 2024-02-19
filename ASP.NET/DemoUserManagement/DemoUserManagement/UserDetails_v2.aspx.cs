@@ -112,9 +112,18 @@ namespace DemoUserManagement
         [WebMethod]
         public static List<StateDTO> PopulateState(int countryId)
         {
-            List<StateDTO> stateList = StateLogic.GetStateList(countryId);
-            return stateList;
+            try
+            {
+                List<StateDTO> stateList = StateLogic.GetStateList(countryId);
+                return stateList;
+            }
+            catch (Exception ex)
+            {
+                Logger.AddError("Error in PopulateState method", ex);
+                throw;
+            }
         }
+
 
         [WebMethod]
         public static List<CountryDTO> GetCountries()
