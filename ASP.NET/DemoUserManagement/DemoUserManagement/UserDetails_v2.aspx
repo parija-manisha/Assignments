@@ -36,7 +36,7 @@
                 <div>
                     <div id="DivEmailID" class="pb-3">
                         <label for="TxtEmailID" class="pe-2 w-25">Email ID</label>
-                        <input type="text" id="TxtEmailID" class="w-100" oninput="checkEmail()">
+                        <input type="email" id="TxtEmailID" class="w-100">
                     </div>
                     <label id="LblEmailExists"></label>
                 </div>
@@ -79,13 +79,14 @@
 
                 <div id="AddRoleToUser" class="pt-5">
                     <label for="DdlAddRole" class="pe-2 w-25">Add Roles</label>
-                    <select id="DdlAddRole" class="w-100" onchange="AddRole()">
+                    <select id="DdlAddRole" class="w-100">
                         <option value="">Select</option>
                     </select>
                 </div>
 
                 <div class="pt-5">
-                    <button id="SaveUserButton" class="w-25" onclick="SaveUser()">Save User</button>
+                    <%--<asp:HiddenField ID="hdnUserId" runat="server" />--%>
+                    <button id="SaveUserButton" class="w-25">Save User</button>
                     <button id="DeleteUserButton" class="w-25">Delete User</button>
                 </div>
 
@@ -138,11 +139,11 @@
                 <div>
                     <h3>PRESENT ADDRESS</h3>
                     <hr />
-                    <input type="checkbox" id="SameAsPermanent" onchange="SameAsPermanent_CheckedChanged()">Same As Permanent Address
+                    <input type="checkbox" id="SameAsPermanent">Same As Permanent Address
                          <div>
                              <div id="DivPresentCountry" class="pb-3">
                                  <label for="DdlPresentCountry" class="pe-2 w-25">Country</label>
-                                 <select id="DdlPresentCountry" class="w-100" onchange="onPresentCountryChange()">
+                                 <select id="DdlPresentCountry" class="w-100">
                                      <option value="">Select</option>
                                  </select>
                              </div>

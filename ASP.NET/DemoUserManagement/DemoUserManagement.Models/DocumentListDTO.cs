@@ -12,7 +12,7 @@ namespace DemoUserManagement.Models
         public int ObjectID { get; set; }
         public int ObjectType { get; set; }
         public int DocumentType { get; set; }
-        public System.Guid DocumentNameOnDisk { get; set; }
+        public string DocumentNameOnDisk { get; set; }
         public string DocumentOriginalName { get; set; }
     }
 }

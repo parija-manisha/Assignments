@@ -103,6 +103,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Login.aspx" />
+    <Content Include="Login_v2.aspx" />
     <Content Include="Logout.aspx" />
     <Content Include="Scripts\JavaScript.js" />
     <Content Include="Scripts\UserManagement.js" />
@@ -204,6 +205,13 @@
     </Compile>
     <Compile Include="Login.aspx.designer.cs">
       <DependentUpon>Login.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Login_v2.aspx.cs">
+      <DependentUpon>Login_v2.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Login_v2.aspx.designer.cs">
+      <DependentUpon>Login_v2.aspx</DependentUpon>
     </Compile>
     <Compile Include="Logout.aspx.cs">
       <DependentUpon>Logout.aspx</DependentUpon>

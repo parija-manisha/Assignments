@@ -13,14 +13,20 @@ namespace DemoUserManagement.Business
 {
     public class DocumentLogic
     {
-        //public static void InsertDocument(int objectID, int objectType, string documentName, string fileName, Guid fileNameGuid, string fileExtension)
-        //{
-        //    DocumentDataAccess.InsertDocument(objectID, objectType, documentName, fileName, fileNameGuid, fileExtension);
-        //}
+        public static void InsertDocument(int objectID, int objectType, int documentName, string fileName, Guid fileNameGuid, string fileExtension)
+        {
+            DocumentDataAccess.InsertDocument(objectID, objectType, documentName, fileName, fileNameGuid, fileExtension);
+        }
 
-        //public static string GetFilePathByFileNameGuid(int userId)
-        //{
-        //    return DocumentDataAccess.GetFilePathByFileNameGuid(userId);
-        //}
+        public static string GetFilePathByFileNameGuid(Guid fileNameGuid)
+        {
+            return DocumentDataAccess.GetFilePathByFileNameGuid(fileNameGuid);
+        }
+
+        public static string GetDocumentDetailsByUserId(int userId)
+        {
+            return DocumentDataAccess.GetDocumentDetailsByUserId(userId);
+        }
+
     }
 }

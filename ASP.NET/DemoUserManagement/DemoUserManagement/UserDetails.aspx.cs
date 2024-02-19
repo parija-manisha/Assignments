@@ -53,12 +53,6 @@ namespace DemoUserManagement
             }
         }
 
-        [WebMethod]
-        public static bool IsEmailExists(string email)
-        {
-            return UserLogic.IsEmailExists(email);
-        }
-
         private void LoadUserDetails(int userId)
         {
             UserDetailDTO user = UserLogic.GetUserById(userId);

@@ -42,7 +42,7 @@
                 <div>
                     <div id="DivEmailID" class="pb-3">
                         <asp:Label CssClass="pe-2 w-25" ClientIDMode="static" ID="LblEmailID" runat="server" AssociatedControlID="TxtEmailID">Email ID</asp:Label>
-                        <asp:TextBox ClientIDMode="static" ID="TxtEmailID" runat="server" CssClass="w-100" onkeyup="chech"></asp:TextBox><br />
+                        <asp:TextBox ClientIDMode="static" ID="TxtEmailID" runat="server" CssClass="w-100" OnTextChanged="TxtEmailID_TextChanged"></asp:TextBox><br />
                         <asp:Label ID="LblEmailExists" ClientIDMode="Static" runat="server" ForeColor="Red"></asp:Label>
                     </div>
                 </div>

@@ -27,7 +27,7 @@ namespace DemoUserManagement
             if (authenticatedUserId > 0)
             {
                 Session["UserID"] = authenticatedUserId;
-                Response.Redirect($"UserDetails_v2.aspx?{Constants.ObjectIDName.UserID}={authenticatedUserId}");
+                Response.Redirect($"UserDetails.aspx?{Constants.ObjectIDName.UserID}={authenticatedUserId}");
             }
 
             else
@@ -38,7 +38,7 @@ namespace DemoUserManagement
 
         protected void btnSignUp_Click(object sender, EventArgs e)
         {
-            Response.Redirect("UserDetails_v2.aspx");
+            Response.Redirect("UserDetails.aspx");
         }
     }
 }
