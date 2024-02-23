@@ -1,34 +1,62 @@
-﻿
-$(document).ready(function () {
-    initializePage();
-});
-
-function getQueryStringParameter(parameterName) {
-    var urlParams = new URLSearchParams(window.location.search);
-    return urlParams.get(parameterName);
-}
-
-function initializePage() {
+﻿$(document).ready(function () {
     populateCountries();
-    //populateRoles();
+
+    $("#UserDetailsLink").hide();
+    $("#UpdateUserLink").hide();
+    $("#ucNoteControl").hide();
+    $("#documentUserControl").hide();
+    $("#AddRoleToUser").hide();
 
     $("#DdlPermanentCountry").on("change", function () {
-        var selectCountryId = $("#" + this.id).val();
-        var targetDropdownId = $("#" + this.id.replace("Country", "State")).attr("id");
+        var selectCountryId = $("#DdlPermanentCountry").val();
+        var targetDropdownId = $("#DdlPermanentCountry").attr("id").replace("Country", "State");
         populateState(selectCountryId, targetDropdownId);
+
     });
 
     $("#DdlPresentCountry").on("change", function () {
-        var selectCountryId = $("#" + this.id).val();
-        var targetDropdownId = $("#" + this.id.replace("Country", "State")).attr("id");
+        var selectCountryId = $(this).val();
+        var targetDropdownId = $(this).attr("id").replace("Country", "State");
         populateState(selectCountryId, targetDropdownId);
     });
-    $("#btnSaveUser").on("click", function () {
-        saveUser();
+
+    $("#SameAsPermanent").on("change", function () {
+        copyPermanentAddress();
     });
 
-    $("#SameAsPermanent").change(function () {
-        copyPermanentAddress();
+    var userId = getUserIdFromUrl();
+    loadUserDetails(userId);
+
+    function getUserIdFromUrl() {
+        const urlParams = new URLSearchParams(window.location.search);
+        return urlParams.has("UserID") ? parseInt(urlParams.get("UserID")) : 0;
+    }
+});
+
+function checkUserAuthorization(userSession) {
+    console.log("Second ajax call");
+
+    var data = { userSession: userSession };
+
+    $.ajax({
+        type: "POST",
+        url: "Login_v2.aspx/CheckUserAuthorisation",
+        data: JSON.stringify(data),
+        contentType: "application/json",
+        success: function (result) {
+            if (result && result.d) {
+                var isLoggedIn = result.d.IsLoggedIn;
+                var isAdmin = result.d.IsAdmin;
+
+                redirectAfterLoad(data.userSession.UserId, isAdmin, isLoggedIn);
+
+            } else {
+                console.log("Error in CheckUserAuthorisation WebMethod.");
+            }
+        },
+        error: function () {
+            console.error("Error");
+        }
     });
 }
 
@@ -43,24 +71,22 @@ function loginUser() {
         contentType: "application/json; charset=utf-8",
         dataType: "json",
         success: function (result) {
-            if (result && result.d && result.d !== -1) {
-                var userId = result.d;
-                window.location.href = 'UserDetails_v2.aspx?UserID=' + userId;
-                console.log(userId);
-                loadUserDetails(userId);
-            } else {
-                $("#lblMessage").text("Invalid Username or password");
+            if (result && result.d) {
+                var userSession = result.d;
+                if (userSession.UserId !== -1) {
+                    checkUserAuthorization(userSession);
+                } else {
+                    $("#lblMessage").text("Invalid Username or password");
+                }
             }
         },
         error: function () {
             console.error("Error");
+            $("#lblMessage").text("An error occurred during login. Please try again.");
         }
     });
 }
 
-function newUser() {
-    window.location.href = 'UserDetails_v2.aspx';
-}
 
 function saveUser() {
     var userDetails = {
@@ -68,10 +94,10 @@ function saveUser() {
         middleName: $("#TxtMiddleName").val(),
         lastName: $("#TxtLastName").val(),
         gender: $("#TxtGender").val(),
-        email: $("#TxtEmailId").val(),
+        email: $("#TxtEmailID").val(),
         password: $("#TxtPassword").val(),
         confirmPassword: $("#TxtConfirmPassword").val(),
-        phone: $("#TxtPhone").val(),
+        phoneNumber: $("#TxtPhone").val(),
         dateOfBirth: $('#TxtDateOfBirth').val(),
         fatherName: $("#TxtFatherName").val(),
         motherName: $("#TxtMotherName").val()
@@ -79,8 +105,8 @@ function saveUser() {
 
     var presentAddressDetails = {
         addressType: 2,
-        country: $("#DdlPresentCountry").val(),
-        state: $("#DdlPresentState").val(),
+        countryId: $("#DdlPresentCountry").val(),
+        stateId: $("#DdlPresentState").val(),
         city: $("#TxtPresentCity").val(),
         pincode: $("#TxtPresentPincode").val(),
         street: $("#TxtPresentAddressLine").val(),
@@ -88,34 +114,38 @@ function saveUser() {
 
     var permanentAddressDetails = {
         addressType: 1,
-        country: $("#DdlPermanentCountry").val(),
-        state: $("#DdlPermanentState").val(),
+        countryId: $("#DdlPermanentCountry").val(),
+        stateId: $("#DdlPermanentState").val(),
         city: $("#TxtPermanentCity").val(),
         pincode: $("#TxtPermanentPincode").val(),
         street: $("#TxtPermanentAddressLine").val(),
     };
-
     var addressDetails = [presentAddressDetails, permanentAddressDetails];
+
 
     $.ajax({
         type: "POST",
         url: "UserDetails_v2.aspx/SaveUser",
         data: JSON.stringify({ userDetails: userDetails, addressDetails: addressDetails }),
-        contentType: "application/json; charset=utf-8",
-        dataType: "json",
+        contentType: "application/json",
         success: function (result) {
             if (result.d === -1) {
-                $("#lblMessage").text("Registration failed.");
+                $("#lblMessage").innerHTML = "Registration failed.";
             } else if (result.d === -2) {
                 window.location.href = 'Users.aspx' + result.d;
             } else {
-                $("#lblMessage").text("User Added Successfully.");
+                $("#lblMessage").innerHTML = "User Added Successfully.";
+                uploadFiles(result.d);
             }
         },
         error: function (xhr, status, error) {
             console.error("Error calling SaveUser: " + error);
         }
     });
+}
+
+function newUser() {
+    window.location.href = 'UserDetails_v2.aspx';
 }
 
 function populateCountries() {
@@ -125,12 +155,8 @@ function populateCountries() {
         contentType: "application/json; charset=utf-8",
         dataType: "json",
         success: function (result) {
-            var countryNames = result.d.map(function (country) {
-                return country.CountryName;
-            });
-            console.log(countryNames)
-            populateDropdown("#DdlPermanentCountry", countryNames);
-            populateDropdown("#DdlPresentCountry", countryNames);
+            var countries = result.d;
+            populateDropdown("#DdlPermanentCountry, #DdlPresentCountry", countries, "CountryID", "CountryName");
         },
         error: function (xhr, status, error) {
             console.error("Error fetching countries: " + error);
@@ -139,29 +165,20 @@ function populateCountries() {
 }
 
 function populateState(selectCountryId, targetDropdownId) {
-    var data = { countryId: selectCountryId };
+    var data = { countryId: parseInt(selectCountryId) };
 
     $.ajax({
         type: "POST",
         url: "UserDetails_v2.aspx/PopulateState",
         data: JSON.stringify(data),
-        contentType: "application/json; charset=utf-8",
-        dataType: "json",
+        contentType: "application/json",
         success: function (result) {
-            if (result.success) {
-                var stateNames = result.data.map(function (state) {
-                    return state.StateName;
-                });
-                console.log(stateNames);
-                populateDropdown("#" + targetDropdownId, stateNames);
-            } else {
-                console.error("Error fetching state data: " + result.message);
-                onError(result.message);
-            }
+            var stateList = result.d;
+            populateDropdown("#" + targetDropdownId, stateList, "StateID", "StateName");
         },
-
-        error: function (result) {
-            onError(result.d);
+        error: function (jqXHR, textStatus, errorThrown) {
+            console.error("Error fetching state data: " + errorThrown);
+            onError(errorThrown);
         }
     });
 }
@@ -174,14 +191,14 @@ function onError(data) {
     console.error("Error fetching state data: " + data);
 }
 
-function populateDropdown(selector, data) {
+function populateDropdown(selector, data, valueKey, textKey) {
     var dropdown = $(selector);
     dropdown.empty();
 
     dropdown.append($("<option></option>").val("").text("Select"));
 
     $.each(data, function (index, item) {
-        var option = $("<option></option>").text(item);
+        var option = $("<option></option>").val(item[valueKey]).text(item[textKey]);
         dropdown.append(option);
     });
 }
@@ -216,47 +233,135 @@ function copyPermanentAddress() {
     });
 }
 
-function loadUserDetails(userId) {
+function updatePresentAddress(sameAsPermanent) {
+    if (sameAsPermanent) {
+        $("#TxtPresentCountry").val($("#DdlPermanentCountry").val());
+
+        $("#TxtPresentState").val($("#DdlPermanentState").val());
+        $("#TxtPresentCity").val($("#TxtPermanentCity").val());
+        $("#TxtPresentPincode").val($("#TxtPermanentPincode").val());
+        $("#TxtPresentAddressLine").val($("#TxtPermanentAddressLine").val());
+    } else {
+        $("#TxtPresentCountry").val('');
+        $("#TxtPresentState").val('');
+        $("#TxtPresentCity").val('');
+        $("#TxtPresentPincode").val('');
+        $("#TxtPresentAddressLine").val('');
+    }
+}
+
+function loadUserDetails(userID) {
+    var data = { userId: parseInt(userID) };
+    console.log("LoadUser")
     $.ajax({
         type: "POST",
         url: "UserDetails_v2.aspx/GetUserDetails",
-        data: JSON.stringify({ userId: userId }),
-        contentType: "application/json; charset=utf-8",
-        dataType: "json",
+        data: JSON.stringify(data),
+        contentType: "application/json",
         success: function (response) {
+            console.log(response)
             var user = response.d;
             console.log(user);
+
             if (user != null) {
                 $("#TxtFirstName").val(user.FirstName);
-                $("#TxtMiddleName").val(user.MiddleName);
                 $("#TxtLastName").val(user.LastName);
                 $("#TxtGender").val(user.Gender);
-                $("#TxtEmail").val(user.Email);
+                $("#TxtEmailID").val(user.Email);
+                $("#TxtPassword").val(user.Password);
+                $("#TxtConfirmPassword").val(user.ConfirmPassword)
                 $("#TxtPhoneNumber").val(user.PhoneNumber);
-                $("#TxtDateOfBirth").val(user.DateOfBirth);
-                $("#TxtHobbies").val(user.Hobbies);
+                $("#TxtDateOfBirth").val(new Date(parseInt(user.DateOfBirth)));
                 $("#TxtFatherName").val(user.FatherName);
                 $("#TxtMotherName").val(user.MotherName);
 
                 if (user.PresentAddress != null) {
-                    $("#TxtPresentStreet").val(user.PresentAddress.Street);
+                    $("#TxtPresentAddressLine").val(user.PresentAddress.Street);
                     $("#TxtPresentCity").val(user.PresentAddress.City);
                     $("#TxtPresentPincode").val(user.PresentAddress.Pincode);
-                    $("#DdlPresentCountry").val(user.PresentAddress.CountryID);
-                    $("#DdlPresentState").val(user.PresentAddress.StateID);
+                    $("#DdlPresentCountry").val(user.PresentAddress.CountryID, function () {
+                        populateState(user.PresentAddress.CountryID, "DdlPresentCountry")
+                        $("#DdlPresentState").val(user.PresentAddress.StateID);
+                    });
                 }
 
                 if (user.PermanentAddress != null) {
-                    $("#TxtPermanentStreet").val(user.PermanentAddress.Street);
+                    $("#TxtPermanentAddressLine").val(user.PermanentAddress.Street);
                     $("#TxtPermanentCity").val(user.PermanentAddress.City);
                     $("#TxtPermanentPincode").val(user.PermanentAddress.Pincode);
                     $("#DdlPermanentCountry").val(user.PermanentAddress.CountryID);
+                    populateState(user.PermanentAddress.CountryID, "DdlPermanentCountry")
                     $("#DdlPermanentState").val(user.PermanentAddress.StateID);
+                }
+
+                var urlParam = new URLSearchParams(window.location.search);
+                var isAdmin = urlParam.get('isAdmin');
+                var isLoggedIn = urlParam.get('isLoggedIn');
+
+                if (isAdmin == 'true') {
+                    $("#UpdateUserLink").show();
+                    $("#UserDetailsLink").show();
+                    $("#AddRoleToUser").show();
+                } else {
+                    $("#UpdateUserLink").hide();
+                    $("#UserDetailsLink").hide();
+                    $("#AddRoleToUser").hide();
+                }
+
+                if (isLoggedIn) {
+                    $("#logoutLink").show();
+                } else {
+                    $("#logoutLink").hide();
                 }
             }
         },
         error: function (xhr, status, error) {
             console.error("Error fetching user details: " + error);
+        }
+    });
+}
+
+function redirectAfterLoad(userId, isAdmin, isLoggedIn) {
+    setTimeout(function () {
+        window.location.href = 'UserDetails_v2.aspx?UserID=' + userId + '&isAdmin=' + isAdmin + '&isLoggedIn=' + isLoggedIn;
+    }, 1000);
+}
+
+function emailExists() {
+    var email = $("#TxtEmailID");
+
+    $.ajax({
+        type: "POST",
+        url: "UserDetails_v2.aspx/IsEmailExists",
+        data: JSON.stringify({ email: email.val() }),
+        contentType: "application/json",
+
+        success: function (response) {
+            if (response) {
+                $("#LblEmailExists").show();
+                $("#LblEmailExists").text("Email Id already exists");
+            }
+            else {
+                $("#LblEmailExists").hide();
+            }
+        },
+        error: function (xhr, status, error) {
+            console.error("Error fetching user details: " + error);
+        }
+    });
+}
+
+function uploadFiles(userId) {
+    var documentType = $("#DocumentDropDown").val();
+    $.ajax({
+        url: 'UserDetails_v2.aspx/FileUploadUrl()',
+        type: 'POST',
+        data: JSON.stringify({ userId: userId, documentType: documentType }),
+        success: function (response) {
+            window.location.href = response;
+        },
+        error: function (error) {
+            return error;
         }
     });
 }

@@ -14,7 +14,7 @@ namespace DemoUserManagement.Business
         public static List<StateDTO> GetStateList(int countryId)
         {
             List<State> states = StateCountry.GetStateByCountry(countryId);
-            List<StateDTO> stateList = new List<StateDTO>();  // Declare outside the try block
+            List<StateDTO> stateList = new List<StateDTO>();  
 
             if (states != null)
             {

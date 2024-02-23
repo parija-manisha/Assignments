@@ -15,6 +15,7 @@ namespace DemoUserManagement.Util
             public const int UserDetail = 1;
         }
 
+
         public struct ObjectIDName
         {
             public const string UserID = "UserID";
@@ -34,12 +35,12 @@ namespace DemoUserManagement.Util
 
         public static SessionModel GetSessionDetail()
         {
-            return HttpContext.Current.Session["UserID"] as SessionModel;
+            return HttpContext.Current.Session["UserSession"] as SessionModel;
         }
 
         public static void SetSessionDetail(SessionModel sessionModel)
         {
-            HttpContext.Current.Session["UserID"] = sessionModel;
+            HttpContext.Current.Session["UserSession"] = sessionModel;
         }
     }
 }

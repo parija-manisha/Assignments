@@ -14,8 +14,9 @@ using System.Web.WebSockets;
 
 namespace DemoUserManagement
 {
-    public partial class _Default : Page
+    public partial class _Default : BasePage
     {
+        public int Hello;
         protected void Page_Load(object sender, EventArgs e)
         {
             ucNoteControl.ObjectType = Constants.ObjectType.UserDetail;
@@ -25,6 +26,7 @@ namespace DemoUserManagement
 
             if (!IsPostBack)
             {
+                Hello = 5;
                 PopulateCountries();
                 PopulateRoles();
                 DdlPresentCountry.SelectedIndexChanged += PresentCountryState;
@@ -42,7 +44,10 @@ namespace DemoUserManagement
                 {
                     ucNoteControl.Visible = true;
                     DeleteUserButton.Visible = true;
-                    AddRoleToUser.Visible = true;
+                    if (UserLogic.IsAdmin(Convert.ToInt32(Request.QueryString[ucNoteControl.ObjectIDName])))
+                    {
+                        DdlAddRole.Visible = true;
+                    }
                 }
                 else
                 {
@@ -50,6 +55,11 @@ namespace DemoUserManagement
                     DeleteUserButton.Visible = false;
                     AddRoleToUser.Visible = false;
                 }
+            }
+
+            else
+            {
+                var Test2 = Hello;
             }
         }
 
@@ -126,8 +136,15 @@ namespace DemoUserManagement
 
         protected void PermanentCountryState(object sender, EventArgs e)
         {
-            int selectedCountryId = Convert.ToInt32(DdlPermanentCountry.SelectedValue);
-            PopulateStates(DdlPermanentState, selectedCountryId);
+            if (int.TryParse(DdlPermanentCountry.SelectedValue, out int selectedCountryId))
+            {
+                PopulateStates(DdlPermanentState, selectedCountryId);
+            }
+            else
+            {
+                selectedCountryId = 0;
+                PopulateStates(DdlPermanentState, selectedCountryId);
+            }
         }
 
         protected void SameAsPermanent_CheckedChanged(object sender, EventArgs e)
@@ -220,7 +237,7 @@ namespace DemoUserManagement
                 LastName = TxtLastName.Text,
                 Gender = TxtGender.Text,
                 Email = TxtEmailID.Text,
-                PhoneNumber = int.Parse(TxtPhoneNumber.Text),
+                PhoneNumber = TxtPhoneNumber.Text,
                 DateOfBirth = DateTime.Parse(TxtDateOfBirth.Text),
                 FatherName = TxtFatherName.Text,
                 MotherName = TxtMotherName.Text,

@@ -44,32 +44,30 @@ namespace DemoUserManagement.DataAccess
                 Logger.AddError("Fill All the Fields", ex);
             }
         }
-
-        public static string GetFilePathByFileNameGuid(Guid fileNameGuid)
+   
+        public static DataTable GetDocument(string objectID, int objectType)
         {
-            string uploadFolderPath = ConfigurationManager.AppSettings["UploadDocumentPath"];
-            string fileName = fileNameGuid.ToString();
-            string fileExtension = ".pdf";
+            DataTable dt = new DataTable();
 
-            string filePath = Path.Combine(uploadFolderPath, fileName + fileExtension);
+            using (var connection = Connection.Connect())
+            {
+                connection.Open();
 
-            if (File.Exists(filePath))
-            {
-                return filePath;
-            }
-            else
-            {
-                return string.Empty;
-            }
-        }
+                string query = "SELECT * FROM DocumentList WHERE ObjectID = @objectID AND ObjectType = @objectType";
+                using (SqlCommand command = new SqlCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@objectID", objectID);
+                    command.Parameters.AddWithValue("@objectType", objectType);
 
-        public static string GetDocumentDetailsByUserId(int userId)
-        {
-            using (var context = new UserManagementTableEntities())
-            {
-                var document = context.DocumentLists.FirstOrDefault(d => d.ObjectID == userId);
-                return document != null ? document.DocumentNameOnDisk : null;
+
+                    using (SqlDataAdapter adapter = new SqlDataAdapter(command))
+                    {
+                        adapter.Fill(dt);
+                    }
+                }
             }
+
+            return dt;
         }
 
     }

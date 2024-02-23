@@ -19,7 +19,22 @@ namespace DemoUserManagement.DataAccess
             {
                 using (UserManagementTableEntities context = new UserManagementTableEntities())
                 {
-                    stateList = context.States.Where(s => s.CountryID == countryId).ToList();
+                    var states = context.States
+                        .Where(s => s.CountryID == countryId)
+                        .Select(s => new
+                        {
+                            s.StateID,
+                            s.StateName
+                        })
+                        .AsEnumerable()
+                        .Select(s => new State
+                        {
+                            StateID = s.StateID,
+                            StateName = s.StateName
+                        })
+                        .ToList();
+
+                    stateList.AddRange(states);
                 }
             }
             catch (Exception ex)
@@ -28,5 +43,8 @@ namespace DemoUserManagement.DataAccess
             }
             return stateList;
         }
+
+
+
     }
 }

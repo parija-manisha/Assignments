@@ -43,7 +43,7 @@ namespace DemoUserManagement.DataAccess
                 LastName = reader["LastName"].ToString(),
                 Gender = reader["Gender"].ToString(),
                 Email = reader["Email"].ToString(),
-                PhoneNumber = (int)reader["PhoneNumber"],
+                PhoneNumber = reader["PhoneNumber"].ToString(),
                 DateOfBirth = (DateTime)reader["DateOfBirth"],
                 FatherName = reader["FatherName"].ToString(),
                 MotherName = reader["MotherName"].ToString(),

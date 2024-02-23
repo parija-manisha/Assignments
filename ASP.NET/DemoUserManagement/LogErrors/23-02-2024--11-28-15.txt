@@ -1,0 +1,7 @@
+Exception Details
+Message: Object reference not set to an instance of an object.
+Source: DemoUserManagement
+Stack Trace:    at DemoUserManagement.ucDocumentUserControl.GetSelectedDocumentId() in D:\Projects\ASSIGNMENTS\ASP.NET\DemoUserManagement\DemoUserManagement\ucDocumentUserControl.ascx.cs:line 91
+   at DemoUserManagement.UserDetails_v2.SaveUser(UserDetailDTO userDetails, List`1 addressDetails) in D:\Projects\ASSIGNMENTS\ASP.NET\DemoUserManagement\DemoUserManagement\UserDetails_v2.aspx.cs:line 43
+
+

@@ -9,6 +9,13 @@ namespace DemoUserManagement.Models
     public class SessionModel
     {
         public int UserId { get; set; }
-        public string UserName { get; set; }
+
+        public bool IsAdmin { get; set; }
+
+        public SessionModel()
+        {
+
+        }
     }
+
 }

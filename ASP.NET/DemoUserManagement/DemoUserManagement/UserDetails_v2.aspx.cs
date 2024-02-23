@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.IO;
+using System.Security.Policy;
 using System.Web;
 using System.Web.Services;
 using System.Web.UI;
@@ -12,10 +13,13 @@ using System.Web.UI.WebControls;
 
 namespace DemoUserManagement
 {
-    public partial class UserDetails_v2 : Page
+    public partial class UserDetails_v2 : BasePage
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (!IsPostBack)
+            {
+            }
         }
 
         [WebMethod]
@@ -40,12 +44,13 @@ namespace DemoUserManagement
                     UserLogic.SaveRole(userId);
                     if (UserLogic.IsAdmin(userId))
                     {
-                        HttpContext.Current.Session["UserID"] = userId;
+                        Constants.GetSessionDetail();
                         return -2;
                     }
                     else
                     {
-                        HttpContext.Current.Session["UserID"] = userId;
+                        SessionModel userSession = new SessionModel { UserId = userId };
+                        Constants.SetSessionDetail(userSession);
                         return userId;
                     }
                 }
@@ -71,7 +76,7 @@ namespace DemoUserManagement
                 LastName = userDetails.LastName,
                 Gender = userDetails.Gender,
                 Email = userDetails.Email,
-                PhoneNumber = Convert.ToInt32(userDetails.PhoneNumber),
+                PhoneNumber = userDetails.PhoneNumber,
                 DateOfBirth = Convert.ToDateTime(userDetails.DateOfBirth),
                 Hobbies = userDetails.Hobbies,
                 FatherName = userDetails.FatherName,
@@ -115,20 +120,12 @@ namespace DemoUserManagement
             return addresses;
         }
 
-
         [WebMethod]
-        public static object PopulateState(int countryId)
+        public static List<StateDTO> PopulateState(int countryId)
         {
-            try
-            {
-                List<StateDTO> stateList = StateLogic.GetStateList(countryId);
-                return new { success = true, data = stateList };
-            }
-            catch (Exception ex)
-            {
-                Logger.AddError("Error in PopulateState method", ex);
-                return new { success = false, message = "An error occurred while populating states." };
-            }
+
+            List<StateDTO> stateList = StateLogic.GetStateList(countryId);
+            return stateList;
         }
 
         [WebMethod]
@@ -171,10 +168,20 @@ namespace DemoUserManagement
             catch (Exception ex)
             {
                 Logger.AddError("Error in GetUserDetails method", ex);
-                return null; 
+                return null;
             }
         }
 
+        [WebMethod]
+        public static bool IsEmailExists(string email)
+        {
+            return UserLogic.IsEmailExists(email);
+        }
 
+        [WebMethod]
+        public static string FileUploadUrl(int userId, int documentType)
+        {
+            return UserLogic.SaveFile(userId, documentType);
+        }
     }
 }

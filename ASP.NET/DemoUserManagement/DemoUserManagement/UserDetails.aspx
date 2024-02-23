@@ -13,7 +13,7 @@
                 <hr />
                 <div>
                     <div id="DivTxtFirstName" class="pb-3">
-                        <asp:Label ClientIDMode="static" ID="LblFirstName" runat="server" AssociatedControlID="TxtFirstName" CssClass="pe-2 w-25">First Name</asp:Label>
+                        <asp:Label ClientIDMode="Static" ID="LblFirstName" runat="server" AssociatedControlID="TxtFirstName" CssClass="pe-2 w-25">First Name</asp:Label>
                         <asp:TextBox ClientIDMode="static" ID="TxtFirstName" runat="server" CssClass="w-100"></asp:TextBox>
                     </div>
                 </div>

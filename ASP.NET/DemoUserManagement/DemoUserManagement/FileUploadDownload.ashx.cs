@@ -1,154 +1,111 @@
 ﻿using DemoUserManagement.Business;
-using DemoUserManagement.Models;
 using DemoUserManagement.Util;
 using System;
 using System.Configuration;
 using System.IO;
 using System.Web;
-using static DemoUserManagement.Util.Constants;
 
-namespace DemoUserManagement
+public class FileUploadHandler : IHttpHandler
 {
-    /// <summary>
-    /// Summary description for FileUploadDownload
-    /// </summary>
-    public class FileUploadDownload : IHttpHandler
+    public void ProcessRequest(HttpContext context)
     {
-
-        public void ProcessRequest(HttpContext context)
+        if (context.Request.QueryString["Action"] != null)
         {
-            if (context.Request.QueryString["Action"] != null)
+            string action = context.Request.QueryString["Action"].ToLower();
+
+            switch (action)
             {
-                string action = context.Request.QueryString["Action"].ToLower();
+                case "upload":
+                    HandleFileUpload(context);
+                    break;
 
-                switch (action)
-                {
-                    case "upload":
-                        HandleFileUpload(context);
-                        break;
+                case "download":
+                    //HandleFileDownload(context);
+                    break;
 
-                    case "download":
-                        HandleFileDownload(context);
-                        break;
-
-                    default:
-                        context.Response.Write("Invalid action specified.");
-                        break;
-                }
-            }
-            else
-            {
-                context.Response.Write("No action specified.");
+                default:
+                    context.Response.Write("Invalid action specified.");
+                    break;
             }
         }
-
-        private void HandleFileUpload(HttpContext context)
+        else
         {
-            if (context.Request.Files.Count > 0)
+            context.Response.Write("No action specified.");
+        }
+    }
+
+    private void HandleFileUpload(HttpContext context)
+    {
+        try
+        {
+            if (TryParseQueryParameters(context, out int userId, out int documentType))
             {
-                if (int.TryParse(context.Request.QueryString["UserID"], out int userId))
+                HttpPostedFile uploadedFile = context.Request.Files["file"];
+
+                if (uploadedFile != null && uploadedFile.ContentLength > 0)
                 {
-
-                    int objectID = userId;
-                    int objectType = ObjectType.UserDetail;
-                    int documentName = 1;
-
-                    HttpPostedFile uploadedFile = context.Request.Files[0];
-
-                    string fileExtension = Path.GetExtension(uploadedFile.FileName);
+                    string sanitizedFileName = SanitizeFileName(uploadedFile.FileName);
                     Guid fileNameGuid = UploadFileToServer(uploadedFile);
 
-                    if (fileNameGuid != Guid.Empty)
+                    if (fileNameGuid != Guid.Empty && userId != 0)
                     {
-                        DocumentLogic.InsertDocument(objectID, objectType, documentName, uploadedFile.FileName, fileNameGuid, fileExtension);
-
-                        context.Response.Write("File uploaded successfully. FileNameGuid: " + fileNameGuid);
-                    }
-                    else
-                    {
-                        context.Response.Write("Error uploading file.");
+                        DocumentLogic.InsertDocument(userId, Constants.ObjectType.UserDetail, documentType, sanitizedFileName, fileNameGuid, Path.GetExtension(uploadedFile.FileName));
                     }
                 }
             }
-            else
-            {
-                context.Response.Write("No file uploaded.");
-            }
+
+            context.Response.Redirect("UserDetails_v2.aspx", false);
+            context.ApplicationInstance.CompleteRequest();
         }
-
-
-        private void HandleFileDownload(HttpContext context)
+        catch (Exception ex)
         {
-            if (context.Request.QueryString["UserID"] != null)
-            {
-                if (int.TryParse(context.Request.QueryString["UserID"], out int userId))
-                {
-                    string documentNameOnDisk = DocumentLogic.GetDocumentDetailsByUserId(userId);
-
-                    if (!string.IsNullOrEmpty(documentNameOnDisk))
-                    {
-                        string filePath = Path.Combine(ConfigurationManager.AppSettings["UploadDocumentPath"], documentNameOnDisk);
-
-                        if (File.Exists(filePath))
-                        {
-                            context.Response.ContentType = "application/octet-stream";
-                            context.Response.AppendHeader("Content-Disposition", "attachment; filename=" + Path.GetFileName(filePath));
-                            context.Response.TransmitFile(filePath);
-                            context.Response.End();
-                        }
-                        else
-                        {
-                            context.Response.Write("File Not Found");
-                        }
-                    }
-                    else
-                    {
-                        context.Response.Write("Document details not found for the specified UserID");
-                    }
-
-                }
-                else
-                {
-                    context.Response.Write("Document details not found for the specified UserID");
-                }
-            }
-            else
-            {
-                context.Response.Write("Invalid UserID");
-            }
+            Logger.AddError("Error in uploading the file", ex);
         }
+    }
 
+    private bool TryParseQueryParameters(HttpContext context, out int userId, out int documentType)
+    {
+        userId = documentType = 0;
 
-        public Guid UploadFileToServer(HttpPostedFile uploadedFile)
+        if (int.TryParse(context.Request.QueryString["UserId"], out userId) &&
+            int.TryParse(context.Request.QueryString["DocumentName"], out documentType))
         {
-            if (uploadedFile != null && uploadedFile.ContentLength > 0)
-            {
-                try
-                {
-                    string uploadFolderPath = ConfigurationManager.AppSettings["UploadDocumentPath"];
-
-                    Guid fileNameGuid = Guid.NewGuid();
-                    string FileExtension = Path.GetExtension(uploadedFile.FileName);
-                    string UniqueFileName = fileNameGuid + FileExtension;
-                    string FilePath = Path.Combine(uploadFolderPath, UniqueFileName);
-                    uploadedFile.SaveAs(FilePath);
-                    return fileNameGuid;
-                }
-                catch (Exception ex)
-                {
-                    Logger.AddError("Error in uploading the file", ex);
-                    return Guid.Empty;
-                }
-            }
-            return Guid.Empty;
+            return true;
         }
 
-        public bool IsReusable
+        return false;
+    }
+
+    private string SanitizeFileName(string originalFileName)
+    {
+        return Path.GetFileNameWithoutExtension(originalFileName);
+    }
+
+    private Guid UploadFileToServer(HttpPostedFile uploadedFile)
+    {
+        if (uploadedFile != null && uploadedFile.ContentLength > 0)
         {
-            get
+            try
             {
-                return false;
+                string uploadFolderPath = ConfigurationManager.AppSettings["UploadDocumentPath"];
+
+                Guid fileNameGuid = Guid.NewGuid();
+                string uniqueFileName = fileNameGuid + Path.GetExtension(uploadedFile.FileName);
+                string filePath = Path.Combine(uploadFolderPath, uniqueFileName);
+                uploadedFile.SaveAs(filePath);
+                return fileNameGuid;
+            }
+            catch (Exception ex)
+            {
+                Logger.AddError("Error in uploading the file", ex);
+                return Guid.Empty;
             }
         }
+        return Guid.Empty;
+    }
+
+    public bool IsReusable
+    {
+        get { return false; }
     }
 }

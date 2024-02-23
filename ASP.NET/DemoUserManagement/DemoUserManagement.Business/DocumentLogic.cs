@@ -2,6 +2,7 @@
 using DemoUserManagement.Util;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -18,10 +19,9 @@ namespace DemoUserManagement.Business
             DocumentDataAccess.InsertDocument(objectID, objectType, documentName, fileName, fileNameGuid, fileExtension);
         }
 
-        public static string GetDocumentDetailsByUserId(int userId)
+        public static DataTable LoadDocument(string objectID, int objectType)
         {
-            return DocumentDataAccess.GetDocumentDetailsByUserId(userId);
+            return DocumentDataAccess.GetDocument(objectID, objectType);
         }
-
     }
 }

@@ -1,0 +1,42 @@
+Exception Details
+Message: The 'PhoneNumber' property on 'UserDetail' could not be set to a 'System.String' value. You must set this property to a non-null value of type 'System.Int32'. 
+Source: EntityFramework
+Stack Trace:    at System.Data.Entity.Core.Common.Internal.Materialization.Shaper.ErrorHandlingValueReader`1.GetValue(DbDataReader reader, Int32 ordinal)
+   at lambda_method(Closure , Shaper )
+   at System.Data.Entity.Core.Common.Internal.Materialization.Shaper.HandleEntityAppendOnly[TEntity](Func`2 constructEntityDelegate, EntityKey entityKey, EntitySet entitySet)
+   at lambda_method(Closure , Shaper )
+   at System.Data.Entity.Core.Common.Internal.Materialization.Coordinator`1.ReadNextElement(Shaper shaper)
+   at System.Data.Entity.Core.Common.Internal.Materialization.Shaper`1.SimpleEnumerator.MoveNext()
+   at System.Linq.Enumerable.FirstOrDefault[TSource](IEnumerable`1 source)
+   at DemoUserManagement.DataAccess.UserDataAccess.GetUserById(Int32 userId) in D:\Projects\ASSIGNMENTS\ASP.NET\DemoUserManagement\DemoUserManagement.DataAccess\UserDataAccess.cs:line 102
+
+
+Exception Details
+Message: The 'PhoneNumber' property on 'UserDetail' could not be set to a 'System.String' value. You must set this property to a non-null value of type 'System.Int32'. 
+Source: EntityFramework
+Stack Trace:    at System.Data.Entity.Core.Common.Internal.Materialization.Shaper.ErrorHandlingValueReader`1.GetValue(DbDataReader reader, Int32 ordinal)
+   at lambda_method(Closure , Shaper )
+   at System.Data.Entity.Core.Common.Internal.Materialization.Shaper.HandleEntityAppendOnly[TEntity](Func`2 constructEntityDelegate, EntityKey entityKey, EntitySet entitySet)
+   at lambda_method(Closure , Shaper )
+   at System.Data.Entity.Core.Common.Internal.Materialization.Coordinator`1.ReadNextElement(Shaper shaper)
+   at System.Data.Entity.Core.Common.Internal.Materialization.Shaper`1.SimpleEnumerator.MoveNext()
+   at System.Linq.Enumerable.FirstOrDefault[TSource](IEnumerable`1 source)
+   at DemoUserManagement.DataAccess.UserDataAccess.GetUserById(Int32 userId) in D:\Projects\ASSIGNMENTS\ASP.NET\DemoUserManagement\DemoUserManagement.DataAccess\UserDataAccess.cs:line 156
+   at DemoUserManagement.Business.UserLogic.GetUserById(Int32 userId) in D:\Projects\ASSIGNMENTS\ASP.NET\DemoUserManagement\DemoUserManagement.Business\UserLogic.cs:line 33
+
+
+Exception Details
+Message: The 'PhoneNumber' property on 'UserDetail' could not be set to a 'System.String' value. You must set this property to a non-null value of type 'System.Int32'. 
+Source: EntityFramework
+Stack Trace:    at System.Data.Entity.Core.Common.Internal.Materialization.Shaper.ErrorHandlingValueReader`1.GetValue(DbDataReader reader, Int32 ordinal)
+   at lambda_method(Closure , Shaper )
+   at System.Data.Entity.Core.Common.Internal.Materialization.Shaper.HandleEntityAppendOnly[TEntity](Func`2 constructEntityDelegate, EntityKey entityKey, EntitySet entitySet)
+   at lambda_method(Closure , Shaper )
+   at System.Data.Entity.Core.Common.Internal.Materialization.Coordinator`1.ReadNextElement(Shaper shaper)
+   at System.Data.Entity.Core.Common.Internal.Materialization.Shaper`1.SimpleEnumerator.MoveNext()
+   at System.Linq.Enumerable.FirstOrDefault[TSource](IEnumerable`1 source)
+   at DemoUserManagement.DataAccess.UserDataAccess.GetUserById(Int32 userId) in D:\Projects\ASSIGNMENTS\ASP.NET\DemoUserManagement\DemoUserManagement.DataAccess\UserDataAccess.cs:line 156
+   at DemoUserManagement.Business.UserLogic.GetUserById(Int32 userId) in D:\Projects\ASSIGNMENTS\ASP.NET\DemoUserManagement\DemoUserManagement.Business\UserLogic.cs:line 38
+   at DemoUserManagement.UserDetails_v2.GetUserDetails(Int32 userId) in D:\Projects\ASSIGNMENTS\ASP.NET\DemoUserManagement\DemoUserManagement\UserDetails_v2.aspx.cs:line 163
+
+

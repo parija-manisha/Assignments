@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" MasterPageFile="~/Site.Master" CodeBehind="Login_v2.aspx.cs" Inherits="DemoUserManagement.Login_v2" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" MasterPageFile="~/Site.Master" CodeBehind="Login_v2.aspx.cs" Inherits="DemoUserManagement.Login_v2" EnableSessionState="True" %>
 
 <asp:Content ID="Login" ContentPlaceHolderID="MainContent" runat="server">
     <div>

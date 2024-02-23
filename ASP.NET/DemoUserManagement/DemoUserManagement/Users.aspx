@@ -18,14 +18,14 @@
                     <asp:BoundField DataField="Email" HeaderText="Email" SortExpression="Email" />
                     <asp:BoundField DataField="PhoneNumber" HeaderText="Phone Number" SortExpression="PhoneNumber" />
                     <asp:BoundField DataField="Gender" HeaderText="Gender" SortExpression="Gender" />
-                    <asp:TemplateField>
+                   <%-- <asp:TemplateField>
                         <ItemTemplate>
                             <asp:LinkButton ID="LinkButtonDownload" runat="server" Text='<%#Eval("FileName") %>' CommandArgument='<%#Eval("UserID") %>' OnCommand="LinkButtonDownload_Command"></asp:LinkButton>
                         </ItemTemplate>
-                    </asp:TemplateField>
+                    </asp:TemplateField>--%>
                     <asp:TemplateField>
                         <ItemTemplate>
-                            <asp:HyperLink ID="HyperLinkEdit" runat="server" Text="Edit" NavigateUrl='<%# "~/UserDetails.aspx?" + DemoUserManagement.Util.Constants.ObjectIDName.UserID + "=" + Eval("UserID") %>'></asp:HyperLink>
+                            <asp:HyperLink ID="HyperLinkEdit" runat="server" Text="Edit" NavigateUrl='<%# "~/UserDetails_v2.aspx?" + DemoUserManagement.Util.Constants.ObjectIDName.UserID + "=" + Eval("UserID") %>'></asp:HyperLink>
                         </ItemTemplate>
                     </asp:TemplateField>
                 </Columns>

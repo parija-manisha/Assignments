@@ -1,0 +1,17 @@
+Exception Details
+Message: Validation failed for one or more entities. See 'EntityValidationErrors' property for more details.
+Source: EntityFramework
+Stack Trace:    at System.Data.Entity.Internal.InternalContext.SaveChanges()
+   at DemoUserManagement.DataAccess.UserDataAccess.SaveUser(UserDetailDTO userDetailDTO) in D:\Projects\ASSIGNMENTS\ASP.NET\DemoUserManagement\DemoUserManagement.DataAccess\UserDataAccess.cs:line 42
+   at DemoUserManagement.Business.UserLogic.SaveUser(UserDetailDTO userDetailDTO) in D:\Projects\ASSIGNMENTS\ASP.NET\DemoUserManagement\DemoUserManagement.Business\UserLogic.cs:line 19
+
+
+Exception Details
+Message: Validation failed for one or more entities. See 'EntityValidationErrors' property for more details.
+Source: EntityFramework
+Stack Trace:    at System.Data.Entity.Internal.InternalContext.SaveChanges()
+   at DemoUserManagement.DataAccess.UserDataAccess.SaveUser(UserDetailDTO userDetailDTO) in D:\Projects\ASSIGNMENTS\ASP.NET\DemoUserManagement\DemoUserManagement.DataAccess\UserDataAccess.cs:line 42
+   at DemoUserManagement.Business.UserLogic.SaveUser(UserDetailDTO userDetailDTO) in D:\Projects\ASSIGNMENTS\ASP.NET\DemoUserManagement\DemoUserManagement.Business\UserLogic.cs:line 25
+   at DemoUserManagement.UserDetails_v2.SaveUser(UserDetailDTO userDetails, List`1 addressDetails) in D:\Projects\ASSIGNMENTS\ASP.NET\DemoUserManagement\DemoUserManagement\UserDetails_v2.aspx.cs:line 32
+
+

@@ -1,9 +1,7 @@
-﻿
-
-using DemoUserManagement.Models;
+﻿using DemoUserManagement.Models;
 using DemoUserManagement.Util;
 using System;
-using System.Data.Entity.ModelConfiguration.Conventions;
+using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
 
@@ -35,6 +33,11 @@ namespace DemoUserManagement.DataAccess
                     ConfirmPassword = userDetailDTO.ConfirmPassword,
 
                 };
+                if (!string.IsNullOrEmpty(userDetailDTO.PhoneNumber))
+                {
+                    user.PhoneNumber = userDetailDTO.PhoneNumber;
+                }
+
                 context.UserDetails.Add(user);
                 context.SaveChanges();
 
@@ -63,6 +66,8 @@ namespace DemoUserManagement.DataAccess
                     user.LastName = userDetailDTO.LastName;
                     user.Gender = userDetailDTO.Gender;
                     user.Email = userDetailDTO.Email;
+                    user.Password = userDetailDTO.Password;
+                    user.ConfirmPassword = userDetailDTO.ConfirmPassword;
                     user.PhoneNumber = userDetailDTO.PhoneNumber;
                     user.DateOfBirth = userDetailDTO.DateOfBirth;
                     user.FatherName = userDetailDTO.FatherName;
@@ -72,7 +77,22 @@ namespace DemoUserManagement.DataAccess
                     if (PermanentAddress != null)
                     {
                         PermanentAddress.UserID = userDetailDTO.UserID;
+                        PermanentAddress.Street = userDetailDTO.PermanentAddress.Street;
+                        PermanentAddress.City = userDetailDTO.PermanentAddress.City;
+                        PermanentAddress.StateID = userDetailDTO.PermanentAddress.StateID;
+                        PermanentAddress.CountryID = userDetailDTO.PermanentAddress.CountryID;
+                        PermanentAddress.Pincode = userDetailDTO.PermanentAddress.Pincode;
+                    }
 
+                    AddressDetail PresentAddress = user.AddressDetails.FirstOrDefault(a => a.AddressType == 2);
+                    if (PresentAddress != null)
+                    {
+                        PresentAddress.UserID = userDetailDTO.UserID;
+                        PresentAddress.Street = userDetailDTO.PresentAddress.Street;
+                        PresentAddress.City = userDetailDTO.PresentAddress.City;
+                        PresentAddress.StateID = userDetailDTO.PresentAddress.StateID;
+                        PresentAddress.CountryID = userDetailDTO.PresentAddress.CountryID;
+                        PresentAddress.Pincode = userDetailDTO.PresentAddress.Pincode;
                     }
 
                     context.SaveChanges();
@@ -107,10 +127,13 @@ namespace DemoUserManagement.DataAccess
                         {
                             UserID = userEntity.UserID,
                             FirstName = userEntity.FirstName,
+                            MiddleName = userEntity.LastName,
                             LastName = userEntity.LastName,
                             Gender = userEntity.Gender,
                             Email = userEntity.Email,
                             PhoneNumber = userEntity.PhoneNumber,
+                            Password = userEntity.Password,
+                            ConfirmPassword = userEntity.ConfirmPassword,
                             DateOfBirth = userEntity.DateOfBirth,
                             FatherName = userEntity.FatherName,
                             MotherName = userEntity.MotherName,
@@ -140,6 +163,13 @@ namespace DemoUserManagement.DataAccess
                                 CountryID = permanentAddress.CountryID,
                                 StateID = permanentAddress.StateID
                             };
+                        }
+
+                        var userSession = userDto.SessionModel;
+                        if (userSession != null)
+                        {
+                            userDto.SessionModel.UserId = userSession.UserId;
+                            userDto.SessionModel.IsAdmin = userSession.IsAdmin;
                         }
 
                         return userDto;
@@ -189,7 +219,6 @@ namespace DemoUserManagement.DataAccess
             return userId;
         }
 
-
         public static void SaveRole(int userId)
         {
             using (var connection = Connection.Connect())
@@ -236,22 +265,28 @@ namespace DemoUserManagement.DataAccess
             }
         }
 
-        //public static List<Role> GetRole()
-        //{
-        //    List<Role> roleList = new List<Role>();
-        //    try
-        //    {
-        //        using (UserManagementTableEntities context = new UserManagementTableEntities())
-        //        {
-        //            roleList = context.Roles.ToList();
-        //        }
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        Logger.AddError("Couldn't retrieve Country Details", ex);
-        //    }
-        //    return roleList;
-        //}
+        public static List<Role> GetRole()
+        {
+            List<Role> roleList = new List<Role>();
+            try
+            {
+                using (UserManagementTableEntities context = new UserManagementTableEntities())
+                {
+                    roleList = context.Roles.ToList();
+                }
+            }
+            catch (Exception ex)
+            {
+                Logger.AddError("Couldn't retrieve Country Details", ex);
+            }
+            return roleList;
+        }
+
+        public static string SaveFile(int userId, int documentType)
+        {
+            string fileHandlerUrl = $"FileUploadDownload.ashx?Action=download&UserID={userId}&DocumentName={documentType}";
+            return fileHandlerUrl;
+        }
 
     }
 }

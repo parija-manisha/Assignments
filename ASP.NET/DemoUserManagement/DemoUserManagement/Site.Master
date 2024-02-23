@@ -50,8 +50,9 @@
                 </button>
                 <div class="collapse navbar-collapse d-sm-inline-flex justify-content-between">
                     <ul runat="server" class="navbar-nav flex-grow-1" id="navBarLinks">
-                        <li runat="server" class="nav-item" id="UserDetailsLink"><a class="nav-link" runat="server" href="~/UserDetails.aspx">Add User</a></li>
+                        <li runat="server" class="nav-item" id="UserDetailsLink"><a class="nav-link" runat="server" href="~/UserDetails_v2.aspx">Add User</a></li>
                         <li runat="server" class="nav-item" id="UpdateUserLink"><a class="nav-link" runat="server" href="~/Users.aspx">Update User</a></li>
+                        <li runat="server" class="nav-item" id="LogOutLink"><a class="nav-link" runat="server" href="~/LogOut.aspx">LogOut</a></li>
                     </ul>
                     <asp:Label ID="SiteName" runat="server" ForeColor="White"></asp:Label>
                 </div>

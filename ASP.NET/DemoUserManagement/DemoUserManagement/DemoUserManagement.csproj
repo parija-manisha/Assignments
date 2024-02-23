@@ -196,6 +196,9 @@
     <Content Include="Site.Mobile.Master" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BasePage.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="FileUploadDownload.ashx.cs">
       <DependentUpon>FileUploadDownload.ashx</DependentUpon>
     </Compile>

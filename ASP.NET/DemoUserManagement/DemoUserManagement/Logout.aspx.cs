@@ -12,7 +12,7 @@ namespace DemoUserManagement
         protected void Page_Load(object sender, EventArgs e)
         {
             Session.Clear();
-            Response.Redirect("~/Login.aspx");
+            Response.Redirect("~/Login_v2.aspx");
         }
     }
 }

@@ -13,7 +13,7 @@ using System.Web.UI.WebControls;
 
 namespace DemoUserManagement
 {
-    public partial class Users : System.Web.UI.Page
+    public partial class Users : BasePage
     {
 
         private string SortExpression

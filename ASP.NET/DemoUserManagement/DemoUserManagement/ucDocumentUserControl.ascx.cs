@@ -3,6 +3,7 @@ using DemoUserManagement.Models;
 using DemoUserManagement.Util;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.IO;
 using System.Linq;
 using System.Net;
@@ -37,7 +38,7 @@ namespace DemoUserManagement
             set { ViewState["DocumentExtension"] = value; }
         }
 
-        private List<DocumentTypeDTO> Documents
+        public List<DocumentTypeDTO> DocumentType
         {
             get
             {
@@ -58,7 +59,6 @@ namespace DemoUserManagement
             }
         }
 
-
         private void BindDocumentType()
         {
             DocumentDropDown.DataSource = Constants.DocumentType;
@@ -67,72 +67,30 @@ namespace DemoUserManagement
             DocumentDropDown.DataBind();
         }
 
-        //public void UploadFile(int userID)
-        //{
-        //    if (DdlFileUpload.HasFile)
-        //    {
-        //        try
-        //        {
-        //            using (Stream fileStream = DdlFileUpload.PostedFile.InputStream)
-        //            {
-        //                byte[] fileData = new byte[DdlFileUpload.PostedFile.ContentLength];
-        //                fileStream.Read(fileData, 0, DdlFileUpload.PostedFile.ContentLength);
-
-        //                UploadFileToHandler(fileData);
-        //            }
-
-        //            ErrorMessage.Text = "";
-        //        }
-        //        catch (Exception ex)
-        //        {
-        //            Logger.AddError("Error: ", ex);
-        //            ErrorMessage.Text = "An error occurred while uploading the file.";
-        //        }
-        //    }
-        //    else
-        //    {
-        //        ErrorMessage.Text = "Please select a file to upload";
-        //    }
-        //}
-
-        private void UploadFileToHandler(byte[] fileData, int objectType, string objectIDName)
-        {
-            using (WebClient client = new WebClient())
-            {
-                string fileHandlerUrl = $"~/FileUploadDownload.ashx?Action=upload&ObjectType={objectType}&ObjectIDName={objectIDName}";
-                string targetUrl = HttpContext.Current.Server.MapPath(fileHandlerUrl);
-
-                client.Headers[HttpRequestHeader.ContentType] = "application/octet-stream";
-                client.UploadData(targetUrl, "POST", fileData);
-            }
-        }
-
-        //public void LoadDocumentDetails()
-        //{
-        //    FileUploadDownload fileUploadDownload = new FileUploadDownload();
-        //    if (Request.Files.Count > 0 && Request.Files[0].ContentLength > 0)
-        //    {
-        //        FileNameGuid = fileUploadDownload.UploadFileToServer(DdlFileUpload.PostedFile);
-        //        FileName = Path.GetFileName(DdlFileUpload.PostedFile.FileName);
-        //    }
-        //    else
-        //    //{
-        //        FileNameGuid = Guid.Empty;
-        //        FileName = string.Empty;
-        //    }
-        //}
-
         protected void DocumentDropDown_SelectedIndexChanged(object sender, EventArgs e)
         {
             int selectedDocumentID = Convert.ToInt32(DocumentDropDown.SelectedValue);
-
-            DocumentTypeDTO selectedDocument = Documents.Find(doc => doc.DocumentID == selectedDocumentID);
+            DocumentTypeDTO selectedDocument = DocumentType.Find(doc => doc.DocumentID == selectedDocumentID);
 
             if (selectedDocument != null)
             {
                 int documentID = selectedDocument.DocumentID;
                 string documentName = selectedDocument.DocumentName;
+
             }
         }
+
+        //public int GetSelectedDocumentId()
+        //{
+        //    if (DocumentType != null)
+        //    {
+        //        int selectedDocumentID = Convert.ToInt32(DocumentDropDown.SelectedValue);
+        //        DocumentTypeDTO selectedDocument = DocumentType.Find(doc => doc.DocumentID == selectedDocumentID);
+
+        //        return selectedDocument != null ? selectedDocument.DocumentID : 1;
+        //    }
+
+        //    return 1;
+        //}
     }
 }

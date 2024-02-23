@@ -123,5 +123,9 @@ namespace DemoUserManagement.Business
             return roleList;
         }
 
+        public static string SaveFile(int userId, int documentType)
+        {
+            return UserDataAccess.SaveFile(userId, documentType);
+        }
     }
 }

@@ -3,6 +3,7 @@
 <%@ Register Src="~/ucNoteControl.ascx" TagPrefix="uc1" TagName="ucNoteControl" %>
 <%@ Register Src="~/ucDocumentUserControl.ascx" TagPrefix="uc1" TagName="ucDocumentUserControl" %>
 
+
 <asp:Content ClientIDMode="static" ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
     <main>
         <div id="UserInformation" class="d-flex">
@@ -10,6 +11,7 @@
                 <h3>PERSONAL DETAILS</h3>
                 <hr />
                 <div>
+                    <%--<asp:HiddenField ID="" />--%>
                     <div id="DivTxtFirstName" class="pb-3">
                         <label for="TxtFirstName" class="pe-2 w-25">First Name</label>
                         <input type="text" id="TxtFirstName" class="w-100">
@@ -36,7 +38,7 @@
                 <div>
                     <div id="DivEmailID" class="pb-3">
                         <label for="TxtEmailID" class="pe-2 w-25">Email ID</label>
-                        <input type="email" id="TxtEmailID" class="w-100">
+                        <input type="email" id="TxtEmailID" class="w-100" onkeyup="emailExists(); return false;">
                     </div>
                     <label id="LblEmailExists"></label>
                 </div>
@@ -61,7 +63,7 @@
                 <div>
                     <div id="DivDateOfBirth" class="pb-3">
                         <label for="TxtDateOfBirth" class="pe-2 w-25">Date Of Birth</label>
-                        <input type="text" id="TxtDateOfBirth" class="w-100">
+                        <input type="date" id="TxtDateOfBirth" class="w-100">
                     </div>
                 </div>
                 <div>
@@ -85,8 +87,7 @@
                 </div>
 
                 <div class="pt-5">
-                    <%--<asp:HiddenField ID="hdnUserId" runat="server" />--%>
-                    <button id="SaveUserButton" class="w-25">Save User</button>
+                    <button id="SaveUserButton" class="w-25" onclick="saveUser(); return false;">Save User</button>
                     <button id="DeleteUserButton" class="w-25">Delete User</button>
                 </div>
 
@@ -102,7 +103,6 @@
                         <div id="DivPermanentCountry" class="pb-3">
                             <label for="DdlPermanentCountry" class="pe-2 w-25">Country</label>
                             <select id="DdlPermanentCountry" class="w-100">
-                                <option value="">Select</option>
                             </select>
                         </div>
                     </div>
@@ -111,7 +111,6 @@
                         <div id="DivPermanentState" class="pb-3">
                             <label for="DdlPermanentState" class="pe-2 w-25">State</label>
                             <select id="DdlPermanentState" class="w-100">
-                                <option value="">Select</option>
                             </select>
                         </div>
                     </div>
@@ -144,7 +143,6 @@
                              <div id="DivPresentCountry" class="pb-3">
                                  <label for="DdlPresentCountry" class="pe-2 w-25">Country</label>
                                  <select id="DdlPresentCountry" class="w-100">
-                                     <option value="">Select</option>
                                  </select>
                              </div>
                          </div>
@@ -152,7 +150,6 @@
                         <div id="DivPresentState" class="pb-3">
                             <label for="DdlPresentState" class="pe-2 w-25">State</label>
                             <select id="DdlPresentState" class="w-100">
-                                <option value="">Select</option>
                             </select>
                         </div>
                     </div>

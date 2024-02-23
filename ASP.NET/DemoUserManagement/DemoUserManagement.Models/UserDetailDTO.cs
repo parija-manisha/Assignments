@@ -16,7 +16,7 @@ namespace DemoUserManagement.Models
         public string LastName { get; set; }
         public string Gender { get; set; }
         public string Email { get; set; }
-        public int PhoneNumber { get; set; }
+        public string PhoneNumber { get; set; }
         public System.DateTime DateOfBirth { get; set; }
         public string Hobbies { get; set; }
         public string FatherName { get; set; }
@@ -26,7 +26,7 @@ namespace DemoUserManagement.Models
       
         public AddressDetailDTO PresentAddress { get; set; }
         public AddressDetailDTO PermanentAddress { get; set; }
-
-        public DocumentTypeDTO DocumentType { get; set; }
+        public DocumentListDTO DocumentList { get; set; }
+        public SessionModel SessionModel { get; set; }  
     }
 }
