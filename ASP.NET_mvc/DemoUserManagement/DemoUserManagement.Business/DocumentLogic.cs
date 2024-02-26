@@ -21,7 +21,7 @@ namespace DemoUserManagement.Business
 
         public static DataTable LoadDocument(string objectID, int objectType)
         {
-            return DocumentDataAccess.GetDocument(objectID, objectType);
+            return DocumentDataAccess.GetDocumentList(objectID, objectType);
         }
     }
 }

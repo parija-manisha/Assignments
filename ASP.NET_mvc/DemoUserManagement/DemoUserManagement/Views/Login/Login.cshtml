@@ -1,5 +1,4 @@
-﻿
-@{
+﻿@{
     ViewBag.Title = "Login";
 }
 
@@ -12,18 +11,20 @@
 
 <div class="container mt-5">
     <div class="row justify-content-center">
-        <form>
+        @using (Html.BeginForm("Login", "Login", FormMethod.Post))
+        {
             <div class="form-group mb-4">
                 <label for="username">Username</label>
-                <input type="text" class="form-control" id="username" placeholder="Enter your username">
+                <input type="text" name="username" class="form-control" placeholder="Enter your username">
             </div>
             <div class="form-group mb-4">
                 <label for="password">Password</label>
-                <input type="password" class="form-control" id="password" placeholder="Enter your password">
+                <input type="password" name="password" class="form-control" placeholder="Enter your password">
             </div>
             <button type="submit" class="btn btn-primary btn-block">Login</button>
-            <button type="submit" class="btn btn-primary btn-block">New User</button>
-        </form>
+
+            <button type="button" onclick="location.href='@Url.Action("UserDetailForm", "Registration")'" class="btn btn-primary btn-block">New User</button>
+        }
+
     </div>
-</div>
 </div>

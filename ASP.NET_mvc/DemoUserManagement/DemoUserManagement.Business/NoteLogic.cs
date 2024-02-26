@@ -15,7 +15,7 @@ namespace DemoUserManagement.Business
             return NotesDataAccess.GetNote(objectID, objectType);
         }
 
-        public static void AddNote(string note,string objectID, int objectType)
+        public static void AddNote(string note,int objectID, int objectType)
         {
             NotesDataAccess.AddNote(note, objectID, objectType);
         }

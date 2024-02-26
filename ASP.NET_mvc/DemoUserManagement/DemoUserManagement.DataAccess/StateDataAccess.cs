@@ -39,12 +39,14 @@ namespace DemoUserManagement.DataAccess
                         .Select(s => new
                         {
                             s.StateID,
-                            s.StateName
+                            s.StateName,
+                            s.CountryID
                         })
                         .AsEnumerable()
                         .Select(s => new State
                         {
                             StateID = s.StateID,
+                            CountryID = s.CountryID,
                             StateName = s.StateName
                         })
                         .ToList();

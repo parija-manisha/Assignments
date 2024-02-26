@@ -78,19 +78,19 @@ namespace DemoUserManagement.Business
             }
         }
 
-        public static List<UserDetailDTO> GetAllUsers()
-        {
-            try
-            {
-                GetUser user = new GetUser();
-                return user.Users();
-            }
-            catch (Exception ex)
-            {
-                Logger.AddError("GetAllUsers Failed", ex);
-                throw;
-            }
-        }
+        //public static List<UserDetailDTO> GetAllUsers()
+        //{
+        //    try
+        //    {
+        //        GetUser user = new GetUser();
+        //        return user.Users();
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        Logger.AddError("GetAllUsers Failed", ex);
+        //        throw;
+        //    }
+        //}
 
         public static int GetUserID(string userName, string password)
         {
