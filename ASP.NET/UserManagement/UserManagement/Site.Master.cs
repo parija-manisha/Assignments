@@ -11,7 +11,7 @@ namespace UserManagement
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            SiteName.Text = Page.Title;
         }
     }
 }

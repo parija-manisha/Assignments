@@ -53,7 +53,6 @@
     <Compile Include="AddressDetail.cs">
       <DependentUpon>UserManagement.tt</DependentUpon>
     </Compile>
-    <Compile Include="Class1.cs" />
     <Compile Include="Country.cs">
       <DependentUpon>UserManagement.tt</DependentUpon>
     </Compile>
@@ -76,6 +75,7 @@
     <Compile Include="UserDetail.cs">
       <DependentUpon>UserManagement.tt</DependentUpon>
     </Compile>
+    <Compile Include="UserDataAccess.cs" />
     <Compile Include="UserManagement.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

@@ -33,12 +33,12 @@ namespace UserManagement.Utils
             new DocumentTypeDTO { DocumentID=3, DocumentName="ProfilePicture"}
             };
 
-        public static SessionModel GetSessionDetail()
+        public static UserSession GetSessionDetail()
         {
-            return HttpContext.Current.Session["UserSession"] as SessionModel;
+            return HttpContext.Current.Session["UserSession"] as UserSession;
         }
 
-        public static void SetSessionDetail(SessionModel sessionModel)
+        public static void SetSessionDetail(UserSession sessionModel)
         {
             HttpContext.Current.Session["UserSession"] = sessionModel;
         }
