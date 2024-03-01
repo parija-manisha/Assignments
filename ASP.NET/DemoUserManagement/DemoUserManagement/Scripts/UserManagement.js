@@ -195,7 +195,8 @@ function populateDropdown(selector, data, valueKey, textKey) {
     var dropdown = $(selector);
     dropdown.empty();
 
-    dropdown.append($("<option></option>").val("").text("Select"));
+    dropdown.append($("<option></option>").val("").text("Select")); 
+    dropdown.append($("<option></option>").val("5").text("China"));
 
     $.each(data, function (index, item) {
         var option = $("<option></option>").val(item[valueKey]).text(item[textKey]);
@@ -236,7 +237,6 @@ function copyPermanentAddress() {
 function updatePresentAddress(sameAsPermanent) {
     if (sameAsPermanent) {
         $("#TxtPresentCountry").val($("#DdlPermanentCountry").val());
-
         $("#TxtPresentState").val($("#DdlPermanentState").val());
         $("#TxtPresentCity").val($("#TxtPermanentCity").val());
         $("#TxtPresentPincode").val($("#TxtPermanentPincode").val());
@@ -280,7 +280,7 @@ function loadUserDetails(userID) {
                     $("#TxtPresentCity").val(user.PresentAddress.City);
                     $("#TxtPresentPincode").val(user.PresentAddress.Pincode);
                     $("#DdlPresentCountry").val(user.PresentAddress.CountryID, function () {
-                        populateState(user.PresentAddress.CountryID, "DdlPresentCountry")
+                        populateState(user.PresentAddress.CountryID, "DdlPresentState")
                         $("#DdlPresentState").val(user.PresentAddress.StateID);
                     });
                 }
@@ -290,7 +290,7 @@ function loadUserDetails(userID) {
                     $("#TxtPermanentCity").val(user.PermanentAddress.City);
                     $("#TxtPermanentPincode").val(user.PermanentAddress.Pincode);
                     $("#DdlPermanentCountry").val(user.PermanentAddress.CountryID);
-                    populateState(user.PermanentAddress.CountryID, "DdlPermanentCountry")
+                    populateState(user.PermanentAddress.CountryID, "DdlPermanentState")
                     $("#DdlPermanentState").val(user.PermanentAddress.StateID);
                 }
 

@@ -47,7 +47,7 @@
     <Compile Include="DocumentTypeDTO.cs" />
     <Compile Include="NoteDTO.cs" />
     <Compile Include="RoleDTO.cs" />
-    <Compile Include="SessionModel.cs" />
+    <Compile Include="SessionModels.cs" />
     <Compile Include="StateDTO.cs" />
     <Compile Include="UserDetailDTO.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

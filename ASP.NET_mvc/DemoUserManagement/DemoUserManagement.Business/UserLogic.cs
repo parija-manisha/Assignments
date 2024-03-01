@@ -7,6 +7,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web;
+using System.Web.UI.WebControls;
 
 namespace DemoUserManagement.Business
 {
@@ -26,11 +28,42 @@ namespace DemoUserManagement.Business
             }
         }
 
+        public static void SaveAddress(int userId, UserDetailDTO userDetailDTO)
+        {
+            try
+            {
+                UserDataAccess.SaveAddress(userId, userDetailDTO);
+            }
+            catch (Exception ex)
+            {
+                Logger.AddError("SaveUser Failed", ex);
+                throw;
+            }
+        }
+
+        public static void SaveRole(int userID)
+        {
+            UserDataAccess.SaveRole(userID);
+        }
+
         public static UserDetailDTO GetUserById(int userId)
         {
             try
             {
                 return UserDataAccess.GetUserById(userId);
+            }
+            catch (Exception ex)
+            {
+                Logger.AddError("GetUserById Failed", ex);
+                throw;
+            }
+        }
+
+        public static List<UserDetailDTO> GetAllUsers(int start, int length, string sortColumn, string sortDirection)
+        {
+            try
+            {
+                return UserDataAccess.GetAllUsers(start, length, sortColumn, sortDirection);
             }
             catch (Exception ex)
             {
@@ -65,49 +98,29 @@ namespace DemoUserManagement.Business
             }
         }
 
-        public static void SaveAddress(AddressDetailDTO addressDetailDTO)
+        public static int GetTotalRecords()
         {
-            try
-            {
-                AddressDataAccess.SaveAddress(addressDetailDTO);
-            }
-            catch (Exception ex)
-            {
-                Logger.AddError("SaveUser Failed", ex);
-                throw;
-            }
+            return UserDataAccess.GetTotalRecords();
         }
 
-        //public static List<UserDetailDTO> GetAllUsers()
-        //{
-        //    try
-        //    {
-        //        GetUser user = new GetUser();
-        //        return user.Users();
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        Logger.AddError("GetAllUsers Failed", ex);
-        //        throw;
-        //    }
-        //}
+        public static int GetFilteredRecords(string sortColumn, string sortDirection)
+        {
+            return UserDataAccess.GetFilteredRecords(sortColumn, sortDirection);
+        }
 
         public static int GetUserID(string userName, string password)
         {
             return UserDataAccess.GetUserID(userName, password);
         }
 
-        public static void SaveRole(int userID)
-        {
-            UserDataAccess.SaveRole(userID);
-        }
-        
+
         public static bool IsAdmin(int userId)
         {
             return UserDataAccess.IsAdmin(userId);
         }
 
-        public static bool IsEmailExists(string email) {
+        public static bool IsEmailExists(string email)
+        {
             return UserDataAccess.IsEmailExists(email);
         }
 
@@ -123,9 +136,10 @@ namespace DemoUserManagement.Business
             return roleList;
         }
 
-        public static string SaveFile(int userId, int documentType)
+        public static object UploadFile(HttpPostedFileBase file)
         {
-            return UserDataAccess.SaveFile(userId, documentType);
+            return DocumentDataAccess.UploadFile(file);
         }
+
     }
 }

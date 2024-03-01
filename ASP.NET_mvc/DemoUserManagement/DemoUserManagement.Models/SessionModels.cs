@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DemoUserManagement.Models
 {
-    public class SessionModel
+    public class UserSession
     {
         public int UserId { get; set; }
 
@@ -14,4 +14,9 @@ namespace DemoUserManagement.Models
 
     }
 
+    public class FileSession
+    {
+        public string fileNameOnDisk { get; set; }
+        public string originalFileName { get; set; }
+    }
 }

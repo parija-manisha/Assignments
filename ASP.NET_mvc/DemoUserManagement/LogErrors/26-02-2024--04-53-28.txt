@@ -1,0 +1,8 @@
+Exception Details
+Message: Validation failed for one or more entities. See 'EntityValidationErrors' property for more details.
+Source: EntityFramework
+Stack Trace:    at System.Data.Entity.Internal.InternalContext.SaveChanges()
+   at DemoUserManagement.DataAccess.UserDataAccess.SaveUser(UserDetailDTO userDetailDTO) in D:\Projects\ASSIGNMENTS\ASP.NET_mvc\DemoUserManagement\DemoUserManagement.DataAccess\UserDataAccess.cs:line 37
+   at DemoUserManagement.Business.UserLogic.SaveUser(UserDetailDTO userDetailDTO) in D:\Projects\ASSIGNMENTS\ASP.NET_mvc\DemoUserManagement\DemoUserManagement.Business\UserLogic.cs:line 19
+
+

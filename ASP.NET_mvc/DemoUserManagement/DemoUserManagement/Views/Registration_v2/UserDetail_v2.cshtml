@@ -1,0 +1,223 @@
+﻿@model DemoUserManagement.Models.UserDetailDTO
+
+@{
+    Layout = "~/Views/Shared/_Layout_v2.cshtml";
+}
+
+@{
+    ViewBag.Title = "UserDetail_v2";
+    ViewBag.PageName = DemoUserManagement.Util.Constants.ObjectType.UserDetail;
+}
+
+@{
+    var userSession = DemoUserManagement.Util.Constants.GetSessionDetail();
+}
+
+@{
+    if (!string.IsNullOrEmpty(ViewBag.ErrorMessage))
+    {
+        <p class="text-warning">ViewBag.ErrorMessage</p>
+    }
+}
+
+@using (Html.BeginForm("NewUser", "Registration_v2", FormMethod.Post, new { id = "UserDetailForm" }))
+{
+    <div id="UserInformation" class="d-flex">
+        <div id="PnlPersonalDetails" class="w-50">
+            <h3>PERSONAL DETAILS</h3>
+            <hr />
+            <div>
+                <div id="DivTxtFirstName" class="pb-3">
+                    @Html.LabelFor(m => m.FirstName, new { @class = "pe-2 w-25" })
+                    @Html.TextBoxFor(m => m.FirstName, new { @class = "w-100" })
+                </div>
+            </div>
+            <div>
+                <div id="DivMiddleName" class="pb-3">
+                    @Html.LabelFor(m => m.MiddleName, new { @class = "pe-2 w-25" })
+                    @Html.TextBoxFor(m => m.MiddleName, new { @class = "w-100" })
+                </div>
+            </div>
+            <div>
+                <div id="DivLastName" class="pb-3">
+                    @Html.LabelFor(m => m.LastName, new { @class = "pe-2 w-25" })
+                    @Html.TextBoxFor(m => m.LastName, new { @class = "w-100" })
+                </div>
+            </div>
+            <div>
+                <div id="DivGender" class="pb-3">
+                    @Html.LabelFor(m => m.Gender, new { @class = "pe-2 w-25" })
+                    @Html.TextBoxFor(m => m.Gender, new { @class = "w-100" })
+                </div>
+            </div>
+            <div>
+                <div id="DivEmailID" class="pb-3">
+                    @Html.LabelFor(m => m.Email, new { @class = "pe-2 w-25" })
+                    @Html.TextBoxFor(m => m.Email, new { @class = "w-100", type = "email", oninput = "isEmailExists(); return false;", @id = "TxtEmailID" })
+                </div>
+            </div>
+            @if (userSession == null && Model.UserID == 0)
+            {
+                <div>
+                    <div id="DivPassword" class="pb-3">
+                        @Html.LabelFor(m => m.Password, new { @class = "pe-2 w-25" })
+                        @Html.TextBoxFor(m => m.Password, new { @class = "w-100" })
+                    </div>
+                </div>
+                <div>
+                    <div id="DivConfirmPassword" class="pb-3">
+                        @Html.LabelFor(m => m.ConfirmPassword, new { @class = "pe-2 w-25" })
+                        @Html.TextBoxFor(m => m.ConfirmPassword, new { @class = "w-100" })
+                    </div>
+                </div>
+            }
+
+            else
+            {
+                if (userSession.UserId == Model.UserID)
+                {
+                    <div>
+                        <div id="DivPassword" class="pb-3">
+                            @Html.LabelFor(m => m.Password, new { @class = "pe-2 w-25" })
+                            @Html.TextBoxFor(m => m.Password, new { @class = "w-100" })
+                        </div>
+                    </div>
+                    <div>
+                        <div id="DivConfirmPassword" class="pb-3">
+                            @Html.LabelFor(m => m.ConfirmPassword, new { @class = "pe-2 w-25" })
+                            @Html.TextBoxFor(m => m.ConfirmPassword, new { @class = "w-100" })
+                        </div>
+                    </div>
+                }
+            }
+            <div>
+                <div id="DivPhoneNumber" class="pb-3">
+                    @Html.LabelFor(m => m.PhoneNumber, new { @class = "pe-2 w-25" })
+                    @Html.TextBoxFor(m => m.PhoneNumber, new { @class = "w-100" })
+                </div>
+            </div>
+            <div>
+                <div id="DivDateOfBirth" class="pb-3">
+                    @Html.Label("TxtDateOfBirth", "Date Of Birth", new { @class = "pe-2 w-25" })
+                    @Html.TextBox("TxtDateOfBirth", null, new { @class = "w-100", type = "date", name = "DateOfBirth" })
+                </div>
+            </div>
+            <div>
+                <div id="DivFatherName" class="pb-3">
+                    @Html.LabelFor(m => m.FatherName, new { @class = "pe-2 w-25" })
+                    @Html.TextBoxFor(m => m.FatherName, new { @class = "w-100" })
+                </div>
+            </div>
+            <div>
+                <div id="DivTxtMotherName" class="pb-3">
+                    @Html.LabelFor(m => m.MotherName, new { @class = "pe-2 w-25" })
+                    @Html.TextBoxFor(m => m.MotherName, new { @class = "w-100" })
+                </div>
+            </div>
+
+            @if (userSession != null && userSession.IsAdmin)
+            {
+                <div id="AddRoleToUser" class="pt-5">
+                    <label for="DdlAddRole" class="pe-2 w-25">Add Roles</label>
+                    <select id="DdlAddRole" class="w-100">
+                    </select>
+                </div>
+
+            }
+
+            <div class="pt-5">
+                <button id="SaveUserButton" class="w-25">Save User</button>
+                <button id="DeleteUserButton" class="w-25">Delete User</button>
+            </div>
+        </div>
+
+        <div id="PnlAddress" class="w-50">
+            <div>
+                <h3>PERMANENT ADDRESS</h3>
+                <hr />
+
+                <div>
+                    <div id="DivPermanentCountry" class="pb-3">
+                        @Html.LabelFor(m => m.PermanentAddress.Country, new { @class = "pe-2 w-25" })
+                        @Html.DropDownListFor(m => m.PermanentAddress.CountryID, new SelectList(Model.Countries, "CountryID", "CountryName"), "-- Select Country --", new { @class = "w-100", @id = "DdlPermanentCountry" })
+                    </div>
+                </div>
+
+                <div>
+                    <div id="DivPermanentState" class="pb-3">
+                        @Html.LabelFor(m => m.PermanentAddress.State, new { @class = "pe-2 w-25" })
+                        @Html.DropDownListFor(m => m.PermanentAddress.StateID, new SelectList(Model.States, "StateID", "StateName"), "-- Select State --", new { @class = "w-100", @id = "DdlPermanentState" })
+                    </div>
+                </div>
+                <div>
+                    <div id="DivPermanentCity" class="pb-3">
+                        @Html.LabelFor(m => m.PermanentAddress.City, new { @class = "pe-2 w-25" })
+                        @Html.TextBoxFor(m => m.PermanentAddress.City, new { @class = "w-100", @id = "TxtPermanentCity" })
+                    </div>
+                </div>
+                <div>
+                    <div id="DivPermanentPincode" class="pb-3">
+                        @Html.LabelFor(m => m.PermanentAddress.Pincode, new { @class = "pe-2 w-25" })
+                        @Html.TextBoxFor(m => m.PermanentAddress.Pincode, new { @class = "w-100", @id = "TxtPermanentPincode" })
+                    </div>
+                </div>
+                <div>
+                    <div id="DivPermanentAddressLine" class="pb-3">
+                        @Html.LabelFor(m => m.PermanentAddress.Street, new { @class = "pe-2 w-25" })
+                        @Html.TextBoxFor(m => m.PermanentAddress.Street, new { @class = "w-100", @id = "TxtPermanentAddressLine" })
+                    </div>
+                </div>
+            </div>
+            <div>
+                <h3>PRESENT ADDRESS</h3>
+                <hr />
+                <input type="checkbox" id="SameAsPermanent" onchange="copyPermanentAddress(); return false;">Same As Permanent Address
+                <div>
+                    <div id="DivPresentCountry" class="pb-3">
+                        @Html.LabelFor(m => m.PresentAddress.Country, new { @class = "pe-2 w-25" })
+                        @Html.DropDownListFor(m => m.PresentAddress.CountryID, new SelectList(Model.Countries, "CountryID", "CountryName"), "-- Select Country --", new { @class = "w-100", @id = "DdlPresentCountry" })
+                    </div>
+                </div>
+
+                <div>
+                    <div id="DivPresentState" class="pb-3">
+                        @Html.LabelFor(m => m.PresentAddress.State, new { @class = "pe-2 w-25" })
+                        @Html.DropDownListFor(m => m.PresentAddress.StateID, new SelectList(Model.States, "StateID", "StateName"), "-- Select State --", new { @class = "w-100", @id = "DdlPresentState" })
+                    </div>
+                </div>
+                <div>
+                    <div id="DivPresentCity" class="pb-3">
+                        @Html.LabelFor(m => m.PresentAddress.City, new { @class = "pe-2 w-25" })
+                        @Html.TextBoxFor(m => m.PresentAddress.City, new { @class = "w-100", @id = "TxtPresentCity" })
+                    </div>
+                </div>
+                <div>
+                    <div id="DivPresentPincode" class="pb-3">
+                        @Html.LabelFor(m => m.PresentAddress.Pincode, new { @class = "pe-2 w-25" })
+                        @Html.TextBoxFor(m => m.PresentAddress.Pincode, new { @class = "w-100", @id = "TxtPresentPincode" })
+                    </div>
+                </div>
+                <div>
+                    <div id="DivPresentAddressLine" class="pb-3">
+                        @Html.LabelFor(m => m.PresentAddress.Street, new { @class = "pe-2 w-25" })
+                        @Html.TextBoxFor(m => m.PresentAddress.Street, new { @class = "w-100", @id = "TxtPresentAddressLine" })
+                    </div>
+                </div>
+            </div>
+            <div id="DivDocumentDropDown" class="pb-3">
+                @Html.LabelFor(m => m.DocumentType, new { @class = "pe-2 w-25" })
+                @Html.DropDownListFor(m => m.DocumentType, new SelectList(Model.DocumentType, "DocumentID", "DocumentName"), "-- Select Document --", new { @class = "w-100", @id = "DdlDocument" })
+            </div>
+            <div>
+                <input type="file" name="file" />
+                <input type="button" value="Upload" id="UploadButton" />
+            </div>
+        </div>
+    </div>
+
+    if (Model.UserID != 0 && Model != null)
+    {
+        @Html.Partial("~/Views/PartialViews/Note_v2.cshtml", new { objectType = ViewBag.PageName });
+        @Html.Partial("~/Views/PartialViews/Document_v2.cshtml");
+    }
+}

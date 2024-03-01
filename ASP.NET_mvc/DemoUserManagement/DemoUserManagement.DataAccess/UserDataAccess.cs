@@ -26,17 +26,167 @@ namespace DemoUserManagement.DataAccess
                     Gender = userDetailDTO.Gender,
                     Email = userDetailDTO.Email,
                     PhoneNumber = userDetailDTO.PhoneNumber,
-                    DateOfBirth = userDetailDTO.DateOfBirth,
+                    DateOfBirth = userDetailDTO.DateOfBirth.Date,
                     FatherName = userDetailDTO.FatherName,
                     MotherName = userDetailDTO.MotherName,
                     Password = userDetailDTO.Password,
                     ConfirmPassword = userDetailDTO.ConfirmPassword,
-
                 };
+
                 context.UserDetails.Add(user);
                 context.SaveChanges();
 
                 return user.UserID;
+            }
+        }
+
+        public static void SaveAddress(int userId, UserDetailDTO userDetailDTO)
+        {
+            using (var context = new UserManagementTableEntities())
+            {
+                AddressDetail permanentAddress = new AddressDetail
+                {
+                    UserID = userId,
+                    AddressType = Constants.AddressType.PermanentAddress,
+                    CountryID = userDetailDTO.PermanentAddress.CountryID,
+                    StateID = userDetailDTO.PermanentAddress.StateID,
+                    City = userDetailDTO.PermanentAddress.City,
+                    Pincode = userDetailDTO.PermanentAddress.Pincode,
+                    Street = userDetailDTO.PermanentAddress.Street
+                };
+
+                AddressDetail presentAddress = new AddressDetail
+                {
+                    UserID = userId,
+                    AddressType = Constants.AddressType.PresentAddress,
+                    CountryID = userDetailDTO.PresentAddress.CountryID,
+                    StateID = userDetailDTO.PresentAddress.StateID,
+                    City = userDetailDTO.PresentAddress.City,
+                    Pincode = userDetailDTO.PresentAddress.Pincode,
+                    Street = userDetailDTO.PresentAddress.Street
+                };
+
+                context.AddressDetails.Add(permanentAddress);
+                context.AddressDetails.Add(presentAddress);
+
+                context.SaveChanges();
+            }
+
+        }
+
+        public static void SaveRole(int userId)
+        {
+            using (var connection = Connection.Connect())
+            {
+                connection.Open();
+
+                string selectDefaultRolesQuery = "SELECT RoleID FROM Role WHERE isDefaultRole = 'true'";
+
+                using (SqlCommand selectDefaultRolesCommand = new SqlCommand(selectDefaultRolesQuery, connection))
+                {
+                    using (var reader = selectDefaultRolesCommand.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            int roleId = Convert.ToInt32(reader["RoleID"]);
+
+                            using (var insertConnection = Connection.Connect())
+                            {
+                                insertConnection.Open();
+
+                                string insertUserRoleQuery = "INSERT INTO UserRoles (UserID, RoleID) VALUES (@UserID, @RoleID)";
+
+                                using (SqlCommand insertUserRoleCommand = new SqlCommand(insertUserRoleQuery, insertConnection))
+                                {
+                                    insertUserRoleCommand.Parameters.AddWithValue("@UserID", userId);
+                                    insertUserRoleCommand.Parameters.AddWithValue("@RoleID", roleId);
+
+                                    insertUserRoleCommand.ExecuteNonQuery();
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        public static List<UserDetailDTO> GetAllUsers(int start, int length, string sortColumn, string sortDirection)
+        {
+            using (var context = new UserManagementTableEntities())
+            {
+                var query = from user in context.UserDetails
+                            select new UserDetailDTO
+                            {
+                                UserID = user.UserID,
+                                FirstName = user.FirstName,
+                                MiddleName = user.MiddleName,
+                                LastName = user.LastName,
+                                Gender = user.Gender,
+                                PhoneNumber = user.PhoneNumber,
+                                DateOfBirth = user.DateOfBirth,
+                                Email = user.Email,
+                                FatherName = user.FatherName,
+                                MotherName = user.MotherName,
+                            };
+
+                if (!string.IsNullOrEmpty(sortColumn) && !string.IsNullOrEmpty(sortDirection))
+                {
+                    query = ApplySorting(query, sortColumn, sortDirection);
+                }
+
+                query = query.Skip(start).Take(length);
+                return query.ToList();
+            }
+        }
+
+        private static IQueryable<UserDetailDTO> ApplySorting(IQueryable<UserDetailDTO> query, string sortColumn, string sortDirection)
+        {
+            switch (sortColumn)
+            {
+                case "Name":
+                    query = (sortDirection == "asc") ? query.OrderBy(u => u.FirstName) : query.OrderByDescending(u => u.FirstName);
+                    break;
+                case "DOB":
+                    query = (sortDirection == "asc") ? query.OrderBy(u => u.DateOfBirth) : query.OrderByDescending(u => u.DateOfBirth);
+                    break;
+            }
+
+            return query;
+        }
+
+        public static int GetTotalRecords()
+        {
+            using (var context = new UserManagementTableEntities())
+            {
+                return context.UserDetails.Count();
+            }
+        }
+
+        public static int GetFilteredRecords(string sortColumn, string sortDirection)
+        {
+            using (var context = new UserManagementTableEntities())
+            {
+                var query = from user in context.UserDetails
+                            select new UserDetailDTO
+                            {
+                                UserID = user.UserID,
+                                FirstName = user.FirstName,
+                                MiddleName = user.MiddleName,
+                                LastName = user.LastName,
+                                Gender = user.Gender,
+                                PhoneNumber = user.PhoneNumber,
+                                DateOfBirth = user.DateOfBirth,
+                                Email = user.Email,
+                                FatherName = user.FatherName,
+                                MotherName = user.MotherName,
+                            };
+
+                if (!string.IsNullOrEmpty(sortColumn) && !string.IsNullOrEmpty(sortDirection))
+                {
+                    query = ApplySorting(query, sortColumn, sortDirection);
+                }
+
+                return query.Count();
             }
         }
 
@@ -113,7 +263,8 @@ namespace DemoUserManagement.DataAccess
             {
                 try
                 {
-                    var userEntity = context.UserDetails.FirstOrDefault(u => u.UserID == userId);
+                    var userEntity = context.UserDetails
+                        .FirstOrDefault(u => u.UserID == userId);
 
                     if (userEntity != null)
                     {
@@ -131,6 +282,9 @@ namespace DemoUserManagement.DataAccess
                             DateOfBirth = userEntity.DateOfBirth,
                             FatherName = userEntity.FatherName,
                             MotherName = userEntity.MotherName,
+                            Countries = new List<CountryDTO>(),
+                            States = new List<StateDTO>(),
+                            DocumentType = new List<DocumentTypeDTO>()
                         };
 
                         var presentAddress = userEntity.AddressDetails.FirstOrDefault(a => a.AddressType == 2);
@@ -144,6 +298,18 @@ namespace DemoUserManagement.DataAccess
                                 CountryID = presentAddress.CountryID,
                                 StateID = presentAddress.StateID
                             };
+
+                            userDto.Countries.Add(new CountryDTO
+                            {
+                                CountryID = presentAddress.CountryID,
+                                CountryName = presentAddress.Country.CountryName
+                            });
+
+                            userDto.States.Add(new StateDTO
+                            {
+                                StateID = presentAddress.StateID,
+                                StateName = presentAddress.State.StateName
+                            });
                         }
 
                         var permanentAddress = userEntity.AddressDetails.FirstOrDefault(a => a.AddressType == 1);
@@ -157,13 +323,18 @@ namespace DemoUserManagement.DataAccess
                                 CountryID = permanentAddress.CountryID,
                                 StateID = permanentAddress.StateID
                             };
-                        }
 
-                        var userSession = userDto.SessionModel;
-                        if (userSession != null)
-                        {
-                            userDto.SessionModel.UserId = userSession.UserId;
-                            userDto.SessionModel.IsAdmin = userSession.IsAdmin;
+                            userDto.Countries.Add(new CountryDTO
+                            {
+                                CountryID = permanentAddress.CountryID,
+                                CountryName = permanentAddress.Country.CountryName
+                            });
+
+                            userDto.States.Add(new StateDTO
+                            {
+                                StateID = permanentAddress.StateID,
+                                StateName = permanentAddress.State.StateName
+                            });
                         }
 
                         return userDto;
@@ -213,42 +384,6 @@ namespace DemoUserManagement.DataAccess
             return userId;
         }
 
-        public static void SaveRole(int userId)
-        {
-            using (var connection = Connection.Connect())
-            {
-                connection.Open();
-
-                string selectDefaultRolesQuery = "SELECT RoleID FROM Role WHERE isDefaultRole = 'true'";
-
-                using (SqlCommand selectDefaultRolesCommand = new SqlCommand(selectDefaultRolesQuery, connection))
-                {
-                    using (var reader = selectDefaultRolesCommand.ExecuteReader())
-                    {
-                        while (reader.Read())
-                        {
-                            int roleId = Convert.ToInt32(reader["RoleID"]);
-
-                            using (var insertConnection = Connection.Connect())
-                            {
-                                insertConnection.Open();
-
-                                string insertUserRoleQuery = "INSERT INTO UserRoles (UserID, RoleID) VALUES (@UserID, @RoleID)";
-
-                                using (SqlCommand insertUserRoleCommand = new SqlCommand(insertUserRoleQuery, insertConnection))
-                                {
-                                    insertUserRoleCommand.Parameters.AddWithValue("@UserID", userId);
-                                    insertUserRoleCommand.Parameters.AddWithValue("@RoleID", roleId);
-
-                                    insertUserRoleCommand.ExecuteNonQuery();
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        }
-
         public static bool IsAdmin(int userId)
         {
             using (var context = new UserManagementTableEntities())
@@ -274,12 +409,6 @@ namespace DemoUserManagement.DataAccess
                 Logger.AddError("Couldn't retrieve Country Details", ex);
             }
             return roleList;
-        }
-
-        public static string SaveFile(int userId, int documentType)
-        {
-            string fileHandlerUrl = $"FileUploadDownload.ashx?Action=download&UserID={userId}&DocumentName={documentType}";
-            return fileHandlerUrl;
         }
 
     }

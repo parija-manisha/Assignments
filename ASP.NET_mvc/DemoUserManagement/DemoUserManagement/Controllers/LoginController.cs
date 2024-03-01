@@ -1,4 +1,7 @@
-﻿using DemoUserManagement.Business;
+﻿using DemoUserManagement.Attributes;
+using DemoUserManagement.Business;
+using DemoUserManagement.Models;
+using DemoUserManagement.Util;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,7 +17,6 @@ namespace DemoUserManagement.Controllers
             return View();
         }
 
-        // GET: Login
         [HttpPost]
         public ActionResult Login(string username, string password)
         {
@@ -22,7 +24,21 @@ namespace DemoUserManagement.Controllers
 
             if (userId != -1)
             {
-                return RedirectToAction("UserDetailForm", new { UserID = userId });
+                var isAdmin = UserLogic.IsAdmin(userId);
+
+                UserSession sessionModel = new UserSession();
+                sessionModel.UserId = userId;
+                sessionModel.IsAdmin = isAdmin;
+                Constants.SetSessionDetail(sessionModel);
+
+                if (isAdmin)
+                {
+                    return RedirectToAction("UserList", "UserList");
+                }
+                else
+                {
+                    return RedirectToAction("UserDetailForm","Registration", new { UserID = userId });
+                }
             }
             else
             {
@@ -30,5 +46,6 @@ namespace DemoUserManagement.Controllers
                 return View("Login");
             }
         }
+
     }
 }

@@ -1,4 +1,5 @@
 ﻿using DemoUserManagement.DataAccess;
+using DemoUserManagement.Models;
 using DemoUserManagement.Util;
 using System;
 using System.Collections.Generic;
@@ -14,14 +15,24 @@ namespace DemoUserManagement.Business
 {
     public class DocumentLogic
     {
-        public static void InsertDocument(int objectID, int objectType, int documentName, string fileName, Guid fileNameGuid, string fileExtension)
+        public static void InsertDocument(int objectID, int objectType, int documentName, string fileName, string fileNameGuid)
         {
-            DocumentDataAccess.InsertDocument(objectID, objectType, documentName, fileName, fileNameGuid, fileExtension);
+            DocumentDataAccess.InsertDocument(objectID, objectType, documentName, fileName, fileNameGuid);
         }
 
-        public static DataTable LoadDocument(string objectID, int objectType)
+        public static List<DocumentList> LoadDocument(int objectID, int objectType)
         {
             return DocumentDataAccess.GetDocumentList(objectID, objectType);
+        }
+
+        public static int CountDocument(int userId, int objectType)
+        {
+            return DocumentDataAccess.CountDocument(userId, objectType);
+        }
+
+        public static DocumentListDTO GetDocumentDetails(int documentId)
+        {
+            return DocumentDataAccess.GetDocumentDetails(documentId);
         }
     }
 }

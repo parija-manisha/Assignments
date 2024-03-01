@@ -1,4 +1,5 @@
 ﻿
+using ClassLibrary1;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,10 +24,19 @@ namespace DemoUserManagement.Models
         public string MotherName { get; set; }
         public string Password { get; set; }
         public string ConfirmPassword { get; set; }
-      
+
         public AddressDetailDTO PresentAddress { get; set; }
         public AddressDetailDTO PermanentAddress { get; set; }
+        public UserRoleDTO UserRole { get; set; }
         public DocumentListDTO DocumentList { get; set; }
-        public SessionModel SessionModel { get; set; }  
+
+
+        public int CurrentPage { get; set; }
+        public int TotalPages { get; set; }
+
+        public List<UserDetailDTO> Users { get; set; }
+        public List<CountryDTO> Countries { get; set; }
+        public List<StateDTO> States { get; set; }
+        public List<DocumentTypeDTO> DocumentType { get; set; }
     }
 }

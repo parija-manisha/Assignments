@@ -39,30 +39,36 @@ namespace DemoUserManagement.DataAccess
             }
         }
 
-
-        public static DataTable GetNote(string objectID, int objectType)
+        public static List<Note> GetNotes(int userId, int pageName)
         {
-            DataTable dt = new DataTable();
-
-            using (var connection = Connection.Connect())
+            try
             {
-                connection.Open();
-
-                string query = "SELECT ObjectID, ObjectType, NoteText, TimeStamp FROM Note WHERE ObjectID = @objectID AND ObjectType = @objectType";
-                using (SqlCommand command = new SqlCommand(query, connection))
+                using (var context = new UserManagementTableEntities())
                 {
-                    command.Parameters.AddWithValue("@objectID", objectID);
-                    command.Parameters.AddWithValue("@objectType", objectType);
+                    var notes = context.Notes
+                        .Where(n => n.ObjectID == userId && n.ObjectType == pageName)
+                        .OrderByDescending(n => n.TimeStamp)
+                        .ToList();
 
-
-                    using (SqlDataAdapter adapter = new SqlDataAdapter(command))
-                    {
-                        adapter.Fill(dt);
-                    }
+                    return notes;
                 }
             }
+            catch (Exception ex)
+            {
+                Logger.AddError("Error while retrieving notes", ex);
+                return new List<Note>();
+            }
+        }
 
-            return dt;
+
+        public static int CountNote(int userId, int objectType)
+        {
+            using (var context = new UserManagementTableEntities())
+            {
+                int count = context.Notes.Where(n => n.ObjectID == userId && n.ObjectType == objectType).Count();
+
+                return count;
+            }
         }
     }
 }
