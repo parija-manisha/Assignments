@@ -38,5 +38,6 @@ namespace DemoUserManagement.Models
         public List<CountryDTO> Countries { get; set; }
         public List<StateDTO> States { get; set; }
         public List<DocumentTypeDTO> DocumentType { get; set; }
+        public List<RoleDTO> Roles { get; set; }
     }
 }

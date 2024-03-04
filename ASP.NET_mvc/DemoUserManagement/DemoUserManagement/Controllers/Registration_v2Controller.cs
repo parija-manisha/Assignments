@@ -23,6 +23,7 @@ namespace DemoUserManagement.Controllers
                 Countries = CountryLogic.GetCountryList(),
                 DocumentType = Constants.DocumentType,
                 States = new List<StateDTO>(),
+                Roles = UserLogic.GetRoleList(),
             };
 
             if (userID.HasValue)

@@ -118,9 +118,8 @@
             @if (userSession != null && userSession.IsAdmin)
             {
                 <div id="AddRoleToUser" class="pt-5">
-                    <label for="DdlAddRole" class="pe-2 w-25">Add Roles</label>
-                    <select id="DdlAddRole" class="w-100">
-                    </select>
+                    @Html.LabelFor(m => m.UserRole.RoleID, new { @class = "pe-2 w-25" })
+                    @Html.DropDownListFor(m => m.UserRole.RoleID, new SelectList(Model.Roles, "RoleID", "RoleName"), "-- Select Role --", new { @class = "w-100", @id = "DdlRole" })
                 </div>
 
             }
@@ -217,7 +216,7 @@
 
     if (Model.UserID != 0 && Model != null)
     {
-        @Html.Partial("~/Views/Note_And_Download_View/Note_v2.cshtml", new { objectType = ViewBag.PageName });
-        @Html.Partial("~/Views/Note_And_Download_View/Document_v2.cshtml");
+        @Html.Partial("~/Views/Note_And_Download_View/_Note_v2.cshtml", new { objectType = ViewBag.PageName });
+        @Html.Partial("~/Views/Note_And_Download_View/_Document_v2.cshtml");
     }
 }

@@ -284,6 +284,7 @@ namespace DemoUserManagement.DataAccess
                             MotherName = userEntity.MotherName,
                             Countries = new List<CountryDTO>(),
                             States = new List<StateDTO>(),
+                            Roles = new List<RoleDTO>(),
                             DocumentType = new List<DocumentTypeDTO>()
                         };
 
@@ -336,6 +337,7 @@ namespace DemoUserManagement.DataAccess
                                 StateName = permanentAddress.State.StateName
                             });
                         }
+
 
                         return userDto;
                     }
@@ -406,7 +408,7 @@ namespace DemoUserManagement.DataAccess
             }
             catch (Exception ex)
             {
-                Logger.AddError("Couldn't retrieve Country Details", ex);
+                Logger.AddError("Couldn't retrieve Role Details", ex);
             }
             return roleList;
         }
