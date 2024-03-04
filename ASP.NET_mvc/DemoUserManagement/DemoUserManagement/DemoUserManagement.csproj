@@ -124,7 +124,7 @@
     <Compile Include="Attributes\CustomAuthorize_v2Attribute.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\Login_v2Controller.cs" />
-    <Compile Include="Controllers\PartialViewsController.cs" />
+    <Compile Include="Controllers\Note_And_Download_ViewController.cs" />
     <Compile Include="Controllers\RegistrationController.cs" />
     <Compile Include="Controllers\Registration_v2Controller.cs" />
     <Compile Include="Controllers\UserListController.cs" />
@@ -187,14 +187,14 @@
     <Content Include="Views\Login\Login.cshtml" />
     <Content Include="Views\Registration\UserDetailForm.cshtml" />
     <Content Include="Views\UserList\UserList.cshtml" />
-    <Content Include="Views\PartialViews\Note.cshtml" />
-    <Content Include="Views\PartialViews\Document.cshtml" />
+    <Content Include="Views\Note_And_Download_View\_Note.cshtml" />
+    <Content Include="Views\Note_And_Download_View\_Document.cshtml" />
     <Content Include="Views\Login_v2\Login_v2.cshtml" />
     <Content Include="Views\Registration_v2\UserDetail_v2.cshtml" />
     <Content Include="Views\UserList_v2\UserList_v2.cshtml" />
     <Content Include="Views\Shared\_Layout_v2.cshtml" />
-    <Content Include="Views\PartialViews\Document_v2.cshtml" />
-    <Content Include="Views\PartialViews\Note_v2.cshtml" />
+    <Content Include="Views\Note_And_Download_View\_Document_v2.cshtml" />
+    <Content Include="Views\Note_And_Download_View\_Note_v2.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -12,16 +12,16 @@ using WebGrease.Css.Ast;
 
 namespace DemoUserManagement.Controllers
 {
-    public class PartialViewsController : Controller
+    public class Note_And_Download_ViewController : Controller
     {
         // GET: Note
-        public ActionResult Note(int pageName, int userID)
-        {
-            ViewData["PageName"] = pageName;
-            ViewData["UserID"] = userID;
+        //public ActionResult Note(int pageName, int userID)
+        //{
+        //    ViewData["PageName"] = pageName;
+        //    ViewData["UserID"] = userID;
 
-            return PartialView("~/Views/PartialViews/Note.cshtml");
-        }
+        //    return PartialView("~/Views/PartialViews/_Note.cshtml");
+        //}
 
         [HttpGet]
         public JsonResult GetNotes(int userId, int pageName)
@@ -43,7 +43,7 @@ namespace DemoUserManagement.Controllers
             ViewData["PageName"] = pageName;
             ViewData["UserID"] = userId;
 
-            return PartialView("~/Views/PartialViews/Document.cshtml");
+            return PartialView("~/Views/PartialViews/_Document.cshtml");
         }
 
         [HttpGet]

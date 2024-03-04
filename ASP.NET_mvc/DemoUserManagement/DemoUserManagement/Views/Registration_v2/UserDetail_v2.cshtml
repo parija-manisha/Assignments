@@ -217,7 +217,7 @@
 
     if (Model.UserID != 0 && Model != null)
     {
-        @Html.Partial("~/Views/PartialViews/Note_v2.cshtml", new { objectType = ViewBag.PageName });
-        @Html.Partial("~/Views/PartialViews/Document_v2.cshtml");
+        @Html.Partial("~/Views/Note_And_Download_View/Note_v2.cshtml", new { objectType = ViewBag.PageName });
+        @Html.Partial("~/Views/Note_And_Download_View/Document_v2.cshtml");
     }
 }
