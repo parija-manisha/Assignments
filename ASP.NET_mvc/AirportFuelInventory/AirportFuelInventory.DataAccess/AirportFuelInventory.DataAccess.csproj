@@ -1,0 +1,123 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{274682E5-6BF9-4880-BCD5-156FEEDCDB7D}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>AirportFuelInventory.DataAccess</RootNamespace>
+    <AssemblyName>AirportFuelInventory.DataAccess</AssemblyName>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Aircraft.cs">
+      <DependentUpon>AirportFuelManagement.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AircraftDataAccess.cs" />
+    <Compile Include="Airport.cs">
+      <DependentUpon>AirportFuelManagement.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AirportDataAccess.cs" />
+    <Compile Include="AirportFuelManagement.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AirportFuelManagement.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AirportFuelManagement.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AirportFuelManagement.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AirportFuelManagement.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AirportFuelManagement.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Transaction.cs">
+      <DependentUpon>AirportFuelManagement.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TransactionDataAccess.cs" />
+    <Compile Include="User.cs">
+      <DependentUpon>AirportFuelManagement.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UserDataAccess.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\AirportFuelInventory.Models\AirportFuelInventory.Models.csproj">
+      <Project>{62cc34f0-e980-4d10-b4eb-2f12a5d48874}</Project>
+      <Name>AirportFuelInventory.Models</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\AirportFuelInventory.Utils\AirportFuelInventory.Utils.csproj">
+      <Project>{0204a7f5-b953-44b3-9372-4b701ffb3b1b}</Project>
+      <Name>AirportFuelInventory.Utils</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EntityDeploy Include="AirportFuelManagement.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>AirportFuelManagement.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="AirportFuelManagement.edmx.diagram">
+      <DependentUpon>AirportFuelManagement.edmx</DependentUpon>
+    </None>
+    <None Include="App.Config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="AirportFuelManagement.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>AirportFuelManagement.edmx</DependentUpon>
+      <LastGenOutput>AirportFuelManagement.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="AirportFuelManagement.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>AirportFuelManagement.edmx</DependentUpon>
+      <LastGenOutput>AirportFuelManagement.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

@@ -1,0 +1,44 @@
+﻿@model AirportFuelInventory.Models.AircraftDTO
+
+@{
+    ViewBag.Title = "AircraftList";
+}
+
+<h2>AircraftList</h2>
+
+<div>
+    @if (Model != null)
+    {
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>@Html.DisplayNameFor(model => Model.Aircrafts.First().Aircraft_Name)</th>
+                    <th>@Html.DisplayNameFor(model => Model.Aircrafts.First().Airline)</th>
+                    <th>@Html.DisplayNameFor(model => Model.Aircrafts.First().Source)</th>
+                    <th>@Html.DisplayNameFor(model => Model.Aircrafts.First().Destination)</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var aircraft in Model.Aircrafts)
+                {
+                    <tr>
+                        <td>@aircraft.Aircraft_Name</td>
+                        <td>@aircraft.Airline</td>
+                        <td>@aircraft.Source</td>
+                        <td>@aircraft.Destination</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+    else
+    {
+        <p>No Aircraft available</p>
+    }
+</div>
+
+<p>
+    @Html.ActionLink("Add Aircraft", "AddAircraft", "Aircraft") 
+    @Html.ActionLink("Back to List", "Index")
+</p>
+

@@ -1,0 +1,30 @@
+﻿@model List<AirportFuelInventory.Models.ReportSummary>
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Available Fuel Report</title>
+</head>
+<body>
+    <h2>Available Fuel Report</h2>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Airport ID</th>
+                <th>Airport Name</th>
+                <th>Available Fuel</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.AirportId</td>
+                    <td>@item.AirportName</td>
+                    <td>@item.AvailableFuel</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</body>
+</html>

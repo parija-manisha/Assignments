@@ -35,7 +35,6 @@
                         <label for="TxtEmailID" class="pe-2 w-25">Email ID</label>
                         <input type="email" id="TxtEmailID" class="w-100">
                     </div>
-                    <label id="LblEmailExists"></label>
                 </div>
                 <div>
                     <div id="DivPassword" class="pb-3">

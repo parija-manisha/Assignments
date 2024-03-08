@@ -12,7 +12,7 @@
             <label for="TxtPassword">Password</label>
             <input type="password" class="form-control" id="TxtPassword" placeholder="Enter your password" required>
         </div>
-        <button type="submit" class="btn btn-primary mt-4" onclick="loginUser(); return false;">Login</button>
+        <button type="button" class="btn btn-primary mt-4" onclick="loginUser(); return false;">Login</button>
         <button type="submit" class="btn btn-secondary mt-4" onclick="newUser(); return false;">New User</button>
     </div>
 </asp:Content>

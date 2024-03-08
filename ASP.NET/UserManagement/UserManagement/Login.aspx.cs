@@ -19,7 +19,7 @@ namespace UserManagement
         }
 
         [WebMethod]
-        public static int LoginUser(string username, string password)
+        public static UserSession LoginUser(string username, string password)
         {
             try
             {
@@ -36,18 +36,18 @@ namespace UserManagement
 
                     Constants.SetSessionDetail(session);
 
-                    return userId;
+                    return session;
                 }
 
                 else
                 {
-                    return -1;
+                    return new UserSession { UserId = -1, IsAdmin = false };
                 }
             }
             catch (Exception ex)
             {
                 Logger.AddError("Login Failed\n", ex);
-                return -1;
+                return new UserSession { UserId = -1, IsAdmin = false };
             }
         }
 

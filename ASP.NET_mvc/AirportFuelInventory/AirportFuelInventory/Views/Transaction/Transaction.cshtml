@@ -1,0 +1,54 @@
+﻿@model AirportFuelInventory.Models.TransactionDTO
+
+@{
+    ViewBag.Title = "Transaction";
+}
+
+<h2>Transaction</h2>
+
+<div>
+    @if (Model != null)
+    {
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Date and Time</th>
+                    <th>Transaction Type</th>
+                    <th>Airport ID</th>
+                    <th>Aircraft ID</th>
+                    <th>Quantity</th>
+                    <th>Parent Transaction ID</th>
+                    <th></th>
+            </thead>
+            <tbody>
+                @foreach (var airport in Model.Transactions)
+                {
+                    <tr>
+                        <td>@airport.Transaction_date_time</td>
+                        <td>@airport.Transaction_type</td>
+                        <td>@airport.Airport_id</td>
+                        <td>@airport.Aircraft_id</td>
+                        <td>@airport.Quantity</td>
+                        <td>@airport.Transaction_id_parent</td>
+                        <td>
+                            @if (airport.Transaction_id_parent != 0)
+                            {
+                                <a href="@Url.Action("AddTransaction", "Transaction", new { Transaction_Id = airport.Transaction_Id })">Reverse</a>
+                            }
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+    else
+    {
+        <p>No Transaction available</p>
+    }
+</div>
+
+<p>
+    @Html.ActionLink("Add Transaction", "AddTransaction") |
+    @Html.ActionLink("Reverse Transaction", "ReverseTransaction")
+</p>
+
