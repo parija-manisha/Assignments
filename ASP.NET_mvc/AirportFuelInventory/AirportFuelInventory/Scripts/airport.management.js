@@ -1,4 +1,11 @@
-﻿function isEmailExist() {
+﻿$('#exportPdf').on('click', function () {
+    var pdf = new jsPDF();
+    pdf.autoTable({ html: 'table' });
+    pdf.save('AvailableFuelReport.pdf');
+});
+
+
+function isEmailExist() {
     var email = $("#TxtEmailId").val();
     $.ajax({
         type: "POST",
