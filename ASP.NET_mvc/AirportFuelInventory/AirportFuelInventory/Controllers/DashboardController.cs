@@ -19,5 +19,6 @@ namespace AirportFuelInventory.Controllers
             return View(availableFuelData);
         }
 
+
     }
 }
