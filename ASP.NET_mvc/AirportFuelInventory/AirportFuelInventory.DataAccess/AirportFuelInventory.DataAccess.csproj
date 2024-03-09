@@ -51,34 +51,34 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Aircraft.cs">
-      <DependentUpon>AirportFuelManagement.tt</DependentUpon>
+      <DependentUpon>AirportManagement.tt</DependentUpon>
     </Compile>
     <Compile Include="AircraftDataAccess.cs" />
     <Compile Include="Airport.cs">
-      <DependentUpon>AirportFuelManagement.tt</DependentUpon>
+      <DependentUpon>AirportManagement.tt</DependentUpon>
     </Compile>
     <Compile Include="AirportDataAccess.cs" />
-    <Compile Include="AirportFuelManagement.Context.cs">
+    <Compile Include="AirportManagement.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>AirportFuelManagement.Context.tt</DependentUpon>
+      <DependentUpon>AirportManagement.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="AirportFuelManagement.cs">
+    <Compile Include="AirportManagement.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>AirportFuelManagement.tt</DependentUpon>
+      <DependentUpon>AirportManagement.tt</DependentUpon>
     </Compile>
-    <Compile Include="AirportFuelManagement.Designer.cs">
+    <Compile Include="AirportManagement.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>AirportFuelManagement.edmx</DependentUpon>
+      <DependentUpon>AirportManagement.edmx</DependentUpon>
     </Compile>
     <Compile Include="Transaction.cs">
-      <DependentUpon>AirportFuelManagement.tt</DependentUpon>
+      <DependentUpon>AirportManagement.tt</DependentUpon>
     </Compile>
     <Compile Include="TransactionDataAccess.cs" />
     <Compile Include="User.cs">
-      <DependentUpon>AirportFuelManagement.tt</DependentUpon>
+      <DependentUpon>AirportManagement.tt</DependentUpon>
     </Compile>
     <Compile Include="UserDataAccess.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -94,12 +94,12 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EntityDeploy Include="AirportFuelManagement.edmx">
+    <EntityDeploy Include="AirportManagement.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>AirportFuelManagement.Designer.cs</LastGenOutput>
+      <LastGenOutput>AirportManagement.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <None Include="AirportFuelManagement.edmx.diagram">
-      <DependentUpon>AirportFuelManagement.edmx</DependentUpon>
+    <None Include="AirportManagement.edmx.diagram">
+      <DependentUpon>AirportManagement.edmx</DependentUpon>
     </None>
     <None Include="App.Config" />
     <None Include="packages.config" />
@@ -108,15 +108,15 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="AirportFuelManagement.Context.tt">
+    <Content Include="AirportManagement.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>AirportFuelManagement.edmx</DependentUpon>
-      <LastGenOutput>AirportFuelManagement.Context.cs</LastGenOutput>
+      <DependentUpon>AirportManagement.edmx</DependentUpon>
+      <LastGenOutput>AirportManagement.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="AirportFuelManagement.tt">
+    <Content Include="AirportManagement.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>AirportFuelManagement.edmx</DependentUpon>
-      <LastGenOutput>AirportFuelManagement.cs</LastGenOutput>
+      <DependentUpon>AirportManagement.edmx</DependentUpon>
+      <LastGenOutput>AirportManagement.cs</LastGenOutput>
     </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -10,6 +10,6 @@ namespace AirportFuelInventory.Models
     {
         public int AirportId { get; set; }
         public string AirportName { get; set; }
-        public int AvailableFuel { get; set; }
+        public decimal AvailableFuel { get; set; }
     }
 }

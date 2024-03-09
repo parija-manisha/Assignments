@@ -37,9 +37,10 @@ namespace AirportFuelInventory.DataAccess
         {
             using (var context = new AirportFuelInventoryEntities())
             {
-                return context.Users.Any(u => u.Email == username && String.Equals(u.Password, password, StringComparison.Ordinal));
+                return context.Users.Any(u => u.Email == username && u.Password == password);
             }
         }
+
 
     }
 }

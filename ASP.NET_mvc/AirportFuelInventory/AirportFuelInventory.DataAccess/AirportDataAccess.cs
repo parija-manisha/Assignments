@@ -36,30 +36,33 @@ namespace AirportFuelInventory.DataAccess
             }
         }
 
-        public static List<object> GetAvailableFuel()
+        public static List<ReportSummary> GetAvailableFuel()
         {
             using (var context = new AirportFuelInventoryEntities())
             {
-                var availableFuel = context.Transactions
+                var transactions = context.Transactions
                     .Where(t => t.Transaction_type == (int)Constants.TransactionType.In || t.Transaction_type == (int)Constants.TransactionType.Out)
                     .GroupBy(t => t.Airport_id)
                     .Select(group => new
                     {
                         AirportId = group.Key,
-                        AvailableFuel = group.Sum(t => t.Transaction_type == (int)Constants.TransactionType.In ? t.Quantity : -t.Quantity)
+                        TotalQuantity = group.Sum(t => t.Quantity * (t.Transaction_type == (int)Constants.TransactionType.In ? 1 : -1))
                     })
                     .ToList();
 
                 var airports = context.Airports.ToDictionary(a => a.Airport_Id, a => a);
 
-                return availableFuel
-                    .Select(data => new
+                var result = transactions
+                    .Where(t => airports.ContainsKey(t.AirportId))
+                    .Select(t => new ReportSummary
                     {
-                        AirportId = data.AirportId,
-                        AirportName = airports.ContainsKey(data.AirportId) ? airports[data.AirportId].Airport_Name : "Unknown",
-                        AvailableFuel = data.AvailableFuel
+                        AirportId = t.AirportId,
+                        AirportName = airports[t.AirportId].Airport_Name,
+                        AvailableFuel = airports[t.AirportId].Fuel_Capacity - t.TotalQuantity
                     })
-                    .ToList<object>();
+                    .ToList();
+
+                return result;
             }
         }
     }

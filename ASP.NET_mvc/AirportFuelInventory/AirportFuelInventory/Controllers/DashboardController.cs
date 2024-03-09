@@ -16,8 +16,7 @@ namespace AirportFuelInventory.Controllers
         {
             var availableFuelData = AirportLogic.GetAvailableFuel();
 
-            List<ReportSummary> reportSummaries = availableFuelData.Cast<ReportSummary>().ToList();
-            return View(reportSummaries);
+            return View(availableFuelData);
         }
 
     }
