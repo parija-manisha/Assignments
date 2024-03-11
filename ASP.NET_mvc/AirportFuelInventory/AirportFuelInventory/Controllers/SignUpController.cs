@@ -17,9 +17,10 @@ namespace AirportFuelInventory.Controllers
             return View();
         }
 
-        public ActionResult NewUser(UserDTO userDTO) {
+        public ActionResult NewUser(UserDTO userDTO)
+        {
             UserLogic.NewUser(userDTO);
-            return RedirectToAction("SignUp");
+            return RedirectToAction("Login", "Login");
         }
 
         public JsonResult IsEmailExist(string email)

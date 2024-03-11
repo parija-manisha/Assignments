@@ -7,24 +7,24 @@
     <div class="row justify-content-center">
         <div class="col-md-6">
             <div class="card p-4">
-                <h2 class="text-center mb-4">Login</h2>
+                <h2 class="text-center mb-4">Register</h2>
                 @using (Html.BeginForm("NewUser", "SignUp", FormMethod.Post))
                 {
                     @Html.AntiForgeryToken()
 
-                    <div class="mb-3 align-items">
+                    <div class="mb-3 align-items w-100">
                         @Html.LabelFor(m => m.Name, new { @class = "form-label" })
-                        @Html.TextBoxFor(m => m.Name, new { @class = "form-control" })
+                        @Html.TextBoxFor(m => m.Name, new { @class = "form-control w-100" })
                     </div>
 
-                    <div class="mb-3 text-center">
+                    <div class="mb-3 align-items w-100">
                         @Html.LabelFor(m => m.Email, new { @class = "form-label" })
-                        @Html.TextBoxFor(m => m.Email, new { @class = "form-control", type = "email", oninput = "isEmailExist(); return false;", @id = "TxtEmailId" })
+                        @Html.TextBoxFor(m => m.Email, new { @class = "form-control w-100", type = "email", oninput = "isEmailExist(); return false;", @id = "TxtEmailId" })
                     </div>
 
-                    <div class="mb-3 text-center">
+                    <div class="mb-3 align-items w-100">
                         @Html.LabelFor(m => m.Password, new { @class = "form-label" })
-                        @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
+                        @Html.PasswordFor(m => m.Password, new { @class = "form-control w-100" })
                     </div>
 
                     <div class="text-center">

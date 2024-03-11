@@ -1,4 +1,4 @@
-﻿@model List<AirportFuelInventory.Models.ReportSummary>
+﻿@model List<AirportFuelInventory.Models.ReportSummary.AirportSummary>
 
 <!DOCTYPE html>
 <html>
@@ -7,7 +7,7 @@
 </head>
 <body>
     <h2>Available Fuel Report</h2>
-    <table class="table">
+    <table id="availableFuelTable" class="table">
         <thead>
             <tr>
                 <th>Airport ID</th>
@@ -55,7 +55,6 @@
             </ul>
         </nav>
     </div>
-
-    <button id="exportPdf">Export to PDF</button>
+    @Html.ActionLink("Export To PDF", "ExportToPdf", null, new { @class = "btn btn-primary" })
 </body>
 </html>

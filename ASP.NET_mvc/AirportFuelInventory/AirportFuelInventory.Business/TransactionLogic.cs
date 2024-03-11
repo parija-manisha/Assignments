@@ -26,7 +26,8 @@ namespace AirportFuelInventory.Business
                 Transaction_type = transaction.Transaction_type,
                 Airport_id = transaction.Airport_id,
                 Aircraft_id = transaction.Aircraft_id,
-                Quantity = transaction.Quantity
+                Quantity = transaction.Quantity,
+                Transaction_id_parent = transaction.Transaction_id_parent,
 
             }).ToList();
 
@@ -38,9 +39,9 @@ namespace AirportFuelInventory.Business
             TransactionDataAccess.ReverseTransaction(transactionDTO);
         }
 
-        public static TransactionDTO GetTransactionById(int trnasactionId)
+        public static TransactionDTO GetTransactionById(int transactionId)
         {
-            return TransactionDataAccess.GetTransactionById(trnasactionId);
+            return TransactionDataAccess.GetTransactionById(transactionId);
         }
     }
 }

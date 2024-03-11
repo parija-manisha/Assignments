@@ -42,7 +42,7 @@ namespace AirportFuelInventory.Controllers
                 }
             }
 
-            model.TransactionTypes = model.TransactionTypes ?? new List<Constants.TransactionType>();
+            model.TransactionTypes = model.TransactionTypes ?? new List<TransactionType>();
 
             return View(model);
 

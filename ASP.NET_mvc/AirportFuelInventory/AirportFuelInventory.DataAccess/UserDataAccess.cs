@@ -1,4 +1,5 @@
 ﻿using AirportFuelInventory.Models;
+using AirportFuelInventory.Utils;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -33,12 +34,30 @@ namespace AirportFuelInventory.DataAccess
             }
         }
 
-        public static bool CheckLogin(string username, string password)
+        public static int CheckLogin(string username, string password)
         {
+            int userID = -1;
             using (var context = new AirportFuelInventoryEntities())
             {
-                return context.Users.Any(u => u.Email == username && u.Password == password);
+                try
+                {
+                    var user = context.Users
+                        .Where(u => u.Email == username && u.Password == password)
+                        .Select(u => new { u.User_Id })
+                        .FirstOrDefault();
+
+                    if (user != null)
+                    {
+                        userID = user.User_Id;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Logger.AddError("Error in GetUserID method", ex);
+                }
             }
+
+            return userID;
         }
 
 

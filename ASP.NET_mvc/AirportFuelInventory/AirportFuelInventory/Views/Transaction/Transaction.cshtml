@@ -31,7 +31,7 @@
                         <td>@airport.Quantity</td>
                         <td>@airport.Transaction_id_parent</td>
                         <td>
-                            @if (airport.Transaction_id_parent != 0)
+                            @if (airport.Transaction_id_parent == null)
                             {
                                 <a href="@Url.Action("AddTransaction", "Transaction", new { Transaction_Id = airport.Transaction_Id })">Reverse</a>
                             }
@@ -48,7 +48,6 @@
 </div>
 
 <p>
-    @Html.ActionLink("Add Transaction", "AddTransaction") |
-    @Html.ActionLink("Reverse Transaction", "ReverseTransaction")
+    @Html.ActionLink("Add Transaction", "AddTransaction")
 </p>
 

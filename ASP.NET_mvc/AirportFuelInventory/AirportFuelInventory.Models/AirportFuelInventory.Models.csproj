@@ -45,11 +45,5 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ReportSummary.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\AirportFuelInventory.Utils\AirportFuelInventory.Utils.csproj">
-      <Project>{0204a7f5-b953-44b3-9372-4b701ffb3b1b}</Project>
-      <Name>AirportFuelInventory.Utils</Name>
-    </ProjectReference>
-  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -21,17 +21,26 @@ namespace AirportFuelInventory.Controllers
         [HttpPost]
         public ActionResult Login(UserDTO model)
         {
-            bool loginSuccess = UserLogic.CheckLogin(model.Email, model.Password);
+            int userID = UserLogic.CheckLogin(model.Email, model.Password);
 
-            if (loginSuccess)
+            if (userID != -1)
             {
+                UserSession sessionModel = new UserSession();
+                sessionModel.UserId = userID;
+                Constants.SetSessionDetail(sessionModel);
                 return RedirectToAction("Dashboard", "Dashboard");
             }
             else
             {
-                ModelState.AddModelError("", "Invalid credentials. Please try again.");
+                ViewBag.ErrorMessage = "Invalid credentials. Please try again.";
                 return View(model);
             }
+        }
+
+        public ActionResult Logout()
+        {
+            Session.Clear();
+            return RedirectToAction("Login", "Login");
         }
     }
 }

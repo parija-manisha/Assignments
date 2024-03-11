@@ -1,5 +1,6 @@
 ﻿using AirportFuelInventory.Business;
 using AirportFuelInventory.Models;
+using Rotativa;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,6 +20,10 @@ namespace AirportFuelInventory.Controllers
             return View(availableFuelData);
         }
 
-
+        public ActionResult ExportToPdf()
+        {
+            var report = new ActionAsPdf("Dashboard");
+            return report;
+        }
     }
 }

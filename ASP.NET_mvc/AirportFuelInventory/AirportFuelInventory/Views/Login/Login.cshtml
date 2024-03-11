@@ -4,6 +4,11 @@
     ViewBag.Title = "Login";
 }
 
+@if (!string.IsNullOrEmpty(ViewBag.ErrorMessage))
+{
+    <p style="color: red;">@ViewBag.ErrorMessage</p>
+}
+
 <div class="m-5">
     <div class="border rounded">
         <div class="d-flex align-items-center">

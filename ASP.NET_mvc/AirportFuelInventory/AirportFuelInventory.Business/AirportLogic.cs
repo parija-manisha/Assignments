@@ -28,9 +28,13 @@ namespace AirportFuelInventory.Business
             AirportDataAccess.NewAirport(airport);
         }
 
-        public static List<ReportSummary> GetAvailableFuel()
+        public static List<ReportSummary.AirportSummary> GetAvailableFuel()
         {
             return AirportDataAccess.GetAvailableFuel();
+        }
+        public static List<ReportSummary.FuelSummary> GetFuelConsumptionReport()
+        {
+            return AirportDataAccess.GetFuelConsumptionReport();
         }
     }
 }

@@ -1,6 +1,7 @@
-﻿$('#exportPdf').on('click', function () {
+﻿
+$('#exportPdf').on('click', function () {
     var pdf = new jsPDF();
-    pdf.autoTable({ html: 'table' });
+    pdf.autoTable({ html: '#availableFuelTable' });
     pdf.save('AvailableFuelReport.pdf');
 });
 

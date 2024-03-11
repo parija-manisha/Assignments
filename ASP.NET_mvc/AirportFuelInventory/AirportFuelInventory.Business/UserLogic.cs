@@ -21,7 +21,7 @@ namespace AirportFuelInventory.Business
             return UserDataAccess.IsEmailExist(email);
         }
 
-        public static bool CheckLogin(string username, string password) { 
+        public static int CheckLogin(string username, string password) { 
             return UserDataAccess.CheckLogin(username, password);
         }
     }

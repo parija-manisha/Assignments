@@ -16,8 +16,8 @@
             @Html.LabelFor(model => model.Transaction_type, new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.DropDownListFor(model => model.Transaction_type,
-                    new SelectList(Enum.GetValues(typeof(AirportFuelInventory.Utils.Constants.TransactionType))
-                        .Cast<AirportFuelInventory.Utils.Constants.TransactionType>()
+                    new SelectList(Enum.GetValues(typeof(AirportFuelInventory.Models.Model.TransactionType))
+                        .Cast<AirportFuelInventory.Models.Model.TransactionType>()
                         .Select(e => new SelectListItem
                         {
                             Value = ((int)e).ToString(),

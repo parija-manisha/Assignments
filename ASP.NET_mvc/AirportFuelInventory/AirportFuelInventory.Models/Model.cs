@@ -1,5 +1,4 @@
-﻿using AirportFuelInventory.Utils;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -10,6 +9,12 @@ namespace AirportFuelInventory.Models
 {
     public class Model
     {
+        public enum TransactionType
+        {
+            In = 1,
+            Out = 2
+        }
+
         public class AircraftDTO
         {
             public int Aircraft_Id { get; set; }
@@ -42,7 +47,7 @@ namespace AirportFuelInventory.Models
             public int? Transaction_id_parent { get; set; }
 
             public List<TransactionDTO> Transactions { get; set; }
-            public List<Constants.TransactionType> TransactionTypes { get; set; }
+            public List<TransactionType> TransactionTypes { get; set; }
 
         }
 
@@ -54,6 +59,11 @@ namespace AirportFuelInventory.Models
             public string Password { get; set; }
 
             public List<UserDTO> Users { get; set; }
+        }
+
+        public class UserSession
+        {
+            public int UserId { get; set; }
         }
     }
 
