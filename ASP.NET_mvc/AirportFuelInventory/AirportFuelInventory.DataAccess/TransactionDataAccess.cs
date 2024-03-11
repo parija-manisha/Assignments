@@ -11,79 +11,134 @@ namespace AirportFuelInventory.DataAccess
 {
     public class TransactionDataAccess
     {
-        public static void NewTransaction(TransactionDTO transactionDTO)
+        public static bool NewTransaction(TransactionDTO transactionDTO)
         {
-            using (var context = new AirportFuelInventoryEntities())
+            try
             {
-                Transaction transaction = new Transaction
+                using (var context = new AirportFuelInventoryEntities())
                 {
-                    Transaction_date_time = DateTime.Now,
-                    Transaction_type = transactionDTO.Transaction_type,
-                    Airport_id = transactionDTO.Airport_id,
-                    Aircraft_id = transactionDTO.Aircraft_id,
-                    Quantity = transactionDTO.Quantity,
-                };
-                context.Transactions.Add(transaction);
-                context.SaveChanges();
+                    Transaction transaction = new Transaction
+                    {
+                        Transaction_date_time = DateTime.Now,
+                        Transaction_type = transactionDTO.Transaction_type,
+                        Airport_id = transactionDTO.Airport_id,
+                        Aircraft_id = transactionDTO.Aircraft_id,
+                        Quantity = transactionDTO.Quantity,
+                    };
+                    context.Transactions.Add(transaction);
+                    context.SaveChanges();
+                    return true;
+                }
+            }
+            catch (Exception ex)
+            {
+                Logger.AddError("Could not add transaction list", ex);
+                return false;
             }
         }
 
         public static List<Transaction> GetTransactionList()
         {
-            List<Transaction> transactionList = new List<Transaction>();
-            using (var context = new AirportFuelInventoryEntities())
+            try
             {
-                transactionList = context.Transactions.ToList();
-            }
+                List<Transaction> transactionList;
+                using (var context = new AirportFuelInventoryEntities())
+                {
+                    transactionList = context.Transactions
+                        .OrderByDescending(t => t.Transaction_date_time)
+                        .ToList();
+                }
 
-            return transactionList;
+                return transactionList;
+            }
+            catch (Exception ex)
+            {
+                Logger.AddError("Could not fetch transaction list", ex);
+                return null;
+            }
         }
 
-        public static void ReverseTransaction(TransactionDTO transactionDTO)
+
+        public static bool ReverseTransaction(TransactionDTO transactionDTO)
         {
-            using (var context = new AirportFuelInventoryEntities())
+            try
             {
-                Transaction transaction = new Transaction
+                using (var context = new AirportFuelInventoryEntities())
                 {
-                    Transaction_date_time = DateTime.Now,
-                    Transaction_type = transactionDTO.Transaction_type,
-                    Airport_id = transactionDTO.Airport_id,
-                    Aircraft_id = transactionDTO.Aircraft_id,
-                    Quantity = transactionDTO.Quantity,
-                    Transaction_id_parent = transactionDTO.Transaction_Id,
-                };
-                context.Transactions.Add(transaction);
-                context.SaveChanges();
+                    Transaction transaction = new Transaction
+                    {
+                        Transaction_date_time = DateTime.Now,
+                        Transaction_type = transactionDTO.Transaction_type,
+                        Airport_id = transactionDTO.Airport_id,
+                        Aircraft_id = transactionDTO.Aircraft_id,
+                        Quantity = transactionDTO.Quantity,
+                        Transaction_id_parent = transactionDTO.Transaction_Id,
+                    };
+                    context.Transactions.Add(transaction);
+                    context.SaveChanges();
+                    return true;
+                }
+            }
+            catch (Exception ex)
+            {
+                Logger.AddError("Could not fetch aircraft list", ex);
+                return false;
             }
         }
 
         public static TransactionDTO GetTransactionById(int transactionId)
         {
-            using (AirportFuelInventoryEntities context = new AirportFuelInventoryEntities())
+            try
             {
-                var transactionDetails = context.Transactions
-                    .FirstOrDefault(u => u.Transaction_Id == transactionId);
-
-                if (transactionDetails != null)
+                using (AirportFuelInventoryEntities context = new AirportFuelInventoryEntities())
                 {
-                    var transaction = new TransactionDTO
+                    var transactionDetails = context.Transactions
+                        .FirstOrDefault(u => u.Transaction_Id == transactionId);
+
+                    if (transactionDetails != null)
                     {
-                        Transaction_Id = transactionId,
-                        Transaction_date_time = transactionDetails.Transaction_date_time,
-                        TransactionTypes = Constants.TransactionTypes,
-                        Transaction_type = transactionDetails.Transaction_type,
-                        Airport_id = transactionDetails.Airport_id,
-                        Aircraft_id = transactionDetails.Aircraft_id,
-                        Quantity = transactionDetails.Quantity,
-                        Transaction_id_parent= transactionDetails.Transaction_Id,
-                    };
+                        var transaction = new TransactionDTO
+                        {
+                            Transaction_Id = transactionId,
+                            Transaction_date_time = transactionDetails.Transaction_date_time,
+                            TransactionTypes = Constants.TransactionTypes,
+                            Transaction_type = transactionDetails.Transaction_type,
+                            Airport_id = transactionDetails.Airport_id,
+                            Aircraft_id = transactionDetails.Aircraft_id,
+                            Quantity = transactionDetails.Quantity,
+                            Transaction_id_parent = transactionDetails.Transaction_Id,
+                        };
 
-                    return transaction;
+                        return transaction;
+                    }
+
+                    return null;
                 }
-
+            }
+            catch (Exception ex)
+            {
+                Logger.AddError("Could not fetch transaction details", ex);
                 return null;
             }
+        }
 
+        public static bool DeleteTransaction()
+        {
+            try
+            {
+                using (var context = new AirportFuelInventoryEntities())
+                {
+                    var allTransactions = context.Transactions.ToList();
+                    context.Transactions.RemoveRange(allTransactions);
+                    context.SaveChanges();
+                    return true;
+                }
+            }
+            catch (Exception ex)
+            {
+                Logger.AddError("Failed to delete", ex);
+                return false;
+            }
         }
     }
 }

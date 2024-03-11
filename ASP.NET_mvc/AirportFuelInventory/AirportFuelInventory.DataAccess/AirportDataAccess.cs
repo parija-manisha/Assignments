@@ -13,16 +13,57 @@ namespace AirportFuelInventory.DataAccess
     {
         public static List<Airport> GetAirportList()
         {
-            List<Airport> airportList = new List<Airport>();
-            using (var context = new AirportFuelInventoryEntities())
+            try
             {
-                airportList = context.Airports.ToList();
-            }
+                List<Airport> airportList = new List<Airport>();
+                using (var context = new AirportFuelInventoryEntities())
+                {
+                    airportList = context.Airports
+                        .OrderBy(t => t.Airport_Name)
+                        .ToList();
+                }
 
-            return airportList;
+                return airportList;
+            }
+            catch (Exception ex)
+            {
+                Logger.AddError("Could not fetch airport list", ex);
+                return null;
+            }
         }
 
-        public static void NewAirport(AirportDTO airportDto)
+        public static List<Airport> GetAirportNameList()
+        {
+            try
+            {
+                List<Airport> airportNameList;
+                using (var context = new AirportFuelInventoryEntities())
+                {
+                    var anonymousList = context.Airports
+                        .Select(a => new
+                        {
+                            a.Airport_Id,
+                            a.Airport_Name
+                        })
+                        .ToList();
+
+                    airportNameList = anonymousList.Select(a => new Airport
+                    {
+                        Airport_Id = a.Airport_Id,
+                        Airport_Name = a.Airport_Name
+                    })
+                    .ToList();
+                }
+                return airportNameList;
+            }
+            catch (Exception ex)
+            {
+                Logger.AddError("Could not fetch airport name list", ex);
+                return null;
+            }
+        }
+
+        public static bool NewAirport(AirportDTO airportDto)
         {
             using (var context = new AirportFuelInventoryEntities())
             {
@@ -33,78 +74,109 @@ namespace AirportFuelInventory.DataAccess
                 };
                 context.Airports.Add(airport);
                 context.SaveChanges();
+                return true;
             }
         }
 
         public static List<ReportSummary.AirportSummary> GetAvailableFuel()
         {
-            using (var context = new AirportFuelInventoryEntities())
+            try
             {
-                var transactions = context.Transactions
-                    .Where(t => t.Transaction_type == (int)TransactionType.In || t.Transaction_type == (int)TransactionType.Out)
-                    .GroupBy(t => t.Airport_id)
-                    .Select(group => new
+                using (var context = new AirportFuelInventoryEntities())
+                {
+                    var transactions = context.Transactions
+                        .Where(t => t.Transaction_type == (int)TransactionType.In || t.Transaction_type == (int)TransactionType.Out)
+                        .GroupBy(t => t.Airport_id)
+                        .Select(group => new
+                        {
+                            AirportId = group.Key,
+                            TotalQuantity = group.Sum(t => t.Quantity * (t.Transaction_type == (int)TransactionType.In ? 1 : -1))
+                        })
+                        .ToList();
+
+                    var airports = context.Airports.ToDictionary(a => a.Airport_Id, a => a);
+
+                    var result = new List<ReportSummary.AirportSummary>();
+
+                    foreach (var airport in airports)
                     {
-                        AirportId = group.Key,
-                        TotalQuantity = group.Sum(t => t.Quantity * (t.Transaction_type == (int)TransactionType.In ? 1 : -1))
-                    })
-                    .ToList();
+                        var airportId = airport.Key;
+                        var airportName = airport.Value.Airport_Name;
 
-                var airports = context.Airports.ToDictionary(a => a.Airport_Id, a => a);
+                        var transaction = transactions.FirstOrDefault(t => t.AirportId == airportId);
 
-                var result = transactions
-                    .Where(t => airports.ContainsKey(t.AirportId))
-                    .Select(t => new ReportSummary.AirportSummary
-                    {
-                        AirportId = t.AirportId,
-                        AirportName = airports[t.AirportId].Airport_Name,
-                        AvailableFuel = airports[t.AirportId].Fuel_Capacity - t.TotalQuantity
-                    })
-                    .ToList();
+                        var availableFuel = transaction != null
+                            ? ((airport.Value.Fuel_Capacity + transaction.TotalQuantity) < 0)
+                                ? 0
+                                : airport.Value.Fuel_Capacity + transaction.TotalQuantity
+                            : airport.Value.Fuel_Capacity;
 
-                return result;
+                        result.Add(new ReportSummary.AirportSummary
+                        {
+                            AirportId = airportId,
+                            AirportName = airportName,
+                            AvailableFuel = availableFuel
+                        });
+                    }
+
+                    return result;
+                }
+            }
+            catch (Exception ex)
+            {
+                Logger.AddError("Could not fetch available fuel report", ex);
+                return null;
             }
         }
+
         public static List<ReportSummary.FuelSummary> GetFuelConsumptionReport()
         {
-            using (var context = new AirportFuelInventoryEntities())
+            try
             {
-                var transactions = context.Transactions
-                    .Where(t => t.Transaction_type == (int)TransactionType.In || t.Transaction_type == (int)TransactionType.Out)
-                    .GroupBy(t => t.Airport_id)
-                    .Select(group => new
-                    {
-                        AirportId = group.Key,
-                        TotalQuantity = group.Sum(t => t.Quantity * (t.Transaction_type == (int)TransactionType.In ? 1 : -1))
-                    })
-                    .ToList();
+                using (var context = new AirportFuelInventoryEntities())
+                {
+                    var transactions = context.Transactions
+                        .Where(t => t.Transaction_type == (int)TransactionType.In || t.Transaction_type == (int)TransactionType.Out)
+                        .GroupBy(t => t.Airport_id)
+                        .Select(group => new
+                        {
+                            AirportId = group.Key,
+                            TotalQuantity = group.Sum(t => t.Quantity * (t.Transaction_type == (int)TransactionType.In ? 1 : -1))
+                        })
+                        .ToList();
 
-                var airports = context.Airports.ToDictionary(a => a.Airport_Id, a => a);
+                    var airports = context.Airports.ToDictionary(a => a.Airport_Id, a => a);
+                    var aircrafts = context.Aircraft.ToDictionary(a => a.Aircraft_Id, a => a);
 
-                var transactionsList = context.Transactions
-                    .GroupBy(t => t.Airport_id)
-                    .ToDictionary(group => group.Key, group => group.ToList());
+                    var transactionsList = context.Transactions
+                        .GroupBy(t => t.Airport_id)
+                        .ToDictionary(group => group.Key, group => group.ToList());
 
-                var result = transactions
-                    .Where(t => airports.ContainsKey(t.AirportId))
-                    .Select(t => new ReportSummary.FuelSummary
-                    {
-                        AirportName = airports[t.AirportId].Airport_Name,
-                        TransactionDTO = transactionsList[t.AirportId]
-                            .Select(tr => new TransactionDTO
-                            {
-                                Transaction_date_time = tr.Transaction_date_time,
-                                Airport_id = tr.Airport_id,
-                                Aircraft_id = tr.Aircraft_id,
-                                Quantity = tr.Quantity,
-                                Transaction_type = tr.Transaction_type
-                            })
-                            .ToList(),
-                        AvailableFuel = airports[t.AirportId].Fuel_Capacity - t.TotalQuantity
-                    })
-                    .ToList();
+                    var result = transactions
+                        .Select(t => new ReportSummary.FuelSummary
+                        {
+                            AirportName = airports[t.AirportId].Airport_Name,
+                            TransactionDTO = transactionsList[t.AirportId]
+                                .Select(tr => new TransactionDTO
+                                {
+                                    Transaction_date_time = tr.Transaction_date_time,
+                                    Quantity = tr.Quantity,
+                                    Transaction_type = tr.Transaction_type,
+                                    Aircraft_id = tr.Aircraft_id,
+                                    AircraftName = aircrafts.ContainsKey(tr.Aircraft_id) ? aircrafts[tr.Aircraft_id].Aircraft_Name : string.Empty
+                                })
+                                .ToList(),
+                            AvailableFuel = airports[t.AirportId].Fuel_Capacity - t.TotalQuantity
+                        })
+                        .ToList();
 
-                return result;
+                    return result;
+                }
+            }
+            catch (Exception ex)
+            {
+                Logger.AddError("Could not fetch fuel consumption report", ex);
+                return null;
             }
         }
     }

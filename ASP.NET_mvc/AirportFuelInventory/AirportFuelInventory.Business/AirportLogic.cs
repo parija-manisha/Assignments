@@ -23,9 +23,21 @@ namespace AirportFuelInventory.Business
             return airportList;
         }
 
-        public static void NewAirport(AirportDTO airport)
+        public static bool NewAirport(AirportDTO airport)
         {
-            AirportDataAccess.NewAirport(airport);
+            return AirportDataAccess.NewAirport(airport);
+        }
+
+        public static List<AirportDTO> GetAirportNameList()
+        {
+            List<Airport> airportName = AirportDataAccess.GetAirportNameList();
+            List<AirportDTO> airportDTOs = airportName.Select(airport => new AirportDTO
+            {
+                Airport_Name = airport.Airport_Name,
+                Airport_Id = airport.Airport_Id,
+            }).ToList();
+
+            return airportDTOs;
         }
 
         public static List<ReportSummary.AirportSummary> GetAvailableFuel()

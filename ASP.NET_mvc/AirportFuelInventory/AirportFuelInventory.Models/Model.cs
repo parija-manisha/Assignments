@@ -45,9 +45,20 @@ namespace AirportFuelInventory.Models
             public int Aircraft_id { get; set; }
             public int Quantity { get; set; }
             public int? Transaction_id_parent { get; set; }
+            public string AircraftName { get; set; }
+
+            public string TransactionTypeString
+            {
+                get
+                {
+                    return ((TransactionType)Transaction_type).ToString();
+                }
+            }
 
             public List<TransactionDTO> Transactions { get; set; }
             public List<TransactionType> TransactionTypes { get; set; }
+            public List<AirportDTO> AirportDTOs { get; set; }
+            public List<AircraftDTO> AircraftDTOs { get; set; }
 
         }
 

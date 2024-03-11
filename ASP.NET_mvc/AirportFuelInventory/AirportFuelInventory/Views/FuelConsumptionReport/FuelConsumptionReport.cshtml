@@ -7,6 +7,9 @@
 <html>
 <head>
     <title>Available Fuel Report</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.6/jspdf.plugin.autotable.min.js"></script>
+    <script src="~/Scripts/airport.management.js"></script>
 </head>
 <body>
     <h2>FuelConsumptionReport</h2>
@@ -31,20 +34,20 @@
                             <table class="inner-table">
                                 <thead>
                                     <tr>
-                                        <th>Transaction Date</th>
-                                        <th>Aircraft ID</th>
-                                        <th>Quantity</th>
-                                        <th>Transaction Type</th>
+                                        <th class="pe-1 border">Transaction Date</th>
+                                        <th class="pe-1 border">Aircraft Name</th>
+                                        <th class="pe-1 border">Quantity</th>
+                                        <th class="pe-1 border">Transaction Type</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     @foreach (var transaction in item.TransactionDTO)
                                     {
                                         <tr>
-                                            <td>@transaction.Transaction_date_time</td>
-                                            <td>@transaction.Aircraft_id</td>
-                                            <td>@transaction.Quantity</td>
-                                            <td>@transaction.Transaction_type</td>
+                                            <td class="pe-1 border">@transaction.Transaction_date_time</td>
+                                            <td class="pe-1 border">@transaction.AircraftName</td>
+                                            <td class="pe-1 border">@transaction.Quantity</td>
+                                            <td class="pe-1 border">@transaction.TransactionTypeString</td>
                                         </tr>
                                     }
                                 </tbody>
@@ -81,6 +84,6 @@
             </ul>
         </nav>
     </div>
-    @Html.ActionLink("Export To PDF", "ExportToPdf", null, new { @class = "btn btn-primary" })
+    <input type="button" onclick="generateFuelConsumptionReport()" value="Export To PDF" />
 </body>
 </html>

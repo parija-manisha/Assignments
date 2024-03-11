@@ -25,9 +25,16 @@
                 {
                     <tr>
                         <td>@airport.Transaction_date_time</td>
-                        <td>@airport.Transaction_type</td>
+                        <td>@airport.TransactionTypeString</td>
                         <td>@airport.Airport_id</td>
-                        <td>@airport.Aircraft_id</td>
+                        @if (airport.TransactionTypeString == "Out")
+                        {
+                            <td>@airport.Aircraft_id</td>
+                        }
+                        else
+                        {
+                            <td></td>
+                        }
                         <td>@airport.Quantity</td>
                         <td>@airport.Transaction_id_parent</td>
                         <td>
@@ -48,6 +55,8 @@
 </div>
 
 <p>
-    @Html.ActionLink("Add Transaction", "AddTransaction")
+    @Html.ActionLink("Add Transaction", "AddTransaction") |
+    @Html.ActionLink("Delete all Transactions", "DeleteTransaction")
+
 </p>
 

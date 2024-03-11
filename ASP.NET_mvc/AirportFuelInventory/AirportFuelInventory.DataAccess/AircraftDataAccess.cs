@@ -1,4 +1,6 @@
 ﻿using AirportFuelInventory.Models;
+using AirportFuelInventory.Utils;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,28 +14,80 @@ namespace AirportFuelInventory.DataAccess
     {
         public static List<Aircraft> GetAircraftList()
         {
-            List<Aircraft> aircraftList = new List<Aircraft>();
-            using (var context = new AirportFuelInventoryEntities())
+            try
             {
-                aircraftList = context.Aircraft.ToList();
-            }
+                List<Aircraft> aircraftList = new List<Aircraft>();
+                using (var context = new AirportFuelInventoryEntities())
+                {
+                    aircraftList = context.Aircraft
+                        .OrderBy(t => t.Aircraft_Id)
+                        .ToList();
+                }
 
-            return aircraftList;
+                return aircraftList;
+            }
+            catch (Exception ex)
+            {
+                Logger.AddError("Could not fetch aircraft list", ex);
+                return null;
+            }
         }
 
-        public static void NewAircraft(AircraftDTO aircraftDTO)
+        public static List<Aircraft> GetAircraftNameList()
         {
-            using (var context = new AirportFuelInventoryEntities())
+            try
             {
-                Aircraft aircraft = new Aircraft
+                List<Aircraft> aircraftNameList;
+                using (var context = new AirportFuelInventoryEntities())
                 {
-                    Aircraft_Name=aircraftDTO.Aircraft_Name,
-                    Airline=aircraftDTO.Airline,
-                    Source=aircraftDTO.Source,
-                    Destination=aircraftDTO.Destination,
-                };
-                context.Aircraft.Add(aircraft);
-                context.SaveChanges();
+                    var anonymousList = context.Aircraft
+                        .Select(a => new
+                        {
+                            a.Aircraft_Id,
+                            a.Aircraft_Name
+                        })
+                        .ToList();
+
+                    aircraftNameList = anonymousList.Select(a => new Aircraft
+                    {
+                        Aircraft_Id = a.Aircraft_Id,
+                        Aircraft_Name = a.Aircraft_Name
+                    })
+                    .ToList();
+                }
+                return aircraftNameList;
+            }
+            catch (Exception ex)
+            {
+                Logger.AddError("Could not fetch aircraft name list", ex);
+                return null;
+            }
+        }
+
+
+        public static bool NewAircraft(AircraftDTO aircraftDTO)
+        {
+            try
+            {
+                using (var context = new AirportFuelInventoryEntities())
+                {
+                    Aircraft aircraft = new Aircraft
+                    {
+                        Aircraft_Name = aircraftDTO.Aircraft_Name,
+                        Airline = aircraftDTO.Airline,
+                        Source = aircraftDTO.Source,
+                        Destination = aircraftDTO.Destination,
+                    };
+                    context.Aircraft.Add(aircraft);
+                    context.SaveChanges();
+
+                    return true;
+                }
+            }
+            catch (Exception ex)
+            {
+                Logger.AddError("Could not fetch aircraft list", ex);
+                return false;
             }
         }
     }

@@ -16,18 +16,30 @@ namespace AirportFuelInventory.Business
             List<Aircraft> aircrafts = AircraftDataAccess.GetAircraftList();
             List<AircraftDTO> aircraftList = aircrafts.Select(aircraft => new AircraftDTO
             {
-                Aircraft_Name=aircraft.Aircraft_Name,
-                Airline=aircraft.Airline,
-                Source=aircraft.Source,
-                Destination=aircraft.Destination,
+                Aircraft_Name = aircraft.Aircraft_Name,
+                Airline = aircraft.Airline,
+                Source = aircraft.Source,
+                Destination = aircraft.Destination,
             }).ToList();
 
             return aircraftList;
         }
 
-        public static void NewAircraft(AircraftDTO aircraft)
+        public static bool NewAircraft(AircraftDTO aircraft)
         {
-            AircraftDataAccess.NewAircraft(aircraft);
+            return AircraftDataAccess.NewAircraft(aircraft);
+        }
+
+        public static List<AircraftDTO> GetAircraftNameList()
+        {
+            List<Aircraft> aircraftName = AircraftDataAccess.GetAircraftNameList();
+            List<AircraftDTO> aircraftDTOs = aircraftName.Select(aircraft => new AircraftDTO
+            {
+                Aircraft_Name = aircraft.Aircraft_Name,
+                Aircraft_Id = aircraft.Aircraft_Id,
+            }).ToList();
+
+            return aircraftDTOs;
         }
     }
 }

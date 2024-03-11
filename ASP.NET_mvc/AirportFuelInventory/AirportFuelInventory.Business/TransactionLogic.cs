@@ -11,9 +11,9 @@ namespace AirportFuelInventory.Business
 {
     public class TransactionLogic
     {
-        public static void NewTransaction(TransactionDTO transactionDTO)
+        public static bool NewTransaction(TransactionDTO transactionDTO)
         {
-            TransactionDataAccess.NewTransaction(transactionDTO);
+            return TransactionDataAccess.NewTransaction(transactionDTO);
         }
 
         public static List<TransactionDTO> GetTransactionList()
@@ -42,6 +42,11 @@ namespace AirportFuelInventory.Business
         public static TransactionDTO GetTransactionById(int transactionId)
         {
             return TransactionDataAccess.GetTransactionById(transactionId);
+        }
+
+        public static bool DeleteTransaction()
+        {
+            return TransactionDataAccess.DeleteTransaction();
         }
     }
 }
