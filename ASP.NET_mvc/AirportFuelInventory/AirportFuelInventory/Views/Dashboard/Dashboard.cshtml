@@ -43,7 +43,7 @@
                 @for (int i = 1; i <= Model.First().TotalPages; i++)
                 {
                     <li class="page-item @(i == Model.First().CurrentPage ? "active" : "")">
-                        <a class="page-link" href="@Url.Action("UserList_v2", "UserList_v2", new { page = i, sortColumn = ViewBag.SortColumn, sortDirection = ViewBag.SortDirection })">@i</a>
+                        <a class="page-link" href="@Url.Action("Dashboard", "DashboardDashboard", new { page = i, sortColumn = ViewBag.SortColumn, sortDirection = ViewBag.SortDirection })">@i</a>
                     </li>
                 }
 
