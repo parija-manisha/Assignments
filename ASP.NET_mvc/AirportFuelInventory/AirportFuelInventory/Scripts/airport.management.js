@@ -1,11 +1,4 @@
 ﻿
-$('#exportPdf').on('click', function () {
-    var pdf = new jsPDF();
-    pdf.autoTable({ html: '#availableFuelTable' });
-    pdf.save('AvailableFuelReport.pdf');
-});
-
-
 function isEmailExist() {
     var email = $("#TxtEmailId").val();
     $.ajax({
