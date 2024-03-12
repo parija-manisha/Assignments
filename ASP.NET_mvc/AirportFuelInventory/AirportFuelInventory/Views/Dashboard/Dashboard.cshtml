@@ -24,30 +24,5 @@
         }
     </tbody>
 </table>
-
-<div id="pagination_v2" class="mt-3">
-    <nav aria-label="Page navigation">
-        <ul class="pagination justify-content-end">
-            <li class="page-item">
-                <a class="page-link" href="@Url.Action("Dashboard", "Dashboard", new { page = Model.First().CurrentPage - 1, sortColumn = ViewBag.SortColumn, sortDirection = ViewBag.SortDirection })" aria-label="Previous">
-                    <span aria-hidden="true">&laquo;</span>
-                </a>
-            </li>
-
-            @for (int i = 1; i <= Model.First().TotalPages; i++)
-            {
-                <li class="page-item @(i == Model.First().CurrentPage ? "active" : "")">
-                    <a class="page-link" href="@Url.Action("Dashboard", "DashboardDashboard", new { page = i, sortColumn = ViewBag.SortColumn, sortDirection = ViewBag.SortDirection })">@i</a>
-                </li>
-            }
-
-            <li class="page-item">
-                <a class="page-link" href="@Url.Action("Dashboard", "Dashboard", new { page = Model.First().CurrentPage + 1, sortColumn = ViewBag.SortColumn, sortDirection = ViewBag.SortDirection })" aria-label="Next">
-                    <span aria-hidden="true">&raquo;</span>
-                </a>
-            </li>
-        </ul>
-    </nav>
-</div>
 <input type="button" onclick="generateAvailableFuelReport()" value="Export To PDF" />
 
