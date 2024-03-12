@@ -15,7 +15,17 @@ namespace AirportFuelInventory.Controllers
 
         public ActionResult Dashboard(int? page, string sortColumn, string sortDirection)
         {
-            var availableFuelData = AirportLogic.GetAvailableFuel();
+            int currentPage = page ?? 1;
+            sortColumn = string.IsNullOrEmpty(sortColumn) ? "AirportName" : sortColumn; ;
+            sortDirection = ToggleSortDirection(sortDirection);
+            var availableFuelData = AirportLogic.GetAvailableFuel(start: (currentPage - 1) * 5, length: 5, sortColumn:sortColumn,sortDirection:sortDirection);
+
+            int totalPages = AirportLogic.GetTotalRecords() / 5;
+            foreach (var airport in availableFuelData)
+            {
+                airport.CurrentPage = currentPage;
+                airport.TotalPages = totalPages;
+            }
 
             return View(availableFuelData);
         }

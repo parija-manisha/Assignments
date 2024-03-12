@@ -40,13 +40,18 @@ namespace AirportFuelInventory.Business
             return airportDTOs;
         }
 
-        public static List<ReportSummary.AirportSummary> GetAvailableFuel()
+        public static List<ReportSummary.AirportSummary> GetAvailableFuel(int start, int length, string sortColumn, string sortDirection)
         {
-            return AirportDataAccess.GetAvailableFuel();
+            return AirportDataAccess.GetAvailableFuel(start, length, sortColumn, sortDirection);
         }
         public static List<ReportSummary.FuelSummary> GetFuelConsumptionReport()
         {
             return AirportDataAccess.GetFuelConsumptionReport();
+        }
+
+        public static int GetTotalRecords()
+        {
+            return AirportDataAccess.GetTotalRecords();
         }
     }
 }

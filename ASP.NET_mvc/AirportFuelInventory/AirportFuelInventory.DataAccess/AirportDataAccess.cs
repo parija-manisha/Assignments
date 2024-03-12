@@ -1,5 +1,6 @@
 ﻿using AirportFuelInventory.Models;
 using AirportFuelInventory.Utils;
+using iText.Kernel.Geom;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -78,7 +79,7 @@ namespace AirportFuelInventory.DataAccess
             }
         }
 
-        public static List<ReportSummary.AirportSummary> GetAvailableFuel()
+        public static List<ReportSummary.AirportSummary> GetAvailableFuel(int start, int length, string sortColumn, string sortDirection)
         {
             try
             {
@@ -98,7 +99,11 @@ namespace AirportFuelInventory.DataAccess
 
                     var result = new List<ReportSummary.AirportSummary>();
 
-                    foreach (var airport in airports)
+                    var paginatedAirports = airports.Skip(start)
+                                          .Take(length)
+                                          .ToList();
+
+                    foreach (var airport in paginatedAirports)
                     {
                         var airportId = airport.Key;
                         var airportName = airport.Value.Airport_Name;
@@ -177,6 +182,14 @@ namespace AirportFuelInventory.DataAccess
             {
                 Logger.AddError("Could not fetch fuel consumption report", ex);
                 return null;
+            }
+        }
+
+        public static int GetTotalRecords()
+        {
+            using (var context = new AirportFuelInventoryEntities())
+            {
+                return context.Airports.Count();
             }
         }
     }
