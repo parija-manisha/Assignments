@@ -25,5 +25,10 @@ namespace AirportFuelInventory.Utils
         {
             HttpContext.Current.Session["UserSession"] = userSession;
         }
+
+        public static string ToggleSortDirection(string currentDirection)
+        {
+            return currentDirection?.ToUpper() == "ASC" ? "DESC" : "ASC";
+        }
     }
 }

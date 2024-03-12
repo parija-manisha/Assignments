@@ -1,17 +1,6 @@
 ﻿@model List<AirportFuelInventory.Models.ReportSummary.FuelSummary>
-
-@{
-    ViewBag.Title = "FuelConsumptionReport";
-}
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Available Fuel Report</title>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.6/jspdf.plugin.autotable.min.js"></script>
-    <script src="~/Scripts/airport.management.js"></script>
-</head>
-<body>
+@if (Model.Any())
+{
     <h2>FuelConsumptionReport</h2>
 
     <table id="fuelConsumptionTable" class="table">
@@ -69,13 +58,6 @@
                     </a>
                 </li>
 
-                @for (int i = 1; i <= Model.First().TotalPages; i++)
-                {
-                    <li class="page-item @(i == Model.First().CurrentPage ? "active" : "")">
-                        <a class="page-link" href="@Url.Action("FuelConsumptionReport", "FuelConsumptionReport", new { page = i, sortColumn = ViewBag.SortColumn, sortDirection = ViewBag.SortDirection })">@i</a>
-                    </li>
-                }
-
                 <li class="page-item">
                     <a class="page-link" href="@Url.Action("FuelConsumptionReport", "FuelConsumptionReport", new { page = Model.First().CurrentPage + 1, sortColumn = ViewBag.SortColumn, sortDirection = ViewBag.SortDirection })" aria-label="Next">
                         <span aria-hidden="true">&raquo;</span>
@@ -85,5 +67,4 @@
         </nav>
     </div>
     <input type="button" onclick="generateFuelConsumptionReport()" value="Export To PDF" />
-</body>
-</html>
+}

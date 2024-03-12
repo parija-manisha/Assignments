@@ -2,6 +2,7 @@
 using AirportFuelInventory.Utils;
 using iText.Kernel.Geom;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,7 +13,7 @@ namespace AirportFuelInventory.DataAccess
 {
     public class AirportDataAccess
     {
-        public static List<Airport> GetAirportList()
+        public static List<Airport> GetAirportList(int start, int length, string sortColumn, string sortDirection)
         {
             try
             {
@@ -21,6 +22,8 @@ namespace AirportFuelInventory.DataAccess
                 {
                     airportList = context.Airports
                         .OrderBy(t => t.Airport_Name)
+                        .Skip(start)
+                        .Take(length)
                         .ToList();
                 }
 
@@ -134,7 +137,7 @@ namespace AirportFuelInventory.DataAccess
             }
         }
 
-        public static List<ReportSummary.FuelSummary> GetFuelConsumptionReport()
+        public static List<ReportSummary.FuelSummary> GetFuelConsumptionReport(int start, int length, string sortColumn, string sortDirection)
         {
             try
             {
@@ -158,6 +161,8 @@ namespace AirportFuelInventory.DataAccess
                         .ToDictionary(group => group.Key, group => group.ToList());
 
                     var result = transactions
+                        .Skip(start)
+                        .Take(length)
                         .Select(t => new ReportSummary.FuelSummary
                         {
                             AirportName = airports[t.AirportId].Airport_Name,
@@ -185,11 +190,12 @@ namespace AirportFuelInventory.DataAccess
             }
         }
 
-        public static int GetTotalRecords()
+        public static double GetTotalRecords()
         {
             using (var context = new AirportFuelInventoryEntities())
             {
-                return context.Airports.Count();
+                var count = context.Airports.Count();
+                return count;
             }
         }
     }

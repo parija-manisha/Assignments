@@ -15,6 +15,12 @@ namespace AirportFuelInventory.Models
             Out = 2
         }
 
+        public class Pagination
+        {
+            public int CurrentPage { get; set; }
+            public int TotalPages { get; set; }
+        }
+
         public class AircraftDTO
         {
             public int Aircraft_Id { get; set; }
@@ -23,7 +29,8 @@ namespace AirportFuelInventory.Models
             public string Source { get; set; }
             public string Destination { get; set; }
 
-            public List<AircraftDTO> Aircrafts { get; set; }
+            public Pagination Pagination { get; set; }
+
         }
 
         public class AirportDTO
@@ -32,7 +39,7 @@ namespace AirportFuelInventory.Models
             public string Airport_Name { get; set; }
             public decimal Fuel_Capacity { get; set; }
 
-            public List<AirportDTO> Airports { get; set; }
+            public Pagination Pagination { get; set; }
 
         }
 

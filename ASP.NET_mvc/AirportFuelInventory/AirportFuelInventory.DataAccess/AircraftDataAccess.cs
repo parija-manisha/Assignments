@@ -12,7 +12,7 @@ namespace AirportFuelInventory.DataAccess
 {
     public class AircraftDataAccess
     {
-        public static List<Aircraft> GetAircraftList()
+        public static List<Aircraft> GetAircraftList(int start, int length, string sortColumn, string sortDirection)
         {
             try
             {
@@ -21,6 +21,8 @@ namespace AirportFuelInventory.DataAccess
                 {
                     aircraftList = context.Aircraft
                         .OrderBy(t => t.Aircraft_Id)
+                        .Skip(start)
+                        .Take(length)
                         .ToList();
                 }
 
@@ -64,6 +66,13 @@ namespace AirportFuelInventory.DataAccess
             }
         }
 
+        public static int GetTotalRecords()
+        {
+            using (var context = new AirportFuelInventoryEntities())
+            {
+                return context.Aircraft.Count();
+            }
+        }
 
         public static bool NewAircraft(AircraftDTO aircraftDTO)
         {

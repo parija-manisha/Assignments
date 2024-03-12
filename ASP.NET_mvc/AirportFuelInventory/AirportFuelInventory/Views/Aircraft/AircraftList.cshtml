@@ -1,4 +1,4 @@
-﻿@model AirportFuelInventory.Models.Model.AircraftDTO
+﻿@model List<AirportFuelInventory.Models.Model.AircraftDTO>
 
 @{
     ViewBag.Title = "AircraftList";
@@ -12,21 +12,26 @@
         <table class="table">
             <thead>
                 <tr>
-                    <th>@Html.DisplayNameFor(model => Model.Aircrafts.First().Aircraft_Name)</th>
-                    <th>@Html.DisplayNameFor(model => Model.Aircrafts.First().Airline)</th>
-                    <th>@Html.DisplayNameFor(model => Model.Aircrafts.First().Source)</th>
-                    <th>@Html.DisplayNameFor(model => Model.Aircrafts.First().Destination)</th>
+                    <th>Sl.No</th>
+                    <th>@Html.DisplayNameFor(model => Model.First().Aircraft_Name)</th>
+                    <th>@Html.DisplayNameFor(model => Model.First().Airline)</th>
+                    <th>@Html.DisplayNameFor(model => Model.First().Source)</th>
+                    <th>@Html.DisplayNameFor(model => Model.First().Destination)</th>
                 </tr>
             </thead>
             <tbody>
-                @foreach (var aircraft in Model.Aircrafts)
-                {
-                    <tr>
-                        <td>@aircraft.Aircraft_Name</td>
-                        <td>@aircraft.Airline</td>
-                        <td>@aircraft.Source</td>
-                        <td>@aircraft.Destination</td>
-                    </tr>
+                @{
+                    var count = (Model.First().Pagination.CurrentPage - 1) * 10 + 1;
+                    foreach (var aircraft in Model)
+                    {
+                        <tr>
+                            <td>@(count++)</td>
+                            <td>@aircraft.Aircraft_Name</td>
+                            <td>@aircraft.Airline</td>
+                            <td>@aircraft.Source</td>
+                            <td>@aircraft.Destination</td>
+                        </tr>
+                    }
                 }
             </tbody>
         </table>

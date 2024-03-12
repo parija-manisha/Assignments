@@ -1,5 +1,6 @@
 ﻿using AirportFuelInventory.Business;
 using AirportFuelInventory.Models;
+using AirportFuelInventory.Utils;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,12 +13,20 @@ namespace AirportFuelInventory.Controllers
     public class AircraftController : Controller
     {
         // GET: Aircraft
-        public ActionResult AircraftList()
+        public ActionResult AircraftList(int? page, string sortColumn, string sortDirection)
         {
-            var model = new AircraftDTO
+            int currentPage = page ?? 1;
+            sortColumn = string.IsNullOrEmpty(sortColumn) ? "Aircraft_Name" : sortColumn; 
+            sortDirection = Constants.ToggleSortDirection(sortDirection);
+            var model = AircraftLogic.GetAircraftList(start: (currentPage - 1) * 5, length: 5, sortColumn: sortColumn, sortDirection: sortDirection);
+
+            int totalPages = AircraftLogic.GetTotalRecords() / 5;
+            foreach (var aircraft in model)
             {
-                Aircrafts = AircraftLogic.GetAircraftList()
-            };
+                aircraft.Pagination = new Pagination();                aircraft.Pagination.CurrentPage = currentPage;
+                aircraft.Pagination.TotalPages = totalPages;
+            }
+            
             return View(model);
         }
 

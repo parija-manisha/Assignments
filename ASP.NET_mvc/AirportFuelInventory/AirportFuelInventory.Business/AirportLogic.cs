@@ -11,9 +11,9 @@ namespace AirportFuelInventory.Business
 {
     public class AirportLogic
     {
-        public static List<AirportDTO> GetAirportList()
+        public static List<AirportDTO> GetAirportList(int start, int length, string sortColumn, string sortDirection)
         {
-            List<Airport> airports = AirportDataAccess.GetAirportList();
+            List<Airport> airports = AirportDataAccess.GetAirportList(start, length, sortColumn, sortDirection);
             List<AirportDTO> airportList = airports.Select(airport => new AirportDTO
             {
                 Airport_Name = airport.Airport_Name,
@@ -44,12 +44,12 @@ namespace AirportFuelInventory.Business
         {
             return AirportDataAccess.GetAvailableFuel(start, length, sortColumn, sortDirection);
         }
-        public static List<ReportSummary.FuelSummary> GetFuelConsumptionReport()
+        public static List<ReportSummary.FuelSummary> GetFuelConsumptionReport(int start, int length, string sortColumn, string sortDirection)
         {
-            return AirportDataAccess.GetFuelConsumptionReport();
+            return AirportDataAccess.GetFuelConsumptionReport(start, length, sortColumn, sortDirection);
         }
 
-        public static int GetTotalRecords()
+        public static double GetTotalRecords()
         {
             return AirportDataAccess.GetTotalRecords();
         }

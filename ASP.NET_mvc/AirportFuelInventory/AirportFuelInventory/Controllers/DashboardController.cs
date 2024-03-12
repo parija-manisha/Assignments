@@ -1,5 +1,6 @@
 ﻿using AirportFuelInventory.Business;
 using AirportFuelInventory.Models;
+using AirportFuelInventory.Utils;
 using Rotativa;
 using System;
 using System.Collections.Generic;
@@ -16,11 +17,12 @@ namespace AirportFuelInventory.Controllers
         public ActionResult Dashboard(int? page, string sortColumn, string sortDirection)
         {
             int currentPage = page ?? 1;
-            sortColumn = string.IsNullOrEmpty(sortColumn) ? "AirportName" : sortColumn; ;
-            sortDirection = ToggleSortDirection(sortDirection);
+            sortColumn = string.IsNullOrEmpty(sortColumn) ? "AirportName" : sortColumn; 
+            sortDirection = Constants.ToggleSortDirection(sortDirection);
             var availableFuelData = AirportLogic.GetAvailableFuel(start: (currentPage - 1) * 5, length: 5, sortColumn:sortColumn,sortDirection:sortDirection);
 
-            int totalPages = AirportLogic.GetTotalRecords() / 5;
+            double totalRecords = AirportLogic.GetTotalRecords() / 5.0;
+            int totalPages = Convert.ToInt32(totalRecords);
             foreach (var airport in availableFuelData)
             {
                 airport.CurrentPage = currentPage;
@@ -34,11 +36,6 @@ namespace AirportFuelInventory.Controllers
         {
             var report = new ActionAsPdf("Dashboard");
             return report;
-        }
-
-        private string ToggleSortDirection(string currentDirection)
-        {
-            return currentDirection?.ToUpper() == "ASC" ? "DESC" : "ASC";
         }
     }
 }
