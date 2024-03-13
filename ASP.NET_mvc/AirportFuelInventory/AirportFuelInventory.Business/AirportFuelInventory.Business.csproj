@@ -89,6 +89,8 @@
   <ItemGroup>
     <Compile Include="AircraftLogic.cs" />
     <Compile Include="AirportLogic.cs" />
+    <Compile Include="DestinationLogic.cs" />
+    <Compile Include="SourceLogic.cs" />
     <Compile Include="TransactionLogic.cs" />
     <Compile Include="UserLogic.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

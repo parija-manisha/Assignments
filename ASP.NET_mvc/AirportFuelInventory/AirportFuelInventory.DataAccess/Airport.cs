@@ -20,8 +20,8 @@ namespace AirportFuelInventory.DataAccess
             this.Transactions = new HashSet<Transaction>();
         }
     
-        public int Airport_Id { get; set; }
-        public string Airport_Name { get; set; }
+        public int Airport_id { get; set; }
+        public string Airport_name { get; set; }
         public decimal Fuel_Capacity { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

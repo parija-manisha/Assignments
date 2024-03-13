@@ -19,14 +19,21 @@ namespace AirportFuelInventory.Controllers
 
         public ActionResult NewUser(UserDTO userDTO)
         {
-            UserLogic.NewUser(userDTO);
-            return RedirectToAction("Login", "Login");
+            bool registrationSuccess = UserLogic.NewUser(userDTO);
+            if (registrationSuccess)
+            {
+                return RedirectToAction("Login", "Login");
+            }
+            else
+            {
+                ViewBag.ErrorMessage = "Failed to register";
+                return View();
+            }
         }
 
         public JsonResult IsEmailExist(string email)
         {
             bool isEmailExist = UserLogic.IsEmailExist(email);
-
             return Json(isEmailExist);
         }
     }

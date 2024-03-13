@@ -16,14 +16,17 @@ namespace AirportFuelInventory.Utils
             TransactionType.Out
         };
 
-        public static UserSession GetSessionDetail()
+        public static UserSession SessionDetail
         {
-            return HttpContext.Current.Session["UserSession"] as UserSession;
-        }
+            get
+            {
+                return HttpContext.Current.Session["UserSession"] as UserSession;
+            }
 
-        public static void SetSessionDetail(UserSession userSession)
-        {
-            HttpContext.Current.Session["UserSession"] = userSession;
+            set
+            {
+                HttpContext.Current.Session["UserSession"] = value;
+            }
         }
 
         public static string ToggleSortDirection(string currentDirection)

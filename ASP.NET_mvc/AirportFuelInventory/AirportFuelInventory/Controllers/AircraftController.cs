@@ -13,32 +13,60 @@ namespace AirportFuelInventory.Controllers
     public class AircraftController : Controller
     {
         // GET: Aircraft
-        public ActionResult AircraftList(int? page, string sortColumn, string sortDirection)
+        public ViewResult AircraftList(int? page)
         {
             int currentPage = page ?? 1;
-            sortColumn = string.IsNullOrEmpty(sortColumn) ? "Aircraft_Name" : sortColumn; 
-            sortDirection = Constants.ToggleSortDirection(sortDirection);
-            var model = AircraftLogic.GetAircraftList(start: (currentPage - 1) * 5, length: 5, sortColumn: sortColumn, sortDirection: sortDirection);
+            var model = AircraftLogic.GetAircraftList(start: (currentPage - 1) * 5, length: 5);
 
-            int totalPages = AircraftLogic.GetTotalRecords() / 5;
+            double totalRecords = AircraftLogic.GetTotalRecords() / 5.0;
+            int totalPages = Convert.ToInt32(totalRecords);
+
             foreach (var aircraft in model)
             {
-                aircraft.Pagination = new Pagination();                aircraft.Pagination.CurrentPage = currentPage;
+                aircraft.Pagination = new Pagination();
+                aircraft.Pagination.CurrentPage = currentPage;
                 aircraft.Pagination.TotalPages = totalPages;
             }
-            
+
             return View(model);
         }
 
-        public ActionResult AddAircraft()
+        public ActionResult AddAircraft(int? Aircraft_Id)
         {
-            return View();
+            var model = new AircraftDTO
+            {
+                Sources = SourceLogic.GetSourceList(),
+                Destinations = DestinationLogic.GetDestinationList(),
+            };
+
+            if (Aircraft_Id.HasValue)
+            {
+                var aircraft = AircraftLogic.GetAircraftDetailById(Convert.ToInt32(Request.QueryString["Aircraft_id"]));
+
+                if (aircraft != null)
+                {
+                    model = aircraft;
+                }
+            }
+
+            model.Sources = model.Sources ?? new List<SourceDTO>();
+            model.Destinations = model.Destinations ?? new List<DestinationDTO>();
+
+            return View(model);
         }
 
         public ActionResult NewAircraft(AircraftDTO aircraftDTO)
         {
-            AircraftLogic.NewAircraft(aircraftDTO);
-            return RedirectToAction("AircraftList");
+            var addAirportSuccess = AircraftLogic.NewAircraft(aircraftDTO);
+            if (addAirportSuccess)
+            {
+                return RedirectToAction("AircraftList");
+            }
+            else
+            {
+                ViewBag.ErrorMessage = "Failed to register";
+                return View();
+            }
         }
     }
 }

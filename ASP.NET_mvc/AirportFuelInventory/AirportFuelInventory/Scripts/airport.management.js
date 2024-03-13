@@ -23,7 +23,7 @@ function generateAvailableFuelReport() {
     var doc = new jsPDF('p', 'pt', 'letter');
     var pageHeight = 0;
     pageHeight = doc.internal.pageSize.height;
-    margins = {
+    var margins = {
         top: 150,
         bottom: 60,
         left: 40,
@@ -52,14 +52,33 @@ function generateAvailableFuelReport() {
             minCellHeight: 40
         }
     })
-    doc.save('AvailableFuelReport_' + getFormattedDateTime() + '.pdf');
+
+    var fileName = 'AvailableFuelReport_' + getFormattedDateTime() + '.pdf';
+
+    var formData = new FormData();
+    formData.append('fileName', fileName);
+    formData.append('data', new Blob([doc.output('blob')], { type: 'application/pdf' }));
+
+    $.ajax({
+        type: 'POST',
+        url: '/DownloadPdf/SavePDF',
+        data: formData,
+        processData: false,
+        contentType: false,
+        success: function () {
+            openDocument(formData);
+        },
+        error: function (error) {
+            console.error('Error saving PDF: ' + error.statusText);
+        }
+    });
 }
 
 function generateFuelConsumptionReport() {
     var doc = new jsPDF('p', 'pt', 'letter');
     var pageHeight = 0;
     pageHeight = doc.internal.pageSize.height;
-    margins = {
+    var margins = {
         top: 150,
         bottom: 60,
         left: 40,
@@ -69,8 +88,26 @@ function generateFuelConsumptionReport() {
     var y = 20;
     doc.setLineWidth(2);
     doc.text(200, y = y + 30, "Fuel Consumption Summary Report");
+
+    var startY = 70;
+
+    var autoTableOptions = {
+        startY: startY,
+        theme: 'grid',
+        columnStyles: {
+            0: { cellWidth: 180 },
+            1: { cellWidth: 180 },
+            2: { cellWidth: 180 }
+        },
+        styles: {
+            minCellHeight: 40
+        },
+    };
+
+    console.log($('#FuelConsumptionTable').html())
+
     doc.autoTable({
-        html: '#fuelConsumptionTable',
+        html: '#FuelConsumptionTable',
         startY: 70,
         theme: 'grid',
         columnStyles: {
@@ -87,9 +124,75 @@ function generateFuelConsumptionReport() {
         styles: {
             minCellHeight: 40
         }
-    })
-    doc.save('FuelConsumptionReport_' + getFormattedDateTime() + '.pdf');
+    });
+
+    var currentY = doc.autoTable.previous.finalY;
+    startY = currentY + 20;
+
+    $('#FuelConsumptionTable tbody tr td').each(function () {
+        var innerTable = $(this).find('#InnerTable').html();
+        console.log(innerTable)
+        doc.autoTable({
+            html: innerTable,
+            startY: startY,
+            theme: 'grid',
+            columnStyles: {
+                0: {
+                    cellWidth: 180,
+                },
+                1: {
+                    cellWidth: 180,
+                },
+                2: {
+                    cellWidth: 180,
+                }
+            },
+            styles: {
+                minCellHeight: 40
+            },
+        });
+
+        startY = doc.autoTable.previous.finalY;
+    });
+    var fileName = 'FuelConsumptionReport_' + getFormattedDateTime() + '.pdf';
+
+
+
+    var formData = new FormData();
+    formData.append('fileName', fileName);
+    formData.append('data', new Blob([doc.output('blob')], { type: 'application/pdf' }));
+
+    $.ajax({
+        type: 'POST',
+        url: '/DownloadPdf/SavePDF',
+        data: formData,
+        processData: false,
+        contentType: false,
+        success: function () {
+            openDocument(formData);
+        },
+        error: function (error) {
+            console.error('Error saving PDF: ' + error.statusText);
+        }
+    });
 }
+
+function openDocument(formData) {
+    $.ajax({
+        type: 'POST',
+        url: '/DownloadPdf/OpenReport',
+        data: formData,
+        processData: false,
+        contentType: false,
+        success: function () {
+            window.open('/DownloadPdf/OpenReport?fileName=' + formData.get('fileName'), '_blank');
+        },
+        error: function (error) {
+            console.error('Error saving PDF: ' + error.statusText);
+        }
+    });
+}
+
 
 function getFormattedDateTime() {
     var now = new Date();

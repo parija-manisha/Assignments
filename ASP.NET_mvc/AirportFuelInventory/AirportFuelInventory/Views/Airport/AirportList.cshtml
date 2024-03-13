@@ -1,9 +1,7 @@
 ﻿@model List<AirportFuelInventory.Models.Model.AirportDTO>
-
 @{
     ViewBag.Title = "AirportList";
 }
-
 <h2>AirportList</h2>
 
 <div>
@@ -15,6 +13,7 @@
                     <th>Sl.No</th>
                     <th>@Html.DisplayNameFor(model => Model.First().Airport_Name)</th>
                     <th>@Html.DisplayNameFor(model => Model.First().Fuel_Capacity)</th>
+                    <th></th>
                 </tr>
             </thead>
             <tbody>
@@ -24,9 +23,11 @@
                     {
                         <tr>
                             <td>@(count++)</td>
-                            <td>@airport.Airport_Name</td>
+                            <td>@airport.Airport_name</td>
                             <td>@airport.Fuel_Capacity</td>
+                            <td><a href="@Url.Action("AddAirport", "Airport", new { Airport_Id = airport.Airport_Id })">Edit</a></td>
                         </tr>
+
                     }
                 }
             </tbody>

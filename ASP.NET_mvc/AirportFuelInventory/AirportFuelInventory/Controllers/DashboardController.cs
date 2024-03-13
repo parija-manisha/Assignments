@@ -14,12 +14,10 @@ namespace AirportFuelInventory.Controllers
     {
         // GET: Dashboard
 
-        public ActionResult Dashboard(int? page, string sortColumn, string sortDirection)
+        public ActionResult Dashboard(int? page)
         {
             int currentPage = page ?? 1;
-            sortColumn = string.IsNullOrEmpty(sortColumn) ? "AirportName" : sortColumn; 
-            sortDirection = Constants.ToggleSortDirection(sortDirection);
-            var availableFuelData = AirportLogic.GetAvailableFuel(start: (currentPage - 1) * 5, length: 5, sortColumn:sortColumn,sortDirection:sortDirection);
+            var availableFuelData = AirportLogic.GetAvailableFuel(start: (currentPage - 1) * 5, length: 5);
 
             double totalRecords = AirportLogic.GetTotalRecords() / 5.0;
             int totalPages = Convert.ToInt32(totalRecords);
@@ -30,12 +28,6 @@ namespace AirportFuelInventory.Controllers
             }
 
             return View(availableFuelData);
-        }
-
-        public ActionResult ExportToPdf()
-        {
-            var report = new ActionAsPdf("Dashboard");
-            return report;
         }
     }
 }

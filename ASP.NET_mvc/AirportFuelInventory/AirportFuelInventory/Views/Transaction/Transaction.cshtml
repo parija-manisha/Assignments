@@ -4,6 +4,12 @@
     ViewBag.Title = "Transaction";
 }
 
+
+@if (!string.IsNullOrEmpty(ViewBag.ErrorMessage))
+{
+    <p style="color: red;">@ViewBag.ErrorMessage</p>
+}
+
 <h2>Transaction</h2>
 
 <div>
@@ -26,10 +32,10 @@
                     <tr>
                         <td>@airport.Transaction_date_time</td>
                         <td>@airport.TransactionTypeString</td>
-                        <td>@airport.Airport_id</td>
+                        <td>@airport.AirportDTOs.FirstOrDefault(s => s.Airport_id == airport.Airport_id).Airport_name</td>
                         @if (airport.TransactionTypeString == "Out")
                         {
-                            <td>@airport.Aircraft_id</td>
+                            <td>@airport.AircraftDTOs.FirstOrDefault(s => s.Aircraft_id == airport.Aircraft_id).Aircraft_no</td>
                         }
                         else
                         {

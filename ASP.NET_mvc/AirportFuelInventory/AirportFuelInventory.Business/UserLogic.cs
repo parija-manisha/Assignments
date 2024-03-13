@@ -11,9 +11,9 @@ namespace AirportFuelInventory.Business
 {
     public class UserLogic
     {
-        public static void NewUser(UserDTO userDTO)
+        public static bool NewUser(UserDTO userDTO)
         {
-            UserDataAccess.NewUser(userDTO);
+            return UserDataAccess.NewUser(userDTO);
         }
 
         public static bool IsEmailExist(string email)

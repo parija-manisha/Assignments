@@ -13,7 +13,7 @@ namespace AirportFuelInventory.DataAccess
 {
     public class AirportDataAccess
     {
-        public static List<Airport> GetAirportList(int start, int length, string sortColumn, string sortDirection)
+        public static List<Airport> GetAirportList(int start, int length)
         {
             try
             {
@@ -21,7 +21,7 @@ namespace AirportFuelInventory.DataAccess
                 using (var context = new AirportFuelInventoryEntities())
                 {
                     airportList = context.Airports
-                        .OrderBy(t => t.Airport_Name)
+                        .OrderBy(t => t.Airport_name)
                         .Skip(start)
                         .Take(length)
                         .ToList();
@@ -46,15 +46,15 @@ namespace AirportFuelInventory.DataAccess
                     var anonymousList = context.Airports
                         .Select(a => new
                         {
-                            a.Airport_Id,
-                            a.Airport_Name
+                            a.Airport_id,
+                            a.Airport_name
                         })
                         .ToList();
 
                     airportNameList = anonymousList.Select(a => new Airport
                     {
-                        Airport_Id = a.Airport_Id,
-                        Airport_Name = a.Airport_Name
+                        Airport_id = a.Airport_id,
+                        Airport_name = a.Airport_name
                     })
                     .ToList();
                 }
@@ -73,7 +73,7 @@ namespace AirportFuelInventory.DataAccess
             {
                 Airport airport = new Airport
                 {
-                    Airport_Name = airportDto.Airport_Name,
+                    Airport_name = airportDto.Airport_name,
                     Fuel_Capacity = airportDto.Fuel_Capacity,
                 };
                 context.Airports.Add(airport);
@@ -82,7 +82,7 @@ namespace AirportFuelInventory.DataAccess
             }
         }
 
-        public static List<ReportSummary.AirportSummary> GetAvailableFuel(int start, int length, string sortColumn, string sortDirection)
+        public static List<ReportSummary.AirportSummary> GetAvailableFuel(int start, int length)
         {
             try
             {
@@ -98,7 +98,7 @@ namespace AirportFuelInventory.DataAccess
                         })
                         .ToList();
 
-                    var airports = context.Airports.ToDictionary(a => a.Airport_Id, a => a);
+                    var airports = context.Airports.ToDictionary(a => a.Airport_id, a => a);
 
                     var result = new List<ReportSummary.AirportSummary>();
 
@@ -109,7 +109,7 @@ namespace AirportFuelInventory.DataAccess
                     foreach (var airport in paginatedAirports)
                     {
                         var airportId = airport.Key;
-                        var airportName = airport.Value.Airport_Name;
+                        var airportName = airport.Value.Airport_name;
 
                         var transaction = transactions.FirstOrDefault(t => t.AirportId == airportId);
 
@@ -121,8 +121,8 @@ namespace AirportFuelInventory.DataAccess
 
                         result.Add(new ReportSummary.AirportSummary
                         {
-                            AirportId = airportId,
-                            AirportName = airportName,
+                            Airport_id = airportId,
+                            Airport_name = airportName,
                             AvailableFuel = availableFuel
                         });
                     }
@@ -137,7 +137,7 @@ namespace AirportFuelInventory.DataAccess
             }
         }
 
-        public static List<ReportSummary.FuelSummary> GetFuelConsumptionReport(int start, int length, string sortColumn, string sortDirection)
+        public static List<ReportSummary.FuelSummary> GetFuelConsumptionReport(int start, int length)
         {
             try
             {
@@ -153,8 +153,8 @@ namespace AirportFuelInventory.DataAccess
                         })
                         .ToList();
 
-                    var airports = context.Airports.ToDictionary(a => a.Airport_Id, a => a);
-                    var aircrafts = context.Aircraft.ToDictionary(a => a.Aircraft_Id, a => a);
+                    var airports = context.Airports.ToDictionary(a => a.Airport_id, a => a);
+                    var aircrafts = context.Aircraft.ToDictionary(a => a.Aircraft_id, a => a);
 
                     var transactionsList = context.Transactions
                         .GroupBy(t => t.Airport_id)
@@ -165,7 +165,7 @@ namespace AirportFuelInventory.DataAccess
                         .Take(length)
                         .Select(t => new ReportSummary.FuelSummary
                         {
-                            AirportName = airports[t.AirportId].Airport_Name,
+                            AirportName = airports[t.AirportId].Airport_name,
                             TransactionDTO = transactionsList[t.AirportId]
                                 .Select(tr => new TransactionDTO
                                 {
@@ -173,7 +173,12 @@ namespace AirportFuelInventory.DataAccess
                                     Quantity = tr.Quantity,
                                     Transaction_type = tr.Transaction_type,
                                     Aircraft_id = tr.Aircraft_id,
-                                    AircraftName = aircrafts.ContainsKey(tr.Aircraft_id) ? aircrafts[tr.Aircraft_id].Aircraft_Name : string.Empty
+                                    AircraftDTOs = tr.Airport != null ? new List<AircraftDTO> {
+                            new AircraftDTO {
+                                Aircraft_no=tr.Aircraft.Aircraft_no,
+                                Aircraft_id = tr.Aircraft_id
+                            }
+                        } : null,
                                 })
                                 .ToList(),
                             AvailableFuel = airports[t.AirportId].Fuel_Capacity - t.TotalQuantity
@@ -198,5 +203,37 @@ namespace AirportFuelInventory.DataAccess
                 return count;
             }
         }
+
+        public static AirportDTO GetAirportDetailById(int airportId)
+        {
+            try
+            {
+                using (AirportFuelInventoryEntities context = new AirportFuelInventoryEntities())
+                {
+                    var airportDetails = context.Airports
+                        .FirstOrDefault(u => u.Airport_id == airportId);
+
+                    if (airportDetails != null)
+                    {
+                        var airport = new AirportDTO
+                        {
+                            Airport_id = airportId,
+                            Airport_name = airportDetails.Airport_name,
+                            Fuel_Capacity = airportDetails.Fuel_Capacity,
+                        };
+
+                        return airport;
+                    }
+
+                    return null;
+                }
+            }
+            catch (Exception ex)
+            {
+                Logger.AddError("Could not fetch airport details", ex);
+                return null;
+            }
+        }
+
     }
 }

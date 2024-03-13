@@ -1,9 +1,10 @@
 ﻿@model List<AirportFuelInventory.Models.ReportSummary.FuelSummary>
+
 @if (Model.Any())
 {
     <h2>FuelConsumptionReport</h2>
 
-    <table id="fuelConsumptionTable" class="table">
+    <table id="FuelConsumptionTable" class="table">
         <thead>
             <tr>
                 <th>Airport Name</th>
@@ -20,7 +21,7 @@
                     <tr>
                         <td>@item.AirportName</td>
                         <td>
-                            <table class="inner-table">
+                            <table id="InnerTable" class="inner-table">
                                 <thead>
                                     <tr>
                                         <th class="pe-1 border">Transaction Date</th>
@@ -34,7 +35,7 @@
                                     {
                                         <tr>
                                             <td class="pe-1 border">@transaction.Transaction_date_time</td>
-                                            <td class="pe-1 border">@transaction.AircraftName</td>
+                                            <td class="pe-1 border">@(transaction.AircraftDTOs.FirstOrDefault(s=>s.Aircraft_id == transaction.Aircraft_id)?.Aircraft_no)</td>
                                             <td class="pe-1 border">@transaction.Quantity</td>
                                             <td class="pe-1 border">@transaction.TransactionTypeString</td>
                                         </tr>
@@ -66,5 +67,5 @@
             </ul>
         </nav>
     </div>
-    <input type="button" onclick="generateFuelConsumptionReport()" value="Export To PDF" />
+    <input type="button" value="Export To PDF" onclick="generateFuelConsumptionReport(); return false;" />
 }

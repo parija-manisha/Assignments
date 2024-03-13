@@ -1,0 +1,14 @@
+Exception Details
+Message: No connection string named 'AirportFuelInventoryEntities' could be found in the application config file.
+Source: EntityFramework
+Stack Trace:    at System.Data.Entity.Internal.LazyInternalConnection.get_ConnectionHasModel()
+   at System.Data.Entity.Internal.LazyInternalContext.InitializeContext()
+   at System.Data.Entity.Internal.InternalContext.Initialize()
+   at System.Data.Entity.Internal.InternalContext.GetEntitySetAndBaseTypeForType(Type entityType)
+   at System.Data.Entity.Internal.Linq.InternalSet`1.Initialize()
+   at System.Data.Entity.Internal.Linq.InternalSet`1.get_InternalContext()
+   at System.Data.Entity.Infrastructure.DbQuery`1.System.Linq.IQueryable.get_Provider()
+   at System.Linq.Queryable.Where[TSource](IQueryable`1 source, Expression`1 predicate)
+   at AirportFuelInventory.DataAccess.UserDataAccess.CheckLogin(String username, String password) in D:\Projects\ASSIGNMENTS\ASP.NET_mvc\AirportFuelInventory\AirportFuelInventory.DataAccess\UserDataAccess.cs:line 44
+
+

@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AirportFuelInventory.Utils"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AirportFuelInventory.Models", "AirportFuelInventory.Models\AirportFuelInventory.Models.csproj", "{62CC34F0-E980-4D10-B4EB-2F12A5D48874}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AirportFuelInventory.Test", "AirportFuelInventory.Test\AirportFuelInventory.Test.csproj", "{7D220A13-18FC-4F99-BDF4-DBD170653C93}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{62CC34F0-E980-4D10-B4EB-2F12A5D48874}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{62CC34F0-E980-4D10-B4EB-2F12A5D48874}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{62CC34F0-E980-4D10-B4EB-2F12A5D48874}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7D220A13-18FC-4F99-BDF4-DBD170653C93}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7D220A13-18FC-4F99-BDF4-DBD170653C93}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7D220A13-18FC-4F99-BDF4-DBD170653C93}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7D220A13-18FC-4F99-BDF4-DBD170653C93}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

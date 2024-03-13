@@ -20,12 +20,14 @@ namespace AirportFuelInventory.DataAccess
             this.Transactions = new HashSet<Transaction>();
         }
     
-        public int Aircraft_Id { get; set; }
-        public string Aircraft_Name { get; set; }
+        public int Aircraft_id { get; set; }
+        public string Aircraft_no { get; set; }
         public string Airline { get; set; }
-        public string Source { get; set; }
-        public string Destination { get; set; }
+        public int Source_id { get; set; }
+        public int Destination_id { get; set; }
     
+        public virtual Destination Destination { get; set; }
+        public virtual Source Source { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Transaction> Transactions { get; set; }
     }

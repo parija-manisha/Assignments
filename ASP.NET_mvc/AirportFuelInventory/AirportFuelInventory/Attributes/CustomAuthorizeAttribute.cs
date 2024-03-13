@@ -13,7 +13,7 @@ namespace AirportFuelInventory.Attributes
         protected override void HandleUnauthorizedRequest(AuthorizationContext filterContext)
         {
             var returnURL = filterContext.HttpContext.Request.Url;
-            var userSession = Constants.GetSessionDetail();
+            var userSession = Constants.SessionDetail;
 
             if (userSession == null)
             {

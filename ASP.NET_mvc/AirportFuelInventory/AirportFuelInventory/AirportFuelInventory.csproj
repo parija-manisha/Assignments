@@ -173,6 +173,7 @@
     <Compile Include="Controllers\AircraftController.cs" />
     <Compile Include="Controllers\AirportController.cs" />
     <Compile Include="Controllers\DashboardController.cs" />
+    <Compile Include="Controllers\DownloadPdfController.cs" />
     <Compile Include="Controllers\FuelConsumptionReportController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\SignUpController.cs" />
@@ -246,6 +247,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Models\" />
+    <Folder Include="Views\DownloadPdf\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.rtl.min.css.map" />

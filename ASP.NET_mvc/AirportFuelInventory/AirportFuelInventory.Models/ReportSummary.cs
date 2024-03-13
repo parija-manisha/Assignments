@@ -11,8 +11,8 @@ namespace AirportFuelInventory.Models
     {
         public class AirportSummary
         {
-            public int AirportId { get; set; }
-            public string AirportName { get; set; }
+            public int Airport_id { get; set; }
+            public string Airport_name { get; set; }
             public decimal AvailableFuel { get; set; }
 
             public int CurrentPage { get; set; }

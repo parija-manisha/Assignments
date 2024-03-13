@@ -11,18 +11,11 @@ namespace AirportFuelInventory.Business
 {
     public class AircraftLogic
     {
-        public static List<AircraftDTO> GetAircraftList(int start, int length, string sortColumn, string sortDirection)
+        public static List<AircraftDTO> GetAircraftList(int start, int length)
         {
-            List<Aircraft> aircrafts = AircraftDataAccess.GetAircraftList(start, length, sortColumn, sortDirection);
-            List<AircraftDTO> aircraftList = aircrafts.Select(aircraft => new AircraftDTO
-            {
-                Aircraft_Name = aircraft.Aircraft_Name,
-                Airline = aircraft.Airline,
-                Source = aircraft.Source,
-                Destination = aircraft.Destination,
-            }).ToList();
+            List<AircraftDTO> aircrafts = AircraftDataAccess.GetAircraftList(start, length);
 
-            return aircraftList;
+            return aircrafts;
         }
 
         public static bool NewAircraft(AircraftDTO aircraft)
@@ -35,16 +28,21 @@ namespace AirportFuelInventory.Business
             List<Aircraft> aircraftName = AircraftDataAccess.GetAircraftNameList();
             List<AircraftDTO> aircraftDTOs = aircraftName.Select(aircraft => new AircraftDTO
             {
-                Aircraft_Name = aircraft.Aircraft_Name,
-                Aircraft_Id = aircraft.Aircraft_Id,
+                Aircraft_no = aircraft.Aircraft_no,
+                Aircraft_id = aircraft.Aircraft_id,
             }).ToList();
 
             return aircraftDTOs;
         }
 
-        public static int GetTotalRecords()
+        public static double GetTotalRecords()
         {
             return AircraftDataAccess.GetTotalRecords();
+        }
+
+        public static AircraftDTO GetAircraftDetailById(int aircraftId)
+        {
+            return AircraftDataAccess.GetAircraftDetailById(aircraftId);
         }
     }
 }

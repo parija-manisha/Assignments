@@ -15,8 +15,12 @@ namespace AirportFuelInventory.Utils
             string logMessage = $"Exception Details\n{GetExceptionDetails(ex)}";
 
             string filename = $"{DateTime.Now:dd-MM-yyyy--hh-mm-ss}.txt";
-            string filepath = Path.Combine(ConfigurationManager.AppSettings["LogFilePath"], filename);
-
+            string path = ConfigurationManager.AppSettings["LogFilePath"];
+            if (!Directory.Exists(path))
+            {
+                Directory.CreateDirectory(path);
+            }
+            string filepath = Path.Combine(path, filename);
             using (StreamWriter writer = new StreamWriter(filepath, true))
             {
                 writer.WriteLine(logMessage);

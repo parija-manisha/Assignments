@@ -14,7 +14,7 @@ namespace AirportFuelInventory.DataAccess
     
     public partial class Transaction
     {
-        public int Transaction_Id { get; set; }
+        public int Transaction_id { get; set; }
         public System.DateTime Transaction_date_time { get; set; }
         public int Transaction_type { get; set; }
         public int Airport_id { get; set; }

@@ -1,0 +1,6 @@
+Exception Details
+Message: Object reference not set to an instance of an object.
+Source: AirportFuelInventory.DataAccess
+Stack Trace:    at AirportFuelInventory.DataAccess.AircraftDataAccess.GetAircraftDetailById(Int32 aircraftId) in D:\Projects\ASSIGNMENTS\ASP.NET_mvc\AirportFuelInventory\AirportFuelInventory.DataAccess\AircraftDataAccess.cs:line 128
+
+

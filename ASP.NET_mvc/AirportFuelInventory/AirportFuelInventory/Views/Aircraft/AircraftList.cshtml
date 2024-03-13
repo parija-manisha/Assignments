@@ -4,45 +4,69 @@
     ViewBag.Title = "AircraftList";
 }
 
-<h2>AircraftList</h2>
+@if (Model.Any())
+{
+    <h2>AircraftList</h2>
 
-<div>
-    @if (Model != null)
-    {
-        <table class="table">
-            <thead>
-                <tr>
-                    <th>Sl.No</th>
-                    <th>@Html.DisplayNameFor(model => Model.First().Aircraft_Name)</th>
-                    <th>@Html.DisplayNameFor(model => Model.First().Airline)</th>
-                    <th>@Html.DisplayNameFor(model => Model.First().Source)</th>
-                    <th>@Html.DisplayNameFor(model => Model.First().Destination)</th>
-                </tr>
-            </thead>
-            <tbody>
-                @{
-                    var count = (Model.First().Pagination.CurrentPage - 1) * 10 + 1;
-                    foreach (var aircraft in Model)
-                    {
-                        <tr>
-                            <td>@(count++)</td>
-                            <td>@aircraft.Aircraft_Name</td>
-                            <td>@aircraft.Airline</td>
-                            <td>@aircraft.Source</td>
-                            <td>@aircraft.Destination</td>
-                        </tr>
+    <div>
+        @if (Model != null)
+        {
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Sl.No</th>
+                        <th>Aircraft No.</th>
+                        <th>Airline</th>
+                        <th>Source Name</th>
+                        <th>Destination Name</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @{
+                        var count = (Model.First().Pagination.CurrentPage - 1) * 10 + 1;
+                        foreach (var aircraft in Model)
+                        {
+                            <tr>
+                                <td>@(count++)</td>
+                                <td>@aircraft.Aircraft_no</td>
+                                <td>@aircraft.Airline</td>
+                                <td>@(aircraft.Sources.FirstOrDefault(s => s.Source_id == aircraft.Source_id)?.Source_name)</td>
+                                <td>@(aircraft.Destinations.FirstOrDefault(d => d.Destination_id == aircraft.Destination_id)?.Destination_name)</td>
+                                <td><a href="@Url.Action("AddAircraft", "Aircraft", new { Aircraft_id = aircraft.Aircraft_id })">Edit</a></td>
+                            </tr>
+                        }
                     }
-                }
-            </tbody>
-        </table>
-    }
-    else
-    {
-        <p>No Aircraft available</p>
-    }
-</div>
+                </tbody>
+            </table>
+        }
+        else
+        {
+            <p>No Aircraft available</p>
+        }
+    </div>
+
+    <div id="pagination_v2" class="mt-3">
+        <nav aria-label="Page navigation">
+            <ul class="pagination justify-content-end">
+                <li class="page-item">
+                    <a class="page-link" href="@Url.Action("AircraftList", "AircraftList", new { page = Model.First().Pagination.CurrentPage - 1, sortColumn = ViewBag.SortColumn, sortDirection = ViewBag.SortDirection })" aria-label="Previous">
+                        <span aria-hidden="true">&laquo;</span>
+                    </a>
+                </li>
+
+                <li class="page-item">
+                    <a class="page-link" href="@Url.Action("AircraftList", "AircraftList", new { page = Model.First().Pagination.CurrentPage + 1, sortColumn = ViewBag.SortColumn, sortDirection = ViewBag.SortDirection })" aria-label="Next">
+                        <span aria-hidden="true">&raquo;</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+
+
+}
 
 <p>
     @Html.ActionLink("Add Aircraft", "AddAircraft", "Aircraft")
 </p>
-

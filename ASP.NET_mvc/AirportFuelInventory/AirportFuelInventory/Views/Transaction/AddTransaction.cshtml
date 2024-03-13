@@ -4,6 +4,11 @@
     ViewBag.Title = "AddTransaction";
 }
 
+@if (!string.IsNullOrEmpty(ViewBag.ErrorMessage))
+{
+    <p style="color: red;">@ViewBag.ErrorMessage</p>
+}
+
 <h2>AddTransaction</h2>
 
 @using (Html.BeginForm("AddTransaction", "Transaction", FormMethod.Post))
@@ -32,14 +37,14 @@
         <div class="form-group mb-3">
             @Html.LabelFor(model => model.Airport_id, "Airport", new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownListFor(model => model.Airport_id, new SelectList(Model.AirportDTOs, "Airport_Id", "Airport_Name"), "--Select Airport--", new { @class = "form-control" })
+                @Html.DropDownListFor(model => model.Airport_id, new SelectList(Model.AirportDTOs, "Airport_id", "Airport_name"), "--Select Airport--", new { @class = "form-control" })
             </div>
         </div>
 
         <div class="form-group mb-3">
             @Html.LabelFor(model => model.Aircraft_id, "Aircraft", new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownListFor(model => model.Aircraft_id, new SelectList(Model.AircraftDTOs, "Aircraft_Id", "Aircraft_Name"), "--Select Aircraft--", new { @class = "form-control" })
+                @Html.DropDownListFor(model => model.Aircraft_id, new SelectList(Model.AircraftDTOs, "Aircraft_id", "Aircraft_no"), "--Select Aircraft--", new { @class = "form-control" })
             </div>
         </div>
 

@@ -13,12 +13,10 @@ namespace AirportFuelInventory.Controllers
     public class AirportController : Controller
     {
         // GET: AirportList
-        public ActionResult AirportList(int? page, string sortColumn, string sortDirection)
+        public ActionResult AirportList(int? page)
         {
             int currentPage = page ?? 1;
-            sortColumn = string.IsNullOrEmpty(sortColumn) ? "Airport_Name" : sortColumn;
-            sortDirection = Constants.ToggleSortDirection(sortDirection);
-            var model = AirportLogic.GetAirportList(start: (currentPage - 1) * 5, length: 5, sortColumn: sortColumn, sortDirection: sortDirection);
+            var model = AirportLogic.GetAirportList(start: (currentPage - 1) * 5, length: 5);
 
             double totalRecords = AirportLogic.GetTotalRecords() / 5.0;
             int totalPages = Convert.ToInt32(totalRecords);
@@ -33,8 +31,19 @@ namespace AirportFuelInventory.Controllers
             return View(model);
         }
 
-        public ActionResult AddAirport() { 
-            return View();
+        public ActionResult AddAirport(int? Airport_Id) {
+            var model = new AirportDTO();
+            if (Airport_Id.HasValue)
+            {
+                var airport = AirportLogic.GetAirportDetailById(Convert.ToInt32(Request.QueryString["Airport_Id"]));
+
+                if (airport != null)
+                {
+                    model = airport;
+                }
+            }
+
+            return View(model);
         }
 
         public ActionResult NewAirport(AirportDTO airportDTO)

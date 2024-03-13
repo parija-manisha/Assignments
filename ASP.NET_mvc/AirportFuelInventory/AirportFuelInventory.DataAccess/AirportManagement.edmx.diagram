@@ -4,11 +4,15 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="5ce67b6b9dcd46559a1fc789916577c9" Name="Diagram1">
-        <EntityTypeShape EntityType="AirportFuelInventoryModel.Aircraft" Width="1.5" PointX="0.75" PointY="1.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="AirportFuelInventoryModel.Airport" Width="1.5" PointX="0.75" PointY="5.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="AirportFuelInventoryModel.Transaction" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
-        <EntityTypeShape EntityType="AirportFuelInventoryModel.User" Width="1.5" PointX="2.75" PointY="4.75" IsExpanded="true" />
+      <Diagram DiagramId="a65bd4f8a110436eb1a2cc03812798e1" Name="Diagram1">
+        <EntityTypeShape EntityType="AirportFuelInventoryModel.Aircraft" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="AirportFuelInventoryModel.Airport" Width="1.5" PointX="3" PointY="5.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="AirportFuelInventoryModel.Destination" Width="1.5" PointX="0.75" PointY="1.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="AirportFuelInventoryModel.Source" Width="1.5" PointX="0.75" PointY="5.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="AirportFuelInventoryModel.Transaction" Width="1.5" PointX="5.25" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="AirportFuelInventoryModel.User" Width="1.5" PointX="5.75" PointY="4.75" IsExpanded="true" />
+        <AssociationConnector Association="AirportFuelInventoryModel.FK_Aircraft_Destination" ManuallyRouted="false" />
+        <AssociationConnector Association="AirportFuelInventoryModel.FK_Aircraft_Source" ManuallyRouted="false" />
         <AssociationConnector Association="AirportFuelInventoryModel.FK_Transaction_Aircraft" ManuallyRouted="false" />
         <AssociationConnector Association="AirportFuelInventoryModel.FK_Transaction_Airport" ManuallyRouted="false" />
       </Diagram>

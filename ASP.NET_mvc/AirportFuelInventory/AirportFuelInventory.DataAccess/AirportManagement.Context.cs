@@ -27,6 +27,8 @@ namespace AirportFuelInventory.DataAccess
     
         public virtual DbSet<Aircraft> Aircraft { get; set; }
         public virtual DbSet<Airport> Airports { get; set; }
+        public virtual DbSet<Destination> Destinations { get; set; }
+        public virtual DbSet<Source> Sources { get; set; }
         public virtual DbSet<Transaction> Transactions { get; set; }
         public virtual DbSet<User> Users { get; set; }
     }

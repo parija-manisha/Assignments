@@ -24,6 +24,7 @@ namespace AirportFuelInventory.DataAccess
                         Airport_id = transactionDTO.Airport_id,
                         Aircraft_id = transactionDTO.Aircraft_id,
                         Quantity = transactionDTO.Quantity,
+                        Transaction_id_parent = transactionDTO.Transaction_Id != 0 ? (int?)transactionDTO.Transaction_Id : null,
                     };
                     context.Transactions.Add(transaction);
                     context.SaveChanges();
@@ -37,53 +38,44 @@ namespace AirportFuelInventory.DataAccess
             }
         }
 
-        public static List<Transaction> GetTransactionList()
+        public static List<TransactionDTO> GetTransactionList()
         {
             try
             {
-                List<Transaction> transactionList;
                 using (var context = new AirportFuelInventoryEntities())
                 {
-                    transactionList = context.Transactions
+                    var transactionEntities = context.Transactions
                         .OrderByDescending(t => t.Transaction_date_time)
                         .ToList();
-                }
 
-                return transactionList;
+                    List<TransactionDTO> transactionList = transactionEntities.Select(transaction => new TransactionDTO
+                    {
+                        Transaction_date_time = transaction.Transaction_date_time,
+                        Transaction_type = transaction.Transaction_type,
+                        Aircraft_id = transaction.Aircraft_id,
+                        Airport_id = transaction.Airport_id,
+                        Quantity= transaction.Quantity,
+                        AircraftDTOs = transaction.Aircraft != null ? new List<AircraftDTO> { new AircraftDTO
+                        {
+                              Aircraft_id = transaction.Aircraft_id,
+                              Aircraft_no = transaction.Aircraft.Aircraft_no
+                        } } : null,
+                        AirportDTOs = transaction.Airport != null ? new List<AirportDTO> { new AirportDTO
+                        {
+                               Airport_id = transaction.Airport_id,
+                               Airport_name = transaction.Airport.Airport_name,
+                        } } : null
+                    }).ToList();
+
+                    return transactionList;
+                }
             }
             catch (Exception ex)
             {
                 Logger.AddError("Could not fetch transaction list", ex);
                 return null;
             }
-        }
 
-
-        public static bool ReverseTransaction(TransactionDTO transactionDTO)
-        {
-            try
-            {
-                using (var context = new AirportFuelInventoryEntities())
-                {
-                    Transaction transaction = new Transaction
-                    {
-                        Transaction_date_time = DateTime.Now,
-                        Transaction_type = transactionDTO.Transaction_type,
-                        Airport_id = transactionDTO.Airport_id,
-                        Aircraft_id = transactionDTO.Aircraft_id,
-                        Quantity = transactionDTO.Quantity,
-                        Transaction_id_parent = transactionDTO.Transaction_Id,
-                    };
-                    context.Transactions.Add(transaction);
-                    context.SaveChanges();
-                    return true;
-                }
-            }
-            catch (Exception ex)
-            {
-                Logger.AddError("Could not fetch aircraft list", ex);
-                return false;
-            }
         }
 
         public static TransactionDTO GetTransactionById(int transactionId)
@@ -93,7 +85,7 @@ namespace AirportFuelInventory.DataAccess
                 using (AirportFuelInventoryEntities context = new AirportFuelInventoryEntities())
                 {
                     var transactionDetails = context.Transactions
-                        .FirstOrDefault(u => u.Transaction_Id == transactionId);
+                        .FirstOrDefault(u => u.Transaction_id == transactionId);
 
                     if (transactionDetails != null)
                     {
@@ -105,9 +97,23 @@ namespace AirportFuelInventory.DataAccess
                             Transaction_type = transactionDetails.Transaction_type,
                             Airport_id = transactionDetails.Airport_id,
                             Aircraft_id = transactionDetails.Aircraft_id,
+                            AircraftDTOs = new List<AircraftDTO>(),
+                            AirportDTOs = new List<AirportDTO>(),
                             Quantity = transactionDetails.Quantity,
-                            Transaction_id_parent = transactionDetails.Transaction_Id,
+                            Transaction_id_parent = transactionDetails.Transaction_id,
                         };
+
+                        transaction.AirportDTOs.Add(new AirportDTO
+                        {
+                            Airport_id = transactionDetails.Airport_id,
+                            Airport_name = transactionDetails.Airport.Airport_name
+                        });
+
+                        transaction.AircraftDTOs.Add(new AircraftDTO
+                        {
+                            Aircraft_id = transactionDetails.Aircraft_id,
+                            Aircraft_no = transactionDetails.Aircraft.Aircraft_no
+                        });
 
                         return transaction;
                     }

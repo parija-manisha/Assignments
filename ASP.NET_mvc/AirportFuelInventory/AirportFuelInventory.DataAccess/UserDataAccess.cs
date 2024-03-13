@@ -11,7 +11,7 @@ namespace AirportFuelInventory.DataAccess
 {
     public class UserDataAccess
     {
-        public static void NewUser(UserDTO userDTO)
+        public static bool NewUser(UserDTO userDTO)
         {
             using (var context = new AirportFuelInventoryEntities())
             {
@@ -23,6 +23,7 @@ namespace AirportFuelInventory.DataAccess
                 };
                 context.Users.Add(user);
                 context.SaveChanges();
+                return true;    
             }
         }
 

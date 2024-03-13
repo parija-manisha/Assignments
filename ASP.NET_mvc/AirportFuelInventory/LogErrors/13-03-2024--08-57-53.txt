@@ -1,0 +1,28 @@
+Exception Details
+Message: Schema specified is not valid. Errors: 
+AirportManagement.msl(10,12) : error 2019: Member Mapping specified is not valid. The type 'Edm.Int32[Nullable=False,DefaultValue=]' of member 'Source' in type 'AirportFuelInventoryModel.Aircraft' is not compatible with 'SqlServer.nvarchar[Nullable=False,DefaultValue=,MaxLength=50,Unicode=True,FixedLength=False]' of member 'Source' in type 'AirportFuelInventoryModel.Store.Aircraft'.
+AirportManagement.msl(11,12) : error 2019: Member Mapping specified is not valid. The type 'Edm.Int32[Nullable=False,DefaultValue=]' of member 'Destination' in type 'AirportFuelInventoryModel.Aircraft' is not compatible with 'SqlServer.nvarchar[Nullable=False,DefaultValue=,MaxLength=50,Unicode=True,FixedLength=False]' of member 'Destination' in type 'AirportFuelInventoryModel.Store.Aircraft'.
+Source: EntityFramework
+Stack Trace:    at System.Data.Entity.Core.Mapping.StorageMappingItemCollection.Init(EdmItemCollection edmCollection, StoreItemCollection storeCollection, IEnumerable`1 xmlReaders, IList`1 filePaths, Boolean throwOnError)
+   at System.Data.Entity.Core.Mapping.StorageMappingItemCollection..ctor(EdmItemCollection edmCollection, StoreItemCollection storeCollection, IEnumerable`1 xmlReaders, IList`1 filePaths)
+   at System.Data.Entity.Core.Metadata.Edm.MetadataCache.LoadStoreCollection(EdmItemCollection edmItemCollection, MetadataArtifactLoader loader)
+   at System.Lazy`1.CreateValue()
+   at System.Lazy`1.LazyInitValue()
+   at System.Data.Entity.Core.Metadata.Edm.MetadataWorkspace.LoadAndCheckItemCollection[T](Func`1 itemCollectionLoader)
+   at System.Lazy`1.CreateValue()
+   at System.Lazy`1.LazyInitValue()
+   at System.Data.Entity.Core.Metadata.Edm.MetadataWorkspace.GetItemCollection(DataSpace dataSpace, Boolean required)
+   at System.Data.Entity.Core.Metadata.Edm.MetadataWorkspace.GetItemCollection(DataSpace dataSpace)
+   at System.Data.Entity.Core.Objects.ObjectContext.InitializeMappingViewCacheFactory(DbContext owner)
+   at System.Data.Entity.Core.Objects.ObjectContext..ctor(EntityConnection connection, Boolean isConnectionConstructor, ObjectQueryExecutionPlanFactory objectQueryExecutionPlanFactory, Translator translator, ColumnMapFactory columnMapFactory)
+   at System.Data.Entity.Internal.InternalConnection.CreateObjectContextFromConnectionModel()
+   at System.Data.Entity.Internal.LazyInternalContext.InitializeContext()
+   at System.Data.Entity.Internal.InternalContext.Initialize()
+   at System.Data.Entity.Internal.InternalContext.GetEntitySetAndBaseTypeForType(Type entityType)
+   at System.Data.Entity.Internal.Linq.InternalSet`1.Initialize()
+   at System.Data.Entity.Internal.Linq.InternalSet`1.get_InternalContext()
+   at System.Data.Entity.Infrastructure.DbQuery`1.System.Linq.IQueryable.get_Provider()
+   at System.Linq.Queryable.OrderBy[TSource,TKey](IQueryable`1 source, Expression`1 keySelector)
+   at AirportFuelInventory.DataAccess.AircraftDataAccess.GetAircraftList(Int32 start, Int32 length, String sortColumn, String sortDirection) in D:\Projects\ASSIGNMENTS\ASP.NET_mvc\AirportFuelInventory\AirportFuelInventory.DataAccess\AircraftDataAccess.cs:line 22
+
+

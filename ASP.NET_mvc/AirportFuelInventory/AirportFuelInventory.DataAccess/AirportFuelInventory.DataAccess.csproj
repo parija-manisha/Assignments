@@ -155,6 +155,14 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>AirportManagement.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Destination.cs">
+      <DependentUpon>AirportManagement.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DestinationDataAccess.cs" />
+    <Compile Include="Source.cs">
+      <DependentUpon>AirportManagement.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SourceDataAccess.cs" />
     <Compile Include="Transaction.cs">
       <DependentUpon>AirportManagement.tt</DependentUpon>
     </Compile>

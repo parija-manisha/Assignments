@@ -27,7 +27,7 @@ namespace AirportFuelInventory.Controllers
             return View(model);
         }
 
-        public ActionResult AddTransaction(int? Transaction_Id)
+        public ActionResult AddTransaction(int? Transaction_Id, TransactionDTO transactionDTO)
         {
             var model = new TransactionDTO
             {
@@ -44,36 +44,24 @@ namespace AirportFuelInventory.Controllers
                 {
                     model = transaction;
                 }
-            }
 
+                else if (transactionDTO != transaction)
+                {
+                    var addTransactionSuccess = TransactionLogic.NewTransaction(transactionDTO);
+                    if (addTransactionSuccess)
+                    {
+                        return RedirectToAction("Transaction");
+                    }
+                    else
+                    {
+                        ViewBag.ErrorMessage = "Failed to Add Transaction";
+                        return View();
+                    }
+                }
+            }
             model.TransactionTypes = model.TransactionTypes ?? new List<TransactionType>();
 
             return View(model);
-
-        }
-
-        [HttpPost]
-        public ActionResult AddTransaction(TransactionDTO transactionDTO)
-        {
-            if (transactionDTO.Transaction_Id != 0)
-            {
-                TempData["UpdatedTransactionDTO"] = transactionDTO;
-                return RedirectToAction("ReverseTransaction", "Transaction");
-            }
-            else
-            {
-                TransactionLogic.NewTransaction(transactionDTO);
-            }
-
-            return RedirectToAction("Transaction");
-        }
-
-        public ActionResult ReverseTransaction()
-        {
-            var updatedTransactionDTO = TempData["UpdatedTransactionDTO"] as TransactionDTO;
-
-            TransactionLogic.ReverseTransaction(updatedTransactionDTO);
-            return RedirectToAction("Transaction", "Transaction");
         }
 
         public ActionResult DeleteTransaction()
