@@ -20,12 +20,26 @@ namespace AirportFuelInventory.Utils
         {
             get
             {
-                return HttpContext.Current.Session["UserSession"] as UserSession;
+                if (HttpContext.Current.Session["UserSession"] != null)
+                {
+                    return HttpContext.Current.Session["UserSession"] as UserSession;
+                }
+                return null;
             }
 
             set
             {
-                HttpContext.Current.Session["UserSession"] = value;
+                if (HttpContext.Current.Session["UserSession"] != null)
+                {
+                    if (value != null)
+                    {
+                        HttpContext.Current.Session["UserSession"] = value;
+                    }
+                    else
+                    {
+                        HttpContext.Current.Session.Remove("UserSession");
+                    }
+                }
             }
         }
 

@@ -25,9 +25,9 @@ namespace AirportFuelInventory.Controllers
 
             if (userID != -1)
             {
-                //UserSession sessionModel = new UserSession();
-                //sessionModel.UserId = userID;
-                //Constants.SessionDetail = sessionModel;
+                UserSession sessionModel = new UserSession();
+                sessionModel.UserId = userID;
+                Constants.SessionDetail = sessionModel;
                 return RedirectToAction("Dashboard", "Dashboard");
             }
             else

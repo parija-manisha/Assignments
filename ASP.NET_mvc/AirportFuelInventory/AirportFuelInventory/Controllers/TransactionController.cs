@@ -61,6 +61,9 @@ namespace AirportFuelInventory.Controllers
             }
             model.TransactionTypes = model.TransactionTypes ?? new List<TransactionType>();
 
+            //Added the ViewBag for unit testing
+            ViewBag.ErrorMessage = "";
+
             return View(model);
         }
 

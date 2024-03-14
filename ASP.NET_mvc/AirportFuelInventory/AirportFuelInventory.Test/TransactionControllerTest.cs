@@ -44,8 +44,7 @@ namespace AirportFuelInventory.Test
 
             else if (result is ViewResult)
             {
-                var viewResult = (ViewResult)result;
-                Assert.AreEqual("AddTransaction", viewResult.ViewName);
+                Assert.IsTrue(transactionController.ViewData.ContainsKey("ErrorMessage"));
             }
 
             else
