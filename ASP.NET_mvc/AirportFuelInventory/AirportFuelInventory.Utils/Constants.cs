@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using System.Web;
 using static AirportFuelInventory.Models.Model;
 
@@ -20,16 +16,16 @@ namespace AirportFuelInventory.Utils
         {
             get
             {
-                if (HttpContext.Current.Session["UserSession"] != null)
+                if (HttpContext.Current.Session["UserSession"] is UserSession userSession)
                 {
-                    return HttpContext.Current.Session["UserSession"] as UserSession;
+                    return userSession;
                 }
                 return null;
             }
 
             set
             {
-                if (HttpContext.Current.Session["UserSession"] != null)
+                if (HttpContext.Current != null && HttpContext.Current.Session != null)
                 {
                     if (value != null)
                     {
@@ -41,11 +37,6 @@ namespace AirportFuelInventory.Utils
                     }
                 }
             }
-        }
-
-        public static string ToggleSortDirection(string currentDirection)
-        {
-            return currentDirection?.ToUpper() == "ASC" ? "DESC" : "ASC";
         }
     }
 }

@@ -1,12 +1,8 @@
-﻿using AirportFuelInventory.Models;
-using AirportFuelInventory.Utils;
-using Microsoft.Extensions.Logging;
+﻿using AirportFuelInventory.Utils;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using static AirportFuelInventory.Models.Model;
 
 namespace AirportFuelInventory.DataAccess

@@ -74,10 +74,10 @@ namespace AirportFuelInventory.Models
                     return ((TransactionType)Transaction_type).ToString();
                 }
             }
-            public List<TransactionDTO> Transactions { get; set; }
             public List<TransactionType> TransactionTypes { get; set; }
             public List<AirportDTO> AirportDTOs { get; set; }
             public List<AircraftDTO> AircraftDTOs { get; set; }
+            public Pagination Pagination { get; set; }
 
         }
 

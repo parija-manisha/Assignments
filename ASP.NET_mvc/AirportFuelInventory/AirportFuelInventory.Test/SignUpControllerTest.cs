@@ -13,24 +13,21 @@ namespace AirportFuelInventory.Test
     public class SignUpControllerTest
     {
         [TestMethod]
-        public void SignUp_ReturnView()
+        public void TestIsEmailExist_ReturnView()
         {
-            SignUpController controller = new SignUpController();
-            var result = controller.SignUp();
-        }
-
-        [TestMethod]
-        public void IsEmailExist_ReturnView()
-        {
+            //Arrange
             SignUpController signUpController = new SignUpController();
-            var email = "manishaaa@gmail.com";
 
+            //Act
+            var email = "manishaaa@gmail.com";
             var result = signUpController.IsEmailExist(email);
 
+            //Assert
             Assert.IsNotNull(result);
 
             if (!(bool)result.Data)
             {
+                //Mock New User Details
                 var newUser = new Models.Model.UserDTO
                 {
                     Name = "Test",
@@ -38,8 +35,10 @@ namespace AirportFuelInventory.Test
                     Password = "123123"
                 };
 
+                //Act
                 var addActionResult = signUpController.NewUser(newUser);
 
+                //Assert
                 Assert.IsNotNull(addActionResult);
 
                 if (addActionResult is RedirectToRouteResult)
@@ -58,6 +57,5 @@ namespace AirportFuelInventory.Test
                 Assert.Fail("Email already exists");
             }
         }
-
     }
 }

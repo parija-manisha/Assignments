@@ -1,4 +1,5 @@
-﻿using AirportFuelInventory.Business;
+﻿using AirportFuelInventory.Attributes;
+using AirportFuelInventory.Business;
 using AirportFuelInventory.Models;
 using AirportFuelInventory.Utils;
 using System;
@@ -13,7 +14,8 @@ namespace AirportFuelInventory.Controllers
     public class AirportController : Controller
     {
         // GET: AirportList
-        public ActionResult AirportList(int? page)
+        [CustomAuthorize]
+        public ViewResult AirportList(int? page)
         {
             int currentPage = page ?? 1;
             var model = AirportLogic.GetAirportList(start: (currentPage - 1) * 5, length: 5);
@@ -24,14 +26,17 @@ namespace AirportFuelInventory.Controllers
 
             foreach (var airport in model)
             {
-                airport.Pagination = new Pagination(); airport.Pagination.CurrentPage = currentPage;
+                airport.Pagination = new Pagination();
+                airport.Pagination.CurrentPage = currentPage;
                 airport.Pagination.TotalPages = totalPages;
             }
 
             return View(model);
         }
 
-        public ActionResult AddAirport(int? Airport_Id) {
+        [CustomAuthorize]
+        public ViewResult AddAirport(int? Airport_Id)
+        {
             var model = new AirportDTO();
             if (Airport_Id.HasValue)
             {
@@ -46,6 +51,7 @@ namespace AirportFuelInventory.Controllers
             return View(model);
         }
 
+        [CustomAuthorize]
         public ActionResult NewAirport(AirportDTO airportDTO)
         {
             AirportLogic.NewAirport(airportDTO);

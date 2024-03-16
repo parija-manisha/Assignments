@@ -17,7 +17,8 @@ namespace AirportFuelInventory.Attributes
 
             if (userSession == null)
             {
-                if (!returnURL.ToString().EndsWith("SignUp", StringComparison.OrdinalIgnoreCase))
+                if (!returnURL.ToString().EndsWith("SignUp", StringComparison.OrdinalIgnoreCase)
+                    && !returnURL.ToString().EndsWith("Login", StringComparison.OrdinalIgnoreCase))
                 {
                     filterContext.Result = new RedirectToRouteResult(new RouteValueDictionary(new { controller = "SignUp", action = "SignUp", returnURL = returnURL }));
                 }
@@ -26,12 +27,9 @@ namespace AirportFuelInventory.Attributes
             {
                 if (returnURL != null)
                 {
-                    if (userSession.UserId != -1)
+                    if (returnURL.ToString().EndsWith("Login", StringComparison.OrdinalIgnoreCase))
                     {
-                        if (!returnURL.ToString().Contains($"UserID={userSession.UserId}"))
-                        {
-                            filterContext.Result = new RedirectToRouteResult(new RouteValueDictionary(new { controller = "Login", action = "Login", UserID = userSession.UserId }));
-                        }
+                        Constants.SessionDetail = null;
                     }
                 }
                 else

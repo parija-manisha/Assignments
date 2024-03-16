@@ -1,4 +1,5 @@
-﻿using AirportFuelInventory.Business;
+﻿using AirportFuelInventory.Attributes;
+using AirportFuelInventory.Business;
 using AirportFuelInventory.Utils;
 using Rotativa;
 using System;
@@ -13,7 +14,8 @@ namespace AirportFuelInventory.Controllers
     public class FuelConsumptionReportController : Controller
     {
         // GET: FuelConsumptionReport
-        public ActionResult FuelConsumptionReport(int? page)
+        [CustomAuthorize]
+        public ViewResult FuelConsumptionReport(int? page)
         {
             int currentPage = page ?? 1;
             var fuelConsumption = AirportLogic.GetFuelConsumptionReport(start: (currentPage - 1) * 5, length: 5);

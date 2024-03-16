@@ -1,4 +1,5 @@
-﻿using AirportFuelInventory.Business;
+﻿using AirportFuelInventory.Attributes;
+using AirportFuelInventory.Business;
 using AirportFuelInventory.Models;
 using AirportFuelInventory.Utils;
 using System;
@@ -13,6 +14,7 @@ namespace AirportFuelInventory.Controllers
     public class AircraftController : Controller
     {
         // GET: Aircraft
+        [CustomAuthorize]
         public ViewResult AircraftList(int? page)
         {
             int currentPage = page ?? 1;
@@ -31,7 +33,8 @@ namespace AirportFuelInventory.Controllers
             return View(model);
         }
 
-        public ActionResult AddAircraft(int? Aircraft_Id)
+        [CustomAuthorize]
+        public ViewResult AddAircraft(int? Aircraft_Id)
         {
             var model = new AircraftDTO
             {
@@ -55,6 +58,7 @@ namespace AirportFuelInventory.Controllers
             return View(model);
         }
 
+        [CustomAuthorize]
         public ActionResult NewAircraft(AircraftDTO aircraftDTO)
         {
             var addAirportSuccess = AircraftLogic.NewAircraft(aircraftDTO);

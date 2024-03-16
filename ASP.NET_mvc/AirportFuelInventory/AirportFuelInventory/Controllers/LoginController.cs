@@ -1,4 +1,5 @@
-﻿using AirportFuelInventory.Business;
+﻿using AirportFuelInventory.Attributes;
+using AirportFuelInventory.Business;
 using AirportFuelInventory.Models;
 using AirportFuelInventory.Utils;
 using System;
@@ -13,7 +14,8 @@ namespace AirportFuelInventory.Controllers
     public class LoginController : Controller
     {
         // GET: Login
-        public ActionResult Login()
+        [CustomAuthorize]
+        public ViewResult Login()
         {
             return View();
         }
@@ -39,7 +41,10 @@ namespace AirportFuelInventory.Controllers
 
         public ActionResult Logout()
         {
-            Session.Clear();
+            if (Session != null)
+            {
+                Session.Clear();
+            }
             return RedirectToAction("Login", "Login");
         }
     }

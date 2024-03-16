@@ -11,7 +11,7 @@
             <thead>
                 <tr>
                     <th>Sl.No</th>
-                    <th>@Html.DisplayNameFor(model => Model.First().Airport_Name)</th>
+                    <th>@Html.DisplayNameFor(model => Model.First().Airport_name)</th>
                     <th>@Html.DisplayNameFor(model => Model.First().Fuel_Capacity)</th>
                     <th></th>
                 </tr>
@@ -25,7 +25,7 @@
                             <td>@(count++)</td>
                             <td>@airport.Airport_name</td>
                             <td>@airport.Fuel_Capacity</td>
-                            <td><a href="@Url.Action("AddAirport", "Airport", new { Airport_Id = airport.Airport_Id })">Edit</a></td>
+                            <td><a href="@Url.Action("AddAirport", "Airport", new { Airport_Id = airport.Airport_id })">Edit</a></td>
                         </tr>
 
                     }
@@ -43,13 +43,13 @@
     <nav aria-label="Page navigation">
         <ul class="pagination justify-content-end">
             <li class="page-item">
-                <a class="page-link" href="@Url.Action("AirportList", "AirportList", new { page = Model.First().Pagination.CurrentPage - 1, sortColumn = ViewBag.SortColumn, sortDirection = ViewBag.SortDirection })" aria-label="Previous">
+                <a class="page-link" href="@Url.Action("AirportList", "AirportList", new { page = Model.First().Pagination.CurrentPage - 1})" aria-label="Previous">
                     <span aria-hidden="true">&laquo;</span>
                 </a>
             </li>
 
             <li class="page-item">
-                <a class="page-link" href="@Url.Action("AirportList", "AirportList", new { page = Model.First().Pagination.CurrentPage + 1, sortColumn = ViewBag.SortColumn, sortDirection = ViewBag.SortDirection })" aria-label="Next">
+                <a class="page-link" href="@Url.Action("AirportList", "AirportList", new { page = Model.First().Pagination.CurrentPage + 1 })" aria-label="Next">
                     <span aria-hidden="true">&raquo;</span>
                 </a>
             </li>

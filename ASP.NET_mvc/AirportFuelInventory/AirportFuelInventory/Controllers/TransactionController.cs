@@ -1,4 +1,5 @@
-﻿using AirportFuelInventory.Business;
+﻿using AirportFuelInventory.Attributes;
+using AirportFuelInventory.Business;
 using AirportFuelInventory.Models;
 using AirportFuelInventory.Utils;
 using System;
@@ -7,6 +8,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Configuration;
 using System.Web.Mvc;
+using System.Web.UI;
 using System.Web.UI.WebControls.WebParts;
 using static AirportFuelInventory.Models.Model;
 
@@ -15,18 +17,27 @@ namespace AirportFuelInventory.Controllers
     public class TransactionController : Controller
     {
         // GET: Transaction
-        public ActionResult Transaction()
+        [CustomAuthorize]
+        public ViewResult Transaction(int? page)
         {
-            var model = new TransactionDTO
-            {
-                Transactions = TransactionLogic.GetTransactionList(),
-            };
+            int currentPage = page ?? 1;
+            var model = TransactionLogic.GetTransactionList(start: (currentPage - 1) * 5, length: 5);
 
-            model.Transactions = model.Transactions ?? new List<TransactionDTO>();
+            double totalRecords = TransactionLogic.GetTotalRecords() / 5.0;
+            int totalPages = Convert.ToInt32(totalRecords);
+
+
+            foreach (var transaction in model)
+            {
+                transaction.Pagination = new Pagination();
+                transaction.Pagination.CurrentPage = currentPage;
+                transaction.Pagination.TotalPages = totalPages;
+            }
 
             return View(model);
         }
 
+        [CustomAuthorize]
         public ActionResult AddTransaction(int? Transaction_Id, TransactionDTO transactionDTO)
         {
             var model = new TransactionDTO
@@ -67,17 +78,19 @@ namespace AirportFuelInventory.Controllers
             return View(model);
         }
 
+        [CustomAuthorize]
         public ActionResult DeleteTransaction()
         {
             var deleteSuccess = TransactionLogic.DeleteTransaction();
             if (deleteSuccess)
             {
-                return View("Transaction");
+                return RedirectToAction("Transaction");
             }
 
             else
             {
-                return HttpNotFound("No transactions found to delete.");
+                ViewBag.ErrorMessage = "No Transaction found to be deleted";
+                return View("Transaction");
             }
         }
     }

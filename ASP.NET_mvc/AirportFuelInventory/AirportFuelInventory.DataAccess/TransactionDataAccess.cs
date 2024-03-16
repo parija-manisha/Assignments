@@ -1,10 +1,7 @@
-﻿using AirportFuelInventory.Models;
-using AirportFuelInventory.Utils;
+﻿using AirportFuelInventory.Utils;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using static AirportFuelInventory.Models.Model;
 
 namespace AirportFuelInventory.DataAccess
@@ -38,7 +35,7 @@ namespace AirportFuelInventory.DataAccess
             }
         }
 
-        public static List<TransactionDTO> GetTransactionList()
+        public static List<TransactionDTO> GetTransactionList(int start, int length)
         {
             try
             {
@@ -46,6 +43,8 @@ namespace AirportFuelInventory.DataAccess
                 {
                     var transactionEntities = context.Transactions
                         .OrderByDescending(t => t.Transaction_date_time)
+                        .Skip(start)
+                        .Take(length)
                         .ToList();
 
                     List<TransactionDTO> transactionList = transactionEntities.Select(transaction => new TransactionDTO
@@ -54,7 +53,7 @@ namespace AirportFuelInventory.DataAccess
                         Transaction_type = transaction.Transaction_type,
                         Aircraft_id = transaction.Aircraft_id,
                         Airport_id = transaction.Airport_id,
-                        Quantity= transaction.Quantity,
+                        Quantity = transaction.Quantity,
                         AircraftDTOs = transaction.Aircraft != null ? new List<AircraftDTO> { new AircraftDTO
                         {
                               Aircraft_id = transaction.Aircraft_id,
@@ -135,15 +134,31 @@ namespace AirportFuelInventory.DataAccess
                 using (var context = new AirportFuelInventoryEntities())
                 {
                     var allTransactions = context.Transactions.ToList();
-                    context.Transactions.RemoveRange(allTransactions);
-                    context.SaveChanges();
-                    return true;
+                    if (allTransactions.Any())
+                    {
+                        context.Transactions.RemoveRange(allTransactions);
+                        context.SaveChanges();
+                        return true;
+                    }
+                    else
+                    {
+                        return false;
+                    }
                 }
             }
             catch (Exception ex)
             {
                 Logger.AddError("Failed to delete", ex);
                 return false;
+            }
+        }
+
+        public static double GetTotalRecords()
+        {
+            using (var context = new AirportFuelInventoryEntities())
+            {
+                var count = context.Transactions.Count();
+                return count;
             }
         }
     }

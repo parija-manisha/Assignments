@@ -16,9 +16,9 @@ namespace AirportFuelInventory.Business
             return TransactionDataAccess.NewTransaction(transactionDTO);
         }
 
-        public static List<TransactionDTO> GetTransactionList()
+        public static List<TransactionDTO> GetTransactionList(int start,int length)
         {
-            List<TransactionDTO> transactions = TransactionDataAccess.GetTransactionList();
+            List<TransactionDTO> transactions = TransactionDataAccess.GetTransactionList(start, length);
 
             return transactions;
         }
@@ -31,6 +31,11 @@ namespace AirportFuelInventory.Business
         public static bool DeleteTransaction()
         {
             return TransactionDataAccess.DeleteTransaction();
+        }
+
+        public static double GetTotalRecords()
+        {
+            return TransactionDataAccess.GetTotalRecords();
         }
     }
 }

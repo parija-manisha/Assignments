@@ -1,4 +1,5 @@
-﻿using AirportFuelInventory.Business;
+﻿using AirportFuelInventory.Attributes;
+using AirportFuelInventory.Business;
 using AirportFuelInventory.Models;
 using System;
 using System.Collections.Generic;
@@ -12,11 +13,13 @@ namespace AirportFuelInventory.Controllers
     public class SignUpController : Controller
     {
         // GET: SignUp
-        public ActionResult SignUp()
+        [CustomAuthorize]
+        public ViewResult SignUp()
         {
             return View();
         }
 
+        [CustomAuthorize]
         public ActionResult NewUser(UserDTO userDTO)
         {
             bool registrationSuccess = UserLogic.NewUser(userDTO);
@@ -31,6 +34,7 @@ namespace AirportFuelInventory.Controllers
             }
         }
 
+        [CustomAuthorize]
         public JsonResult IsEmailExist(string email)
         {
             bool isEmailExist = UserLogic.IsEmailExist(email);

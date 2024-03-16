@@ -1,4 +1,5 @@
-﻿using AirportFuelInventory.Business;
+﻿using AirportFuelInventory.Attributes;
+using AirportFuelInventory.Business;
 using AirportFuelInventory.Models;
 using AirportFuelInventory.Utils;
 using Rotativa;
@@ -13,8 +14,8 @@ namespace AirportFuelInventory.Controllers
     public class DashboardController : Controller
     {
         // GET: Dashboard
-
-        public ActionResult Dashboard(int? page)
+        [CustomAuthorize]
+        public ViewResult Dashboard(int? page)
         {
             int currentPage = page ?? 1;
             var availableFuelData = AirportLogic.GetAvailableFuel(start: (currentPage - 1) * 5, length: 5);

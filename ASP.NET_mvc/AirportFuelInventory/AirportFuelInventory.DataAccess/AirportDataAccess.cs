@@ -1,12 +1,8 @@
 ﻿using AirportFuelInventory.Models;
 using AirportFuelInventory.Utils;
-using iText.Kernel.Geom;
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using static AirportFuelInventory.Models.Model;
 
 namespace AirportFuelInventory.DataAccess

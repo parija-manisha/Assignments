@@ -1,10 +1,6 @@
-﻿using AirportFuelInventory.Models;
-using AirportFuelInventory.Utils;
+﻿using AirportFuelInventory.Utils;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using static AirportFuelInventory.Models.Model;
 
 namespace AirportFuelInventory.DataAccess
@@ -60,7 +56,5 @@ namespace AirportFuelInventory.DataAccess
 
             return userID;
         }
-
-
     }
 }

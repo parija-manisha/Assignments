@@ -1,4 +1,4 @@
-﻿@model AirportFuelInventory.Models.Model.TransactionDTO
+﻿@model List<AirportFuelInventory.Models.Model.TransactionDTO>
 
 @{
     ViewBag.Title = "Transaction";
@@ -12,12 +12,13 @@
 
 <h2>Transaction</h2>
 
-<div>
-    @if (Model != null)
-    {
+@if (Model != null && Model.Any())
+{
+    <div>
         <table class="table">
             <thead>
                 <tr>
+                    <th>Sl.No</th>
                     <th>Date and Time</th>
                     <th>Transaction Type</th>
                     <th>Airport ID</th>
@@ -27,39 +28,60 @@
                     <th></th>
             </thead>
             <tbody>
-                @foreach (var airport in Model.Transactions)
-                {
-                    <tr>
-                        <td>@airport.Transaction_date_time</td>
-                        <td>@airport.TransactionTypeString</td>
-                        <td>@airport.AirportDTOs.FirstOrDefault(s => s.Airport_id == airport.Airport_id).Airport_name</td>
-                        @if (airport.TransactionTypeString == "Out")
-                        {
-                            <td>@airport.AircraftDTOs.FirstOrDefault(s => s.Aircraft_id == airport.Aircraft_id).Aircraft_no</td>
-                        }
-                        else
-                        {
-                            <td></td>
-                        }
-                        <td>@airport.Quantity</td>
-                        <td>@airport.Transaction_id_parent</td>
-                        <td>
-                            @if (airport.Transaction_id_parent == null)
+                @{
+                    var count = (Model.First().Pagination?.CurrentPage ?? 1 - 1) * 10 + 1;
+                    foreach (var airport in Model)
+                    {
+                        <tr>
+                            <td>@(count++)</td>
+                            <td>@airport.Transaction_date_time</td>
+                            <td>@airport.TransactionTypeString</td>
+                            <td>@(airport.AirportDTOs?.FirstOrDefault(s => s.Airport_id == airport.Airport_id)?.Airport_name)</td>
+                            @if (airport.TransactionTypeString == "Out")
                             {
-                                <a href="@Url.Action("AddTransaction", "Transaction", new { Transaction_Id = airport.Transaction_Id })">Reverse</a>
+                                <td>@(airport.AircraftDTOs?.FirstOrDefault(s => s.Aircraft_id == airport.Aircraft_id)?.Aircraft_no)</td>
                             }
-                        </td>
-                    </tr>
+                            else
+                            {
+                                <td></td>
+                            }
+                            <td>@airport.Quantity</td>
+                            <td>@airport.Transaction_id_parent</td>
+                            <td>
+                                @if (airport.Transaction_id_parent == null)
+                                {
+                                    <a href="@Url.Action("AddTransaction", "Transaction", new { Transaction_Id = airport.Transaction_Id })">Reverse</a>
+                                }
+                            </td>
+                        </tr>
+                    }
                 }
             </tbody>
         </table>
-    }
-    else
-    {
-        <p>No Transaction available</p>
-    }
-</div>
+    </div>
 
+    <div id="pagination_v2" class="mt-3">
+        <nav aria-label="Page navigation">
+            <ul class="pagination justify-content-end">
+                <li class="page-item">
+                    <a class="page-link" href="@Url.Action("Transaction", "Transaction", new { page = Model.First().Pagination.CurrentPage - 1})" aria-label="Previous">
+                        <span aria-hidden="true">&laquo;</span>
+                    </a>
+                </li>
+
+                <li class="page-item">
+                    <a class="page-link" href="@Url.Action("Transaction", "Transaction", new { page = Model.First().Pagination.CurrentPage + 1 })" aria-label="Next">
+                        <span aria-hidden="true">&raquo;</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+}
+else
+{
+    <p>No Transaction available</p>
+}
 <p>
     @Html.ActionLink("Add Transaction", "AddTransaction") |
     @Html.ActionLink("Delete all Transactions", "DeleteTransaction")
